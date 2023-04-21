@@ -12,7 +12,7 @@ Một hoạt động về cơ bản có bốn trạng thái:
 
 - Hệ thống có thể loại bỏ Activity khỏi bộ nhớ bằng cách yêu cầu nó kết thúc hoặc đơn giản là giết quá trình của nó, làm cho nó bị hủy (NÓ ĐÃ BỊ DESTROY). Khi nó được hiển thị lại cho người dùng, nó phải được khởi động lại hoàn toàn và khôi phục về trạng thái trước đó.
 
-![](file:///G:/My%20Drive/Experiences/Android/SummaryDocumentation/resources/activity_lifecycle.png)
+![loading-ag-444](../resources/activity_lifecycle.png)
 
 There are three key loops you may be interested in monitoring within your activity:
 
@@ -115,7 +115,7 @@ Các chế độ khởi chạy cho phép bạn xác định cách một phiên b
           Nếu một instance của activity đã tồn tại ở top of task hiện tại, thì hệ thống sẽ định tuyến Intent đến phiên bản đó thông qua lệnh gọi phương thức onNewIntent() của nó, thay vì tạo một instance mới của activity. Activity có thể được khởi tạo nhiều lần, mỗi instance có thể thuộc về các Task khác nhau và một Task có thể có nhiều Instance (nhưng chỉ khi Instance ở đầu back stack không phải là instance hiện có của hoạt động).
   
   
-  
+
       Ví dụ: giả sử back stack của một Task bao gồm root Activity A với các activity B, C và D ở trên cùng (stack là A-B-C-D; D ở trên cùng). Một Intent đến cho một Activity thuộc loại D. Nếu D có chế độ khởi chạy "standard" mặc định, một phiên bản mới của lớp sẽ được khởi chạy và ngăn xếp trở thành A-B-C-D-D. Tuy nhiên, nếu chế độ khởi chạy của D là "singleTop", Instance hiện tại của D sẽ nhận được Intent thông qua onNewIntent(), bởi vì nó ở trên cùng của ngăn xếp—ngăn xếp vẫn là A-B-C-D. Tuy nhiên, nếu một ý định đến cho một activity thuộc loại B, thì một Instance mới của B sẽ được thêm vào ngăn xếp, ngay cả khi chế độ khởi chạy của nó là "singleTop"
 
 
