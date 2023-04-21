@@ -1,0 +1,19 @@
+# Architecture
+
+## MVP:
+
+
+
+## 
+
+
+
+## MVVM:
+
+
+
+
+
+
+
+
