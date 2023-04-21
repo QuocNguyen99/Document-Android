@@ -154,4 +154,4 @@ class ExampleService : Service() {
 
 
 
-![](file:///G:/My%20Drive/Experiences/Android/SummaryDocumentation/resources/service_lifecycle.png)
+![](../resources/service_lifecycle.png)

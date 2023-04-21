@@ -93,7 +93,7 @@ Tuy nhiên, nếu ứng dụng của bạn ghi đè onBackPressed() để xử l
 
 Task là một đơn vị gắn kết có thể di chuyển xuống background khi người dùng bắt đầu một Task mới hoặc chuyển đến Màn hình Home. Trong khi ở chế độ background, tất cả các Activity trong Task đều bị dừng, nhưng back stack của Task vẫn còn nguyên—Task chỉ đơn giản là mất focus trong khi một Task khác diễn ra, như thể hiện trong hình. Sau đó, một Task có thể trở lại foreground để người dùng có thể tiếp tục từ nơi họ đã dừng lại.
 
-![](file:///G:/My%20Drive/Experiences/Android/SummaryDocumentation/resources/diagram_multitasking.png)
+![](../resources/diagram_multitasking.png)
 
 ### Multiple activity instances
 

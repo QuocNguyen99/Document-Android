@@ -2,7 +2,7 @@
 
 Hiện nay, các lập trình viên hay lẫn lộn giữa các khái niệm Dependency Inversion, Inversion of Control (IoC), Dependency Injection (DI). Ba khái niệm này tương tự nhau nhưng không hoàn toàn giống nhau.
 
-![](file:///G:/My%20Drive/Experiences/Android/SummaryDocumentation/resources/ioc-and-mapper-in-c-6-638.webp)
+![](../resources/ioc-and-mapper-in-c-6-638.webp)
 
 Sự khác biệt giữa 3 khái niệm trên:
 
