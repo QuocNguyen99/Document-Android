@@ -313,3 +313,9 @@ EventBus.getDefault().post(MySpecificEvent())
 
 
 Rx java, Livedata, Flow đều theo Observer pattern
+
+
+
+
+
+## Concurrency Design pattern
