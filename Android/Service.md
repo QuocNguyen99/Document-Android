@@ -89,8 +89,7 @@ Notice that the `[onStartCommand()]` method must return an integer. The intege
 
 
 
-    You can ensure that your service is available to only your app by including the [`android:exported`](https://developer.android.com/guide/topics/manifest/service-element#exported) attribute and setting it to `false`. This effectively stops other apps from starting your service, even when using an explicit intent.
-
+You can ensure that your service is available to only your app by including the [`android:exported`](https://developer.android.com/guide/topics/manifest/service-element#exported) attribute and setting it to `false`. This effectively stops other apps from starting your service, even when using an explicit intent.
 Managing the lifecycle of a service
 -----------------------------------
 
@@ -105,10 +104,10 @@ The service lifecycle—from when it's created to when it's destroyed—can foll
 
 * A bound service
   The service is created when another component (a client) calls `[bindService()]`. The client then communicates with the service through an `[IBinder]` interface. The client can close the connection by calling `[unbindService()]`. Multiple clients can bind to the same service and when all of them unbind, the system destroys the service. The service does _not_ need to stop itself.
-
-
-
-
+  
+  
+  
+  
 
     These two paths aren't entirely separate. You can bind to a service that is already started with `[startService()]`. For example, you can start a background music service by calling `[startService()]` with an `[Intent]` that identifies the music to play. Later, possibly when the user wants to exercise some control over the player or get information about the current song, an activity can bind to the service by calling `[bindService()]`. In cases such as this, `[stopService()]` or `[stopSelf()]` doesn't actually stop the service until all of the clients unbind.
 
@@ -150,8 +149,6 @@ class ExampleService : Service() {
 }
 ```
 
-
-
-
-
 ![](../resources/service_lifecycle.png)
+
+
