@@ -52,7 +52,7 @@ Các lớp Con kế thừa toàn bộ thành phần của lớp Cha và không c
 
 * Mọi phương thức, property đều mặc định là public.
 
-## Tính chất của interface
+## Tính chất của Abstract class
 
 * Một Abstract Class không thể được khởi tạo.
 * Abstract Class có thể chứa các phương thức trừu tượng và cụ thể (abstract method – virtual method).
