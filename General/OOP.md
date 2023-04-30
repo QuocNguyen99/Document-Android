@@ -27,8 +27,51 @@ Các lớp Con kế thừa toàn bộ thành phần của lớp Cha và không c
     Tính đa hình trong lập trình OOP cho phép các đối tượng khác nhau thực thi chức năng giống nhau theo những cách khác nhau.
     Ví dụ:
 
-```ja
+```java
+           // Lớp cha Shape
+        public abstract class Shape {
+            public abstract void draw();
+        }
+        // Lớp con Rectangle
+        public class Rectangle extends Shape {
+            @Override
+            public void draw() {
+                System.out.println("Vẽ hình chữ nhật.");
+            }
+        }
 
+        // Lớp con Circle
+        public class Circle extends Shape {
+            @Override
+            public void draw() {
+                System.out.println("Vẽ hình tròn.");
+            }
+        }
+
+        // Lớp con Triangle
+        public class Triangle extends Shape {
+            @Override
+            public void draw() {
+                System.out.println("Vẽ hình tam giác.");
+            }
+        }
+
+        // Lớp Main để kiểm tra
+        public class Main {
+            public static void main(String[] args) {
+                // Tạo đối tượng hình chữ nhật và vẽ
+                Shape rect = new Rectangle();
+                rect.draw();
+
+                // Tạo đối tượng hình tròn và vẽ
+                Shape circle = new Circle();
+                circle.draw();
+
+                // Tạo đối tượng hình tam giác và vẽ
+                Shape triangle = new Triangle();
+                triangle.draw();
+            }
+        }
 ```
 
 
