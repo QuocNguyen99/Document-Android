@@ -25,55 +25,13 @@ Các lớp Con kế thừa toàn bộ thành phần của lớp Cha và không c
 ### 3. Tính đa hình (Polymorphism)
 
     Tính đa hình trong lập trình OOP cho phép các đối tượng khác nhau thực thi chức năng giống nhau theo những cách khác nhau.
-    
     Ví dụ:
-    ```java
-            // Lớp cha Shape
-        public abstract class Shape {
-            public abstract void draw();
-        }
 
-        // Lớp con Rectangle
-        public class Rectangle extends Shape {
-            @Override
-            public void draw() {
-                System.out.println("Vẽ hình chữ nhật.");
-            }
-        }
+```ja
 
-        // Lớp con Circle
-        public class Circle extends Shape {
-            @Override
-            public void draw() {
-                System.out.println("Vẽ hình tròn.");
-            }
-        }
+```
 
-        // Lớp con Triangle
-        public class Triangle extends Shape {
-            @Override
-            public void draw() {
-                System.out.println("Vẽ hình tam giác.");
-            }
-        }
 
-        // Lớp Main để kiểm tra
-        public class Main {
-            public static void main(String[] args) {
-                // Tạo đối tượng hình chữ nhật và vẽ
-                Shape rect = new Rectangle();
-                rect.draw();
-
-                // Tạo đối tượng hình tròn và vẽ
-                Shape circle = new Circle();
-                circle.draw();
-
-                // Tạo đối tượng hình tam giác và vẽ
-                Shape triangle = new Triangle();
-                triangle.draw();
-            }
-        }
-    ```
     Trong ví dụ này, lớp cha Shape có một phương thức trừu tượng draw() và ba lớp con Rectangle, Circle, Triangle đều kế thừa lớp cha này và triển khai lại phương thức draw() của nó theo cách riêng của từng lớp. Trong Main, ta tạo ra các đối tượng của các lớp con và gọi phương thức draw() của chúng, ta sẽ thấy rằng mỗi đối tượng sẽ có cách thức vẽ riêng biệt tùy theo lớp mà nó thuộc về. Đó là ví dụ về tính đa hình trong OOP.
 
 ### 4. Tính trừu tượng (Abstraction)
@@ -142,3 +100,5 @@ Khi nào nên dùng Abstract Class
   
 
 # 
+
+
