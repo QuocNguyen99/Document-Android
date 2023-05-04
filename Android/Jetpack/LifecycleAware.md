@@ -21,7 +21,7 @@ Lifecycle
 
 * Nghĩ một cách đơn giản thì states như các nodes của một đồ thị, các events như các đường đi giữa các nodes.
 
-![loading-ag-583](../resources/lifecycle-states.png)
+![lifecycle-states](.././resources/lifecycle-states.png)
 
 * Một lớp có thể quan sát trạng thái vòng đời của một component bằng cách thêm các thêm các annotations vào các methods của nó. Sau đó bạn có thể add một Observer bằng lời gọi hàm **addObserver()** của lớp **Lifecycle** và truyền vào đó một instance của observer của bạn như ví dụ dưới đây:
 
