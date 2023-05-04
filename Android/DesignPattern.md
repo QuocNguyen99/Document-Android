@@ -319,3 +319,13 @@ Rx java, Livedata, Flow đều theo Observer pattern
 
 
 ## Concurrency Design pattern
+
+    Concurrency design patterns là các khuôn mẫu được sử dụng để giải quyết các vấn đề liên quan đến đồng thời hóa trong các ứng dụng đa luồng hoặc đa tiến trình. Các mẫu này cung cấp các phương pháp và chiến lược để giải quyết các vấn đề như sự đồng bộ hóa truy cập tài nguyên chia sẻ, xử lý và giải quyết tranh chấp giữa các luồng, cải thiện hiệu suất và tăng tính khả dụng của hệ thống.
+
+    
+
+    Trong lập trình Android Kotlin, có nhiều concurrency design patterns được sử dụng để xử lý đa luồng và tránh deadlock, race conditions, và các vấn đề khác liên quan đến concurrency.
+
+
+
+    Một ví dụ về sử dụng concurrency design pattern trong Android Kotlin là sử dụng AsyncTask. AsyncTask là một lớp được cung cấp bởi Android để thực hiện các tác vụ nặng như tải xuống dữ liệu từ Internet hoặc thực hiện các tác vụ khác liên quan đến I/O. AsyncTask cho phép bạn thực hiện các tác vụ này trong một thread riêng biệt, vì vậy không ảnh hưởng đến giao diện người dùng.
