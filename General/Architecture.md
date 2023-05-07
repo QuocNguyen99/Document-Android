@@ -2,11 +2,11 @@
 
 ## MVC - Model View Controller:
 
-Model: Các lớp dữ liệu của bạn. Trong Kotlin, chúng ta sử dụng các Data classes, trong khi trong Java chúng được gọi là POJOs (Plain Old Java Object).
+Model: chịu trách nhiệm về business logic của ứng dụng. Nó quản lý trạng thái của ứng dụng. Điều này cũng bao gồm đọc và ghi dữ liệu, duy trì trạng thái ứng dụng và thậm chí nó có thể bao gồm các tác vụ liên quan đến quản lý dữ liệu như xác thực dữ liệu và kết nối mạng.
 
-View: Các class trực quan. Mọi thứ người dùng nhìn thấy đều thuộc mục này. Trong Android thì nó chủ yếu là XML, mặc dù bạn cũng có thể tạo các chế độ xem bằng code và với sự ra đời của Jetpack Compose thì việc tạo UI sẽ thực hiện ở bằng code động.
+View:  thành phần này có hai nhiệm vụ quan trọng: trình bày dữ liệu cho người dùng và xử lý tương tác của người dùng.
 
-Controller: Chất keo kết dính giữa hai thứ. Nó cập nhật view, nhận thông tin đầu vào của người dùng và thực hiện các thay đổi đối với model.
+Controller: lớp xem và lớp mô hình được dán lại với nhau bằng một hoặc nhiều  Controller (quan hệ một nhiều).
 
 
 
@@ -29,11 +29,15 @@ Controller: Chất keo kết dính giữa hai thứ. Nó cập nhật view, nh�
 
 MVP architecture pattern provides an easy way to structure the project codes. The reason why MVP is widely accepted is that it provides modularity, testability, and a more clean and maintainable codebase. It is composed of the following three components:
 
-* **Model:** Layer for storing data. It is responsible for handling the domain logic(real-world business rules) and communication with the database and network layers.
-* **View:** UI(User Interface) layer. It provides the visualization of the data and keep a track of the user’s action in order to notify the Presenter.
-* **Presenter:** Fetch the data from the model and applies the UI logic to decide what to display. It manages the state of the View and takes actions according to the user’s input notification from the View.
+* **Model:** Model đại diện cho một tập hợp các lớp mô tả dữ liệu và business logic. Nó cũng xác định các  business rules cho dữ liệu có nghĩa là cách dữ liệu có thể được thay đổi và thao tác..
+* **View:** The View is used for making interactions with users like XML, Activity, fragments and keep a track of the user’s action in order to notify the Presenter.
+* **Presenter:** Presenter đóng vai trò làm trung gian giữa View và Model. Presenter nhận dữ liệu từ Model và hiển thị nó trên View, cũng như xử lý các sự kiện từ người dùng trên View và truyền nó đến Model để thực hiện các thao tác xử lý. Presenter cũng có trách nhiệm thực hiện các logic xử lý phức tạp hoặc logic nghiệp vụ, tránh việc để View xử lý các công việc này. 
   
   
+
+  Trong mô hình MVP, Presenter không trực tiếp điều khiển view. Thay vào đó, Presenter sử dụng Interface để tương tác với View và chỉ định các hành động cần thực hiện. Điều này cho phép View độc lập với Presenter và giúp giảm thiểu sự phụ thuộc giữa các thành phần trong ứng dụng. Nó cũng giúp cho việc kiểm thử và bảo trì ứng dụng dễ dàng hơn.
+
+
 
 ### **Ưu điểm MVP**
 
@@ -59,10 +63,10 @@ Dưới đây là một số sự khác biệt giữa MVC và MVP:
 
 ## MVVM:
 
-        MVVM pattern has some similarities with the MVP(Model — View — Presenter) design pattern as the **Presenter** role is played by the **ViewModel**. However, the drawbacks of the MVP pattern have been solved by MVVM. It suggests separating the data presentation logic(Views or UI) from the core business logic part of the application. The separate code layers of MVVM are:
+        This pattern based on MVC and MVP which attempts to more clearly separate the development of UI from that of the business logic and behavior in an application. However, the drawbacks of the MVP pattern have been solved by MVVM. It suggests separating the data presentation logic(Views or UI) from the core business logic part of the application. The separate code layers of MVVM are:
 
 * **Model:** This layer is responsible for the abstraction of the data sources. Model and ViewModel work together to get and save the data.
-* **View:** The purpose of this layer is to inform the ViewModel about the user’s action. This layer observes the ViewModel and does not contain any kind of application logic.
+* **View:** The purpose of this layer is to inform the ViewModel about the user’s action. This layer observes the ViewModel and does not contain any kind of application business logic.
 * **ViewModel:** It exposes those data streams which are relevant to the View. Moreover, it serves as a link between the Model and the View.
 
 ![](../resources/mvvm.png)
@@ -95,7 +99,7 @@ Dưới đây là một số sự khác biệt giữa MVC và MVP:
 | **Model** layer returns the response of the user’s input to the **Presenter** which forwards it to **View**.                             | After performing operations according to the user’s input, the **Model** layer returns the response to the **View**.                            |
 | **Presenter** handles the application flow and the **View** is the actual application.                                                   | **ViewModel** is the actual application and **View** is the interface for the user in order to interact with the app.                           |
 | The project file will contain more classes as well as code.                                                                              | The Project file will contain more classes but less code per class.                                                                             |
-| Maintenance is not ensured in the architecture.                                                              | Maintenance of the layers is very good.                                                                                                         |
+| Maintenance is not ensured in the architecture.                                                                                          | Maintenance of the layers is very good.                                                                                                         |
 | It does not work well with android applications or software.                                                                             | It works extremely well with android applications or software.                                                                                  |
 
 ## Clean Achitecture
@@ -192,3 +196,7 @@ Nhược điểm của Clean Architecture
 
 * Clean architecture do phân tách cấu trúc thành nhiều tầng nên dẫn đến việc số lượng code sinh ra là rất lớn, không phù hợp cho các dự án nhỏ.
 * Khó hiểu, khó áp dụng với những người mới bắt đầu.
+
+**!! Lưu ý :**
+
+    Trong các mô hình MVC, MVVM, MVP, Repository không được liệt kê là một layer bởi vì nó không là một phần của kiến trúc mô hình, mà là một design pattern. Repository pattern được sử dụng để giải quyết vấn đề truy cập và quản lý dữ liệu trong ứng dụng, và thường được sử dụng cùng với các mô hình kiến trúc khác như MVC, MVVM, MVP. Repository pattern đóng vai trò quan trọng trong việc quản lý truy cập và xử lý dữ liệu, giúp cho việc tách biệt các thành phần trong ứng dụng trở nên dễ dàng hơn.

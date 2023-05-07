@@ -329,3 +329,27 @@ Rx java, Livedata, Flow đều theo Observer pattern
 
 
     Một ví dụ về sử dụng concurrency design pattern trong Android Kotlin là sử dụng AsyncTask. AsyncTask là một lớp được cung cấp bởi Android để thực hiện các tác vụ nặng như tải xuống dữ liệu từ Internet hoặc thực hiện các tác vụ khác liên quan đến I/O. AsyncTask cho phép bạn thực hiện các tác vụ này trong một thread riêng biệt, vì vậy không ảnh hưởng đến giao diện người dùng.
+
+
+
+## Repository Design pattern
+
+    Repository design pattern trong Android là một mô hình thiết kế giúp cho việc quản lý và truy cập dữ liệu trong ứng dụng trở nên dễ dàng hơn. Nó là một lớp trung gian giữa các lớp Model (dữ liệu) và Presenter/ViewModel (hiển thị dữ liệu) hoặc giữa ViewModel và Model.
+
+Repository sử dụng các phương thức để truy xuất và lưu trữ dữ liệu từ nguồn dữ liệu, bao gồm cả cơ sở dữ liệu local và remote. Repository cung cấp các phương thức để lấy dữ liệu từ các nguồn khác nhau, đồng thời cũng cung cấp các phương thức để lưu trữ dữ liệu mới hoặc cập nhật dữ liệu hiện có.
+
+Một số lợi ích của Repository design pattern trong Android là:
+
+1. Giúp tách biệt các lớp logic của ứng dụng như lưu trữ và truy xuất dữ liệu từ lớp hiển thị (View) để dễ dàng bảo trì và phát triển ứng dụng.
+
+2. Giúp cải thiện hiệu suất ứng dụng bằng cách quản lý và tối ưu hóa các yêu cầu truy xuất và lưu trữ dữ liệu.
+
+3. Giúp cung cấp khả năng đa nguồn dữ liệu cho ứng dụng, từ đó cải thiện tính linh hoạt của ứng dụng.
+
+4. Giúp kiểm soát việc truy cập vào cơ sở dữ liệu và tăng tính bảo mật của ứng dụng.
+
+Trong Repository design pattern, chúng ta thường sử dụng các thư viện như Room để làm việc với cơ sở dữ liệu local, Retrofit hoặc Volley để làm việc với dữ liệu từ server. Chúng ta cũng có thể sử dụng các thư viện khác như Firebase để làm việc với dữ liệu realtime.
+
+Tóm lại, Repository design pattern trong Android là một mô hình thiết kế quan trọng giúp cho việc quản lý và truy xuất dữ liệu trở nên dễ dàng hơn. Nó làm giảm sự phụ thuộc giữa các lớp của ứng dụng và cải thiện tính bảo mật, hiệu suất và tính linh hoạt của ứng dụng.
+
+
