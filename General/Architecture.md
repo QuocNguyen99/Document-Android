@@ -6,7 +6,7 @@ Model: chịu trách nhiệm về business logic của ứng dụng. Nó quản 
 
 View:  thành phần này có hai nhiệm vụ quan trọng: trình bày dữ liệu cho người dùng và xử lý tương tác của người dùng.
 
-Controller: lớp xem và lớp mô hình được dán lại với nhau bằng một hoặc nhiều  Controller (quan hệ một nhiều).
+Controller: View class và Model class giao tiếp với nhau thông qua một hoặc nhiều  Controller (quan hệ một nhiều).
 
 
 
