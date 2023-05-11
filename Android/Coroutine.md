@@ -169,6 +169,7 @@ To specify where the coroutines should run, Kotlin provides three dispatchers th
 * **Dispatchers.Main** - Use this dispatcher to run a coroutine on the main Android thread. This should be used only for interacting with the UI and performing quick work. Examples include calling `suspend` functions, running Android UI framework operations, and updating [`LiveData`](https://developer.android.com/topic/libraries/architecture/livedata) objects.
 * **Dispatchers.IO** - This dispatcher is optimized to perform disk or network I/O outside of the main thread. Examples include using the [Room component](https://developer.android.com/topic/libraries/architecture/room), reading from or writing to files, and running any network operations.
 * **Dispatchers.Default** - This dispatcher is optimized to perform CPU-intensive work outside of the main thread. Example use cases include sorting a list and parsing JSON.
+* **Dispatchers.Unconfined** -  it executes coroutine immediately on the current thread and later resumes it in whatever thread called resume. It is usually a good fit for things like intercepting regular non-suspending API or invoking coroutine-related code from blocking world callbacks.
 
 
 
