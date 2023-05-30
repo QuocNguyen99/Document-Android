@@ -1,0 +1,2 @@
+# Data Structure
+Trong lĩnh vực Khoa học máy tính, cấu trúc dữ liệu được định nghĩa là những cách để tổ chức và lưu trữ dữ liệu trong máy tính để chúng ta có thể thực hiện các hoạt động trên dữ liệu được lưu trữ đó một cách hiệu quả hơn.
