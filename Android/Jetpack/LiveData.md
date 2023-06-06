@@ -74,4 +74,6 @@ class UserRepository {
     }
 }
 ```
+Đoạn code trên chạy trên main thread vì nó được gọi trong một hàm không có chỉ định việc thực thi trên một thread khác. Nếu một đoạn code được thực thi trên main thread mà yêu cầu nhiều thời gian và tài nguyên, nó có thể gây ra hiện tượng "jank" trong giao diện người dùng, làm cho ứng dụng trở nên không mượt.
+
     If you need to use streams of data in other layers of your app, consider using [Kotlin Flows](https://developer.android.com/kotlin/flow) and then converting them to `LiveData` in the `ViewModel` using [`asLiveData()`](https://developer.android.com/reference/kotlin/androidx/lifecycle/package-summary#aslivedata). Learn more about using Kotlin `Flow` with `LiveData` in [this codelab](https://developer.android.com/codelabs/advanced-kotlin-coroutines). For codebases built with Java, consider using [Executors](https://developer.android.com/guide/background/threading) in conjuction with callbacks or `RxJava`.
