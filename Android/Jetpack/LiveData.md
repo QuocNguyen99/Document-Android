@@ -51,5 +51,27 @@ VN :
     Activities and fragments should not hold `LiveData` instances because their role is to display data, not hold state. Also, keeping activities and fragments free from holding data makes it easier to write unit tests.
 
     The code below is an example of how holding a `LiveData` in the `Repository` can block the main thread:
+```kotlin
+class UserRepository {
 
+    // DON'T DO THIS! LiveData objects should not live in the repository.
+    fun getUsers(): LiveData<List<User>> {
+        ...
+    }
+
+    fun getNewPremiumUsers(): LiveData<List<User>> {
+        return getUsers().map { users ->
+            // This is an expensive call being made on the main thread and may
+            // cause noticeable jank in the UI!
+            users
+                .filter { user ->
+                  user.isPremium
+                }
+          .filter { user ->
+              val lastSyncedTime = dao.getLastSyncedTime()
+              user.timeCreated > lastSyncedTime
+                }
+    }
+}
+```
     If you need to use streams of data in other layers of your app, consider using [Kotlin Flows](https://developer.android.com/kotlin/flow) and then converting them to `LiveData` in the `ViewModel` using [`asLiveData()`](https://developer.android.com/reference/kotlin/androidx/lifecycle/package-summary#aslivedata). Learn more about using Kotlin `Flow` with `LiveData` in [this codelab](https://developer.android.com/codelabs/advanced-kotlin-coroutines). For codebases built with Java, consider using [Executors](https://developer.android.com/guide/background/threading) in conjuction with callbacks or `RxJava`.
