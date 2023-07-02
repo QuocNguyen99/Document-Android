@@ -81,3 +81,19 @@ android {
 ```
 
 ## 
+Để giữ data không bị thay đổi khi xoay màng hình (k dùng viewmodel và save instance sate)
+
+```groovy
+    <activity
+        android:name="com.example.ListActivity"
+        android:label="@string/app_name"
+        android:configChanges="keyboardHidden|orientation">
+ ```
+if API level > 23 using this :
+
+```groovy
+    <activity
+        android:name="com.example.Activity"
+        android:label="@string/app_name"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+```
