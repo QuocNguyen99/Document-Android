@@ -1,3 +1,8 @@
+# Activity
+
+Activity là một component  độc lập và có thể tái sử dụng, tương tác với người dùng bằng cách cung cấp các tài nguyên liên quan đến giao diện người dùng. Tất cả các ứng dụng Android phải có ít nhất một activity để vào ứng dụng và tương tác với người dùng.
+
+
 ## Activity Lifecycle
 
 Các Activities trong hệ thống được quản lý dưới dạng Activities stacks. Khi một hoạt động mới được bắt đầu, nó thường được đặt ở trên cùng của stack hiện tại và trở thành hoạt động đang chạy -- Activity trước đó luôn ở bên dưới nó trong ngăn xếp và sẽ không xuất hiện trở lại nền trước cho đến khi Activity mới thoát ra. Có thể có một hoặc nhiều stacks hoạt động hiển thị trên màn hình.
@@ -12,7 +17,7 @@ Một hoạt động về cơ bản có bốn trạng thái:
 
 - Hệ thống có thể loại bỏ Activity khỏi bộ nhớ bằng cách yêu cầu nó kết thúc hoặc đơn giản là giết quá trình của nó, làm cho nó bị hủy (NÓ ĐÃ BỊ DESTROY). Khi nó được hiển thị lại cho người dùng, nó phải được khởi động lại hoàn toàn và khôi phục về trạng thái trước đó.
 
-![loading-ag-444](../resources/activity_lifecycle.png)
+![loading-ag-444](../../resources/activity_lifecycle.png)
 
 There are three key loops you may be interested in monitoring within your activity:
 
@@ -93,7 +98,7 @@ Tuy nhiên, nếu ứng dụng của bạn ghi đè onBackPressed() để xử l
 
 Task là một đơn vị gắn kết có thể di chuyển xuống background khi người dùng bắt đầu một Task mới hoặc chuyển đến Màn hình Home. Trong khi ở chế độ background, tất cả các Activity trong Task đều bị dừng, nhưng back stack của Task vẫn còn nguyên—Task chỉ đơn giản là mất focus trong khi một Task khác diễn ra, như thể hiện trong hình. Sau đó, một Task có thể trở lại foreground để người dùng có thể tiếp tục từ nơi họ đã dừng lại.
 
-![](../resources/diagram_multitasking.png)
+![](../../resources/diagram_multitasking.png)
 
 ### Multiple activity instances
 
