@@ -8,7 +8,7 @@ To read an encrypted data, you must have access to a secret key or password that
 Unencrypted data is called plain data (plain text), encrypted data is referred to as cipher data (cipher text).
 
 
-![](../../Android/Security/resources/encrypt1.webp)
+![](../../resources/encrypt1.webp)
 
 
 In overall encryption works as following:

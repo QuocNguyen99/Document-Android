@@ -6,7 +6,7 @@ Android builds on the Java Cryptography Architecture (JCA),
 that provides API for digital signatures, certificates, encryption, 
 keys generation and management.
 
-![](../../Android/Security/resources/JCA.webp)
+![](../../resources/JCA.webp)
 
 ### KeyGenerator 
 provides the public API for generating symmetric cryptographic keys.
