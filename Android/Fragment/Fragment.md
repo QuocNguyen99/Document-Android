@@ -1,5 +1,9 @@
 ## Fragment
 
+![](../../resources/fragment.avif)
+
+A Fragment là phần có thể sử dụng lại trong giao diện người dùng của bạn để tương tác với người dùng bằng cách cung cấp các thành phần giao diện người dùng bên cạnh các Activity. Thông thường, fragments thuộc về activities và được quản lý bởi Fragment manager.
+
 ## Fragment manager
 
     You might never interact with `FragmentManager` directly if you're using the [Jetpack Navigation](https://developer.android.com/guide/navigation) library, as it works with the `FragmentManager` on your behalf. That said, any app using fragments is using `FragmentManager` at some level, so it's important to understand what it is and how it works.
