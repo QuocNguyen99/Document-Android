@@ -1,4 +1,21 @@
-# The manifest file
+# App Manifest
+
+![](../resources/android-app-manifest.avif)
+
+Mọi dự án Android đều phải có tệp AndroidManifest.xml mô tả thông tin cần thiết về ứng dụng như tên gói,
+điểm truy cập, thành phần, quyền và siêu dữ liệu.
+
+## Package Name and Application ID
+
+Mọi dự án Android đều phải có package attribute, đại diện cho ID ứng dụng duy nhất trên toàn cầu của ứng dụng của bạn trong tệp AndroidManifest.xml. 
+Manifest file phải được đặt trong thư mục/src/main của bạn.
+
+Package attribute là cách để định danh ứng dụng của bạn trên hệ thống Android (Thiết bị vật lý) và trong Google Play. Các công cụ xây dựng Android sử dụng thuộc tính gói cho các mục sau:
+
+- Applying the package name as the namespace for your app resources.
+- Resolving implicit class names that are declared in the manifest file. For example, with the above manifest, an activity declared as <activity android:name=".MainActivity"> is resolved to be io.getstream.chat.android.ui.MainActivity. So the classes also must be in the same package folder.
+
+## The manifest file
 
 Trước khi hệ thống Android có thể khởi động Component, hệ thống phải biết rằng component đó tồn tại bằng cách đọc tệp kê khai của ứng dụng, `AndroidManifest.xml`. Ứng dụng của bạn khai báo tất cả các component của nó trong tệp này, nằm ở thư mục gốc của thư mục dự án ứng dụng.
 
