@@ -29,3 +29,8 @@ Lưu ý: Nếu bạn cần hỗ trợ các tập dữ liệu lớn hoặc phức
 2. The generic type of the DataStore must be immutable. Mutating a type used in DataStore invalidates any guarantees that DataStore provides and creates potentially serious, hard-to-catch bugs. It is strongly recommended that you use protocol buffers which provide immutability guarantees, a simple API and efficient serialization.
 
 3. Never mix usages of SingleProcessDataStore and MultiProcessDataStore for the same file. If you intend to access the DataStore from more than one process always use MultiProcessDataStore.
+
+
+## So sánh DataStore và SharePreference
+
+![](../../../resources/DataStore.png)

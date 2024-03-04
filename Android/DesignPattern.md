@@ -1,5 +1,17 @@
 # Design Pattern thường dùng trong android
 
+![loading-ag-444](../resources/pattern.avif)
+
+Software design pattern is a reusable solution to solve repeated and common software problems in software engineering.
+Design patterns can be categorized based on what kind of problem they solve, 
+such as Creational pattern, Behavioral pattern, and Concurrency pattern.
+
+In Android development, there are frequently used design patterns to solve common problems 
+in the Android platform and manage resource lifecycles, such as Dependency Injection 
+and Observer pattern.
+
+You may already have used Creational patterns at least once, such as Builder pattern, 
+Factory method pattern, and Singleton pattern to create instances in Android development.
 ## Creational Patterns
 
 ### Builder
@@ -27,9 +39,33 @@ Một tập hợp các lựa chọn khác nhau sẽ dẫn đến một alert ho�
 
 ## Dependency Injection pattern
 
-    Trong Android, bạn có thể thấy mình cần truy cập cùng một đối tượng phức tạp từ nhiều điểm khác nhau trong ứng dụng của mình, chẳng hạn như network client , image loader hoặc `SharedPreferences` để lưu trữ cục bộ. Bạn có thể **inject** đối tượng này vào các activities và fragments của mình và truy cập chúng ngay lập tức.
+Dependency Injection is one of the most popular patterns in modern Android development, 
+transferring the obligation to create an object out of the class.
 
-Hiện tại, có 2 thư viện chính để dependency injection: Dagger 2, Hilt, Koin
+By transferring the obligation to create an object,
+classes don’t need to have dependencies on each other. 
+Therefore you can design loosely coupled dependencies between the classes
+
+If you utilize dependency injection properly, you can benefit from the advantages below:
+
+- Reduces boilerplate code.
+- Loose coupling between classes, so you can write unit tests easily.
+- Leverage class reusability.
+- Improve code maintainability.
+
+You can implement dependency injection [manually following Manual dependency injection guidelines](https://developer.android.com/training/dependency-injection/manual), 
+but it’s highly recommended to use the following efficient solutions: Hilt, Dagger, and Koin(strictly service locator pattern).
+
+- Hilt: Hilt is a compile-time dependency injection tool for Android,
+which works on top of Dagger. Hilt generates standard Android Dagger components and 
+reduces the amount of boilerplate code needed compared to the Dagger-Android library.
+- Dagger: Dagger is also a compile-time dependency injection tool, based on javax.inject annotations and (JSR 330). 
+You can use Dagger to configure dependency injection for your Android project, 
+but it will require a lot of additional setup costs because Dagger is not an 
+Android-dependent library. It’s highly recommended to use Hilt or Dagger-Android 
+to reduce your setup costs massively.
+- Koin: Koin is also a popular dependency injection (strictly service locator pattern) tool for Kotlin projects,
+it is easy to use and requires low setup costs.
 
 ## Singleton
 
@@ -304,7 +340,7 @@ Cuối cùng, tạo và đăng một trong những sự kiện đó dựa trên 
 EventBus.getDefault().post(MySpecificEvent())
 ```
 
-### Observer
+### Observer Pattern
 
     Mẫu Observer xác định sự phụ thuộc một-nhiều giữa các đối tượng. Khi một đối tượng thay đổi trạng thái, những thứ phụ thuộc theo nó sẽ nhận được thông báo và cập nhật một cách tự động.
 
@@ -312,8 +348,28 @@ EventBus.getDefault().post(MySpecificEvent())
 
 
 
-Rx java, Livedata, Flow đều theo Observer pattern
+Rx java, Livedata,Rx kotlin, Flow đều theo Observer pattern
 
+- LiveData: LiveData is a lifecycle-aware, thread-safe, and data-holder observer pattern. 
+LiveData’s observers are bound to Android Lifecycles, so you don’t need to unsubscribe your observers manually,
+and they will not subscribe to data emissions when the lifecycle is not activated. 
+As a result, it will prevent unpredicted and hard-to-identify memory leaks. 
+It also provides useful operators with LiveData-ktx library, and supports Data Binding and Room compatibility.
+However, modern Android development prefers Kotlin’s Flows over LiveData since 
+Coroutines has been adopted broadly.
+- Kotlin Flows: Flows is an asynchronous solution that is cold streams similar to sequences working with 
+Coroutines. They are asynchronous and non-blocking solutions, which are supported at the language level in Kotlin.
+Flows also provides useful operators, such as Transform operator, Flattening operators, and flowOn operator.
+You can utilize StateFlow and SharedFlow in Android to implement state-holder observable
+flow and emit values to multiple consumers.
+- RxKotlin(RxJava): RxKotlin originated from the ReactiveX, which is a combination of the observer pattern, 
+iterator pattern, and functional programming. 
+RxKotlin provides many useful operators that allow you to compose asynchronous and event-based programs by
+using observable sequences. Also, you can easily solve concurrency problems, such as low-level threading,
+synchronization, and thread safety, with those operators, and there are many useful solutions for Android,
+such as RxAndroid. However, RxKotlin includes many operators and can be too complex for beginners.
+Kotlin Flows or LiveData are easier to use, especially if you don’t need to use lots of complicated
+operations in your project.
 
 
 

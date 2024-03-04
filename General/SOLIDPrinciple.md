@@ -7,14 +7,16 @@
 5. Dependency inversion principle
 
 ### **1. Single responsibility principle**
-
-        Một class chỉ nên giữ 1 trách nhiệm duy nhất (Chỉ có thể sửa đổi class với 1 lý do duy nhất)
+Each software component, such as a class or module, should have only one reason to change; that means designing unrelated functionalities in the same component, class, or module makes it difficult to comprehend the purpose of the code and makes it unclear.
 
 ### **2. Open/closed principle**
 
         Có thể thoải mái mở rộng 1 class, nhưng không được sửa đổi bên trong class đó (open for extension but closed for modification).
 
 Theo nguyên lý này, mỗi khi ta muốn thêm chức năng,.. cho chương trình, chúng ta nên viết class mới mở rộng class cũ ( bằng cách kế thừa hoặc sở hữu class cũ) không nên sửa đổi class cũ.
+
+
+You should be able to extend the functionalities of components (open for extension). without breaking points and modifying the usages (closed for modification).
 
 ### **3. Liskov Substitution Principle**
 
