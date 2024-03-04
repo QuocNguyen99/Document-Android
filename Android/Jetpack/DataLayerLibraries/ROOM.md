@@ -1,5 +1,9 @@
 # ROOM Database
 
+Room is an Android Jetpack library by Google, which provides an abstraction layer over SQLite that simplifies querying and accessing the database without complicated SQL statements.
+
+It works based on Annotation Processor (it also supports KSP (Kotlin Symbol Processing)), so the implementation, such as querying and inserting columns, will be generated at compile time.
+
     Room Database(**Room Persistence Library**) là một phần trong Android Architecture Components, nó giúp cho việc thao tác với SQLiteDatabase Object trở lên dễ dàng hơn, giảm thiểu số lượng câu truy vấn bằng những annotation sẵn có và xác minh truy vấn tại thời điểm biên dịch.
 
 ## Cấu Tạo ROOM Database
