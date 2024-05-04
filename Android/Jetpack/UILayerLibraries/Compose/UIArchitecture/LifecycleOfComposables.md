@@ -15,7 +15,7 @@ Recomposition is typically triggered by a change to a State<T> object. Compose t
 
 
 > [!NOTE]
-> A composable's lifecycle is simpler than the lifecycle of views, activities, and fragments. When a composable needs to manage or interact with external resources that do have a more complex lifecycle, you should use effects.
+> A composable's lifecycle is simpler than the lifecycle of views, activities, and fragments. When a composable needs to manage or interact with external resources that do have a more complex lifecycle, you should use effects.(An effect is a composable function that doesn't emit UI and causes side effects to run when a composition completes.)
 
 
 ## Anatomy of a composable in Composition
