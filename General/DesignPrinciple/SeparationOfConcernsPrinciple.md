@@ -12,3 +12,10 @@ Các lợi ích mà Separation of Concerns đem lại thì có rất nhiều, c�
 - **Reusability**: Separating concerns often leads to the creation of reusable components. Once a concern has been isolated into a distinct module, it can be reused across different parts of the system or even in entirely different projects. This reduces development time and effort and promotes consistency across applications.
 - **Parallel Development**: SoC facilitates parallel development by providing clear boundaries between different parts of the system. Multiple developers can work on separate concerns concurrently without stepping on each other’s toes, leading to more efficient development workflows and shorter time-to-market.
 - **Understanding and Debugging**: With concerns separated into distinct modules, it becomes easier to understand and debug software systems. Developers can focus on one concern at a time, isolating and analyzing issues without being distracted by unrelated functionality. This leads to faster diagnosis and resolution of problems.
+
+**Separation of Concerns** là một design principle (nguyên lý thiết kế) phổ biến trong phát triển phẩn mềm, với rất nhiều các thể hiện, có thể rất quen thuộc với các lập trình viên, nhưng họ lại không hay để ý đến, ví dụ một vài cái đơn giản như:
+
+- HTML/CSS/Javascript với các ngôn ngữ đóng những vai trò khác nhau
+- Mô hình MVC, với các tầng Model, View, Controller đảm nhiệm các nhiệm vụ riêng biệt khác nhau
+- Kiến trúc Microservices với các service thực hiện những nhiệm vụ khác nhau
+- Trong lập trình hướng đối tượng, Separation of Concerns được thể hiện qua một design principle khác là Single Responsibility
