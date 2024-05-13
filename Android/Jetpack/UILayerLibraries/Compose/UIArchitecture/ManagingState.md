@@ -1,0 +1,242 @@
+# Managing State in Jetpack Compose
+
+## State and Jetpack Compose
+
+
+State in an app is any value that can change over time. This is a very broad definition and encompasses everything from a Room database to a variable in a class.
+
+This guide focuses on the connection between state and composables, and on the APIs that Jetpack Compose offers to work with state more easily.
+
+
+### State and composition
+
+**Compose is declarative and as such the only way to update it is by calling the same composable with new arguments.** These arguments are representations of the UI state. Any time a state is updated a recomposition takes place.
+
+> [!NOTE]
+> Key term:
+> Initial composition: creation of a Composition by running composables the first time.
+> Recomposition: re-running composables to update the Composition when data changes.
+
+### State in composables
+
+**Composable functions can use the `remember` API to store an object in memory. A value computed by `remember` is stored in the Composition during initial composition, and the stored value is returned during recomposition. `remember` can be used to store both mutable and immutable objects.**
+
+> [!NOTE]
+>  Các đối tượng được lưu trữ bởi remember sẽ được hủy bỏ khi composable tương ứng bị loại bỏ hoặc không còn cần thiết nữa.
+
+#### mutableStateOf
+
+`mutableStateOf` creates an observable `MutableState<T>`, which is an observable type integrated with the compose runtime.
+
+
+```kotlin
+interface MutableState<T> : State<T> {
+    override var value: T
+}
+```
+
+Any changes to `value` schedules recomposition of any composable functions that read `value`.
+
+
+There are three ways to declare a MutableState object in a composable:
+
+- `val mutableState = remember { mutableStateOf(default) }`
+- `var value by remember { mutableStateOf(default) }`
+- `val (value, setValue) = remember { mutableStateOf(default) }`
+
+These declarations are equivalent, and are provided as syntax sugar for different uses of state.You should pick the one that produces the easiest-to-read code in the composable you're writing.
+
+You can use the remembered value as a parameter for other composables or even as logic in statements to change which composables are displayed. 
+
+
+While `remember` helps you retain state across recompositions, the state is not retained across configuration changes. For this, you must use `rememberSaveable`. `rememberSaveable` automatically saves any value that can be saved in a Bundle. For other values, you can pass in a custom saver object.
+Example:
+
+```kotlin
+var count by rememberSaveable { mutableStateOf(0) }
+```
+> [!Caution]
+> Using mutable objects such as ArrayList<T> or mutableListOf() as state in Compose causes your users to see incorrect or stale data in your app. Mutable objects that are not observable, such as ArrayList or a mutable data class, are not observable by Compose and don't trigger a recomposition when they change. Instead of using non-observable mutable objects, the recommendation is to use an observable data holder such as State<List<T>> and the immutable listOf().
+
+
+#### derivedStateOf
+
+Sử dụng derivedStateOf: derivedStateOf cho phép bạn tạo ra một trạng thái phụ thuộc vào một hoặc nhiều trạng thái khác. Khi bất kỳ trạng thái nào mà nó phụ thuộc vào thay đổi, trạng thái được tạo ra bởi derivedStateOf cũng sẽ thay đổi, và tất cả các Composable đang lắng nghe trạng thái đó sẽ được recompose.
+
+```kotlin
+val count1 by remember { mutableStateOf(0) }
+val count2 by remember { mutableStateOf(0) }
+val sum by derivedStateOf { count1 + count2 }
+```
+
+#### Other supported types of state
+
+Compose doesn't require that you use `MutableState<T>` to hold state; it supports other observable types. Before reading another observable type in Compose, **you must convert it to a `State<T>` so that composables can automatically recompose when the state changes.**
+
+Compose ships with functions to create State<T> from common observable types used in Android apps. Before using these integrations, add the appropriate artifact(s) as outlined below:
+
+- Flow: `collectAsStateWithLifecycle()`
+
+`collectAsStateWithLifecycle() `collects values from a Flow in a lifecycle-aware manner, allowing your app to conserve app resources. It represents the latest emitted value from the Compose State. Use this API as the recommended way to collect flows on Android apps.
+
+- Flow: `collectAsState()`
+`collectAsState` is similar to `collectAsStateWithLifecycle`, because it also collects values from a Flow and transforms it into Compose State.
+
+Use collectAsState for platform-agnostic code instead of collectAsStateWithLifecycle, which is Android-only.
+
+- Live Data: `observeAsState()`
+
+`observeAsState()` starts observing this `LiveData` and represents its values via `State`.
+- RxJava2/RxJava3: `subscribeAsState()`
+
+`subscribeAsState()` are extension functions that transform reactive streams of (RxJava2/RxJava3) (e.g. `Single`, `Observable`, `Completable`) into Compose `State`.
+
+
+
+> [!IMPORTANT]
+> Compose automatically recomposes from reading `State` objects. If you use another observable type such as `LiveData` in Compose, you should convert it to State before reading it. Make sure that type conversion happens in a composable, using a composable extension function like `LiveData<T>.observeAsState()`.
+
+> [!NOTE]
+> You are not limited to these integrations. You can build an extension function for Jetpack Compose that reads other observable types. If your app uses a custom observable class, convert it to produce `State<T>` using the `produceState` API.
+
+## Stateful versus stateless
+
+A composable that uses remember to store an object creates internal state, making the composable stateful. HelloContent is an example of a stateful composable because it holds and modifies its name state internally. This can be useful in situations where a caller doesn't need to control the state and can use it without having to manage the state themselves. However, composables with internal state tend to be less reusable and harder to test.
+
+A stateless composable is a composable that doesn't hold any state. An easy way to achieve stateless is by using state hoisting.
+
+As you develop reusable composables, you often want to expose both a stateful and a stateless version of the same composable. The stateful version is convenient for callers that don't care about the state, and the stateless version is necessary for callers that need to control or hoist the state.
+
+
+## State hoisting
+
+State hoisting in Compose is a pattern of moving state to a composable's caller to make a composable stateless. The general pattern for state hoisting in Jetpack Compose is to replace the state variable with two parameters:
+
+- `value T`: the current value to display
+- `onValueChange: (T) -> Unit`: an event that requests the value to change, where T is the proposed new value
+
+However, you are not limited to `onValueChange`. If more specific events are appropriate for the composable, you should define them using lambdas.
+
+**State that is hoisted this way has some important properties:**
+
+- **Single source of truth**: By moving state instead of duplicating it, we're ensuring there's only one source of truth. This helps avoid bugs.
+- **Encapsulated**: Only stateful composables can modify their state. It's completely internal.
+Shareable: Hoisted state can be shared with multiple composables. If you wanted to read name in a different composable, hoisting would allow you to do that.
+- **Interceptable**: callers to the stateless composables can decide to ignore or modify events before changing the state.
+- **Decoupled**: the state for the stateless composables may be stored anywhere. For example, it's now possible to move name into a ViewModel.
+
+> [!IMPORTANT]
+> When hoisting state, there are three rules to help you figure out where state should go:
+> 1. State should be hoisted to at least **the lowest common parent** of all composables that use the state (read).
+> 2. State should be hoisted to at least **the highest level it may be changed** (write).
+> 3. If **two states change in response to the same events** they should be **hoisted together**.
+
+## Restoring state in Compose
+
+The `rememberSaveable` API behaves similarly to `remember` because it retains state across recompositions, and also across activity or process recreation using the saved instance state mechanism. For example, this happens, when the screen is rotated.
+
+> [!NOTE]
+> rememberSaveable will not retain state if the activity is [completely dismissed by the user](https://developer.android.com/topic/libraries/architecture/saving-states#ui-dismissal-user). For example, it does not retain state if the user swipes the current activity up from the [recents screen](https://developer.android.com/guide/components/activities/recents).
+
+### Ways to store State
+
+All data types that are added to the `Bundle` are saved automatically. If you want to save something that cannot be added to the `Bundle`, there are several options.
+
+#### Parcelize
+
+The simplest solution is to add the `@Parcelize` annotation to the object. The object becomes parcelable, and can be bundled. For example, this code makes a parcelable `City` data type and saves it to the state.
+
+```kotlin
+@Parcelize
+data class City(val name: String, val country: String) : Parcelable
+
+@Composable
+fun CityScreen() {
+    var selectedCity = rememberSaveable {
+        mutableStateOf(City("Madrid", "Spain"))
+    }
+}
+```
+
+#### MapSaver
+
+If for some reason `@Parcelize` is not suitable, you can use mapSaver to define your own rule for converting an object into a set of values that the system can save to the `Bundle`.
+
+```kotlin
+data class City(val name: String, val country: String)
+
+val CitySaver = run {
+    val nameKey = "Name"
+    val countryKey = "Country"
+    mapSaver(
+        save = { mapOf(nameKey to it.name, countryKey to it.country) },
+        restore = { City(it[nameKey] as String, it[countryKey] as String) }
+    )
+}
+
+@Composable
+fun CityScreen() {
+    var selectedCity = rememberSaveable(stateSaver = CitySaver) {
+        mutableStateOf(City("Madrid", "Spain"))
+    }
+}
+```
+
+#### ListSaver
+
+To avoid needing to define the keys for the map, you can also use `listSaver` and use its indices as keys:
+
+```kotlin
+data class City(val name: String, val country: String)
+
+val CitySaver = listSaver<City, Any>(
+    save = { listOf(it.name, it.country) },
+    restore = { City(it[0] as String, it[1] as String) }
+)
+
+@Composable
+fun CityScreen() {
+    var selectedCity = rememberSaveable(stateSaver = CitySaver) {
+        mutableStateOf(City("Madrid", "Spain"))
+    }
+}
+```
+
+## State holders in Compose
+
+Simple state hoisting can be managed in the composable functions itself. However, if the amount of state to keep track of increases, or the logic to perform in composable functions arises, it's a good practice to delegate the logic and state responsibilities to other classes: **state holders.** -> **State holders manage logic and state of composables.**
+
+
+## Retrigger remember calculations when keys change
+
+>In general, `remember` takes a calculation lambda parameter. When `remember` is first run, it invokes the calculation lambda and stores its result. During recomposition, `remember` returns the value that was last stored.
+Apart from caching state, you can also use `remember` to store any object or result of an operation in the Composition that is expensive to initialize or calculate. You might not want to repeat this calculation in every recomposition. 
+
+`remember` stores the value until it leaves the Composition. However, **there is a way to invalidate the cached value**. The `remember` API also takes a `key` or `keys` parameter. If any of these keys change, the next time the function recomposes, **`remember` invalidates the cache and executes the calculation lambda block again. This mechanism gives you control over the lifetime of an object in the Composition**. The calculation remains valid until the inputs change, instead of until the remembered value leaves the Composition.
+
+Example:
+
+```kotlin
+@Composable
+private fun BackgroundBanner(
+    @DrawableRes avatarRes: Int,
+    modifier: Modifier = Modifier,
+    res: Resources = LocalContext.current.resources
+) {
+    val brush = remember(key1 = avatarRes) {
+        ShaderBrush(
+            BitmapShader(
+                ImageBitmap.imageResource(res, avatarRes).asAndroidBitmap(),
+                Shader.TileMode.REPEAT,
+                Shader.TileMode.REPEAT
+            )
+        )
+    }
+
+    Box(
+        modifier = modifier.background(brush)
+    ) {
+        /* ... */
+    }
+}
+```
