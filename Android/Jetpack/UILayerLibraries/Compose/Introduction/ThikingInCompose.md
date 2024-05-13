@@ -59,8 +59,15 @@ This function takes in a list of names and generates a greeting for each user. C
 
 In an imperative UI model, to change a widget, you call a setter on the widget to change its internal state. In Compose, you call the composable function again with new data. Doing so causes the function to be recomposed--the widgets emitted by the function are redrawn, if necessary, with new data. The Compose framework can intelligently recompose only the components that changed.
 
-For example, consider this composable function which displays a button:
-
+<details>
+  <summary style="color: orange;">
+  <b>
+  For example, consider this composable function which displays a button
+  </b>
+  </summary>
+  
+  <p>
+  
 ```kotlin
 @Composable
 fun ClickCounter(clicks: Int, onClick: () -> Unit) {
@@ -74,6 +81,7 @@ Every time the button is clicked, the caller updates the value of clicks. Compos
 
 As we discussed, recomposing the entire UI tree can be computationally expensive, which uses computing power and battery life. Compose solves this problem with this intelligent recomposition.
 
+
 Recomposition is the process of calling your composable functions again when inputs change. This happens when the function's inputs change. When Compose recomposes based on new inputs, it only calls the functions or lambdas that might have changed, and skips the rest. By skipping all functions or lambdas that don't have changed parameters, Compose can recompose efficiently.
 
 Never depend on side-effects from executing composable functions, since a function's recomposition may be skipped. If you do, users may experience strange and unpredictable behavior in your app. A side-effect is any change that is visible to the rest of your app. For example, these actions are all dangerous side-effects:
@@ -83,6 +91,10 @@ Never depend on side-effects from executing composable functions, since a functi
 - Updating shared preferences
 
 Composable functions might be re-executed as often as every frame, such as when an animation is being rendered. Composable functions should be fast to avoid jank during animations. If you need to do expensive operations, such as reading from shared preferences, do it in a background coroutine and pass the value result to the composable function as a parameter.
+
+  </p>
+</details>
+
 >[!NOTE]
 >**This document discusses a number of things to be aware of when you use Compose:**
 >- Composable functions can execute in any order.
@@ -97,8 +109,16 @@ The following sections will cover how to build composable functions to support r
 
 If you look at the code for a composable function, **you might assume that the code is run in the order it appears**. But this isn't necessarily true. If a composable function contains calls to other composable functions, those functions might run in any order. Compose has the option of recognizing that some UI elements are higher priority than others, and drawing them first.
 
-For example, suppose you have code like this to draw three screens in a tab layout:
 
+<details>
+  <summary style="color: orange;">
+  <b>
+  For example, suppose you have code like this to draw three screens in a tab layout
+  </b>
+  </summary>
+  
+  <p>
+  
 ```kotlin
 @Composable
 fun ButtonRow() {
@@ -112,6 +132,9 @@ fun ButtonRow() {
 
 The calls to StartScreen, MiddleScreen, and EndScreen might happen in any order. This means you can't, for example, have StartScreen() set some global variable (a side-effect) and have MiddleScreen() take advantage of that change. Instead, each of those functions needs to be self-contained.
 
+  </p>
+</details>
+
 
 ## Composable functions can run in parallel
 
@@ -123,8 +146,15 @@ To ensure your application behaves correctly, all composable functions should ha
 
 When a composable function is invoked, the invocation might occur on a different thread from the caller. That means code that modifies variables in a composable lambda should be avoided–both because such code is not thread-safe, and because it is an impermissible side-effect of the composable lambda.
 
-For example To showing a composable that displays a list and its count:
-
+<details>
+  <summary style="color: orange;">
+  <b>
+  For example To showing a composable that displays a list and its count
+  </b>
+  </summary>
+  
+  <p>
+  
 ```kotlin
 @Composable
 fun ListComposable(myList: List<String>) {
@@ -161,11 +191,22 @@ fun ListWithBug(myList: List<String>) {
 
 In this example, items is modified with every recomposition. That could be every frame of an animation, or when the list updates. Either way, the UI will display the wrong count. Because of this, writes like this are not supported in Compose; by prohibiting those writes, we allow the framework to change threads to execute composable lambdas.
 
+  </p>
+</details>
+
 ## Recomposition skips as much as possible
 
 When portions of your UI are invalid, Compose does its best to recompose just the portions that need to be updated. This means it may skip to re-run a single Button's composable without executing any of the composables above or below it in the UI tree.
 
-Every composable function and lambda might recompose by itself. Here's an example that demonstrates how recomposition can skip some elements when rendering a list:
+<details>
+  <summary style="color: orange;">
+  <b>
+Here's an example that demonstrates how recomposition can skip some elements when rendering a list
+  </b>
+  </summary>
+
+  <p>
+Every composable function and lambda might recompose by itself.
 
 ```kotlin
 /**
@@ -203,6 +244,9 @@ private fun NamePickerItem(name: String, onClicked: (String) -> Unit) {
 }
 
 ```
+
+  </p>
+</details>
 
 ## Recomposition is optimistic
 
