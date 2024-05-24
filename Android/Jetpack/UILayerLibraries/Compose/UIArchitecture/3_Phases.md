@@ -79,6 +79,222 @@ Nhớ lại cây giao diện người dùng từ phần trước:
 > [!NOTE]
 >Lưu ý rằng mỗi nút chỉ được truy cập một lần. Compose runntime chỉ yêu cầu một lần duyệt qua cây giao diện người dùng để đo lường và đặt tất cả các nút, giúp cải thiện hiệu suất. Khi số lượng nút trong cây tăng lên, thời gian duyệt qua nó sẽ tăng theo kiểu tuyến tính. Ngược lại, nếu mỗi nút được truy cập nhiều lần thì thời gian duyệt qua các node sẽ tăng theo cấp số nhân.
 
+#### Build the custom layout in Compose
+
+Calling the layout composable is the starting point of both the layout phase and building a custom layout. It accepts a composable content as it's children and measure policy for measuring and positioning it elements.All higher-level layout, like `Column` and `Row`, use this composable under the hood. Layout composable has currently three overloads. 
+
+**1.** Layout for measuring and placing zero or more children, which accept one composable as content. 
+
+```kotlin
+//Layout.kt
+inline fun Layout(
+    content: @Composable @UiComposable () -> Unit,
+    modifier: Modifier = Modifier,
+    measurePolicy: MeasurePolicy
+) {
+    ..
+}
+```
+
+
+**2.** Layout for leaf nodes of the UI tree, with precisely zero children, so it doesn't have content paramenter.
+
+```kotlin
+//Layout.kt
+@Suppress("NOTHING_TO_INLINE")
+@Composable
+@UiComposable
+inline fun Layout(
+    modifier: Modifier = Modifier,
+    measurePolicy: MeasurePolicy
+) {..}
+```
+
+**3.** Layout that accepts content list for passing multiple different composables..
+
+```kotlin
+//Layout.kt
+@Suppress("ComposableLambdaParameterPosition", "NOTHING_TO_INLINE")
+@UiComposable
+@Composable
+inline fun Layout(
+    contents: List<@Composable @UiComposable () -> Unit>,
+    modifier: Modifier = Modifier,
+    measurePolicy: MultiContentMeasurePolicy
+) {...}
+```
+
+
+Once we entered the layout phase, wee see that it consists of two steps, **measurement and palcement**, in that specific order. Sizes of the child elements are calculated during the measure pass and their positions during the placement pass. The order of these steps is enforced with Kotlin DSL scopes, the content of the layout can be accessed as measureables, components that are now ready to be measured. Inside layout, measurables come as list by default. Depending on the requirements of your layout, you could either take this list and measure evey item with the same incoming constraints to keep its original predefined size or tweak its measurements as needed by copying over constraints you wish to keep and overriding the ones you wish to change.
+
+
+```kotlin
+@Composable
+fun CustomLayout(
+    content: @Composable () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Layout(content  = { //TODO },measurePolicy = { measurables, constraints ->
+        // MEASUREMENT SCOPE
+        // 1. Measurement step
+        // Determine sizes of components
+
+        measurables // Ready to measured!
+
+        /**
+        **Very important feature of the layout phase is single pass measurement.** 
+        This mean the layout element may not measure at any of its children more than once. 
+        Single pass element is good for performance, allow Compose to efficiently handle deep UI trees. 
+        Measuring a list of measurables would, in return, give a list of placeables
+        **/
+
+        val placeables = measurables.map{ 
+            it.measure(
+                constraints.copy(
+                    minWidth = constraints.minWidth + 10
+                    maxWidth = constraints.maxWidth + 10
+                )
+            )
+        }
+
+
+        layout(placeables.sumOf { it.width }, placeables.sumOf{ it.height }){
+            //PLACEMENT SCOPE
+            /**
+            The placement step starts by calling the layout function and entering placement scope. 
+            At this point, the parent layout will be able to decide on its own size, 
+            for example , by summing up the widths and the heights of all its child placeables.
+            **/
+            //2. Placement step
+            /**
+             Placement scope now allows us use all placeables that came as result of measurement. 
+            To start placing children, we need their starting x and y coordinates.
+            Once we define where we want the children to be positioned
+            **/
+            val xPosition = 0
+            val yPosition = 0
+
+            placeables // Ready to placed
+
+            /**
+                 we call `place()` to conclude with the placement pass.
+                 And with that, we end the placement step, as well as the layout phase.
+                 Your custom layout is now ready to be used and reused.
+            **/
+            placeables.map { it.place(xPosition, yPosition)}
+
+        }
+
+    })
+}
+
+```
+
+Using the layout composable to create a custom layout enable to you mainipulate all children elements and manually control their sizing and positioning.
+
+**However, there are cases when creating a custom layout just from controlling one specific element is overkill and not necessary.** In this casses, rather than using custom layout, use the layout Modifier, which allow you to measure and layout just one single wrapped element
+
+Example :
+<div style="display: flex; align-items: center;">
+  <img src="../../../../../resources/layout_modifier.png" alt="Image" style="margin-right: 10px; width:30%"/>
+  <p>
+
+```kotlin
+@Composable
+fun LayoutModifierExample(){
+    Coulmn(
+        modifier = Modifier
+        .fillMaxWidth
+        .background(Color.LightGray)
+        .padding(40.dp)
+    ){
+        Element()
+        Element()
+        //Item below should rebel against the enforced padding and go edge to edge
+        Element(modifier = Modifier.layout{ measurables, constraints ->
+            val placeable = measureable.measure(
+                constraints.copy(
+                    maxWidth = constraints.maxWidth + 80.dp.roundToPx()
+                )
+            )
+
+            layout(placeabe.width, placeable.height){
+                placeable.place(x = 0,y = 0)
+            }
+        })
+        Element()
+    }
+}
+```
+
+  </p>
+</div>
+
+#### Subcompose Layout
+
+<details>
+  <summary style="color: orange;">
+  <b>
+  Think about usecases
+  </b>
+  </summary>
+  
+  <p>
+  
+you're building a list of 1000 item that simply cannot fit on the screen at the same time. In that case, composing all these child items would be unnecessary waste of resources.
+Instead, a better approach would be to measure all of list items to obtain their sizes, then base on that, calculate how many items can fit available viewport.
+And finally
+
+
+  </p>
+</details>
+
+**Compose only items that would be visible. This is the main ideas behind `Subcompose Layout`. It needs to do the measurement pass first for some child composeables, and then secondly to use that size information to determine whether to compose other children**. Meaning the measurement step in the layout phase need to happen before the composition phase of some children.This deferred composition is called subcomposition,and it is precisely why lazy components are build on top of subcompose layout, which enables them to add content on demand while scrolling.
+
+![](../../../../../resources/subcomnpose_layout.png)
+
+#### BoxWithConstraints
+
+BoxWithConstraints also uses subcompose layout under the hood, It grants you access to incoming constraints like max height, from the parent, whitch are not available in regular layouts. This is because the layout the measurement step of some children is done before the composition of others.You can use obtain constraints to decide whether to compose a child or not.
+
+
+> [!CAUTION]
+> Subcompose layout can have impact on performance because a Subcomposed lauyout changes the usual flow of compose phase, There are certain costs and limitations when it comses to performance. so you need to decide whether to compose a child or not.
+>|       ✅      |       ❌       |
+>| -------------- | -------------- |
+>| At least one child's composition depends on the result of another child's measurement | Requiring one child's measurement to measure other children |
+
+#### Instrinsic measurements
+
+There are use cases when the parent layout needs to know some information about its children before measurung them so that it can use this information for defining and passing down constraints And this is precisely what intrinsic measurements do. They let you query children before they're measured.
+
+<details>
+  <summary style="color: orange;">
+  <b>
+For example
+  </b>
+  </summary>
+  
+  <p>
+
+We want this column items to have the same width or to be more precise, have each item's width as that
+of widest child. In our case, the and modifiers item. But we also want that child to take as much width as it needs.
+
+```kotlin
+
+@Composeable
+fun IntrinsicExample(){
+    Column(modifier = Modifier.background(Color.LightGray).width(InstrinsicSize.Max)){
+        ...
+    }
+}
+
+```
+
+
+  </p>
+</details>
+
 ### Drawing
 
 Trong giai Drawing, cây lại được duyệt từ trên xuống dưới và lần lượt từng nút sẽ tự vẽ trên màn hình.
