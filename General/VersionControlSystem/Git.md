@@ -32,6 +32,12 @@ Tagging version is the practice of assigning version numbers for each software r
 
 In Git, a tag is a simple naming function that allows us to clearly identify versions of the source code. We can think of a tag as an immutable branch. Once it is created (linked to a specific commit), we cannot change the commit history anymore.
 
+### Workflow
+
+your local repository consists of three "trees" maintained by git. the first one is your `Working Directory` which holds the actual files. the second one is the `Index` which acts as a staging area and finally the `HEAD` which points to the last commit you've made.
+
+![alt text](image.png)
+
 ## General Git rules
 
 ### Source Code Branching Organization Rules
