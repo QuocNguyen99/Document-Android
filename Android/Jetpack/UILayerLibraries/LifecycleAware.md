@@ -8,8 +8,7 @@
 
 * Hầu hết các thành phần của ứng dụng được định nghĩa trong Android Framework có các vòng đời gắn liền với chúng. Lifecycles được quản lý bởi hệ thống hoặc framework đang chạy trong tiến trình của bạn. Chúng là cốt lõi để giúp Android hoạt động và ứng dụng của bạn nên quan tâm đến chúng. Nếu không làm như vậy, một ứng dụng có thể gặp rất nhiều rủi ro như memory leaks hay thậm chí khiến app bị dừng đột ngột.
 
-Lifecycle
-=========
+## Lifecycle
 
 * **Lifecycle** là một class giữ các thông tin về trạng thái vòng đời của một component và cho phép và cho phép các đối tượng khác observe (quan sát hoặc lắng nghe) các trạng thái này.
 
@@ -21,7 +20,7 @@ Lifecycle
 
 * Nghĩ một cách đơn giản thì states như các nodes của một đồ thị, các events như các đường đi giữa các nodes.
 
-![lifecycle-states](../../resources/lifecycle-states.png)
+![lifecycle-states](../../../resources/lifecycle-states.png)
 
 * Một lớp có thể quan sát trạng thái vòng đời của một component bằng cách thêm các thêm các annotations vào các methods của nó. Sau đó bạn có thể add một Observer bằng lời gọi hàm **addObserver()** của lớp **Lifecycle** và truyền vào đó một instance của observer của bạn như ví dụ dưới đây:
 
@@ -63,6 +62,6 @@ myLifecycleOwner.getLifecycle().addObserver(MyObserver())
 
 Lifecycle-aware components can make it much easier for you to manage lifecycles in a variety of cases. A few examples are:
 
-* Switching between coarse and fine-grained location updates. Use lifecycle-aware components to enable fine-grained location updates while your location app is visible and switch to coarse-grained updates when the app is in the background. [`LiveData`](https://developer.android.com/reference/androidx/lifecycle/LiveData), a lifecycle-aware component, allows your app to automatically update the UI when your user changes locations.
+* Switching between coarse and fine-grained location updates. Use lifecycle-aware components to enable fine-grained location updates while your location app is visible and switch to coarse-grained updates when the app is in the background. [LiveData](https://developer.android.com/reference/androidx/lifecycle/LiveData), a lifecycle-aware component, allows your app to automatically update the UI when your user changes locations.
 
 * Stopping and starting video buffering. Use lifecycle-aware components to start video buffering as soon as possible, but defer playback until app is fully started. You can also use lifecycle-aware components to terminate buffering when your app is destroyed.
