@@ -450,3 +450,44 @@ otherModifier.then(reusableModifier)
 
   </p>
 </details>
+
+
+# TL DR
+
+## Definition
+
+Modifiers allow you to decorate or augment a composable. Modifiers let you do these sorts of things:
+
+- Change the composable's size, layout, behavior, and appearance
+- Add information, like accessibility labels
+- Process user input
+- Add high-level interactions, like making an element clickable, scrollable, draggable, or zoomable
+
+## Order of modifiers matters
+
+The order of modifier functions is significant. Since each function makes changes to the Modifierreturned by the previous function, the sequence affects the final result.
+
+
+The explicit order helps you to reason about how different modifiers will interact. Compare this to the view-based system where you had to learn the box model, that margins applied "outside" the element but padding "inside" it, and a background element would be sized accordingly. The modifier design makes this kind of behavior explicit and predictable, and gives you more control to achieve the exact behavior you want. **It also explains why there is not a margin modifier but only a padding one.**
+
+
+## Scope safety in Compose
+
+Scope safety prevents you from adding modifiers that wouldn't work in other composables and scopes and saves time from trial and error. In the Android View system, there is no scope safety. Developers usually find themselves trying out different layout params to discover which ones are considered and their meaning in the context of a particular parent.
+
+
+## Extracting and reusing modifiers
+
+Sometimes it can be beneficial to reuse the same modifier chain instances in multiple composables, by extracting them into variables and hoisting them into higher scopes. It can improve code readability or help improve your app's performance for a few reasons:
+
+- The re-allocation of the modifiers won’t be repeated when recomposition occurs for composables that use them
+- Modifier chains could potentially be very long and complex, so reusing the same instance of a chain can alleviate the workload Compose runtime needs to do when comparing them
+- This extraction promotes code cleanliness, consistency and maintainability across the codebase
+
+
+Some usecase can use this :
+
+- Extracting and reusing modifiers when observing frequently changing state
+- Extracting and reusing unscoped modifiers
+- Extracting and reusing scoped modifiers
+- Further chaining of extracted modifiers
