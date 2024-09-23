@@ -6,7 +6,7 @@ A `Service` is an application component that can perform long-running operat
 > The difference between the WorkManager API and a Service lies in their functionality and use cases. WorkManager provides a flexible way to schedule tasks and can run them as foreground services if needed, ensuring execution even when the app is not running. It supports scheduling based on system conditions such as network connectivity or battery status. In contrast, a Service handles long-running or frequent background tasks, like playing music or downloading data, but does not offer the same level of scheduling or system condition management. While WorkManager is often preferable for tasks that require guaranteed execution, a foreground service is still necessary for tasks that demand continuous operation and low latency.
 
 
-Types of Services
+## Types of Services
 These are the three different types of services:
 - Foreground
 - Background
