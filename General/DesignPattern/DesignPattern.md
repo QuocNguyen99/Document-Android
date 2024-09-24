@@ -6,16 +6,16 @@
 
 ## Lợi ích của việc sử dụng Design Pattern
 
-### 1. Tăng tốc độ phát triển phần mềm
+- Tăng tốc độ phát triển phần mềm
 
-### 2. Code tường minh, dễ dàng team work
+- Code tường minh, dễ dàng team work
 
-### 3. Tái sử dụng code
+- Tái sử dụng code
 
-### 4. Hạn chế lỗi tiềm ẩn, dễ dàng nâng cấp
+- Hạn chế lỗi tiềm ẩn, dễ dàng nâng cấp
 
-Phân loại Design Patterns
--------------------------
+## Phân loại Design Patterns
+
 
 Hệ thống các mẫu design pattern được chia thành 3 nhóm, được phân loại theo mục đích sử dụng:
 
