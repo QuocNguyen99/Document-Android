@@ -42,27 +42,6 @@ Instead of storing a text sequence as a contiguous array, Gap Buffer maintains a
 
 - Moving the cursor left or right is done by adjusting the gap's position. (Controls the position of the gap by determining if the cursor is to the left or right of gap_left, deciding whether to move the gap left or right.)
 
-## Example:
-
-
-Suppose we have a Gap Buffer with an initial size of 10, and the gap has a size of 5:
-
-```mathematica
-_ _ _ _ _ A B C D E
-^        ^
-gap_left gap_right
-```
-
-- `gap_left` points to the beginning of the gap.
-- `gap_right` points to the end of the gap.
-
-If we insert the string "HELLO" at the current cursor position, the result will be:
-
-```mathematica
-H E L L O A B C D E
-^           ^
-gap_left    gap_right
-```
 
 ## Advantages:
 
