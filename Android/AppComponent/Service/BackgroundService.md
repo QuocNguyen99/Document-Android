@@ -15,7 +15,7 @@ Although you usually implement either `onBind()` or `onStartCommand()`, it's som
 
 When the last client unbinds from the service, the system destroys the service, unless the service was started using `startService()`.
 
-The most important part of your bound service implementation is defining the interface that your `onBind()` callback method returns. The following section discusses several ways that you can define your service's `IBinder` interface.
+
 
 ### Bound Service
 
@@ -24,6 +24,8 @@ The most important part of your bound service implementation is defining the int
 For example: When an `Activity` binds to a bound service, the connection is maintained only as long as the `Activity` exists. If the `Activity` is destroyed, the system will call the `onUnbind()` method and subsequently destroy the service if no other components are still bound to it. **Therefore, when the `Activity` is destroyed, the connection between it and the bound service is also terminated.**
 
 ### Create a bound service
+
+The most important part of your bound service implementation is defining the interface that your `onBind()` callback method returns. The following section discusses several ways that you can define your service's `IBinder` interface.
 
 When creating a service that provides binding, you must provide an IBinder that provides the programming interface that clients can use to interact with the service. There are three ways you can define the interface:
 - Extend the Binder class
