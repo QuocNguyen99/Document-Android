@@ -1,22 +1,5 @@
 # Variable Declaretion
 
-
-## Integer numbers
-
-Here are several examples of valid integer number :  `0`, `1`, `2`, `10`, `11`, `100`.
-
-If an integer value contains a lot of digits, we can add underscores to divide the digits into blocks to make this number more readable: for example, `1_000_000` is much easier to read than `1000000`.
-
-
-## Characters
-
-A single character can represent a digit, a letter, or another symbol. To write a single character, we wrap a symbol in single quotes as follows: `'A'`, `'B'`, `'C'`, `'x'`, `'y'`, `'z'`, `'0'`, `'1'`, `'2'`, `'9'`
-
-## String 
-
-To write strings, we wrap characters in double quotes instead of single ones. Here are some valid examples: "text", "I want to learn Kotlin", "123456", "e-mail@gmail.com". So, strings can include letters, digits, whitespaces, and other characters.
-
-
 ## Declaring variables
 
 To declare a variable, Kotlin provides two keywords:
@@ -99,3 +82,18 @@ const val MAX_USER_COUNT = 50
 const val COMPANY_NAME = "TechCorp"
 const val VERSION_CODE = 3
 ```
+
+### Naming variables
+
+Experienced programmers are very cautious with choosing names for variables, so their code is easy to follow. It is very important, as programmers spend a lot of time reading code written by others. 
+
+To avoid unreadable code mistakes:
+
+- Always give descriptive and concise names to all variables.
+- Follow the naming conventions.
+- Avoid Magic numbers, Such values must be stored in immutable variables, namely constants.
+- Follow Kotlin rules that restrict possible names for variables.
+    - Names are case-sensitive (number is not the same as Number);
+    - Each name can include only letters, digits, and underscores;
+    - A name cannot start with a digit;
+    - A name cannot be a keyword (for example, val, var, fun are illegal).
