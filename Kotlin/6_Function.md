@@ -207,6 +207,45 @@ applyAndSum(1, 2, ::square)  // returns 5 = 1 * 1 + 2 * 2
 applyAndSum(1, 2, ::triple)  // returns 9 = 3 * 1 + 3 * 2
 ```
 
+### Reference by class
+
+Also, you can reference functions that belong to a class. The base syntax in such cases looks like this:
+
+```kotlin
+objectOrClass::functionName
+```
+
+Here, `objectOrClass` can be a **class name** or a **particular instance** of a class.
+
+Example: 
+
+```kotlin
+class Person(val name: String, val lastname: String) {
+
+    fun printFullName(): String {
+        return("full name: $name $lastname")
+    }
+}
+```
+Here, we create a function reference:
+```kotlin
+val person: Person = Person("Sara", "Rogers")
+val personFun: () -> String = person::printFullName
+
+```
+### Reference to a constructor
+This reference has the following declaration:
+```kotlin
+class Person (val name: String){
+}
+
+val personGenerator: (String) -> Person = ::Person
+
+val johnFoster: Person = personGenerator("John Foster")
+```
+
+
+
 ### Real-world usage
 
 What about more realistic examples? Well, see for yourself.
@@ -287,8 +326,6 @@ println(triple(4)) // Output: 12
 When there is a single parameter in a lambda, there is an opportunity to skip it. The parameter is available under the `it` name. The type of `it` is inferred from the type of the argument being passed to the lambda. 
 
 Returning from a lambda expression in Kotlin is achieved using `return@label`, where `label` is a tag, usually matching the name of the **higher-order function** in the context of which the lambda was called. Returning with `return@label` allows for exiting the lambda expression without interrupting the execution of the outer function.
-
-
 
 
 
