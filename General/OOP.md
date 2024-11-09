@@ -1,14 +1,8 @@
-Các nguyên lý cơ bản của OOP
-----------------------------
+# Basic principles of OOP
 
-Lập trình hướng đối tượng có tổng cộng 4 nguyên lý cơ bản nhất, bao gồm: Encapsulation, Polymorphism, Inheritance và Abstraction.
+Each object can be characterized by a state and behavior. An object’s current state is represented by its **properties**, and an object’s behavior is represented by its **methods**.
 
-
-
-Đối tượng trong OOP bao gồm 2 thành phần chính:
-
-* Thuộc tính (Attribute): là những thông tin, đặc điểm của đối tượng
-* Phương thức (Method): là những hành vi mà đối tượng có thể thực hiện
+There are four basic principles of OOP. They are encapsulation, abstraction, inheritance, and polymorphism.
 
 ### 1. Tính đóng gói (Encapsulation)
 
@@ -18,68 +12,15 @@ Tính chất này giúp tăng tính bảo mật cho đối tượng và tránh t
 
 ### 2. Tính kế thừa (Inheritance)
 
-    Đây là tính chất được sử dụng khá nhiều. Tính kế thừa cho phép xây dựng một lớp mới (lớp Con), kế thừa và tái sử dụng các thuộc tính, phương thức dựa trên lớp cũ (lớp Cha) đã có trước đó. 
-
-Các lớp Con kế thừa toàn bộ thành phần của lớp Cha và không cần phải định nghĩa lại. Lớp Con có thể mở rộng các thành phần kế thừa hoặc bổ sung những thành phần mới.
+    Inheritance is a mechanism for defining parent-child relationships between classes. Often objects are very similar, so inheritance allows programmers to reuse common logic and at the same time introduce unique concepts into the classes.
 
 ### 3. Tính đa hình (Polymorphism)
 
-    Tính đa hình trong lập trình OOP cho phép các đối tượng khác nhau thực thi chức năng giống nhau theo những cách khác nhau.
-    Ví dụ:
-
-```java
-           // Lớp cha Shape
-        public abstract class Shape {
-            public abstract void draw();
-        }
-        // Lớp con Rectangle
-        public class Rectangle extends Shape {
-            @Override
-            public void draw() {
-                System.out.println("Vẽ hình chữ nhật.");
-            }
-        }
-
-        // Lớp con Circle
-        public class Circle extends Shape {
-            @Override
-            public void draw() {
-                System.out.println("Vẽ hình tròn.");
-            }
-        }
-
-        // Lớp con Triangle
-        public class Triangle extends Shape {
-            @Override
-            public void draw() {
-                System.out.println("Vẽ hình tam giác.");
-            }
-        }
-
-        // Lớp Main để kiểm tra
-        public class Main {
-            public static void main(String[] args) {
-                // Tạo đối tượng hình chữ nhật và vẽ
-                Shape rect = new Rectangle();
-                rect.draw();
-
-                // Tạo đối tượng hình tròn và vẽ
-                Shape circle = new Circle();
-                circle.draw();
-
-                // Tạo đối tượng hình tam giác và vẽ
-                Shape triangle = new Triangle();
-                triangle.draw();
-            }
-        }
-```
-
-
-    Trong ví dụ này, lớp cha Shape có một phương thức trừu tượng draw() và ba lớp con Rectangle, Circle, Triangle đều kế thừa lớp cha này và triển khai lại phương thức draw() của nó theo cách riêng của từng lớp. Trong Main, ta tạo ra các đối tượng của các lớp con và gọi phương thức draw() của chúng, ta sẽ thấy rằng mỗi đối tượng sẽ có cách thức vẽ riêng biệt tùy theo lớp mà nó thuộc về. Đó là ví dụ về tính đa hình trong OOP.
+    Polymorphism literally means "having many forms" and is a concept related to inheritance. It allows programmers to define different implementations for the same method. Thus, the name (or interface) remains the same, but the actions performed may differ. For example, imagine a website that posts three main types of text: news, announcements, and articles. They are somewhat similar in that they all have a headline, some text, and a date. In other ways, they are different: articles have authors, news bulletins have sources, and announcements have a date after which they become irrelevant. It is convenient to write an abstract class with general information for all publications to avoid copying it every time and store what is different in the appropriate derived classes.
 
 ### 4. Tính trừu tượng (Abstraction)
 
-    Tính trừu tượng giúp loại bỏ những thứ phức tạp, không cần thiết của đối tượng và chỉ tập trung vào những gì cốt lõi, quan trọng.
+Data abstraction means that objects should provide a simplified, abstract version of their implementations. The details of their internal work usually aren't necessary for the user, so there's no need to represent them. Abstraction also means that only the most relevant features of the object will be presented.
 
 
 

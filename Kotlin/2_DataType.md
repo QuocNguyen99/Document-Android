@@ -58,6 +58,93 @@ The size cannot be changed. It does not depend on the operating system or hardwa
 To write strings, we wrap characters in double quotes instead of single ones. Here are some valid examples: "text", "I want to learn Kotlin", "123456", "e-mail@gmail.com". So, strings can include letters, digits, whitespaces, and other characters.
 
 
+### Unicode
+
+<details>
+  <summary>
+    The solution to all these problems had to be a unified system and that is when Unicode comes in.
+  </summary>
+    As you know, computers operate in binary code so, naturally, different kinds of symbols that we use need to be transformed into numbers. For this purpose, different encodings were created and implemented over the years.
+
+    One of the earliest was the ASCII encoding. It's a 7-bit encoding that contains 128(2^7) symbols based on the English alphabet. It wasn't perfect for everyone for several reasons.
+
+    - First, computers started to use 8-bit sequences, bytes, for storing information and ASCII strings had extra memory that wasn't being used.
+    - Second and most important, 128 symbols just wasn't enough for everyone, not even for the English script itself
+
+    There was a clear need for new, improved encodings and many of them started to appear after ASCII. There were extensions of ASCII (like ISO 8859-1) or encodings for specific scripts (for example, Windows-1251 for Cyrillic). However, in different encodings, the same number could represent different symbols and that would complicate communications. 
+</details>
+
+Unicode is a standard for encoding and representing text. It is not an encoding per se since it doesn't determine how symbols are converted to bytes. **It is simply a specification that defines the mapping between symbols and numbers.**
+
+Unicode can also be viewed as an extension of the `ASCII` table: in fact, the first 128 numbers in the Unicode represent ASCII symbols. All in all, Unicode can accommodate 1,112,064 code points, but as of May 2019, only 137,994 are occupied. The fact that most code points aren't designated yet is also one of Unicode's advantages. It means that for years and years to come, we can add new letters, scripts, punctuation marks, and pictograms to the standard without running out of space.
+
+Unicode consists of two parts: **Universal character set**(UCS), and **Universal transformation format** (UTF).
+
+UCS is essentially an index of all symbols supported by the Unicode and codes for those symbols.This is a part of Basic Latin, the symbols that have traveled from ASCII:
+![alt text](/resources/ucs_unicode.png)
+In Unicode, every symbol corresponds to a number—**code point**. A code point is usually presented with U+ followed by its hexadecimal value. 
+The hexadecimal number in the code has from 4 to 6 digits depending on its place in the standard. For example, the code for the Latin Capital Letter Q is `U+0051`.
+
+
+Unicode code points are divided into 17 planes with numbers from 0 to 16. Each plane is a continuous group of 65 536 (2^16) code points. The plane with the number 0 is called **Basic Multilingual Plane** (BMP) and it contains characters for most modern writing systems and languages as well as many symbols. The ASCII part of the BMP includes the first 128 characters, from `U+0000` to `U+007F`.
+
+The rest of the planes (1 through 16) are called "supplementary planes". Most of the supplementary planes are unassigned and empty which leaves room for additions.
+
+The **Supplementary Multilingual Plane** (SMP) (codes from `U+10000` to `U+1FFFF`) is the next plane after BMP. It includes many historic scripts and, what is quite interesting, special characters and symbols. SMP has musical notations, alchemical symbols, geometric shapes, and even emojis! If your favorite programming language supports Unicode strings, chances are you can put emojis or other interesting characters in your strings!
+
+### Unicode Implementation
+
+We've already mentioned that along with UCS, Unicode has **UTF — Universal Transformation Format**.
+UTF is a set of encodings that support Unicode. Encodings describe how symbols (or, rather, their code points) are transformed into bytes according to a particular character set and vice versa.
+
+UTF-8 is the most commonly used encoding in the world as around 94% of the Internet is encoded in UTF-8. UTF-8 uses from 1 to 4 bytes per code point and is capable of representing all code points of the Unicode. UTF-8 is also backward compatible with ASCII.
+
+## Char type
+
+A character can also be represented by its hexadecimal code in the Unicode table. The code starts with `\u`:
+
+```kotlin
+val ch = '\u0040' // it represents '@'
+println(ch) // @
+```
+
+Although we use a sequence of characters to represent such code, the code itself represents exactly one character.
+
+### Escape sequences
+
+There are some special characters starting with a backslash `\`, which are known as **escape** or **control sequences**.
+
+- `'\n'` is the newline character;
+- `'\t'` is the tab character;
+
+- `'\r'` is the carriage return character;
+
+- `'\\'` is the backslash character itself;
+
+- `'\''` is the single quote mark;
+
+- `'\"'` is the double quote mark.
+
+### Relational operations with characters
+
+You can compare characters using relational operations (`==,` `<`, `>`, `<=`, `>=`, and `!=`) according to their position in the Unicode table.
+
+
+Using relational operations and codes, we can check whether a Char is a digit: all ten digits have codes from '\u0030' to '\u0039'.
+
+```kotlin
+fun main() {
+    val ch = readln().first()
+    val isDigit = ch >= '\u0030' && ch <= '\u0039'
+
+    println(isDigit)
+}
+```
+
+
+
+
+
 ## Type Conversion
 
 Type conversion, or type casting, involves switching a value from one data type to another.
@@ -157,3 +244,90 @@ val one: Byte = 1
 val five: Byte = 5
 val six = (one + five).toByte() // 6, Byte
 ```
+
+
+## Nullable and non-nullable types
+
+### Nullability
+
+
+we just added a `?` sign right after the type of our variable. We marked our name variable as nullable.
+
+```kotlin
+var age: Int? = null
+```
+without a `?` sign in the type you can't assign null to a variable.
+### Accessing nullable variables
+
+we can access the length this way:
+
+```kotlin
+print(name?.length)
+```
+
+This `?`. pair of symbols is called a **safe call** in Kotlin. 
+
+So, Kotlin introduces **nullable types** that differ from **non-nullable** ones
+
+- In Kotlin, a nullable type is a variable that can hold a null value, in contrast to a non-nullable type, which cannot.
+
+- In Kotlin, a non-nullable is a type that cannot hold a null value.
+
+### Avoiding NPEs. Null safety
+
+Null safety is a crucial feature in Kotlin's design. Kotlin's type system aims to get rid of null references, which commonly lead to bugs and crashes in software development.
+
+### Save calls
+If you need to have access to properties or call methods of a nullable object, you must check if it's null first.
+
+```kotlin
+val name: String? = "Kotlin"
+val length = if (name != null) name.length else null 
+```
+
+But it's quite a long expression! You can get the same result if you use the safe call operator `?`. that allows you to access properties or call methods on nullable variables without risking a `NullPointerException`
+
+```kotlin
+val name: String? = "Kotlin"
+val length = name?.length // length is null if name is null
+```
+
+### Elvis Operator
+
+we can simplify the code with the **Elvis operator**:
+
+```kotlin
+var name: String? = "Kotlin"
+val length: Int? = name?.length
+print(length ?: 0)
+```
+
+You may ask, but why is it called Elvis? Look: there he is!
+
+![alt text](../resources/elvis_operator.png)
+
+### The Not-Null Assertion Operator
+
+The not-null assertion operator`!!`. **The code won't crash only if you're 100% sure that your variable won't be** `null`
+
+
+This operator is used to stop the program when `null` is encountered.
+
+Why `!!` overuse is problematic:
+
+1. **Defeats Null Safety**: Kotlin's type system is designed to handle nulls gracefully. Overusing !! bypasses these safety measures.
+
+2. **Code Smell**:  Regular use often indicates a disregard for proper null checks and can lead to code that's less stable and more challenging to maintain.
+
+3. **Unexpected Crashes**: It can cause your application to crash unexpectedly if proper null checks are not done before using `!!`.
+
+
+### Best Practices for Null Safety in Kotlin
+
+1. **Use Nullable Types Wisely**: Only use nullable types (`Type?`) when a variable can indeed be `null`. If a variable should not be `null`, use a non-nullable type.
+
+2. **Safe Calls (?.)**: Use the safe call operator when accessing properties or methods on a nullable object. This will return `null` if the object is `null` instead of throwing a `NullPointerException`.
+
+3. **Elvis Operator (?:)**: The Elvis operator lets you offer an alternative value if an expression evaluates to null.
+
+4. **Non-Null Assertion (!!)**: Use this operator only when you are certain that the value is not `null`. It will throw a `NullPointerException` if the value is `null`.

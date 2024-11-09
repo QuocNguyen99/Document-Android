@@ -294,3 +294,6 @@ Using trailing commas has several benefits:
 
 - It simplifies code generation, for example, for object initializers. The last element can also have a comma.
 
+### Decomposing a program into functions
+
+Functional decomposition is the process of decomposing a problem into several functions. Each function does a particular task which we can perform in a row to get the results we need. Considering a problem, we need to identify the actions that will be repeated multiple times or, alternatively, performed separately. This is how we get the desired functions that are easier to read, understand, reuse, test, and debug.

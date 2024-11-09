@@ -41,3 +41,31 @@ Some operations take precedence over others, that is, they are performed first. 
 5. Addition and subtraction ( +, - );
 6. Assignment operations ( =, +=, -=, *=, /=, %= ).
 
+## Ranges
+
+Imagine a situation where you need to check whether the integer variable `c` is greater than or equal to `a` and less than or equal to `b`
+
+```kotlin
+val within = a <= c && c <= b
+```
+
+This code works well. However, Kotlin provides a more convenient way to do the same thing using **ranges**:
+
+```kotlin
+val within = c in a..b
+```
+
+Here, `a..b` is a range of numbers from `a` to `b` (including both border values), `in` is a special keyword that is used to check whether a value is within a range. This is a **closed-ended range**.
+
+Also, we have an open-ended range: `a..<b` is a range of numbers from `a` until `b` (excluding the border value, `b`).
+
+If you need to check that a value is not within a range, just add `!` (not) before `in`.
+
+```kotlin
+val notWithin = 100 !in 10..99 // true
+```
+You can assign a range to a variable and use it later.
+```kotlin
+val range = 100..200
+println(300 in range) // false
+```
