@@ -2,7 +2,6 @@
 
 To write strings, we wrap characters in double quotes instead of single ones. Here are some valid examples: "text", "I want to learn Kotlin", "123456", "e-mail@gmail.com". So, strings can include letters, digits, whitespaces, and other characters.
 
-
 ### Unicode
 
 <details>
@@ -43,3 +42,61 @@ We've already mentioned that along with UCS, Unicode has **UTF — Universal Tra
 UTF is a set of encodings that support Unicode. Encodings describe how symbols (or, rather, their code points) are transformed into bytes according to a particular character set and vice versa.
 
 UTF-8 is the most commonly used encoding in the world as around 94% of the Internet is encoded in UTF-8. UTF-8 uses from 1 to 4 bytes per code point and is capable of representing all code points of the Unicode. UTF-8 is also backward compatible with ASCII.
+
+## Getting substrings
+
+> [!NOTE]
+> Don't forget that strings are immutable, therefore, functions that change a string return a new string.
+
+Oftentimes, you need to get only a certain part of a string. Kotlin provides the `substring` function for this.
+
+The `substring` function accepts `startIndex` and `lastIndex` as arguments and returns a string that starts at the `startIndex` and ends right **before** the `lastIndex`.
+
+The parameter `lastIndex` can be omitted; then you will get a `substring` from the `startIndex` element to the end of the original string.
+
+```kotlin
+val greeting = "Hello"
+println(greeting.substring(0, 3)) // "Hel"
+println(greeting.substring(1, 3)) // "el"
+println(greeting.substring(2))    // "llo"
+println(greeting.substring(4, 5)) // "o"
+```
+The `substring` method is not the only way to get part of a string. You can also use the `substringAfter` and `substringBefore` functions:
+
+>[!NOTE]
+> Most of the functions in this topic accept not only characters but also strings as arguments.
+The function accept the second argument. 
+Just keep it in mind that as a second argument, you can specify the message to be returned if the `delimiter` argument is not present in the string. 
+For example, .`substringBefore('z', "can't find a character")`.
+
+The functions `substringBeforeLast` and `substringAfterLast` have a logic similar to `substringBefore` and `substringAfter` but return a string before or after the last occurrence of the `delimiter`.
+
+## Replacing parts of a string
+
+The `replace` function **replaces all** occurrences of the first argument in the string with the second argument.
+If you need to replace only the **first occurrence** of an argument, use `replaceFirst`.
+
+## Changing the case
+
+in Kotlin you can use the `lowercase` function:
+
+```kotlin
+val example = "UPPERCASE String"
+println(example.lowercase()) // uppercase string
+```
+If you need to do the opposite, then use the `uppercase` function:
+
+```kotlin
+val example = "Lowercase String"
+println(example.uppercase()) // LOWERCASE STRING
+```
+
+## Splitting the string
+
+A string can be separated by delimiters to a list of strings. To perform this, call the method split() , it divides a string into substrings by a **separator**.
+The method returns a `List` of all the substrings. 
+
+```kotlin
+val sentence = "a long text"
+val wordsList: List<String> = sentence.split(" ") // ["a", "long", "text"]
+```

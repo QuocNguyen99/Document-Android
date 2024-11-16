@@ -34,3 +34,114 @@ println(collection.contains(elem))
 ## Map collection
 
 A `Map` **is an immutable collection that holds pairs of objects** (**keys** and **values**) and supports efficiently retrieving values corresponding to each key. As you remember, immutable implies that the size and content of the collection cannot be changed once it's initialized. It's important to remember that `Map` keys are unique: in other words, a `Map` can hold only one value for each individual key.
+
+## Test predicates: checking elements in collection
+
+A **predicate** is a function that returns true or false based on the input. We will get true if the condition matches the predicate and false otherwise. A single predicate always checks for the same condition; different conditions are checked by different predicates.
+
+A predicate is defined based on a lambda function: `(T) -> Boolean`. Also, a predicate can be passed as a function reference
+
+```kotlin
+val isEven: (Int) -> Boolean = { x -> x % 2 == 0 }
+
+fun main() {
+    val numbers = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+    // any number is even?
+    println(numbers.any { x -> x % 2 == 0 }) // true
+    println(numbers.any { isEven(it) }) // true
+    println(numbers.any(isEven)) // true
+}
+```
+
+### Any
+
+With a predicate, the `any()` function will return true if at least one collection element matches the predicate we defined in `any()`. 
+The function can be also called without a predicate to check for emptiness.
+
+### None
+
+With a predicate, the `none()` function will return true if none of the collection elements matches the predicate indicated in `none()`. Like `any()`, it can also be called without a predicate to check for emptiness.
+
+### All
+
+The `all()` function will only return true if all elements in the collection satisfy the given predicate. A special feature of this function is that it will always return true on an empty collection; this trait is also called vacuous truth in math.
+
+## Ordering elements in collection
+
+### Sorting objects
+
+In Kotlin, we have two functions: `sorted()` and `sortedDescending()` for sorting the elements of a collection in natural
+
+```kotlin
+    val numbers = listOf(3, 5, 6, 4, 1, 8, 2, 7)
+    println(numbers.sorted()) // [1, 2, 3, 4, 5, 6, 7, 8]
+    println(numbers.sortedDescending()) // [8, 7, 6, 5, 4, 3, 2, 1]
+```
+
+### Reverse order
+
+We can obtain a collection in reverse order (based on the index positions) using two functions: `reversed()` and `asReversed()`
+
+- The `reversed()` function returns a copy of the original collection in reverse index order. If you change the original collection, the changes won't affect the copy.
+
+> [!NOTE]
+> Remember in ASCII or UTF-8, the uppercase letters are assigned lower numeric codes than their corresponding lowercase letters. So, the uppercase letters come before the lowercase letters when ordered by their decimal codes.
+
+Ex:
+```kotlin
+val numbers = mutableListOf(3, 5, 6, 4, 1, 8, 2, 7)
+    val reversedNumbers = numbers.reversed()
+    
+    println(numbers) // [3, 5, 6, 4, 1, 8, 2, 7]
+    println(reversedNumbers) // [7, 2, 8, 1, 4, 6, 5, 3]
+
+    val words = listOf("racecar", "mom", "dad", "abracadabra", "MANDRAKE")
+    val wordsReversed = words.reversed()
+    
+    println(words) // [racecar, mom, dad, abracadabra, MANDRAKE]
+    println(wordsReversed) // [MANDRAKE, abracadabra, dad, mom, racecar]
+```
+- The `asReversed()` method returns a reference to the original collection in reverse index order. It is lighter because it does not create a new copy, but if the original collection changes, the changes are reflected in the reversed list. **So we must be careful if we work with mutable collections.**
+
+Ex:
+```kotlin
+fun main() {
+    val numbers = mutableListOf(3, 5, 6, 4, 1, 8, 2, 7)
+    val numbersAsReversed = numbers.asReversed()
+    
+    println(numbers) // [3, 5, 6, 4, 1, 8, 2, 7]
+    println(numbersAsReversed) // [7, 2, 8, 1, 4, 6, 5, 3]
+    
+    numbers.add(9)
+    
+    println(numbers) // [3, 5, 6, 4, 1, 8, 2, 7, 9]
+    println(numbersAsReversed) // [9, 7, 2, 8, 1, 4, 6, 5, 3]
+
+    val words = listOf("racecar", "mom", "dad", "abracadabra", "MANDRAKE")
+    val wordsAsReversed = words.asReversed()
+    println(words) // [racecar, mom, dad, abracadabra, MANDRAKE]
+    println(wordsAsReversed) // [MANDRAKE, abracadabra, dad, mom, racecar]
+}
+```
+
+### Random order
+
+The `shuffled()` method gives you a new collection where the original items are randomly shuffled. You can use it without arguments or with a Random instance as the source of randomness.
+Ex:
+
+```kotlin
+fun main() {
+    val numbers = mutableListOf(3, 5, 6, 4, 1, 8, 2, 7)
+    val shuffledNumbers = numbers.shuffled()
+
+    println(numbers) // [3, 5, 6, 4, 1, 8, 2, 7]
+    println(shuffledNumbers) // [5, 3, 6, 7, 1, 8, 2, 4]
+    
+    val words = listOf("racecar", "mom", "dad", "abracadabra", "MANDRAKE")
+    val shuffledWords = words.shuffled(Random(1))
+
+    println(words) // [racecar, mom, dad, abracadabra, MANDRAKE]
+    println(shuffledWords) // [MANDRAKE, abracadabra, mom, dad, racecar]
+}
+```
