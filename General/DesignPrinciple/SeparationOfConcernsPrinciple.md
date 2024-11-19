@@ -1,7 +1,7 @@
 # Separation of concerns principle
 
 ## Definition
-Separation of Concerns có thể hiểu là phân **tách phụ thuộ**c hay **chia tách quan hệ**
+Separation of Concerns có thể hiểu là phân **tách phụ thuộc** hay **chia tách quan hệ**
 
 Tư tưởng của `Separation of Concerns` là phân tách hệ thống ra thành các thành phần, chức năng nhỏ hơn, sao cho chúng càng ít điểm chung (về mặt chức năng), hay càng ít phụ thuộc vào nhau càng tốt. Khi các thành phần được ghép nối vào trong hệ thống, chúng sẽ tương tác với nhau thông qua thông tin về Interface, hay các open API, mà không cần phải biết các thành phần kia được xây dựng như thế nào, bên trong đó được lập trình (implement) ra sao.
 

@@ -145,3 +145,42 @@ fun main() {
     println(shuffledWords) // [MANDRAKE, abracadabra, mom, dad, racecar]
 }
 ```
+
+### Retrieve by position
+
+To get the element at a specific index position, you can use `elementAt()`. We can also fetch an element in an equivalent way with the `get()` function.
+
+However, in the Kotlin world, things are easier if we use the indexed access operator `[]`, which is equivalent to the `get()` function on lists.
+
+All of them will throw an `IndexOutOfBoundsException` if the index is not within the indicated limits (0.. size-1).
+
+In order not to have problems with exceptions when trying to get an invalid index element, we can make use of the following safe calls:
+
+`elementAtOrNull()`: it will return null when the index position is out of the collection bounds.
+
+`elementAtOrElse()`: it takes a lambda function that returns the result of the lambda if the index position is out of the collection bounds.
+
+`getOrNull()`: it is the equivalent to `elementAtOrNull()` for a list.
+
+`getOrElse()`: it is the equivalent to `elementAtOrElse()` for a list.
+
+`firstOrNull()`: it is used to get the first element or null if the collection is empty.
+
+`lastOrNull()`: it is used to get the last element or null if the collection is empty.
+
+### Retrieve by condition
+
+Some functions allow you to get elements based on a predicate: `first()` and `last()`. You will only get the element if the predicate is true. To avoid an exception, you can use the secure calls: `firstOrNull()` and `lastOrNull()`.
+
+### Retrieve with selector
+
+Sometimes, it is helpful to use a selector to map the collection before getting an element. The `firstNotNullOf()` method performs the following actions: maps the collection with a selector function and returns the first non-null value in the result. However, it throws `NoSuchElementException` if there is no non-null element. To avoid that, you can use `firstNotNullOfOrNull()`.
+
+### Random element
+If You need is to obtain a random value from a collection.
+We can use the `random()` function. Remember, though, that this function throws `NoSuchElementException` if the array is empty. To avoid that, you can use the safer call `randomOrNull()`, which returns null if the collection is empty.
+
+### Check if an element exists
+
+you can use the `contains()` method – this methods returns true if the element is found in the collection.
+To check if a collection contains multiple elements, you can make use of the method `containsAll()`.
