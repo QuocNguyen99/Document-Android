@@ -100,3 +100,183 @@ The method returns a `List` of all the substrings.
 val sentence = "a long text"
 val wordsList: List<String> = sentence.split(" ") // ["a", "long", "text"]
 ```
+
+
+## String Builder
+
+### Mutable strings
+
+In Kotlin, `String` objects are immutable, meaning that once created, they cannot be changed. 
+
+> [!CAUTION]
+> Every time we perform operations like concatenation using the + operator or the plus() function, a new string object is created, which can result in unnecessary memory allocations and performance overhead.
+
+To address these challenges, Kotlin has a special class named `StringBuilder` that represents a **mutable sequence of characters**.
+
+It can be used to efficiently perform multiple string manipulation operations, allowing you to modify its contents without creating a new object. This can help reduce the memory overhead and improve performance.
+
+
+![alt text](/resources/String_Builder.png)
+
+> [!CAUTION]
+> Don't confuse immutability with the use of val or var when declaring variables. Immutability refers to certain data types that cannot be changed in memory once they have been created. On the other hand, val or var defines if a variable can be reassigned or not.
+
+
+### Constructors of StringBuilder
+
+There are two main ways to construct a `StringBuilder` object in Kotlin:
+
+1. Using the `StringBuilder` constructor
+
+```kotlin
+
+val sb = StringBuilder()
+
+val sb1 = StringBuilder("Kotlin")
+val sb2 = StringBuilder(sb1)
+
+val sb3 = StringBuilder(100)
+```
+
+2. Using the `buildString` function
+
+```kotlin
+val str = buildString {
+    append("Hello")
+    append(' ')
+    append("Kotlin")
+}
+println(str) // Output: Hello Kotlin
+
+
+val str1 = buildString(100) {
+    // some code here
+}
+```
+
+> [!CAUTION]
+> It is important to note that the buildString function returns a String, not a StringBuilder.
+
+### Methods of StringBuilder
+
+- The `append` method: it allows you to add characters or strings to the end of a `StringBuilder`. This method is overloaded to accept different types of arguments.
+
+```kotlin
+val str = buildString {
+    append("Kotlin v") // Appending a String
+    append(1.8)        // Appending a Double
+}
+println(str) // Output: Kotlin v1.8
+```
+
+- The `insert` method: it allows you to insert characters or strings at a specific position in a `StringBuilder`. This method is also overloaded to accept different types of arguments.
+
+```kotlin
+val str = buildString {
+    append("Hello World")
+    insert(5, ",")
+}
+println(str) // Output: Hello, World
+```
+
+- The `delete` method: it allows you to remove characters or strings from a specific range in a `StringBuilder`. This method takes two arguments: the start index (included) and the end index (excluded) of the range to delete.
+
+```kotlin
+val str = buildString {
+    append("That's impossible!")
+    delete(7, 9)
+}
+println(str) // Output: That's possible!
+```
+
+- The `replace` method: it allows you to replace characters or strings within a specific range in a `StringBuilder`. This method takes three arguments: the start index (included), the end index of the range to replace (excluded), and the string to replace with.
+
+```kotlin
+val str = buildString {
+    append("one, two, two, ...")
+    replace(10, 13, "three")
+}
+println(str) // Output: one, two, three, ...
+```
+
+- The `reverse` method: it allows you to reverse the characters in a `StringBuilder`. This method takes no arguments and reverses the entire sequence of characters.
+
+```kotlin
+val str = buildString {
+    append("Hello, Kotlin!")
+    reverse()
+}
+println(str) // Output: !niltoK ,olleH
+```
+
+### Length vs. capacity
+
+The `StringBuilder` class has two important members: `length` and `capacity()`. The **length** property represents the number of characters a `StringBuilder` object contains, while the **capacity** method returns the number of characters it can hold before it needs to be resized.
+
+```kotlin
+val sb = StringBuilder()
+println("Length: ${sb.length}, Capacity: ${sb.capacity()}") // Output: Length: 0, Capacity: 16
+sb.append("Hello!")
+println("Length: ${sb.length}, Capacity: ${sb.capacity()}") // Output: Length: 6, Capacity: 16
+```
+
+![alt text](/resources/string_builder_capacity_and_size.png)
+
+When you create a new `StringBuilder`, its initial **capacity** is determined by the constructor you use. If you use the default constructor, the initial capacity will be `16` characters. If you pass a string when constructing a `StringBuilder`, it will add the length of that string to the initial capacity.
+
+As you append new characters to a `StringBuilder`, its `length` increases. If the `length` exceeds the current `capacity`, the `StringBuilder` **automatically increases** its `capacity` to accommodate the additional characters.
+
+The new capacity is calculated using the following formula: `newCapacity = max(oldCapacity * 2 + 2, newLength)`.
+
+Example that demonstrates how the capacity of a `StringBuilder` created with the default constructor:
+
+```kotlin
+val sb = StringBuilder()              // Capacity = initial capacity = 16
+println("Capacity: ${sb.capacity()}") // Output: Capacity: 16
+
+sb.append("0123456789abcdef")         // (oldCapacity >= newLength) then: newCapacity = oldCapacity
+println("Capacity: ${sb.capacity()}") // Output: Capacity: 16
+
+sb.append('g')                        // // (oldCapacity < newLength) then: newCapacity = max(oldCapacity * 2 + 2, newLength) = oldCapacity * 2 + 2
+println("Capacity: ${sb.capacity()}") // Output: Capacity: 34
+```
+
+Example with a `StringBuilder` created by passing a string to its constructor:
+
+```kotlin
+val sb = StringBuilder("Kotlin!")   // Capacity = initial capacity + "Kotlin!".length = 16 + 7
+println("Capacity: ${sb.capacity()}")   // Output: Capacity: 23
+
+sb.append("0123456789abcdef")           // (oldCapacity >= newLength) then: newCapacity = oldCapacity
+println("Capacity: ${sb.capacity()}")   // Output: Capacity: 23
+
+sb.append("0123456789abcdef0123456789abcdef") // (oldCapacity < newLength) then: newCapacity = max(oldCapacity * 2 + 2, newLength) = newLength
+println("Capacity: ${sb.capacity()}, Length: ${sb.length}") // Output: Capacity: 55
+```
+
+### Best practices
+
+Here are some best practices for using the `StringBuilder` class:
+
+1. Use `StringBuilder` for **complex** string manipulation tasks.
+2. **Pre-allocate** the capacity of the `StringBuilder`. If you know the approximate size of the final string, you can pre-allocate the capacity of the `StringBuilder` to reduce the number of times it needs to be resized. This can help improve performance by reducing the number of memory allocations.
+
+3. **Reuse** the same `StringBuilder` object. If you need to perform multiple string manipulation operations, consider reusing the same `StringBuilder` object rather than creating a new one each time. This can help reduce memory overhead and improve performance. To do that, you can reset the `StringBuilder` to an empty state by calling its `setLength` method with an argument of `0`. This will clear the contents of the `StringBuilder` without changing its capacity, allowing you to reuse it for further string manipulation operations. 
+
+```kotlin
+val sb = StringBuilder()
+sb.append("Java")
+println(sb.toString()) // Output: Java
+sb.setLength(0)
+sb.append("Kotlin")
+println(sb.toString()) // Output: Kotlin
+```
+
+4. **Convert** a `StringBuilder` to a `String` when finished. Once you have finished manipulating a `StringBuilder`, you may want to convert it to a String. This can be done easily by calling the toString method on the `StringBuilder` object. Keep in mind that calling this method creates a new `String` object, so if you need to perform further string manipulation operations, it may be more efficient to continue using the `StringBuilder`.
+
+
+Also, here are some best practices for using the `buildString` function:
+
+1. Use `buildString` for **simple** string construction.
+2. **Avoid** unnecessary object creation.
+3. **Leverage** the scope of the lambda. The buildString function takes a lambda as an argument, which provides a convenient scope for building the string. Use this scope to your advantage by declaring local variables and functions that can help simplify your code.
