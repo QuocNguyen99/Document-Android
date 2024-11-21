@@ -97,3 +97,110 @@ To avoid unreadable code mistakes:
     - Each name can include only letters, digits, and underscores;
     - A name cannot start with a digit;
     - A name cannot be a keyword (for example, val, var, fun are illegal).
+
+
+
+## Lazy initialization
+
+Lazy initialization lets us create an object at the exact point when the first reference to it occurs.
+
+This means that we don't need to waste time by immediately using our program's resources to allocate memory to objects that aren't required from the outset.
+
+If we allow objects to be initialized when they're needed, we can save a lot of time by redistributing the allocation of resources over the life cycle of our program.
+
+
+Kotlin has a special `lazy()` function that accepts a lambda. The first call executes this lambda and remembers the result. Subsequent calls simply return this value.
+
+Example:
+
+```kotlin
+fun main() {
+    val a: String by lazy {
+        print("Variable a is initialized. ")
+        "I love Hyperskill!"
+    }
+
+    println("Initializing a! ") // Initializing a!
+    println(a) // Variable a is initialized. I love Hyperskill!
+    println(a) // I love Hyperskill!
+}
+```
+
+> [!NOTE]
+> When using lazy initialization in Kotlin, you must declare variables with the val keyword because the value can only be initialized once.
+
+### Synchronization problems
+
+If your programs take advantage of multithreading, you need to know about the `lazy()` function's mode parameter.
+
+- `LazyThreadSafetyMode.SYNCHRONIZED` means that the value is only computed in one thread, and all threads will get the same value. It's the default option, so you can omit it if you wish:
+
+```kotlin
+val a: String by lazy(LazyThreadSafetyMode.SYNCHRONIZED) { //... }
+```
+- `LazyThreadSafetyMode.PUBLICATION` specifies that the lambda can be called several times with an uninitialized lazy object value, but the value that is returned first will be used:
+
+```kotlin
+val a: String by lazy(LazyThreadSafetyMode.PUBLICATION) { //...}
+```
+
+- `LazyThreadSafetyMode.NONE` means there's no synchronization at all, so if we call the variable from different threads, its value can't be uniquely defined. Using this option isn't recommended if your program allows a lazy object to be called for the first time from more than one thread:
+
+```kotlin
+val a: String by lazy(LazyThreadSafetyMode.None) { //..}
+```
+
+You may be wondering why the keyword by is used before lazy? Well, it's to do with delegates. This is how we **delegate** the implementation of the corresponding property to a lambda.
+
+### lateinit
+
+Another delayed initialization feature in Kotlin that's worth mentioning is `lateinit`. This is a keyword rather than a function like `lazy()`.
+
+We can't use the following approach because the default value of the field must be initialized:
+
+```kotlin
+var a: String
+```
+
+We could make a nullable, but we don't want it to be!
+```kotlin
+var a: String? = null
+```
+Fortunately, `lateinit` can be used to solve this problem:
+
+```kotlin
+lateinit var a: String
+
+fun initA(a: String) {
+    this.a = a
+}
+```
+
+This method allows us to set the value of `a` in the `initA()`
+function at a convenient point after the object has been created.
+
+Note that `lateinit` variables must be declared with `var`, unlike those declared with `lazy()`.
+
+We can also check whether the property has already been initialized.
+To see how this works, let's add a function to our class.
+As shown below, `isInitialized` can be called on the current object's field via `this::a`,
+returning either true or false:
+
+```kotlin 
+lateinit var a: String
+
+fun initA(a: String) {
+    this.a = a
+}
+
+fun doSmth() {
+    if (::a.isInitialized)
+        println("a is Initialized")
+    else
+        println("a isn't Initialized")
+}
+```
+
+> [!CAUTION]
+> If you try to access a property before it has been initialized, an error will be thrown:
+> Caused by: kotlin.UninitializedPropertyAccessException: lateinit property a has not been initialized
