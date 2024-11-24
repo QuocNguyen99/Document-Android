@@ -204,3 +204,88 @@ fun doSmth() {
 > [!CAUTION]
 > If you try to access a property before it has been initialized, an error will be thrown:
 > Caused by: kotlin.UninitializedPropertyAccessException: lateinit property a has not been initialized
+
+## Final members
+
+In programming languages such as Java and C++, the final keyword is used to indicate that a value, method, or class cannot be changed or overridden. In Kotlin, however, the situation is somewhat different.
+
+**In Kotlin, all classes and methods are final by default.** This means that if you declare a class in Kotlin, you will not be able to inherit it until you clearly make it `open`.  **Similarly, methods and properties in Kotlin are also final by default**, and they cannot be overridden in subclasses until they are declared `open`.
+**Error declaretion**
+```kotlin
+class MyFinalClass {
+    fun myFinalMethod() {
+        println("This method cannot be overridden!")
+    }
+}
+
+class MyChildClass : MyFinalClass() { // Error! Cannot inherit MyFinalClass
+    override fun myFinalMethod() { // Error! Cannot override myFinalMethod
+        println("I'm trying to override your method!")
+    }
+}
+```
+**Right way declaretion**
+```kotlin
+open class MyBaseClass {
+    open fun myMethod() {
+        println("Basic implementation")
+    }
+}
+
+class MyDerivedClass : MyBaseClass() {
+    override fun myMethod() {
+        println("Overridden implementation")
+    }
+}
+```
+You might wonder why Kotlin takes such an approach. The answer is simple: the approach contributes to safer, more predictable code. After all, if a class or method can be arbitrarily inherited or overridden, that can lead to undesirable consequences.
+
+### 'final' after 'open'
+
+It is important to note that you can use `final` for overridden methods or properties to prevent them from being further redefined. Let's take an example:
+
+```kotlin
+open class MyBaseClass {
+    open fun myMethod() {
+        println("Basic implementation")
+    }
+}
+
+open class MyIntermediateClass : MyBaseClass() {
+    final override fun myMethod() {
+        println("An overridden implementation that cannot be redefined further")
+    }
+}
+
+class MyDerivedClass : MyIntermediateClass() {
+    override fun myMethod() { // Error! Cannot override myMethod
+        println("I'm trying to override your method!")
+    }
+}
+```
+
+## Visibility modifiers for members
+
+Visibility modifiers are special keywords that define which part of your code is allowed to use. There are four access modifiers in Kotlin: **private**, **protected**, **internal**, and **public**.
+
+- The `public` keyword is used to tell the compiler that something should be available to everywhere
+- When using `private`, data will only be available within a specific class.
+- `protected` is the same as `private`, except it can be seen in subclasses.
+- The `internal` modifier means that who sees the declaring class sees its `internal` members
+
+## Visibility of constructors in a class
+
+You can also specify a modifier for constructors: for example, make the class primary constructor private. Remember to add an explicit `constructor` keyword:
+
+```kotlin
+class Student private constructor(val name: String) {
+    var age: Int = 0
+
+    constructor(name: String, _age: Int) : this(name) {
+        age = _age
+    }
+}
+
+val anna: Student = Student("Anna")     //Cannot access '<init>': it is private in 'Student'
+val mark: Student = Student("Mark", 23)
+```

@@ -179,6 +179,125 @@ Object with area equal to 6 is created
 Updated outer object's area is equal to 34
 ```
 
+## Overriding constructors
+
+Using inheritance and polymorphism, we can extend superclass constructors in subclasses.
+
+### Basic principles of overriding
+
+In the context of object-oriented programming (OOP), **overriding** is a mechanism that allows a subclass to provide its implementation of a method already defined in its superclass.
+
+### Overriding constructors in Kotlin
+
+As mentioned before, constructors cannot be overridden in Kotlin. However, you can define constructors in subclasses that use or "extend" constructors of the superclass.
+
+
+When declaring a subclass, we can use the keywords `open`, `final`, and `override` to control inheritance and polymorphism.
+
+- `open`: it allows subclasses to inherit or override functions and properties.
+- `final`: it prevents subclasses from overriding functions or properties.
+- `override`: it is used by the subclass to override functions or properties of the superclass.
+
+```kotlin
+open class Person(open val name: String)
+
+class Employee(override val name: String, val id: Int) : Person(name)  // We override the property name.
+```
+
+### Constructor overriding in practice
+
+Even though constructors cannot be directly overridden in Kotlin, you can still use the constructors of the superclass when defining subclasses, which is an important element of inheritance in OOP.
+
+### Inheritance and secondary constructor
+
+A derived class might use one or more of those in order to initiate the base class by implementing multiple constructors itself.
+
+```kotlin
+open class Base(val beta: Int, val gamma: Int, var message: String = "") {
+    constructor(beta: Int, message: String = "") : this(beta, 0, message)
+}
+
+class Derived(val alpha: Int, beta: Int, gamma: Int, message: String = "") : Base(beta, gamma, message) {
+    constructor(alpha: Int, beta: Int, message: String = "") : this(alpha, beta, 0, message)
+}
+
+Base(10)                    // beta is set
+Base(10, 20)                // beta and gamma are set
+Base(10, 20, "My message")  // beta, gamma, and a message are set
+Base(10, "My message")      // beta and a message are set
+
+Derived(0, 10)
+Derived(0, 10, 20)
+Derived(0, 10, 20, "My message")
+Derived(0, 10, "My message")
+```
+
+Of course, if we want to restrict the ways in which our `Derived` class can be initiated, then we should make further use of the secondary constructors.
+
+```kotlin
+open class Base(val beta: Int, val gamma: Int = 0, var message: String = "")
+
+class Derived : Base {
+    val alpha: Int
+
+    constructor(alphaConstr: Int, beta: Int) : super(beta) {
+        alpha = alphaConstr
+    }
+
+    constructor(alphaConstr: Int, beta: Int, gamma: Int) : super(beta, gamma) {
+        alpha = alphaConstr
+    }
+
+    constructor(alphaConstr: Int, beta: Int, gamma: Int, message: String) : super(beta, gamma, message) {
+        alpha = alphaConstr
+    }
+
+    constructor(alphaConstr: Int, beta: Int, message: String) : super(beta, message = message) {
+        alpha = alphaConstr
+    }
+}
+```
+
+### Inheritance and init
+
+In case a class has a primary constructor, some `init` blocks, and some secondary constructors, then the order of execution is the following:
+
+- The primary constructor, even if a secondary one is called. The primary one is called first through the keyword `this`;
+- All `init` blocks, sequentially in the order they appear;
+- The second constructor block, in case this constructor was called.
+- Base class primary constructor, even if a base class secondary constructor is called through the derived class;
+- Base class `init` blocks, sequentially in the order they appear;
+- Base class secondary constructor block, in case this constructor was called;
+- Derived class primary constructor, even if a derived class secondary constructor is called;
+- Derived class `init` blocks, sequentially in the order they appear;
+- Derived class secondary constructor block, in case this constructor was called.
+
+The following code is an example of the above
+
+```kotlin
+open class Base(val message: String, val email: String) {
+    init { println("Base class init") }
+    constructor(email: String) : this("No message", email) { println("Base class secondary") }
+}
+
+class Derived(email: String) : Base(email) {
+    init { println("Derived class init") }
+    constructor() : this("example.com") { println("Derived class secondary") }
+}
+
+fun main() {
+    val myDerived = Derived()
+}
+```
+Output : 
+
+```bash
+Base class init
+Base class secondary
+Derived class init
+Derived class secondary
+```
+
 
 ## Nested and inner classes
 

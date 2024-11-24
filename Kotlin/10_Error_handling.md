@@ -277,3 +277,67 @@ class CustomCloseable : Closeable {
     }
 }
 ```
+
+## Nothing
+
+**Kotlin is a statically-typed language**. This means every expression in Kotlin has a known type at compile time
+
+In Kotlin, `Nothing` is a unique type because **it doesn't have an instance**. You might ask when this is useful. It can be used when a function never returns a value, not even Unit.
+
+In essence, `Nothing` is a subtype of every known type in Kotlin. It means that it can represent a value of any type in terms of type checks.
+
+For example, let's consider a situation where the Nothing type is particularly useful:
+
+```kotlin
+fun fail(): Nothing {
+    throw RuntimeException("This function always throws an exception")
+}
+
+fun calculatePercentage(marks: Int, total: Int): Float {
+    if (total == 0) {
+        fail()  // 'fail()' is used where a Float is expected
+    }
+    return (marks/total.toFloat()) * 100
+}
+```
+
+## Catching supertype
+
+Imagine a situation where you encounter different types of exceptions and want to handle them differently. 
+
+
+```kotlin
+fun main() {
+    val input = readln()
+    try {
+        println(100 / input.toInt())
+    } catch (e: Exception) {
+        println("What else can go wrong!")
+    } catch (e: NumberFormatException) {
+        println("You didn't type an INT number!")
+    } catch (e: ArithmeticException) {
+        println("You typed 0!")
+    }
+}
+```
+
+By rearranging the catch blocks and placing the more specific exceptions first, we ensure that the corresponding catch block executes correctly.
+
+the when statement can help us with writing a more concise code to catch multiple exceptions in a single catch block:
+
+```kotlin
+fun main() {
+    val input = readln()
+    try {
+        println(100 / input.toInt())
+    } catch (e: Exception) {
+        when (e) {
+            is NumberFormatException -> println("You didn't type an INT number!")
+            is ArithmeticException -> println("You typed 0!")
+            else -> println("What else can go wrong!")
+        }
+    }
+}
+```
+
+
