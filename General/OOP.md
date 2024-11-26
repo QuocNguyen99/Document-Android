@@ -4,19 +4,21 @@ Each object can be characterized by a state and behavior. An object’s current 
 
 There are four basic principles of OOP. They are encapsulation, abstraction, inheritance, and polymorphism.
 
-### 1. Tính đóng gói (Encapsulation)
+### 1. Encapsulation
 
     Tính đóng gói cho phép che giấu thông tin và những tính chất xử lý bên trong của đối tượng. Các đối tượng khác không thể tác động trực tiếp đến dữ liệu bên trong và làm thay đổi trạng thái của đối tượng mà bắt buộc phải thông qua các phương thức công khai do đối tượng đó cung cấp.
 
 Tính chất này giúp tăng tính bảo mật cho đối tượng và tránh tình trạng dữ liệu bị hư hỏng ngoài ý muốn.
 
-### 2. Tính kế thừa (Inheritance)
+### 2. Inheritance
 
     Inheritance is a mechanism for defining parent-child relationships between classes. Often objects are very similar, so inheritance allows programmers to reuse common logic and at the same time introduce unique concepts into the classes.
 
-### 3. Tính đa hình (Polymorphism)
+### 3. Polymorphism
+**Polymorphism is the ability of an object or its methods to take on many forms depending on its type and the parameters of this or that method**. It allows programmers to define different implementations for the same method. Thus, the name (or interface) remains the same, but the actions performed may differ. For example, imagine a website that posts three main types of text: news, announcements, and articles. They are somewhat similar in that they all have a headline, some text, and a date. In other ways, they are different: articles have authors, news bulletins have sources, and announcements have a date after which they become irrelevant. It is convenient to write an abstract class with general information for all publications to avoid copying it every time and store what is different in the appropriate derived classes.
 
-    Polymorphism literally means "having many forms" and is a concept related to inheritance. It allows programmers to define different implementations for the same method. Thus, the name (or interface) remains the same, but the actions performed may differ. For example, imagine a website that posts three main types of text: news, announcements, and articles. They are somewhat similar in that they all have a headline, some text, and a date. In other ways, they are different: articles have authors, news bulletins have sources, and announcements have a date after which they become irrelevant. It is convenient to write an abstract class with general information for all publications to avoid copying it every time and store what is different in the appropriate derived classes.
+> [!NOTE]
+> Not all languages support this kind of polymorphism. For example, you can define such methods in Java, Kotlin, or Scala, but not in Python or JavaScript.
 
 ### 4. Tính trừu tượng (Abstraction)
 

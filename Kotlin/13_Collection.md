@@ -184,3 +184,115 @@ We can use the `random()` function. Remember, though, that this function throws 
 
 you can use the `contains()` method – this methods returns true if the element is found in the collection.
 To check if a collection contains multiple elements, you can make use of the method `containsAll()`.
+
+
+## Collections as interface
+
+![alt text](/resources/collection_as_interface.png)
+
+`Collection<T>` is the root for a hierarchy of immutable collections — `List` and `Set`. It provides methods like `size`, `get()`, `find()`, `filter()`, `count()`, etc.
+
+`MutableCollections<T>` is the root for `MutableList` and `MutableSet`, and it supports adding and removing elements with the help of the following methods: `add()`, `addAll()`, `remove()`, `removeAll()`, `retainAll()`, and `drop()`.
+
+`Collection` and `MutableCollection` inherit from `Iterable` and `MutableIterable`. So, these interfaces support all the methods available to their parents.
+
+However, maps don't represent `Collection` or `Iterable` interfaces, though we also call them collections. It means that they have methods different from other collections. And it is logical because they contain key-value pairs — as opposed to single elements in `Set` or `List`, so we need to separate methods for them. Unfortunately, we can't use `Map` with `Collection` interfaces.
+
+
+### Iterable
+
+there are two universal interfaces in Kotlin: `Iterable` and `MutableIterable`. They provide methods for working with sequences of elements.
+
+Classes that inherit from `Iterable` have a set of common methods: `iterator()`, `forEach()`, `contains()`, `count()`, `drop()`, `filter()`, etc.
+
+`MutableIterable`, unlike `Iterable`, also supports removing elements during iterations. For example, `remove()` and `removeAll()`.
+
+> [!NOTE]
+> It's interesting that they both contain the method drop() which drops a certain element. But unlike remove() from MutableIterable, which really removes a certain element in a certain object, drop() returns a new object.
+
+### Collection
+
+There are some common methods for all collections.
+
+- `count()` returns the number of elements that meet the conditions.
+
+- `drop()` returns a new List of elements without n first elements.
+
+`containsAll()` checks if the collection contains all elements from another collection and returns `true` or `false`.
+- `joinToString()` returns the collection as a string with a specific delimiter.
+
+- `find()` returns the first element which fits the pattern.
+
+- `filter()` returns a `List` of elements that meet the conditions.
+
+- `minus()` returns the collection without the element or elements specified in the condition.
+
+- `random()` returns a random element of the collection.
+
+> [!NOTE]
+> Notice that drop() or minus() don’t change the original collection; instead, they create a new collection, so they also work with Collection<T>, an immutable type.
+
+### MutableCollection
+
+the use of `MutableCollection`. It can use all the methods from `Collection`, but it also has some specific operations.
+
+Notice that the specific `MutableCollection` methods, unlike `drop()` or `minus()`, change the original collection. So a function with these methods will return a boolean value — `true` if the operation was successful and `false` if the operation failed.
+
+- `addAll()` adds all elements from one collection to another.
+
+- `add()` adds one element to a collection.
+
+- `clear()` removes all elements from a collection.
+
+- `remove()` removes the first occurrence of a certain element from a collection.
+
+- `retainAll()` method leaves the unique elements in the collection — only those that are also contained in the specified collection.
+
+
+## Mapping transformation
+
+With the `map()` and `mapIndexed()` functions, we can create a new collection by applying a transformation lambda function to our source collection.
+
+- `map()` transforms a given collection into a new one by applying a transformation lambda function to each element.
+- `mapIndexed()` transforms a given collection into a new one by applying a transformation lambda function to each element and using the element index as the first argument of the lambda.
+
+When do we need map transformations? **You need them whenever you want to get a new collection based on the elements of the original one.**
+
+If you apply a transformation function to the elements and the transformation cannot be performed on some of them, the result for those elements is null. You can check the above example. You can avoid these results using `mapNotNull()` or `mapIndexedNotNull()`.
+
+Why do we need these two functions? If we can't perform a mapping operation, we'll have a `null`, so our collection is `T?`. It is essential to have such operations that allow us to avoid `null` values so that our collection will be of type `T`.
+
+You have two options to perform a transformation: transform the keys with `mapKeys()` or transform the values associated with the said keys with `mapValues()`.
+
+### Flatten (flatten/flatMap)
+
+The function `flatten()` returns a single list of all the elements from all collections in the given collection. It is very helpful if we have several collections and we want to get a single collection that concatenates them.
+
+However, this function is not valid for all kinds of collections. Remember, `flatten` returns a `List` or a `sequence`.
+
+Example:
+
+```kotlin
+    val nestedNumbers = listOf(
+        listOf(1, 2, 3),
+        listOf(4, 5, 6),
+        listOf(7, 8, 9)
+    )
+    println(nestedNumbers.flatten())  // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+The function `flatMap()` takes a function that maps the elements of one collection to another and returns a list of all the values in those elements.
+It is very useful if we are faced with the task of mapping **one-to-many relationships.**
+
+Example:
+```kotlin
+    val nestedNumbers = listOf(
+        listOf(1, 2, 3),
+        listOf(4, 5, 6),
+        listOf(7, 8, 9)
+    )
+    // FlatMap example
+    println(nestedNumbers.flatMap { 
+        it.map { it * 2 } }
+    ) // [2, 4, 6, 8, 10, 12, 14, 16, 18]
+```
