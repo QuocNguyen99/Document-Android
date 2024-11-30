@@ -368,3 +368,76 @@ Write this@Cat.color in the inner class code and you will get the color of the o
 
 - To access the inner class, you need to instantiate the outer class first, as inner classes are associated with an instance of their enclosing class
 
+## Data Class 
+the data class is a convenient way to organize data or to create DTOs (Data Transfer Objects).
+
+Example of the path to the solution
+we need a class, so here is a nice `Client` class:
+
+```kotlin
+class Client(val name: String, val age: Int, val gender: String)
+```
+
+Right now it has 3 properties, so far so good! But in order to properly compare the objects (i.e., by their properties) we need to implement `equals()` and `hashCode()` functions:
+
+```kotlin
+class Client(val name: String, val age: Int, val gender: String) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Client
+
+        if (name != other.name) return false
+        if (age != other.age) return false
+        if (gender != other.gender) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = name.hashCode()
+        result = 31 * result + age
+        result = 31 * result + gender.hashCode()
+        return result
+    }
+}
+```
+
+Why do we need such a long piece of code just for standard stuff? That's the right question because with the data class we can simplify it like this:
+
+```kotlin
+data class Client(val name: String, val age: Int, val gender: String)
+```
+
+Wait! Where are all my functions now? Actually, with the `data` keyword, you don't need them anymore. It will magically work as if you have already implemented them all. This keyword will also provide `toString()` ,`copy()` and `componentN()` functions with default behavior (equals and hashCode). We'll look at `copy()` and `componentN()`a bit later, but right now you need to remember several rules here:
+1.  You can only count on properties that are inside the constructor.
+```kotlin
+data class Client(val name: String, val age: Int, val gender: String) {
+    var balance: Int = 0
+}
+```
+All those functions won't consider balance field, **because it isn't inside the constructor.**
+
+2.  You can override all those functions, except for `copy()`:
+3. The primary constructor of a data class must have at least one parameter and all of those parameters must be `val` or `var`.
+
+### Copy and ComponentN
+
+To be honest, there isn't really a convenient way to copy an object in Java, but Kotlin is different.
+
+we just used our `copy()` function, which will be provided automatically with the `data` keyword. 
+```kotlin
+fun main() {
+    val bob = Client("Bob", 29, "Male")
+    val john = bob.copy(name = "John")
+    println(bob) // Client(name='Bob', age=29, gender='Male', balance=0)
+    println(john) // Client(name='John', age=29, gender='Male', balance=0)
+}
+```
+
+
+The `componentN()` functions correspond to the properties in their order of declaration: `component1()`, `component2()`, ..., for all data class properties. The Component functions generated for data classes make it possible to use them in destructuring declarations
+
+> [!NOTE]
+> In Kotlin, a destructuring declaration is a feature that allows you to separate the properties of an object or a collection into individual variables, which can then be used separately in your code.

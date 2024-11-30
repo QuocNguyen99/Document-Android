@@ -280,3 +280,32 @@ Also, here are some best practices for using the `buildString` function:
 1. Use `buildString` for **simple** string construction.
 2. **Avoid** unnecessary object creation.
 3. **Leverage** the scope of the lambda. The buildString function takes a lambda as an argument, which provides a convenient scope for building the string. Use this scope to your advantage by declaring local variables and functions that can help simplify your code.
+
+
+## toString()
+
+### Default behavior
+
+The `toString()` function is defined for the type `Any?`. This means that all the classes inherit all of the `Any?` methods, including `toString()`.
+
+The point is that `toString()` for `Any?` returns **the class name and memory location** as a string. For some classes, the default behavior is adjusted for correct processing. For example, take `Int` or `Double`.
+
+### Overriding toString()
+
+It seems that our problems can be solved by redefining the `toString()` method. `toString()` is automatically defined for all the classes you create, and you can override it for any class
+
+### Overriding toString(): Inheritance
+
+Another reason for overriding the` toString()` method is working with superclasses or parent classes. Here, the general rules of inheritance also apply. If the `toString()` method is defined in the parent class, the derived class will use this particular override.
+
+### Using the superclass definition
+
+It may be necessary to invoke the `toString()` parent implementation in the child class. It can be done with `super`, as you remember from inheritance:
+
+```kotlin
+class Author(id: Int, login: String, email: String, val books: String): User(id, login, email) {
+        override fun toString(): String {
+            return "Author: ${super.toString()};\nBooks: $books"
+    	}
+}
+```
