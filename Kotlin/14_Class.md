@@ -298,6 +298,32 @@ Derived class init
 Derived class secondary
 ```
 
+## Overriding properties
+
+The primary mechanism works for properties as it does for methods. When redeclaring properties from a superclass in a derived class, they must be preceded by the override keyword and possess a compatible type.
+```kotlin
+open class Shape {
+    open val vertexCount: Int = 0
+}
+
+class Triangle : Shape() {
+    override val vertexCount = 3
+}
+```
+A declared property can be overridden either by a property featuring an initializer or one with a `get` method. Overriding a `val` property with a `var` property is allowed, **but the opposite is not permitted**. This is due to the fact that a `val` property inherently includes a `get` method, and when overridden as a `var`, a `set` method is also declared in the derived class
+
+```kotlin
+interface Shape {
+    val vertexCount: Int
+}
+
+
+class Polygon : Shape {
+    override var vertexCount: Int = 0  // Can be set to any number later
+}
+```
+
+
 
 ## Nested and inner classes
 
@@ -441,3 +467,12 @@ The `componentN()` functions correspond to the properties in their order of decl
 
 > [!NOTE]
 > In Kotlin, a destructuring declaration is a feature that allows you to separate the properties of an object or a collection into individual variables, which can then be used separately in your code.
+
+## Argument naming in overridden functions
+
+Functions can often have several arguments, and to improve the readability of code in Kotlin, you can use named arguments when calling a function.
+
+```kotlin
+    val shape: Shape = Circle()
+    shape.draw(color = "red", strokeWidth = 3)
+``` 

@@ -640,3 +640,213 @@ You can see more methods in Kotlin documentation.
 
 The main difference between `Comparable` and `Comparator` is that `Comparable` defines the natural ordering of objects, while `Comparator` defines a custom ordering of objects. When objects of the same class are being compared, it's recommended to implement `Comparable` to provide a natural ordering for them. When objects of different classes are compared or custom orderings are required, it's recommended to implement `Comparator`.
 
+## Aggregate operations on collections
+ 
+It is time to learn to obtain values based on the content of a collection, for example, the maximum value, the average value, an object with the maximum value of a property, etc.
+ 
+### Basic aggregate function
+ 
+When we work with collections, we have a series of methods to obtain values based on the collection content and get additional information about the content. These methods are known as "aggregation methods":
+ 
+- `minOrNull()` returns the smallest element of a collection or null on an empty collection.
+ 
+- `maxOrNull()` returns the largest element of a collection or null on an empty collection.
+ 
+- `average()` returns the average value of the elements in a collection with number values.
+ 
+- `sum()` returns the sum of all elements in a collection with number values.
+ 
+- `count()` returns the number of elements in a collection.
+ 
+### Aggregate with selector function
+ 
+Sometimes, we need to specify which value we want to obtain with an aggregate method. In Kotlin, we have special methods to perform these tasks using a **selector function**. They are:
+ 
+ 
+- `minByOrNull()` with a selector function, returns the element with the smallest value. It is used as a substitute for the `minBy()` to avoid an exception.
+ 
+- `maxByOrNull()` with a selector function, returns the element with the largest value. It is used as a substitute for the `maxBy()` to avoid an exception.
+ 
+- `minOfOrNull()` with a selector function, returns the smallest return value of the selector itself. It is an evolution of `minOf()`, which throws an exception if the collection is empty.
+ 
+- `maxOfOrNull()` with a selector function, returns the largest return value of the selector itself. It is an evolution of `maxOf()`, which throws an exception if the collection is empty.
+ 
+- `sumOf()` with a selector function, returns the sum of its application to all collection elements.
+ 
+Alternatively, we can also use `minBy()`/`maxBy()` and `maxOf()`/`minOf()` to perform the same tasks, but they throw a `NoSuchElementException` on empty collections. Also, you can use predicates to find the max or min elements.
+ 
+ 
+```kotlin
+fun main() {
+    val words = listOf("anne", "michael", "caroline", "dimitry", "emilio")
+ 
+    // Count
+    println(words.count()) // 5
+    // maxByOrNull/minByOrNull
+    println(words.maxByOrNull { it.length }) // caroline
+    println(words.minByOrNull { it.length }) // anne
+    //maxOfOrNull/minOfOrNull
+    println(words.maxOfOrNull { it.length }) // 8
+    println(words.minOfOrNull { it.length }) // 4
+    // sumOf
+    println(words.sumOf { it.length }) // 32
+ 
+    // using predicates, length > 5
+    println(words.count { it.length > 5 }) // 4
+    println(words.maxByOrNull { it.length > 5 }) // michael
+    println(words.minByOrNull { it.length > 5 }) // anne
+ 
+    // emptyList
+    val emptyWordsList = emptyList<String>()
+    println(emptyWordsList.count()) // 0
+    println(emptyWordsList.maxByOrNull { it.length }) // null
+    println(emptyWordsList.minByOrNull { it.length }) // null
+    println(emptyWordsList.maxOfOrNull { it.length }) // null
+    println(emptyWordsList.minOfOrNull { it.length }) // null
+    println(emptyWordsList.maxOf { it.length })  // NoSuchElementException
+    println(emptyWordsList.minOf { it.length })  // NoSuchElementException
+    println(emptyWordsList.maxBy { it.length })  // NoSuchElementException
+    println(emptyWordsList.minBy { it.length })  // NoSuchElementException
+}
+```
+ 
+**It is important to note the difference** between `maxOfOrNull`/`minOfOrNull` and `maxByOrNull`/`minByOrNull`. `maxOfOrNull`/`minOfOrNull` return the largest/smallest value among all values produced by the selector function applied to each element in the collection or null if the collection is empty.
+ 
+```kotlin
+    //maxOfOrNull/minOfOrNull
+    println(words.maxOfOrNull { it.length }) // 8
+    println(words.minOfOrNull { it.length }) // 4
+```
+ 
+ 
+Meanwhile, `maxByOrNull`/`minByOrNull` return the first element yielding the largest/smallest value of the given function or null if there are no elements
+ 
+```kotlin
+    println(words.maxByOrNull { it.length > 5 }) // michael
+    println(words.minByOrNull { it.length > 5 }) // anne
+```
+### Aggregate with comparator
+ 
+We can perform the same task as above using a custom comparator with a lambda and the following methods:
+ 
+- `minWithOrNull()` returns the smallest element according to the comparator.
+ 
+- `maxWithOrNull()` returns the largest element according to the comparator.
+ 
+- `minOfWithOrNull()` returns the smallest selector return value according to the comparator.
+ 
+- `maxOfWithOrNull()` returns the largest selector return value according to the comparator.
+ 
+- `count()` returns the number of items according to the comparator.
+ 
+These methods return `null` on empty collections. However, we also have `maxOfWith()` and `minOfWith()` to perform the same task, and they throw a `NoSuchElementException` on empty collections.
+
+## Retrieve collection parts
+
+### Slice
+
+Slicing is a fundamental operation: it returns a range of items from a collection based on their indices.
+
+```kotlin
+    val list = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+    // retrieve items from 1 to 5 using slice and range
+    println(list.slice(0..4)) // [1, 2, 3, 4, 5]
+```
+
+### Take and drop
+You can indicate how many elements to return from a collection using the family of the "take" methods:
+
+- `take()`: returns a collection with n elements from the original collection, starting from the first element. If called with a number larger than the collection size, the whole collection is returned.
+
+- `takeLast()`: returns a collection with n elements from the original collection, starting from the last element. If called with a number larger than the collection size, the whole collection is returned.
+
+- `takeWhile()`: returns a collection with the elements that satisfy the predicate, starting from the first element. If none of the elements match the predicate, the result is an empty collection.
+
+```kotlin
+fun main() {
+    val list = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+    // take 5 elements from the first
+    println(list.take(5)) // [1, 2, 3, 4, 5]
+    // take 5 elements from the last
+    println(list.takeLast(5)) // [6, 7, 8, 9, 10]
+    // take while the condition is true < 5
+    println(list.takeWhile { it < 5 }) // [1, 2, 3, 4]
+    // take last while the condition is true > 5
+    println(list.takeLastWhile { it > 5 }) // [6, 7, 8, 9, 10]
+}
+```
+
+Sometimes, we want to take just a specific number of elements from a collection.
+
+- `drop()`: returns a collection containing all the elements except the first n elements. If called with a number larger than the collection size, an empty list is returned.
+
+- `dropLast()`: returns a collection containing all the elements except the last n elements. If called with a number larger than the collection size, an empty list is returned.
+
+- `dropWhile()`: returns a collection containing all the elements except the first elements that satisfy the given predicate. If no elements match the predicate, the result is the original collection; if all of them match the predicate, an empty list is returned.
+
+- `dropLastWhile()`: returns a collection containing all the elements except last elements that satisfy the given predicate. If no elements match the predicate, the result is the original collection; if all of them match the predicate, an empty list is returned.
+
+```kotlin
+fun main() {
+    val list = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+    // drop 5 elements from the first
+    println(list.drop(5)) // [6, 7, 8, 9, 10]
+    // drop 5 elements from the last
+    println(list.dropLast(5)) // [1, 2, 3, 4, 5]
+    // drop while the condition is true < 5
+    println(list.dropWhile { it < 5 }) // [5, 6, 7, 8, 9, 10]
+    // drop last while the condition is true > 5
+    println(list.dropLastWhile { it > 5 }) // [1, 2, 3, 4, 5]
+}
+```
+
+### Chunked
+
+Quite often, we need to split a collection into parts of a fixed size.
+
+```kotlin
+fun main() {
+    val list = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+    // chunked into 3
+    println(list.chunked(3)) // [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10]]
+    // chunked into 3, the result transformed by applying a lambda with sum
+    println(list.chunked(3) { it.sum() }) // [6, 15, 24, 10]
+    // chunked into 3, the result transformed into a string
+    println(list.chunked(3) { it.joinToString() }) // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+```
+
+### Windowed
+
+You can also get all possible ranges of collection elements of a defined size. 
+
+We use the following parameters:
+
+- `size`: it is the number of elements in each window, that is, the size of the window.
+
+- `step`: it is the number of elements we need to scroll between windows, by default it is 1. It represents the distance between the first elements of consecutive windows.
+
+- `partialWindows`: it includes windows of smaller sizes at the end of the collection if you can't build a window of the specified size; by default, it is `false`. It indicates whether you want to keep partial windows at the end.
+
+```kotlin
+fun main() {
+    val list = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+    // windows of 3, default step is 1
+    println(list.windowed(3))
+    // [[1, 2, 3], [2, 3, 4], [3, 4, 5], [4, 5, 6], [5, 6, 7], [6, 7, 8], [7, 8, 9], [8, 9, 10]]
+    // windows of 3, step 3
+    println(list.windowed(3, 3)) // [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+    // windows of 3, step 4, partial windows is false
+    println(list.windowed(3, 4, false)) // [[1, 2, 3], [5, 6, 7]]
+    // windows of 3, step 4, partial windows is true
+    println(list.windowed(3, 4, true)) // [[1, 2, 3], [5, 6, 7], [9, 10]]
+    // windows of 3, step 4, partial windows is true, the result is transformed with sum
+    println(list.windowed(3, 4, true) { it.sum() }) // [6, 18, 19]  
+}
+```
+
