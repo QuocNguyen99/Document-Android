@@ -146,6 +146,25 @@ fun main() {
 }
 ```
 
+### Custom order
+
+To perform custom sorting of the elements in a collection and order the elements of any type in a way you like, Kotlin offers the following functions: `sortedBy()` and `sortedByDescending()`.
+
+They take a lambda as the selector function, which maps the element or some properties of the element into comparable attributes. As a result, it returns an ordered collection following the identified natural order. `sortedBy()` returns a collection where the elements are sorted in ascending order, and `sortedByDescending()` returns a collection in descending order.
+
+### Define new order
+
+you can implement a custom order for non-comparable elements or properties. We can define custom sorting using the `Comparator` interface. The `Comparator` interfaces helps us to define the `compare()` method, which returns the integer result of the comparison between two values
+
+```kotlin
+  val words = listOf("peter", "anne", "michael", "caroline")
+
+    // define a comparator for the list of words
+    val wordsLengthComparator = Comparator { str1: String, str2: String -> str1.length - str2.length }
+    // Ordered list according to the comparator
+    println(words.sortedWith(wordsLengthComparator)) // [anne, peter, michael, caroline]
+```
+
 ### Retrieve by position
 
 To get the element at a specific index position, you can use `elementAt()`. We can also fetch an element in an equivalent way with the `get()` function.
