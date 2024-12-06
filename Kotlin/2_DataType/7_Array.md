@@ -44,3 +44,18 @@ println("Only -1: ${onlyMinusOne.joinToString()}")
 
 To compare two arrays, invoke the `contentEquals()` function of an array and pass another array as the argument.
 the operators `==` and `!=` do not compare the contents of arrays, they compare only the variables that point to the same object
+
+## Multi-dimensional array
+
+It makes it very easy to represent things that have many dimensions: for example, 3D objects with length, height, and width. The universe we live in could be described with four measurements, time being the fourth dimension, so it is 4D. Higher levels like 5D and so
+
+### Creating 2D arrays of different types
+
+Nested arrays can be of different types. For example, you can create a two-dimensional array that stores both Int and String arrays:
+
+```kotlin
+val arrayOfString2D = arrayOf(
+    arrayOf("Practice", "makes", "perfect"),
+    arrayOf(1, 2)
+)
+```
