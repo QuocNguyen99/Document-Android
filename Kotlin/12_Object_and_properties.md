@@ -107,3 +107,68 @@ println("list2 $list2") // list2 [1, 5]
 
 As you can see in this example, the variables `list1` and `list2` refer to the same object. 
 **When you change the object through the first variable, we see the updated data through the second variable.**
+
+## Property accessors
+
+### Property getter
+
+You already know how to retrieve a property name, just type in the dot and the property name after the object name: `client.name`
+
+but in fact, when you want to get the value of some property, you call a special `get()` function called getter. This is what it actually looks like:
+
+```kotlin
+class Client {
+    val name = "Unknown"
+        get() {
+            return field
+        }
+}
+```
+
+When you try to retrieve a value, you will get the result of the `get()` function. So, what is `field`? Every property in Kotlin has its own backing `field`, which contains a property value that can be accessed with the special keyword `field`.
+
+> [!NOTE]
+>  In Kotlin, a backing field is a generated private property that stores the value of a property, allowing you to add more control over the property's behavior.
+
+we can use it to have a mutable value to save the info, and always return a read only val.
+
+```kotlin
+class IntegerRepository {
+    private val _list = mutableListOf<Int>()
+    val list: List<Int> get() = _list // backing property
+}
+```
+
+### Property setter
+
+When you want to set the value of some property, you should call a special `set()` function called setter. This is what it looks like:
+
+```kotlin
+class Client {
+    var name = "Unknown"
+        set(value) {
+            field = value
+        }
+}
+```
+
+### Additional features
+
+If you want to add a getter and/or a setter to a property in a constructor, just "move" the property out
+Remember that in this case, you need to use another variable, not the property from the constructor:
+Keep in mind that when initializing your property, the setter will not be called.
+```kotlin
+class Client(name: String) {
+    var name: String = name
+        set(value) {
+            println("The name is changing. Old value is $field. New value is $value.")
+            field = value
+        }
+}
+
+val client = Client("Annie")  // without output
+client.name = "Ann"           // The name is changing. Old value is Annie. New value is Ann.
+```
+
+> [!NOTE]
+> You cannot use a setter for val variables: the set() function reassigns the variable, which is not possible for val

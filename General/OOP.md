@@ -6,9 +6,7 @@ There are four basic principles of OOP. They are encapsulation, abstraction, inh
 
 ### 1. Encapsulation
 
-    Tính đóng gói cho phép che giấu thông tin và những tính chất xử lý bên trong của đối tượng. Các đối tượng khác không thể tác động trực tiếp đến dữ liệu bên trong và làm thay đổi trạng thái của đối tượng mà bắt buộc phải thông qua các phương thức công khai do đối tượng đó cung cấp.
-
-Tính chất này giúp tăng tính bảo mật cho đối tượng và tránh tình trạng dữ liệu bị hư hỏng ngoài ý muốn.
+    Encapsulation refers to bundling data with the methods operating with it while restricting direct access to some components.
 
 ### 2. Inheritance
 
