@@ -314,3 +314,43 @@ Example:
         it.map { it * 2 } }
     ) // [2, 4, 6, 8, 10, 12, 14, 16, 18]
 ```
+
+## Group collection
+
+In Kotlin, we have extension functions for grouping collection elements, and one of them is `groupBy()`.
+It takes a lambda function and returns a Map grouped by keys, with the value field containing all the corresponding elements of the collection.
+
+```kotlin
+fun main() {
+    val names = listOf("John", "Jane", "Mary", "Peter", "John", "Jane", "Mary", "Peter")
+    
+    // Grouping by the first letter of the name
+    val groupedNames = names.groupBy { it.first() }
+    println(groupedNames) // {J=[John, Jane, John, Jane], M=[Mary, Mary], P=[Peter, Peter]}
+}
+```
+
+You can use `groupBy()` with a second lambda argument as a transformation function. 
+The result is a map where the keys produced by the **keySelector** function are mapped with values, 
+and each value is the result of applying the transformation function **valueTransform** to each element of the grouping.
+
+
+```kotlin
+fun main() {
+    val names = listOf("John", "Jane", "Mary", "Peter", "John", "Jane", "Mary", "Peter")
+   
+    // Grouping by the length of the name and values transformed to uppercase
+    val groupedNames2 = names.groupBy(keySelector = { it.length },
+        valueTransform = { it.uppercase() })
+    println(groupedNames2) // {4=[JOHN, JANE, MARY, JOHN, JANE, MARY], 5=[PETER, PETER]}
+}
+```
+
+Sometimes when we work with collections, we want to apply an operation to all groups at the same time.
+We can perform this task using `groupingBy()`.
+It returns a grouping instance, which allows you to apply operations to all groups in a lazy way: 
+that is, the groups are built before the operation execution
+We can use this method with grouping:
+- `eachCount()`
+- `fold()`
+- `reduce()`

@@ -202,3 +202,74 @@ fun main() {
 }
 ```
 
+## Zip
+
+Zipping is an operation that allows us to obtain a pair based on two elements that occupy the same position in two different collections. This way, you can get a collection of pairs after applying `zip()`.
+
+If the original collections do not have the same size, the result will be a list of pairs limited to the size of the smaller collection, ignoring the remaining elements of the larger one.
+
+## Unzip
+
+Unzipping helps us to perform the reverse transformation. Given a collection of pairs, you can transform it into two collections with `unzip()`. The first one will have the first elements of the pair, the second one – the second elements.
+
+```kotlin
+fun main() {
+    val listNumbers = listOf(1, 2, 3, 4, 5)
+    val listStrings = listOf("one", "two", "three", "four", "five")
+
+    // Zipping
+    val zipped = listNumbers.zip(listStrings)
+    println(zipped) // [(1, one), (2, two), (3, three), (4, four), (5, five)]
+
+    // Unzipping
+    val unzipped = zipped.unzip()
+    println(unzipped) // ([1, 2, 3, 4, 5], [one, two, three, four, five])
+
+    // Zipping with different length
+    val numbers = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    // other way to call zip function
+    val zippedWithDifferentLength = numbers.zip(listStrings)
+    // ignore the rest of numbers
+    println(zippedWithDifferentLength) // [(1, one), (2, two), (3, three), (4, four), (5, five)]
+
+    // Zipping with transform
+    val zippedWithTransform = numbers.zip(listStrings) { number, string ->
+        "$number - $string"
+    }
+    println(zippedWithTransform) // [1 - one, 2 - two, 3 - three, 4 - four, 5 - five]
+}
+```
+
+## Associate
+
+The `associateWith()` method allows us to obtain a map where the elements are the keys. The map values are obtained with the help of a transformation function. If two items are the same, only one of them will be on the `Map`.
+
+The `associateBy()` method offers us a way to create a map where the elements of a collection are the values. The key is obtained with the help of a transformation function. If two items have the same key, only one of them will be on the `Map`.
+
+You can also obtain maps where the key or value is obtained from the elements of a collection thanks to the `associate()` function. This function takes a lambda that returns a Pair that corresponds to the map entry. **It should be used with care – when performance is not critical and when you cannot make use of the other options.**
+
+
+```kotlin
+fun main() {
+
+    val listStrings = listOf("one", "two", "three", "four", "five")
+
+    // Associate With
+    val associatedWith = listStrings.associateWith { it.length }
+    println(associatedWith) // {one=3, two=3, three=5, four=4, five=4}
+
+    // Associate By
+    val associatedBy = listStrings.associateBy { it.first().uppercase() }
+    println(associatedBy) // {O=one, T=three, F=five}
+
+    // Associate with a lambda
+    val associatedWithLambda = listStrings.associate {
+        it.first().uppercase() to it.length
+    }
+    println(associatedWithLambda) // {O=3, T=5, F=4}
+}
+```
+
+
+
+
