@@ -193,6 +193,28 @@ mutableListIterator.add("John")
 println(words)// i, don't know, John, Claire
 ```
 
+## Labels
+
+Technically, it's just an identifier with the @ sign at the end, for example: `loop@`, `kotlin@`. You can use almost any word with it, apart from the reserved words in Kotlin. What do you need labels for? Well, you can add your label to a loop:
+
+
+```kotlin
+loop@ for (i in 1..3) { 
+    for (j in 1..3) {
+        println("i = $i, j = $j")   
+        if (j == 3) break@loop  
+    }  
+}  
+```
+
+Both the inner and outer for loops are terminated at the third iteration. The output is this:
+
+```bash
+i = 1, j = 1
+i = 1, j = 2
+i = 1, j = 3
+```
+
 
 
 
