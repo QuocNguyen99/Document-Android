@@ -179,3 +179,95 @@ val threadMXBean = ManagementFactory.getThreadMXBean()
 val threadInfos = threadMXBean.dumpAllThreads(true, true)
 threadInfos.forEach { println(it) }
 ```
+
+## Debugger Under The Hood
+
+### Understanding the Kotlin Debugger Architecture
+
+At its core, the debugger architecture relies on the Java Virtual Machine (JVM) for executing Kotlin code because Kotlin is a JVM-targeted language.
+
+
+When a Kotlin application is run in debug mode, the JVM uses the Java Debug Wire Protocol (JDWP) to communicate with the debugger. 
+This protocol enables the transfer of debugging information between the JVM and the debugger interface.
+
+Here's a simplified view of the interaction:
+
+```kotlin
+fun main() {
+    val message = "Debugging in Kotlin"
+    println(message) // A breakpoint is set here
+}
+```
+
+When a breakpoint is hit, the JVM signals the debugger, which then takes control of the program execution. 
+The debugger can then **inspect variables**, **evaluate expressions**, and step through the code.
+
+
+The JVM plays a crucial role in this process by providing the necessary hooks and APIs for the debugger to control the application flow.
+For instance, the JVM's TI (Tool Interface) offers features like setting breakpoints, stepping through code, and accessing the call stack.
+
+Overall, the Kotlin debugger architecture is built upon the JVM's debugging capabilities. It uses the JDWP to interface with the Kotlin runtime
+
+
+### Breakpoints and Execution Flow
+
+When you run the program in debug mode and it reaches this line, the execution pauses, giving you the chance to inspect the program's state. 
+This inspection includes examining the values of variables, like message in the example above, or evaluating expressions on-the-go.
+
+Most IDEs offer several options:
+
+- **Step Over**: Executes the next line of code without diving into methods.
+
+- **Step Into**: If the next line contains a method call, it goes inside the method to continue line-by-line debugging.
+
+- **Step Out**: Completes the current method and returns to the calling method.
+
+- **Run to Cursor**: Resumes execution until the line where the cursor is located.
+
+### Advanced Debugging Features in Kotlin
+
+#### Conditional Breakpoints
+
+Conditional breakpoints pause execution only when a specified condition is true. They are useful for stopping on loops or frequent method calls.
+
+```kotlin
+for (i in 1..100) {
+    // Set a conditional breakpoint with the condition (i == 50)
+    println(i)
+}
+```
+
+#### Exception Breakpoints
+
+Exception breakpoints pause execution whenever a specified exception is thrown, which is useful for catching and diagnosing errors.
+
+```kotlin
+try {
+    // Code that might throw an exception
+} catch (e: Exception) {
+    // Set an exception breakpoint on this line for Exception
+}
+```
+
+#### Logging Breakpoints
+
+Logging breakpoints enable you to log a message to the console without stopping the program. It is useful for monitoring without interrupting the flow.
+
+
+### Performance and Limitations
+
+Debugging can significantly impact the performance of a Kotlin application due to the extra overhead of monitoring and capturing the program's state. 
+When a debugger is attached, the Kotlin application runs slower because it often turns off certain optimizations and maintains extra information.
+
+To minimize this impact, developers can use techniques such as:
+
+- **Conditional Breakpoints**: Set breakpoints that are triggered only when a specific condition is true, to avoid unnecessary stops.
+- **Sampling Profilers**: These tools take snapshots of the application's state at intervals, reducing the performance hit compared to instrumenting profilers.
+- **Debugging Proxies**: In Kotlin, a debugging proxy, in the context of multi-threaded applications, is a technique used to isolate the debugging process to a single thread.
+
+However, the Kotlin debugger has several limitations:
+
+- **Multiplatform Projects**: While Kotlin aims to be cross-platform, debugging support for platforms other than the JVM might not be as robust.
+- **Inline Functions**: Kotlin's `inline` functions can be harder to debug because they are expanded at compile-time, which means the debugger may not accurately represent the call stack.
+- **Coroutines**: Debugging asynchronous code using coroutines can be challenging due to the non-linear execution flow.
+
