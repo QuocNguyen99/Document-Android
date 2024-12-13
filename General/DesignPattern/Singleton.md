@@ -1,19 +1,21 @@
 # Singleton Pattern
 
-        Nó đảm bảo một class chỉ có duy nhất một instance được khởi tạo và nó cung cấp phương thức truy cập đến instance đó từ mọi nơi (global access).
+Singleton is a creational design pattern that allows you to keep only one instance of an object and provide global access to it. 
 
-Sử dụng Singleton khi chúng ta muốn:
+it solves two problems:
 
-* Đảm bảo rằng chỉ có một instance của lớp.
+- Keeping only one instance of an object is useful when you want to control access to some shared resources. When you create one object of a class, if you use a singleton pattern, you will always have that same object. In case you'll try to create another one, the code will return the first initiated object each time.
 
-* Việc quản lý việc truy cập tốt hơn vì chỉ có một thể hiện duy nhất.
+- Providing a global access point to allow all clients to use the initiated instances. When you address this problem, you also should squeeze all the code regarding the first problem in one class, to avoid it being scattered all over your code.
 
-* Có thể quản lý số lượng thể hiện của một lớp trong giới hạn chỉ định.
+![alt text](/resources/singleton_pattern.png)
+## Implementation
 
-## Mục đích ra đời
+to implement this pattern, we create a `Singleton` class that is connected to other parts of our application. It consists of Object `constructor` and `getInstance()` method. Through our `constructor`, we create instances when an application first needs it. Then we check the presence of this instance with our method `getInstance()` and pass it to our application. This helps us to avoid creating other instances.
 
-Đôi khi, trong quá trình phân tích thiết kế một hệ thống, chúng ta mong muốn có những đối tượng cần tồn tại duy nhất và có thể truy xuất mọi lúc mọi nơi. Vậy làm thế nào để hiện thực được một đối tượng như thế khi xây dựng mã nguồn? Chúng ta có thể nghĩ tới việc sử dụng một biến toàn cục (global variable : public static final). Tuy nhiên, việc sử dụng biến toàn cục nó phá vỡ quy tắc đóng gói của Lập trình hướng đối tượng. Để giải bài toán trên, người ta hướng đến một giải pháp là sử dụng Singleton pattern.
 
+> [!NOTE]
+> Instead of trying to maintain one instance of a class, you can maintain a few instances. All it takes is a bit of change to the getInstance() method and keeping more than one instance. But by doing this, you'll now work with a different design pattern called multiton.
 ## Kiến trúc
 
 Cách sử dụng
@@ -30,11 +32,13 @@ Cách sử dụng
 * Kiểm soát truy cập đến instance duy nhất
 * Giảm namespace
 
-### Nhược điểm
+### Problems
 
-* Vi phạm Single Responsibility Principle. Mẫu này giải quyết hay vấn đề trên cùng một thời điểm.
-* Singleton pattern có thể thể hiện thiết kế kém (bad design), chẳng hạn, khi các thành phần của chương trình biết quá nhiều về nhau.
-* Có thể sinh ra khó khăn trong việc unit test client code của Singleton bởi nhiều test frameworks dựa vào kế thừa khi sản sinh mock objects.
+- Singleton violates SRP (Single Responsibility Principle) by solving two problems at once. This could have a negative impact on your code because the solution for one problem can interfere with the solution for another.
+
+- Components of a program can have a bit too much information about each other.
+
+- The use of the singleton pattern makes unit testing harder.
 
 ## Trường hợp sử dụng
 
