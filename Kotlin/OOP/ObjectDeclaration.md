@@ -1,4 +1,4 @@
-## object declaration
+# Object declaration
 
 Singleton is a really useful pattern, and Kotlin provides a specific structure to declare singletons: **object declaration**. 
 
