@@ -24,4 +24,9 @@ The dot character `.` matches any single character including letters, digits, an
 
 The question mark `?` is a special character that means “the preceding character or nothing". The question mark `?` signals that the character before it can occur once or zero times in a string to match the pattern. When can we use it?
 
+### The escape character
 
+If part of the actual regex happens to be a special character, this can be managed with the escape character. When you create strings with special characters, you can escape them using a double backslash `\\`
+
+
+So, if you need to find a special character such as a dot or a question mark, you can escape it with `\\`. The characters on which you used the escape symbol `\\` will not be interpreted as special.
