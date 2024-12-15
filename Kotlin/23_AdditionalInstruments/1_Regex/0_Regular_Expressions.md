@@ -40,7 +40,3 @@ val stringCat = "The cat is eating."
 println(regex.matchAt(stringCat, 4)?.value) // cat
 println(regex.matchAt(stringCat, 5)?.value) // null
 ```
-
-## The dot character
-
-
