@@ -1,5 +1,8 @@
 # Regexps in kotlin
 
+Look at the [basic definition of Regexps](/General/ComputerScience/Fundamentals/Essentials/ProgrammingConcepts/ProgrammingTechniques/RegularExpressions.md) first
+
+
 The first way is creating a String instance and then calling the method toRegex(), which will make a regex out of that string:
 
 ```kotlin
