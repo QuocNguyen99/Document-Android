@@ -88,21 +88,3 @@ for (matches in matchResult) println(matches.value)
 //1980-07-31
 //1997-12-24
 ```
-
-## groups
-
-You can use the `groups` function to retrieve a group's contents by its name for a regular expression match.  This is useful when you want to access the results of regular expression matches belonging to a particular capture group. Here is an example with a regular expression containing three capture groups: city, state, and areaCode. You can use these group names to access the matched values:
-
-```kotlin
-val regex = """\b(?<city>[A-Za-z\s]+),\s(?<state>[A-Z]{2}):\s(?<areaCode>[0-9]{5})\b""".toRegex()
-val input = "Coordinates: Madrid, SP: 28080"
-
-val match = regex.find(input)!!
-println(match.groups["city"]?.value)
-// Madrid
-println(match.groups["state"]?.value)
-// SP
-println(match.groups["areaCode"]?.value)
-// 28080
-```
-
