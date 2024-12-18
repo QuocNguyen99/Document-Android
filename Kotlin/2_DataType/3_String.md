@@ -309,3 +309,105 @@ class Author(id: Int, login: String, email: String, val books: String): User(id,
     	}
 }
 ```
+
+##  String formatting
+
+In Kotlin, the `String.format()` method returns a string formatted using a format string and a number of arguments. The format string defines how the arguments form the resulting string. As an example, let's create a string and print it:
+
+```kotlin
+val string = String.format("%s %s", "Hello", "World")
+println(string)
+//Hello World
+```
+
+An alternative syntax with the same result is:
+
+```kotlin
+val string = "%s %s".format("Hello", "World")
+println(string)
+//Hello World
+```
+
+In order to print all string characters in the upper case, we can use the format specifier `%S`
+
+> [!CAUTION]
+> In case the syntax of a format string is incorrect, an IllegalFormatException is thrown.
+
+You can change the order using parameters for it: `%n\$s` , where `n` represents the number of the parameter that we want to insert into the result String and `s` is the parameter of the type `String`.
+
+```kotlin
+val str1 = "Kotlin"
+val str2 = "the best language"
+    
+// %s is used to represent the String value,
+// %1 is used to represent first argument
+// %2 is used to represent second argument
+var str = String.format("%1\$s is %2\$s", str1, str2)
+println(str) // // Kotlin is the best language
+    
+// you can change the order of arguments
+str = String.format("%2\$s is %1\$s", str1, str2)
+println(str) // the best language is Kotlin
+```
+
+there are some special specifiers. Thus, `%%` inserts the `%` sign, while `%n` inserts a newline.
+
+Note that `%n` may be interpreted as either `\r\n` or `\n`, depending on the platform. 
+
+### Formatting integers
+
+The main format specifier for integers (`Int`), including `Long`, `Short`, `Byte`, and `BigInteger`, is `%d`
+
+- **%0Nd**: Leading zeros fill in the indicated width.
+- **%,d**: Thousands divisor.
+- **%+d**: Number always signed, even if positive.
+- **% d**: For a positive number, insert one leading space.
+- **%(d** : Put a negative number in parentheses, without the minus sign.
+Note that `-` is incompatible with `0`.
+
+
+```kotlin
+val int1 = 1234
+val int2 = -4567
+
+println(String.format("%d", int1))       //1234
+println(String.format("%8d", int1))      //    1234
+println(String.format("%-8d", int1))     //1234  
+println(String.format("%+d", int1))      //+1234
+
+println(String.format("%+d", int2))      //-4567
+println(String.format("%09d", int1))     //000001234
+println(String.format("%,10d", int1))    //     1,234
+println(String.format("%+,010d", int1))  //+00001,234
+
+println(String.format("%-+,10d", int1))  //+1,234  
+println(String.format("% d", int1))      // 1234
+println(String.format("% d", int2))      //-4567
+println(String.format("%(d", int2))      //(4567)
+```
+
+### Formatting floating point numbers
+
+For normal decimal representation, we use `%f`.
+
+```kotlin
+val double1 = 1234.5678
+val double2 = -1234.5678
+
+println(String.format("%f", double1))      //1234.567800
+println(String.format("%f", double2))      //-1234.567800
+println(String.format("% f", double1))     // 1234.567800
+println(String.format("% f", double2))     //-1234.567800
+
+println(String.format("%(f", double1))     //1234.567800
+println(String.format("%(f", double2))     //(1234.567800)
+println(String.format("%+f", double1))     //+1234.567800
+println(String.format("%,f", double1))     //1,234.567800
+
+println(String.format("%-15f", double1))   //1234.567800    
+println(String.format("%015f", double1))   //00001234.567800
+println(String.format("%15.2f", double1))  //        1234.57
+println(String.format("%.3f", double1))    //1234.568
+println(String.format("%.6f", double1))    //1234.567800
+```
+
