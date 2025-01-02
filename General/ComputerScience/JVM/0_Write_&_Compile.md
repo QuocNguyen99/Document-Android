@@ -18,46 +18,22 @@ One of the main concepts of the Java Platform is "write once, run anywhere". It 
 >It's important to remember: the code input into the JVM is platform-independent, while the output code is platform-dependent.
 
 
-![A platform-independent program in the world of Java](../resources/platform-independentJava.png)
+![A platform-independent program in the world of Java](/resources/platform-independentJava.png)
 
 If the JVM is installed on the computer, you can run a compiled JVM program using the `java` tool. It will open a file with the `.class` extension to launch the program from this file. The tool is the same for all JVM languages.
 
 The picture below briefly summarizes the work cycle of a JVM program.
 
-![alt text](../resources/cycleOfJVMProgram.png)
+![alt text](/resources/cycleOfJVMProgram.png)
 
 ## JVM languages
 
 The Java Platform allows using more than one programming language to create programs. This is achieved by the design of the JVM: it doesn't know anything about any particular programming language. It only understands Java bytecode. If the tools for a programming language can generate bytecode, programs written in this language can be executed on the JVM. Such languages are often called **JVM languages**. They include Java itself, Kotlin, Scala, Groovy, Clojure, and others. So, to create programs in the world of Java, you can choose the most convenient language of your choice.
 
-![Different programming languages can be used to write programs in the world of Java](../resources/DiffProgramLanguagesWithJVM.png)
+![Different programming languages can be used to write programs in the world of Java](/resources/DiffProgramLanguagesWithJVM.png)
 
 
-## JVM Defination
 
-The **Java Virtual Machine**, or JVM, is a virtual simulation of a physical computer.  It executes the Java (or Java-compatible) bytecode, which comes after the source code compilation. In some sense, JVM acts as a mediator between the code and the real machine. In some sense, JVM acts as a mediator between the code and the real machine. It runs on a unified set of bytecode instructions, which are then interpreted and converted into machine-level commands.
-
-JVMs are available for many hardware and software platforms, so you can run the bytecode almost everywhere.  A program compiled to bytecode is almost always platform-independent. Basically, when you have a JVM language code, you need to compile it only once, get the bytecode, and you'll be able to run it on any platform that has JVM.
-
-## Java Development Kit (JDK)
-
-Java Development Kit, or JDK, is a package to develop programs for the Java Platform. It includes JRE to run the programs and tools for developers: Java compiler, debugger, archiver, documentation generator, etc.
-
-At the compilation stage, compilers translate source code into `.class` files that contain bytecode and can be executed by JVM. Note that if you're using JVM languages other than Java, you will need to download compilers separately, as they are not bundled with JDK.
-
-## Java Runtime Environment (JRE)
-
-Java Runtime Environment, or JRE, is an execution environment. It includes the necessary components for running compiled JVM programs: the JVM itself and the Java Class Library (JCL).
-
-JCL is essentially a set of standard libraries providing the most common functionality: fundamental classes, input/output, math package, collections, security, user interface toolkits, and many others. You can utilize these libraries in your programs.
-
-> [!NOTE]
-> Before Java 11, if you wanted only to run a Java program, JRE was enough for you. However, since Java 11 was released, for most JVM implementations JRE is no longer downloadable as a separate component. If you want to run programs in JVM 11 or newer, you have to install JDK.
-
-The relationship between JVM, JRE, and JDK
-The following image illustrates the relationship between JVM, JRE, and JDK:
-
-![alt text](../resources/JDKRelationship.png)
 
 
 ## JAR files
