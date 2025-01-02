@@ -1,4 +1,13 @@
-# **Định nghĩa và khái niệm DI**
+# Dependency Injection
+
+When working with OOP, you may have noticed certain relations between objects. Often, these relations need to be structured, described, and properly utilized. One way to do this is by using dependency injection.
+
+## Dependency and dependency injection
+
+what is a **dependency**? It's a relation between two classes in which one class uses the functionality of the other class, i.e. one class is dependent on the other.
+
+![alt text](/resources/dependency.png)
+
 
 Hiện nay, các lập trình viên hay lẫn lộn giữa các khái niệm Dependency Inversion, Inversion of Control (IoC), Dependency Injection (DI). Ba khái niệm này tương tự nhau nhưng không hoàn toàn giống nhau.
 
@@ -21,11 +30,11 @@ Có thể hiểu Dependency Injection một cách đơn giản như sau:
 
 ### **Các dạng DI**
 
-Có 3 dạng Dependency Injection:
+There are three main types of DI:
 
-1. **Constructor Injection**: Các dependency sẽ được container **truyền vào (inject vào)** 1 class thông qua constructor của class đó. Đây là cách thông dụng nhất.
-2. **Setter Injection**: Các dependency sẽ được truyền vào 1 class thông qua các hàm Setter.
-3. **Interface Injection**: Class cần inject sẽ implement 1 interface. Interface này chứa 1 hàm tên _Inject_. Container sẽ injection dependency vào 1 class thông qua việc gọi hàm _Inject_ của interface đó. Đây là cách rườm rà và ít được sử dụng nhất.
+1. **Method(Interface) Injection** — dependencies are passed through methods that the class can access via interface or another class.
+2. **Property(Setter) Injection** — dependencies are passed through a separate setter method. Implementation of this injector varies depending on the language.
+3. **Constructor Injection — dependencies** are provided through the class constructor.
    
    
 
