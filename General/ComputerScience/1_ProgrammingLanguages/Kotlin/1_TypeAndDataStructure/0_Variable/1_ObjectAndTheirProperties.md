@@ -1,4 +1,4 @@
-# Object And Properties in Kotlin
+# Object and their properties
 
 Objects are complex structures that can store some data and do something.
 
@@ -19,7 +19,7 @@ If you create a variable and assign an object to it, another variable can point 
 
 In Kotlin, similar rules apply. If you create a variable and assign an object to it, another variable can point to the same object as well
 
-![alt text](../resources/copying_by_ref_kotlin.png)
+![alt text](/resources/copying_by_ref_kotlin.png)
 
 **In other words, the = sign does not copy the object itself, it only copies a reference to it.**
 
