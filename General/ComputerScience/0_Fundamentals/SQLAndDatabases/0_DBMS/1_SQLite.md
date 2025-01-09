@@ -1,13 +1,16 @@
 # SQLite
 
-SQL databases can be handy even in the simplest applications. However, running a database system like MySQL or PostgreSQL requires installation, configuration, and maintenance. Sometimes it can be unsuitable for us or even forbidden. In such cases, SQLite comes to the rescue.
+
+SQL databases can be handy even in the simplest applications. However, running a database system like PostgreSQL, MySQL and MariaDB, non-relational Elasticsearch, MongoDB, and more. requires installation, configuration,
+maintenance, and work in separate processes that accept network connections. Sometimes it can be unsuitable for us or even forbidden. In such cases, SQLite comes to the rescue.
+
+**SQLite** (pronounced either "S. Q. Lite" or "sequelite”) is a **relational database management system (RDBMS)**. 
 
 Contrary to the typical database running as a separate process, SQLite takes a different approach:
 
 - an application embeds the database code within itself, so there's no need for a separate database process.
-
--  Issued SQL statements read and write the files directly on the local disk.
--  The database with all the tables and metadata is contained in a single file. The database file format is cross-platform, thus the file can be copied and used on a different machine with a different architecture
+- Issued SQL statements read and write the files directly on the local disk.
+- The database with all the tables and metadata is contained in a single file. The database file format is cross-platform, thus the file can be copied and used on a different machine with a different architecture
 - Despite competing with regular files, SQLite can be used as a backend database to a web application.
 - It’s also safe to access the same SQLite database at the same time from multiple applications and processes.
 
