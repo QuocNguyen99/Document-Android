@@ -86,11 +86,11 @@ There are three primary properties to obtain Context:
 
 - **applicationContext**: gives you a broader context that spans the entire application. This context is alive as long as your app is running. Since it's not specifically tied to any UI component, you wouldn't use it for tasks like starting an activity or inflating a UI element. **Instead, it's great for app-wide actions such as starting services or broadcasting messages.**
 
-![alt text](image.png)
+![alt text](/resources/application_context.png)
 
 - The **context** property gives you a context specifically tied to the component you're in, like an Activity or a View. This context is linked to that component's lifecycle, making it suitable for UI-related tasks such as inflating layouts or showing dialogs. When the component (e.g., an Activity) is destroyed, its context is also cleared out.
 
-![alt text](image-1.png)
+![alt text](/resources/context.png)
 
 - **baseContext** is a property associated with the `ContextWrapper` class in Android. This property allows you to retrieve the original or underlying Context that the `ContextWrapper` is wrapping around or proxying. In simpler terms, when you have a `ContextWrapper` that modifies or extends the behavior of a Context, the `baseContext` property gives you access to that original, unmodified Context inside the wrapper. Typically, you'd rarely need to use this. However, it becomes particularly handy when you want to ensure that no additional styling or theming layers interfere with your operations. When using views or operations that need to be free of the current activity's or application's theme, this context becomes useful.
 
