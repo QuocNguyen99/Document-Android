@@ -1,0 +1,40 @@
+# Button
+
+`Buttons` inherit from TextView and use many familiar attributes: `textColor`, `textSize`, and so on. The main difference is the appearance: a typical button has rounded corners and a shadow
+
+It has an icon on the left and text on the right, which is achieved by using the `drawableLeft` attribute inherited from `TextView`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
