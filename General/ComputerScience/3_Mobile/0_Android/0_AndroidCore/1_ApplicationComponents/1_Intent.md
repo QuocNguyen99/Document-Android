@@ -53,7 +53,6 @@ In the case of a broadcast intent, this is the action that took place and is bei
         Flags are defined in the `[Intent]` class that function as metadata for the intent. The flags may instruct the Android system how to launch an activity (for example, which Task the activity should belong to) and how to treat it after it's launched (for example, whether it belongs in the list of recent activities).
 
 Receiving an implicit intent
-----------------------------
 
     To advertise which implicit intents your app can receive, declare one or more intent filters for each of your app components with an [`<intent-filter>`](https://developer.android.com/guide/topics/manifest/intent-filter-element) element in your manifest file. Each intent filter specifies the type of intents it accepts based on the intent's action, data, and category. The system delivers an implicit intent to your app component only if the intent can pass through one of your intent filters.
 
