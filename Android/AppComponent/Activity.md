@@ -14,7 +14,7 @@ An activity has essentially four states:
 - If an activity is completely obscured by another activity, it is **STOPPED (also called HIDDEN)**. It still retains all state and member information, however, it is no longer visible to the user so its window is hidden and it will often be killed by the system when memory is needed elsewhere.
 - The system can drop the activity from memory by either asking it to finish, or simply killing its process, making it **DESTROYED**. When it is displayed again to the user, it must be completely restarted and restored to its previous state.
 
-![loading-ag-444](https://mionix.ddns.net/blog/resources/mionix/media/activity_lifecycle.png)
+![loading-ag-444](/resources/activity_lifecycle.png)
 
 There are three key loops you may be interested in monitoring within your activity:
 
@@ -26,7 +26,7 @@ There are three key loops you may be interested in monitoring within your activi
   
   | Method                                                                                                                                        | Description                                                                                                                                                                                                                                                                                                                                                                       | Killable ?             | Next    |
   | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ------- |
-  | onCreate()                                                                                                                                    | Called when the activity is first created. This is where you should do all of your normal static set up: create views, bind data to lists, etc. This method also provides you with a Bundle containing the activity's previously frozen state, if there was one.                                                                                                                  |                        |         |
+  | onCreate()                                                                                                                                    |  the Activity becomes visible and ready to interact with the user. The application stays in this state until something interrupts it: a phone call, the screen turning off, user switching to another activity and so on. You can use this method to resume everything that should only work when the Activity is visible. If it's interrupted, the `onPause()` method is called.                                                                                               |                        |         |
   | <br/>Always followed by onStart().                                                                                                            | No                                                                                                                                                                                                                                                                                                                                                                                | onStart()              |         |
   | onRestart()                                                                                                                                   | Called after your activity has been stopped, prior to it being started again.                                                                                                                                                                                                                                                                                                     |                        |         |
   | <br/>Always followed by onStart()                                                                                                             | No                                                                                                                                                                                                                                                                                                                                                                                | onStart()              |         |
@@ -57,7 +57,7 @@ When the user performs a back action, the current Activity is popped from the to
 
 Activities in the stack are never rearranged, only pushed and popped from the stack—pushed onto the stack when started by the current activity and popped off when the user leaves it by using the Back button or gesture. Thus, the back stack operates as a **last in, first out** object structure. Figure below visualizes this behavior with a timeline showing the progress between activities along with the current back stack at each point in time.
 
-![](https://mionix.ddns.net/blog/resources/mionix/media/task_and_back_stack.png)
+![](/resources/task_and_back_stack.png)
 
 If the user continues to press or gesture Back, then each Activity in the stack is popped off to reveal the previous Activity until the user returns to the Home screen (or to whichever Activity was running when the task began). When all Activities are removed from the stack, the Task no longer exists.
 
@@ -83,7 +83,7 @@ However, if your application overrides onBackPressed() to handle Back navigation
 
 A Task is a cohesive unit that can move to the background when the user starts a new Task or goes to the Home Screen. While in the background, all the Activities in the Task are stopped, but the Task's back stack remains intact—the Task has simply lost focus while another Task takes place, as illustrated in the figure. Then, the Task can return to the foreground so users can pick up where they left off.
 
-![](https://mionix.ddns.net/blog/resources/mionix/media/diagram_multitasking.png)
+![](/resources/diagram_multitasking.png)
 
 ### Multiple activity instances
 
@@ -91,7 +91,7 @@ Since activities in the background stack are never reordered, if your applicatio
 
 Thus, an activity in your application can be initialized multiple times (even from different tasks), as shown in Figure below. If the user navigates back using the back button or gesture, each instance of the activity will be displayed in the order they were opened (each with its own user interface state). However, you can modify this behavior if you do not want an activity to be initialized multiple times. How to do this is discussed in the following section on task management.
 
-![](https://mionix.ddns.net/blog/resources/mionix/media/multiple_activity_instances.png)
+![](/resources/multiple_activity_instances.png)
 
 ### Defining launch modes
 
