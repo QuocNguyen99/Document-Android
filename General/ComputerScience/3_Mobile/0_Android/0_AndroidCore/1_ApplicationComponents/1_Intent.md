@@ -26,29 +26,29 @@ An `Intent` object carries information that the Android system uses to determi
 
 The primary information contained in an `Intent` is the following:
 
-**Component name**
+- **Component name**
 
     This is optional, but it's the critical piece of information that makes an intent _explicit_, meaning that the intent should be delivered only to the app component defined by the component name. Without a component name, the intent is _implicit_ and the system decides which component should receive the intent based on the other intent information (such as the action, data, and category—described below). If you need to start a specific component in your app, you should specify the component name.
 
-**Action**
+- **Action**
 
     A string that specifies the generic action to perform (such as _view_ or _pick_).
 
 In the case of a broadcast intent, this is the action that took place and is being reported. The action largely determines how the rest of the intent is structured—particularly the information that is contained in the data and extras.
 
-**Data**
+- **Data**
 
     The URI (a `[Uri]` object) that references the data to be acted on and/or the MIME type of that data. The type of data supplied is generally dictated by the intent's action. For example, if the action is `[ACTION_EDIT]`, the data should contain the URI of the document to edit.
 
-**Category**
+- **Category**
 
     A string containing additional information about the kind of component that should handle the intent. Any number of category descriptions can be placed in an intent, but most intents do not require a category
 
-**Extras**
+- **Extras**
 
        Key-value pairs that carry additional information required to accomplish the requested action. Just as some actions use particular kinds of data URIs, some actions also use particular extras.
 
-**Flags**
+- **Flags**
 
         Flags are defined in the `[Intent]` class that function as metadata for the intent. The flags may instruct the Android system how to launch an activity (for example, which Task the activity should belong to) and how to treat it after it's launched (for example, whether it belongs in the list of recent activities).
 
