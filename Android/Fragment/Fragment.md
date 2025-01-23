@@ -1,6 +1,6 @@
 ## Fragment
 
-![](../../resources/fragment.avif)
+![](/resources/fragment.avif)
 
 A Fragment là phần có thể sử dụng lại trong giao diện người dùng của bạn để tương tác với người dùng bằng cách cung cấp các thành phần giao diện người dùng bên cạnh các Activity. Thông thường, fragments thuộc về activities và được quản lý bởi Fragment manager.
 
@@ -72,7 +72,7 @@ Fragments are also capable of hosting one or more child fragments. Inside a frag
 
     When moving upward through its lifecycle states, a fragment first calls the associated lifecycle callback for its new state. Once this callback is finished, the relevant [`Lifecycle.Event`](https://developer.android.com/reference/androidx/lifecycle/Lifecycle.Event) is emitted to observers by the fragment's `Lifecycle`
 
-![loading-ag-604](../resources/fragment-view-lifecycle.png)
+![loading-ag-604](/resources/fragment-view-lifecycle.png)
 
 ## Fragment CREATED
 
@@ -124,7 +124,7 @@ When the fragment becomes `STARTED`, the [`onStart()`](https://developer.andro
 
      the ordering of the [`onStop()`](https://developer.android.com/reference/androidx/fragment/app/Fragment#onStop()) callback and the saving of the state with `onSaveInstanceState()` differs based on API level. For all API levels prior to API 28, `onSaveInstanceState()` is invoked before [`onStop()`](https://developer.android.com/reference/androidx/fragment/app/Fragment#onStop()). For API levels 28 and higher, the calling order is reversed.
 
-![loading-ag-1211](../resources/stop-save-order.png)
+![loading-ag-1211](/resources/stop-save-order.png)
 
 ## Fragment CREATED and View DESTROYED
 
@@ -140,4 +140,4 @@ When the fragment becomes `STARTED`, the [`onStart()`](https://developer.andro
 
 ## So sánh vòng đời của fragment và activity
 
-![](../resources/activity_and_fragment_lifecycle.webp)
+![](/resources/activity_and_fragment_lifecycle.webp)
