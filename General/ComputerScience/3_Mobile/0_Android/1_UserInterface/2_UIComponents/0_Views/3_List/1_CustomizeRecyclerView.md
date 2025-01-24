@@ -302,3 +302,7 @@ recyclerView.layoutManager!!.startSmoothScroll(object : LinearSmoothScroller(thi
 ```
 
 There are, of course, many other things that can be tuned. For example, [this Stack Overflow answer](https://stackoverflow.com/a/53756296/3050249) shows how to scroll to the center of an item.
+
+
+## ref
+- [Customize RecyclerView](https://hyperskill.org/learn/step/19037)
