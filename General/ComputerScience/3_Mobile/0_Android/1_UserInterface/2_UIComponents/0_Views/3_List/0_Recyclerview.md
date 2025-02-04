@@ -1,6 +1,6 @@
 # RecyclerView
 
-**RecyclerView** is a component for creating scrollable lists. It's used in almost every modern Android app and was introduced as a replacement for **ListView**, which has a lot of flaws. In this topic, you'll discover that RecyclerView isn't as scary as it might initially seem and learn how to use it in your projects.
+**RecyclerView** is a component for creating scrollable lists. It's used in almost every modern Android app and was introduced as a replacement for **ListView**, which has a lot of flaws.
 
 ## About RecyclerView
 
