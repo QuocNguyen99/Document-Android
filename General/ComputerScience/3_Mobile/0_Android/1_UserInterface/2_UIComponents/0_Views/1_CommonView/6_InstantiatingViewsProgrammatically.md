@@ -1,6 +1,10 @@
 # Instantiating Views programmatically
 
-It's a very common practice to declare view hierarchies in XML layout files and turn them into real objects with `LayoutInflater` or by calling `Activity.setContentView(layoutResId)` which does exactly the same thing. After that, we obtain normal objects, such as `TextView`, `Button`, `LinearLayout`, and others. Under the hood, `LayoutInflater` just invokes the constructor of a required `View` class, passes parsed XML attributes into it, and does this recursively, adding child tags to parent `ViewGroup`. Hence, we're dealing with normal objects which can be instantiated directly by invoking a constructor.
+It's a very common practice to declare view hierarchies in XML layout files and turn them into real objects with `LayoutInflater` or by calling `Activity.setContentView(layoutResId)` which does exactly the same thing. 
+After that, we obtain normal objects, such as `TextView`, `Button`, `LinearLayout`, and others.
+
+Under the hood, `LayoutInflater` just invokes the constructor of a required `View` class, passes parsed XML attributes into it, and does this recursively, adding child tags to parent `ViewGroup`.
+Hence, we're dealing with normal objects which can be instantiated directly by invoking a constructor.
 
 ## Instantiating a single View
 
