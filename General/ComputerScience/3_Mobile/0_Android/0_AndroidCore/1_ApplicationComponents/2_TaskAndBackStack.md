@@ -16,30 +16,71 @@ You can see a visualization of this below:
 
 ![alt text](/resources/back_stack.png)
 
-Let's take the Settings app as an example.
+## Lifecycle of a task and its back stack
 
-A new task will be created when you open it, and the main settings activity will be shown on the screen and added (**pushed**) to the task's stack.
+The Home screen of the device is the starting point for most Tasks. When a user touches an icon for an application or shortcut in the app launcher (or on the home screen), that application's task is brought to the foreground. If no task exists for the application (the app hasn't been used recently), then a new task is created and the main activity of that application opens as the root activity on the stack.
 
-Then, if you click on any item in the settings list, a new activity will be created, shown, and pushed to the stack. 
 
-Pressing the "Back" button will destroy that activity and remove (**pop**) it from the stack.
+When the current Activity starts another Activity, the new Activity is pushed to the top of the stack and takes focus. The previous Activity remains in the stack, but is stopped.
+When an Activity stops, the system retains the current state of its user interface.
+When the user performs a back action, the current Activity is popped from the top of the stack (the activity is destroyed) and the previous activity resumes (the previous state of its user interface is restored). 
 
-Clicking the "Back" button again will pop the previous activity off.
+Activities in the stack are never rearranged, only pushed and popped from the stack—pushed onto the stack when started by the current activity and popped off when the user leaves it by using the Back button or gesture. Thus, the back stack operates as a **last in, first out** object structure. Figure below visualizes this behavior with a timeline showing the progress between activities along with the current back stack at each point in time.
 
-And once all activities are popped off the stack, you will be returned to the Home screen, and the task will no longer exist.
-This is the stack's standard behavior. 
+![](/resources/task_and_back_stack.png)
 
-It's known as "last in, first out" and results in the most recent activity being shown on the screen. It's a launch mode that works well for most apps.
+If the user continues to press or gesture Back, then each Activity in the stack is popped off to reveal the previous Activity until the user returns to the Home screen (or to whichever Activity was running when the task began). When all Activities are removed from the stack, the Task no longer exists.
 
-![alt text](/resources/setting_backstack_example.png)
 
-If a user hits the "Home" button without closing activities, the associated task will be **backgrounded**.
+### Back press behavior for root launcher activities
 
-It should then be possible to return to this task later with no changes in the back stack. 
+Root launcher activities are activities that declare an Intent filter with both `ACTION_MAIN` and `CATEGORY_LAUNCHER`. These activities are unique because they act as entry points into your application from the app launcher and are used to start a Task.
 
-However, if the user has many tasks (or apps) in the background, the system might kill some of them to recover resources, leading to the loss of unsaved data. Therefore it is the developer's responsibility to ensure that important data is saved.
+When the user presses or gestures Back from a root launcher activity, the system handles the event differently depending on which version of Android the device is running.
+
+System behavior on Android 11 and lower:
+- The system finishes the activity.
+System behavior on Android 12 and higher:
+- The system moves the activity and its task to the background instead of finishing the activity. This behavior matches the system's default behavior when navigating out of the app using the Home button or gesture.
+
+
+In most cases, this behavior means that users can quickly resume your application from a [warm state](https://developer.android.com/topic/performance/vitals/launch-time#warm) instead of having to completely restart the application from a [cold state](https://developer.android.com/topic/performance/vitals/launch-time#cold).
+
+If you need to [provide custom back navigation](https://developer.android.com/guide/navigation/navigation-custom-back), we recommend using the AndroidX Activity APIs, rather than overriding **onBackPressed()**. The AndroidX Activity APIs automatically defer to the appropriate system behavior if there are no components intercepting the system Back press.
+However, if your application overrides onBackPressed() to handle Back navigation and finish the Activity, update your implementation to call super.onBackPressed() instead of finish(). Calling super.onBackPressed() will move the Activity and its Task to the background when appropriate and provide a more consistent navigation experience for users across applications.
+
+## Background and foreground tasks
+
+A Task is a cohesive unit that can move to the background when the user starts a new Task or goes to the Home Screen. While in the background, all the Activities in the Task are stopped, but the Task's back stack remains intact—the Task has simply lost focus while another Task takes place, as illustrated in the figure. Then, the Task can return to the foreground so users can pick up where they left off.
+
+![](/resources/diagram_multitasking.png)
+
+
+
+## Manage tasks
+
+For example, you might want an activity in your app to begin a new task when it is started, instead of being placed within the current task. Or, when you start an activity, you might want to bring forward an existing instance of it, instead of creating a new instance on top of the back stack. Or you might want your back stack to be cleared of all activities except for the root activity when the user leaves the task.
+
+
+These are the principal `<activity>` attributes that you can use to manage tasks:
+
+- taskAffinity
+- launchMode
+- allowTaskReparenting
+- clearTaskOnLaunch
+- alwaysRetainTaskState
+- finishOnTaskLaunch
 
 ## Launch modes
+
+Launch modes allow you to specify how a new instance of an Activity is associated with the current task. You can define different launch modes in two ways:
+
+1. Define launch modes using the manifest file
+2. Define launch modes using Intent flags
+
+### Define launch modes using manifest configuration
+
+When declaring an Activity in your Manifest file, you can specify how the Activity will be associated with a Task using the `launchMode` attribute of the `<activity>` element.
 
 There are four activity launch modes available:
 - `standard`
@@ -97,6 +138,16 @@ The stack already contains two standard activities (A-B). Activity C is set to s
 ![alt text](/resources/launch_mode_single_instance.png)
 
 
+- `singleInstancePerTask`. 
+
+The Activity can only run as the root activity of a task, meaning it is the first Activity to create the task, so there can only be one instance of this Activity in a task. Unlike the `singleTask` launch mode, this Activity can be started in multiple instances across different tasks if the flags `FLAG_ACTIVITY_MULTIPLE_TASK` or `FLAG_ACTIVITY_NEW_DOCUMENT` are set.
+
+
+
+
+> [!NOTE]
+> singleTask and singleInstancePerTask will remove all activities which are above the starting activity from the task. For example, suppose a task consists of root activity A with activities B, C (the task is A-B-C; C is on top). An intent arrives for an activity of type A. If A's launch mode is singleTask or singleInstancePerTask, the existing instance of A receives the intent through onNewIntent(). B and C are finished, and the task is now A.
+
 ---
 
 They are defined in the `AndroidManifest.xml` file in the activity tag:
@@ -131,9 +182,9 @@ If these notifications constantly repeat, it becomes really annoying to press th
 
 Intent flags can help us solve problems like this, so let's learn about some of them:
 
-- `FLAG_ACTIVITY_SINGLE_TOP` has the same behavior as the `singleTop` launch mode.
+- `FLAG_ACTIVITY_SINGLE_TOP` If the activity being launched is already at the top of the current task’s stack, the system will not create a new instance but will instead deliver the new intent to the existing activity via the `onNewIntent()` method. This behavior is similar to the `singleTop` launch mode
 
-- `FLAG_ACTIVITY_NEW_TASK` creates a new instance of the activity in the task. The documentation says that this flag acts like `singleTask`.
+- `FLAG_ACTIVITY_NEW_TASK` This flag requests the system to launch the activity in a new task. If a task already exists for the launched activity, that task will be brought to the foreground, and the activity will receive the new intent in `onNewIntent()`. This behavior is similar to the `singleTask` launch mode.
 
 - `FLAG_ACTIVITY_CLEAR_TOP` looks at whether the activity already exists in the stack. If it does, it destroys every activity above, which results in the activity being at the top of the stack. If it doesn't already exist, it creates the activity in the usual way.
 Using this flag with `FLAG_ACTIVITY_NEW_TASK` will result in similar behavior to the `singleTask` launch mode, but the activity will be restarted.
@@ -173,6 +224,56 @@ intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
 startActivity(intent)
 ```
 
+## Clear the back stack
+
+If the user leaves a task for a long time, the system clears the task of all activities except the root activity. When the user returns to the task again, only the root activity is restored. The system behaves this way, because, after an extended amount of time, users likely have abandoned what they were doing before and are returning to the task to begin something new.
+
+There are some activity attributes that you can use to modify this behavior:
+
+[alwaysRetainTaskState](https://developer.android.com/guide/topics/manifest/activity-element#always)
+
+    If this attribute is set to `true` in the root activity of a task, the default behavior just described does not happen. The task retains all activities in its stack even after a long period.
+
+[clearTaskOnLaunch](https://developer.android.com/guide/topics/manifest/activity-element#clear)
+
+    If this attribute is set to `true` in the root activity of a task, the task is cleared down to the root activity whenever the user leaves the task and returns to it. In other words, it's the opposite of [alwaysRetainTaskState](https://developer.android.com/guide/topics/manifest/activity-element#always). The user always returns to the task in its initial state, even after leaving the task for only a moment.
+
+> [!NOTE]
+> This attribute is ignored if FLAG_ACTIVITY_RESET_TASK_IF_NEEDED isn't set.
+
+[finishOnTaskLaunch](https://developer.android.com/guide/topics/manifest/activity-element#finish)
+
+    This attribute is like [clearTaskOnLaunch](https://developer.android.com/guide/topics/manifest/activity-element#clear), but it operates on a single activity, not an entire task. It can also cause any activity to finish, except for the root activity. When it's set to `true`, the activity remains part of the task only for the current session. If the user leaves and then returns to the task, it is no longer present.
+
+> [!NOTE]
+> This attribute is ignored if FLAG_ACTIVITY_RESET_TASK_IF_NEEDED isn't set.
+
+
+
+In Android, there are three ways to clear the back stack:
+
+- **Using Intent Flags**. You can use Intent Flags to clear the entire stack and start a new Activity. This can be done by adding the Intent Flags `FLAG_ACTIVITY_CLEAR_TASK` and `FLAG_ACTIVITY_NEW_TASK` to the Intent when starting a new Activity. This will clear all Activities in the path of the new Activity and start fresh with the new Activity.
+
+For example:
+
+```kotlin
+val intent = Intent(this, MainActivity::class.java) 
+intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+ startActivity(intent)
+```
+
+
+- **Using the finishAffinity() Method**. You can use the `finishAffinity()` method to terminate all current Activities and clear the stack. This will return the user to the Home screen or the application's launch screen.
+
+For example
+
+    `finishAffinity()`
+
+- **Using the finish() Method**. You can use the finish() method to terminate the current Activity and return to the previous Activity on the stack. This method can be used to end selected Activities or prevent them from being stored in the stack.
+
+For example:
+
+    `finish()`
 
 
 
