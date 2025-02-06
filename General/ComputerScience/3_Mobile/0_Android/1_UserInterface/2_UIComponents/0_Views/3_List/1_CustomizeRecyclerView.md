@@ -6,20 +6,20 @@ The `RecyclerView` widget is very flexible — it allows you to make a lot of cu
 
 A typical adapter is backed by a list. But if we replace the list or change its contents, the adapter won't be aware, leading to inconsistent behavior and even crashes. So when a change occurs, we must notify the adapter about it via the appropriate method:
 
-- notifyDataSetChanged: forget everything and populate RecyclerView from scratch.
+- `notifyDataSetChanged`: forget everything and populate RecyclerView from scratch.
 
-- notifyItemChanged / notifyItemRangeChanged: bind the specified item(s) again.
+- `notifyItemChanged` / `notifyItemRangeChanged`: bind the specified item(s) again.
 
-- notifyItemInserted / notifyItemRangeInserted: insert item(s) at the specified position.
+- `notifyItemInserted` / `notifyItemRangeInserted`: insert item(s) at the specified position.
 
-- notifyItemRemoved / notifyItemRangeRemoved: make the specified item(s) disappear.
+- `notifyItemRemoved` / `notifyItemRangeRemoved`: make the specified item(s) disappear.
 
-- notifyItemMoved: change the location of an item.
+- `notifyItemMoved`: change the location of an item.
 
 
-notifyDataSetChanged() is a universal way to make an update, but it's terribly inefficient, and animations that have been changed won't run. So this method should only be used as a last resort.
+`notifyDataSetChanged()` is a universal way to make an update, but it's terribly inefficient, and animations that have been changed won't run. So this method should only be used as a last resort.
 
-The other methods listed above are utilized when the relevant situations occur. As an example of how to do this, let's implement an add method that calls notifyItemInserted():
+The other methods listed above are utilized when the relevant situations occur. As an example of how to do this, let's implement an add method that calls `notifyItemInserted()`:
 
 ```kotlin
 class TransactionAdapter(
