@@ -1,12 +1,16 @@
 # DI Containers
 
-Dependency injection (DI) is important in Android development, as it helps in creating modular and easy-to-maintain apps. DI containers, which are at the core of this approach, simplify the management of app dependencies and improve efficiency. Let's explore DI containers and how they can impact your approach to Android development, making it easier to scale and maintain.
+Dependency injection (DI) is important in Android development, as it helps in creating modular and easy-to-maintain apps.
+
+DI containers, which are at the core of this approach, simplify the management of app dependencies and improve efficiency.
 
 ## Understanding dependency injection (DI)
 
 Dependency injection is a technique where an object, often referred to as a client, receives other objects that it depends on—known as dependencies. The pattern aims to decouple the construction of dependencies from the client that uses them, leading to more modular, testable, and maintainable code. In Kotlin, especially within Android development, DI is crucial for efficiently managing the lifecycle and configuration of dependencies.
 
-Let's dive into the concept of dependency injection with a simple example. Imagine a UserDataRepository in an Android component that requires access to a LocalDataSource to fetch user data. Instead of directly instantiating a LocalDataSource within the UserDataRepository, we declare it as a dependency:
+## The types of dependency injection commonly used:
+
+**1. Constructor Injection**: The dependencies are passed to the class constructor, as shown in the UserDataRepository example. This is the most common form of DI and is preferred due to its immutability and thread safety.
 
 ```kotlin
 class UserDataRepository(private val localDataSource: LocalDataSource) {
@@ -14,13 +18,7 @@ class UserDataRepository(private val localDataSource: LocalDataSource) {
 }
 ```
 
-In the example above, the UserDataRepository does not create the LocalDataSource; instead, it is provided from the outside. This is a classic example of constructor injection, where dependencies are supplied through the class's constructor.
-
-Let's examine the types of dependency injection commonly used:
-
-**1. Constructor Injection**: The dependencies are passed to the class constructor, as shown in the UserDataRepository example. This is the most common form of DI and is preferred due to its immutability and thread safety.
-
-**2. Field Injection**: This is used when you do not have control over the instantiation of an object, such as with Activity or Fragment. Field Injection involves declaring dependencies as properties and setting them after the object's creation. It's suitable for third-party libraries that require a parameterless constructor, as it allows for the injection of dependencies post-instantiation.
+**2. Field Injection**: **This is used when you do not have control over the instantiation of an object, such as with Activity or Fragment**. Field Injection involves declaring dependencies as properties and setting them after the object's creation. It's suitable for third-party libraries that require a parameterless constructor, as it allows for the injection of dependencies post-instantiation.
 
 ```kotlin
 class UserDataRepository {
@@ -29,7 +27,7 @@ class UserDataRepository {
 }
 ```
 
-**3. Method Injection**: This technique allows you to provide dependencies through a method and is particularly useful for altering dependencies at various lifecycle stages. While it also supports third-party libraries with parameterless constructors, its primary advantage lies in its ability to modify dependencies dynamically, long after the object has been instantiated.
+**3. Method Injection**: **This technique allows you to provide dependencies through a method and is particularly useful for altering dependencies at various lifecycle stages**. While it also supports third-party libraries with parameterless constructors, its primary advantage lies in its ability to modify dependencies dynamically, long after the object has been instantiated.
 
 ```kotlin
 class UserDataRepository {
@@ -40,11 +38,17 @@ class UserDataRepository {
     // UserDataRepository methods that use localDataSource
 }
 ```
-Each type of injection has its own use cases and benefits. Constructor injection is generally favored for its simplicity and the immutability it provides. Field and method injections offer flexibility in scenarios where constructor injection is not feasible.
+> [!CAUTION]
+> Each type of injection has its own use cases and benefits. Constructor injection is generally favored  for its simplicity and the immutability it provides. Field and method injections offer flexibility in scenarios where constructor injection is not feasible.
 
 ## Understanding DI containers
 
-Understanding DI containers requires a grasp of the conventional methods for handling dependencies. Traditionally, dependencies such as data sources and repositories are created directly within the components that use them. For example, in an Activity, it’s common to instantiate a ViewModel along with its necessary Repository and LocalDataSource. This direct approach, while seemingly straightforward, leads to tightly coupled code, posing challenges in terms of maintenance and scalability.
+> [!WARNING]
+> This approach is using manual DI containers implementation to deep dive the usecase. not using specific 3nd dependency. If using 3nd dependency DI, some action can be automatically managed by it self
+
+Understanding DI containers requires a grasp of the conventional methods for handling dependencies. Traditionally, dependencies such as data sources and repositories are created directly within the components that use them.
+
+For example, in an Activity, it’s common to instantiate a ViewModel along with its necessary Repository and LocalDataSource. This direct approach, while seemingly straightforward, leads to tightly coupled code, posing challenges in terms of maintenance and scalability.
 
 Consider this typical implementation in a UserProfileActivity:
 
@@ -114,7 +118,9 @@ class UserProfileActivity: AppCompatActivity() {
 }
 ```
 
-This manual DI approach with an AppContainer and a ViewModel factory significantly enhances code maintainability and scalability. However, it’s crucial to note that DI containers don’t automatically handle lifecycle events of Android components like Activities and Fragments. A thorough understanding of the Android lifecycle is essential to ensure that dependencies managed by DI containers are appropriately aligned with these events. This alignment is key to preventing memory leaks and optimizing resource management, thereby contributing to the creation of robust and efficient Android applications.
+> [!CAUTION]
+> This manual DI approach with an AppContainer and a ViewModel factory significantly enhances code maintainability and scalability. However, it’s crucial to note that DI containers don’t automatically handle lifecycle events of Android components like Activities and Fragments.
+> A thorough understanding of the Android lifecycle is essential to ensure that dependencies managed by DI containers are appropriately aligned with these events. This alignment is key to preventing memory leaks and optimizing resource management, thereby contributing to the creation of robust and efficient Android applications.
 
 ## Managing the lifecycles and scopes for DI containers
 
