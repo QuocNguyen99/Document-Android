@@ -1,6 +1,6 @@
 # Dependency Injection in Android
 
-Exploring Dependency Injection (DI) in Android development offers a deep dive into the architectural composition of Android apps and the significant role DI plays in streamlining the development process. This article is designed to clarify DI's essentials, supported by real-world applications and examples, for those new to the concept or seeking to deepen their understanding. The focus is on demystifying DI to highlight its importance as a tool in the Android developer's toolkit.
+Dependency Injection (DI) enhances the management, maintenance, and scalability of code. These concepts enable the creation of robust, adaptable applications. To simplify DI implementation and mitigate manual complexities, developers often use frameworks like Hilt, Dagger, Koin, etc. which streamline dependency management and reduce boilerplate in complex Android applications.
 
 ## Understanding Dependency Injection
 
@@ -54,7 +54,9 @@ Each type of injection has its specific use cases and advantages. Constructor in
 
 In Android development, it's essential to have a clear and efficient way to organize the parts of your application. This organization can be visualized as a Dependency Injection (DI) Graph, which helps manage the dependencies between different components of your app. Let's break down this concept, focusing on the roles of `LocalDataStore`, `Repository`, `ViewModel`, and `Activity`.
 
-Image with graph like [this](https://developer.android.com/static/images/training/dependency-injection/2-application-graph.png)
+Image with graph like this:
+
+![](https://developer.android.com/static/images/training/dependency-injection/2-application-graph.png)
 
 - **LocalDataStore** - The LocalDataStore is where your app's data lives. Think of it as the foundation of a house, but for your app's data. It directly interacts with the database or any local storage system to fetch or save data.
 
@@ -211,15 +213,6 @@ Here, the `UserContainer` is prepared during the ViewModel's initialization phas
 
 
 By introducing scoped containers like UserContainer, we effectively manage the lifecycle and scope of our dependencies. This not only leads to better memory management but also enhances the modularity and maintainability of the application. Scoping is particularly beneficial in complex applications with multiple components requiring varied dependencies.
-
-
-## Conclusion
-
-Understanding DI is vital for Android developers, as it enhances the management, maintenance, and scalability of code. These concepts enable the creation of robust, adaptable applications. To simplify DI implementation and mitigate manual complexities, developers often use frameworks like Hilt, Dagger, Koin, etc. which streamline dependency management and reduce boilerplate in complex Android applications.
-
-
-
-
 
 
 ### reference
