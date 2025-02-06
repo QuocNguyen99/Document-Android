@@ -2,8 +2,6 @@
 
 There are many ways to implement navigation in Android. Here, we will use **Jetpack's Navigation component**.
 
-## Navigation graph
-
 The Navigation graph can be used to navigate between fragments and activities (also known as "destinations" in the context of navigation). The Navigation graph is an XML file that contains navigation information. The Navigation Editor can be used to visualize this information. 
 
 ![alt text](/resources/visualize_graph_navigation.png)
@@ -51,7 +49,9 @@ Your finished navigation XML file will look something like this:
 ```
 ## NavHostFragment
 
-After you have finished working with the graph, you'll need to add `NavHostFragment` to your layout for fragment navigation. Let's add this to the app's main activity. The `NavHostFragment` can be thought of as the window that swaps between different fragment destinations in the navigation graph. To add the `NavHostFragment`, you'll need to add `FragmentContainerView` to your activity. This container is where your entire graph will be displayed.
+After you have finished working with the graph, you'll need to add `NavHostFragment` to your layout for fragment navigation.
+Let's add this to the app's main activity. The `NavHostFragment` can be thought of as the window that swaps between different fragment destinations in the navigation graph. To add the `NavHostFragment`, you'll need to add `FragmentContainerView` to your activity.
+This container is where your entire graph will be displayed.
 
 
 ```xml
@@ -75,31 +75,6 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             findNavController().navigate(R.id.your_fragment_id)
         }
 }
-```
-
-## Passing data between fragments
-
-To pass any data between fragments, use an arguments bundle. To do this, in the fragment from which you want to transfer data, create a Bundle and put all the necessary objects in it, giving them a key to refer to later in the target fragment.
-
-```kotlin
-val bundle = Bundle()
-bundle.putString("Key", thing)
-```
-Note that you can also create a Bundle like this:
-
-```kotlin
-val bundle = bundleOf("Key" to thing)
-```
-
-Next, add your bundle as an argument to the `navigate()` function to the transition to the next fragment.
-
-```kotlin
-findNavController().navigate(R.id.firstFragment, bundle)
-```
-In the receiving fragment, you can get the arguments bundle to use its contents.
-
-```kotlin
-val thing = arguments?.getString("Key")
 ```
 
 ## reference

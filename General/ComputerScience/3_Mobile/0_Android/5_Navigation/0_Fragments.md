@@ -239,9 +239,179 @@ YourFragmentManager.setFragmentResultListener("key", this) { key, bundle ->
 }
 ```
 
+### 3. ViewModel
+
+To share data between fragments and their host activity, use a `ViewModel` with activity scope.
+
+Example:
+
+```kotlin
+class ItemViewModel : ViewModel() {
+    private val mutableSelectedItem = MutableLiveData<Item>()
+    val selectedItem: LiveData<Item> get() = mutableSelectedItem
+
+    fun selectItem(item: Item) {
+        mutableSelectedItem.value = item
+    }
+}
+```
+Using `LiveData` ensures data remains lifecycle-aware.
+
+Using ViewModel in Activity
+
+```kotlin
+class MainActivity : AppCompatActivity() {
+    private val viewModel: ItemViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.selectedItem.observe(this, Observer { item ->
+            // Handle item update
+        })
+    }
+}
+```
+Using ViewModel in Fragment
+
+```kotlin
+class ListFragment : Fragment() {
+    private val viewModel: ItemViewModel by activityViewModels()
+
+    fun onItemClicked(item: Item) {
+        viewModel.selectItem(item)
+    }
+}
+```
+> [!CAUTION]
+>  Ensure the same scope (MainActivity) is used in both MainActivity and ListFragment to share the same ViewModel. Using the fragment as its own scope would create a separate instance.
+
+
+## Communicating with the other Fragment
+
+### Using sharedViewModel
+
+Fragments within the same activity often need to communicate without being tightly coupled. Using a shared `ViewModel` with activity scope allows them to exchange data while remaining independent.
+
+Example:
+
+```kotlin
+class ListViewModel : ViewModel() {
+    val filters = MutableLiveData<Set<Filter>>()
+
+    private val originalList: LiveData<List<Item>>() = ...
+    val filteredList: LiveData<List<Item>> = ...
+
+    fun addFilter(filter: Filter) { ... }
+    fun removeFilter(filter: Filter) { ... }
+}
+```
+Using `ViewModel` in `ListFragment`
+```kotlin
+class ListFragment : Fragment() {
+    private val viewModel: ListViewModel by activityViewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.filteredList.observe(viewLifecycleOwner, Observer { list ->
+            // Update the list UI
+        })
+    }
+}
+```
+Using `ViewModel` in `FilterFragment`
+
+```kotlin
+class FilterFragment : Fragment() {
+    private val viewModel: ListViewModel by activityViewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.filters.observe(viewLifecycleOwner, Observer { set ->
+            // Update the selected filters UI
+        })
+    }
+
+    fun onFilterSelected(filter: Filter) = viewModel.addFilter(filter)
+    fun onFilterDeselected(filter: Filter) = viewModel.removeFilter(filter)
+}
+```
+
+> [!CAUTION]
+> The ViewModel remains in memory until the ViewModelStoreOwner to which it's scoped goes away permanently. 
+> In a single activity architecture, if the ViewModel is scoped to the activity, it's essentially a singleton. After the ViewModel is first instantiated, subsequent calls to retrieve the ViewModel using the activity scope always returns the same existing ViewModel, along with the existing data until the activity's lifecycle has permanently ended.
+
+### Share data between a parent and child fragment via ViewModel
+
+When working with child fragments, your parent fragment and its child fragments might need to share data with each other.
+To share data between these fragments, use the parent fragment as the `ViewModel` scope, as shown in the following example:
+
+```kotlin
+class ListFragment: Fragment() {
+    // Using the viewModels() Kotlin property delegate from the fragment-ktx
+    // artifact to retrieve the ViewModel.
+    private val viewModel: ListViewModel by viewModels()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.filteredList.observe(viewLifecycleOwner, Observer { list ->
+            // Update the list UI.
+        })
+    }
+}
+
+class ChildFragment: Fragment() {
+    // Using the viewModels() Kotlin property delegate from the fragment-ktx
+    // artifact to retrieve the ViewModel using the parent fragment's scope
+    private val viewModel: ListViewModel by viewModels({requireParentFragment()})
+    
+}
+```
+
+### Scope a ViewModel to the Navigation Graph (Jetpack navigation)
+
+If you're using the Navigation library, you can also scope a `ViewModel` to the lifecycle of a destination's `NavBackStackEntry`. For example, the `ViewModel` can be scoped to the `NavBackStackEntry` for the `ListFragment`:
+
+```kotlin
+class ListFragment: Fragment() {
+    // Using the navGraphViewModels() Kotlin property delegate from the fragment-ktx
+    // artifact to retrieve the ViewModel using the NavBackStackEntry scope.
+    // R.id.list_fragment == the destination id of the ListFragment destination
+    private val viewModel: ListViewModel by navGraphViewModels(R.id.list_fragment)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.filteredList.observe(viewLifecycleOwner, Observer { item ->
+            // Update the list UI.
+        })
+    }
+}
+```
+
+### Using bundle with Jetpack navigation
+
+To pass any data between fragments, use an arguments bundle. To do this, in the fragment from which you want to transfer data, create a Bundle and put all the necessary objects in it, giving them a key to refer to later in the target fragment.
+
+```kotlin
+val bundle = Bundle()
+bundle.putString("Key", thing)
+```
+Note that you can also create a Bundle like this:
+
+```kotlin
+val bundle = bundleOf("Key" to thing)
+```
+
+Next, add your bundle as an argument to the `navigate()` function to the transition to the next fragment.
+
+```kotlin
+findNavController().navigate(R.id.firstFragment, bundle)
+```
+In the receiving fragment, you can get the arguments bundle to use its contents.
+
+```kotlin
+val thing = arguments?.getString("Key")
+```
+
+
 references:
 
 https://hyperskill.org/learn/step/12981
 
 https://hyperskill.org/learn/step/21929
 
+https://developer.android.com/guide/fragments/communicate
