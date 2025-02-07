@@ -1,20 +1,23 @@
 # AlertDialog
 
-You've probably come across the AlertDialog action many times in different applications. Say you want to delete some data, and the app shows you a small window with the question "Are you sure you want to delete it?" and asks you to choose "yes" or "no". There you go: this is an AlertDialog, a tool provided by the Android system to offer users a choice in specific situations. In this topic, you will learn how to use it in your app.
+AlertDialog, a tool provided by the Android system to offer users a choice in specific situations.
 
 ## Types of AlertDialogs
 
 
-AlertDialog is a special class that allows you to create and display dialog popups. The standard features of this class allow you to implement several types of AlertDialog. For example, it can be a simple pop-up window with a title and some text or a pop-up with selection buttons. We can also create a window with a list of items and use single or multiple selections for them.
+`AlertDialog` is a special class that allows you to create and display dialog popups.
+The standard features of this class allow you to implement several types of `AlertDialog`.
+
+For example, it can be a simple pop-up window with a title and some text or a pop-up with selection buttons. We can also create a window with a list of items and use single or multiple selections for them.
 
 The actions performed in the pop-ups can affect the behavior of the application: we can leave the application, delete some data, transfer the selected items to our activity, etc.
 
 ## Simple AlertDialog
 
 
-To show an AlertDialog, use the AlertDialog.Builder class by passing a context to its constructor.
+To show an `AlertDialog`, use the `AlertDialog.Builder` class by passing a context to its constructor.
 
-In the activity_main.xml markup file, we have defined a button with the id alertDialogButton. The AlertDialog.Builder class will allow us to build our pop-up piece by piece. First, we will set the title, then the message, and then our two buttons with their corresponding handler functions:
+In the `activity_main.xml` markup file, we have defined a button with the id `alertDialogButton`. The `AlertDialog.Builder` class will allow us to build our pop-up piece by piece. First, we will set the title, then the message, and then our two buttons with their corresponding handler functions:
 
 
 ```kotlin
@@ -30,17 +33,12 @@ alertDialogButton.setOnClickListener {
 }
 ```
 
-setTitle() and setMessage() simply set the desired strings. The button text can be specified either as a CharSequence or as a resource ID, and we use the latter option.
 
-The show() method of the Builder will display our AlertDialog.
+`set**Button` functions accept button text and a `DialogInterface.OnClickListener` instance with a single abstract onClick method. It receives the following parameters: **dialog** (the dialog that received the click) and **which (the button that was clicked or the position of the item clicked)**. This helps to figure out which button in which dialog was clicked if the same callback is used more than once.
 
-We can also use the setNeutralButton method like we used positive and negative.
+When the user clicks on any button, the dialog gets dismissed automatically. Thus, if no more action needed, the listener could be `null`.
 
-set**Button functions accept button text and a DialogInterface.OnClickListener instance with a single abstract onClick method. It receives the following parameters: dialog (the dialog that received the click) and which (the button that was clicked or the position of the item clicked). This helps to figure out which button in which dialog was clicked if the same callback is used more than once.
-
-When the user clicks on any button, the dialog gets dismissed automatically. Thus, if no more action needed, the listener could be null.
-
-We can create a dialog using Builder's create() method, save it to a variable, and only then show it:
+We can create a dialog using Builder's `create()` method, save it to a variable, and only then show it:
 
 ```kotlin
 val dialog = AlertDialog.Builder(this)
@@ -54,9 +52,11 @@ alertDialogButton.setOnClickListener {
 ```
 ## AlertDialog with a list of items
 
-We can create an AlertDialog that allows the user to make a single selection from a variety of choices. In this case, the options are stored in an array. A dialog of this type will close once you click on an item in the list, so buttons are useless in this situation.
+### 1. Single selection from a variety of choices without confirmation button
 
-Don't forget to remove .setMessage(): otherwise, this message will be displayed instead of the list.
+We can create an `AlertDialog` that allows the user to make a single selection from a variety of choices. In this case, the options are stored in an array. A dialog of this type will close once you click on an item in the list, **so buttons are useless in this situation.**
+
+Don't forget to remove `.setMessage()`: otherwise, this message will be displayed instead of the list.
 
 ```kotlin
 val items = arrayOf("First Item", "Second Item", "Third Item")
@@ -70,10 +70,10 @@ alertDialogButton.setOnClickListener {
         .show()
 }
 ```
+### 2. Single-choice item list with confirmation button
+Now let's create an `AlertDialog` with a single-choice item list: for this, we are going to use the `setSingleChoiceItems` method.
 
-Now let's create an AlertDialog with a single-choice item list: for this, we are going to use the setSingleChoiceItems method.
-
-The second parameter is responsible for the default item. In this case, -1 means that there is no default value:
+The second parameter is responsible for the default item. In this case, `-1` means that there is no default value:
 
 ```kotlin
 val items = arrayOf("First Item", "Second Item", "Third Item")
@@ -91,14 +91,16 @@ alertDialogButton.setOnClickListener {
         .show()
 }
 ```
-
-If you need a multiple-choice list, you can create it using the setMultiChoiceItems method. Again, the second parameter is responsible for the default items. You can pass a boolean array there, but here, we will pass null. Next, we pass the onClick method lambda of the OnMultiChoiceClickListener interface. onClick method signature :
+### 3. AlertDialog with  multiple-choice list
+If you need a multiple-choice list, you can create it using the `setMultiChoiceItems` method. Again, the second parameter is responsible for the default items. You can pass a boolean array there, but here, we will pass `null`. Next, we pass the `onClick` method lambda of the `OnMultiChoiceClickListener` interface. `onClick` method signature :
 
 ```kotlin
 onClick(dialog: DialogInterface, which: Int, isChecked: Boolean)
 ```
 
-dialog - dialog where the selection was made, which - position of the selected item, isChecked - true if the click checked the item, false if unchecked.
+- dialog: dialog where the selection was made
+- which: position of the selected item
+- isChecked: true if the click checked the item, false if unchecked.
 
 ```kotlin
 val items = arrayOf("First Item", "Second Item", "Third Item")
@@ -124,7 +126,7 @@ alertDialogButton.setOnClickListener {
 
 ## AlertDialog with custom content view
 
-You can use the setView() method to specify more complex content. To do this, you need to define your own dialog content view:
+You can use the `setView()` method to specify more complex content. To do this, you need to define your own dialog content view:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -141,7 +143,7 @@ You can use the setView() method to specify more complex content. To do this, yo
 </FrameLayout>
 ```
 
-Then you need to create (“inflate”) the view and pass it to the setView() method:
+Then you need to create (inflate) the view and pass it to the `setView()` method:
 
 ```kotlin
 alertDialogButton.setOnClickListener {
@@ -178,25 +180,26 @@ We can also set a handler for the situation when the window is closed as a resul
 }
 ```
 
-A similar method setOnShowListener() sets the callback to the moment when the window appears.
+A similar method `setOnShowListener()` sets the callback to the moment when the window appears.
 
-We can override the ability to close the AlertDialog with the back button by calling .setCancelable(false).
+We can override the ability to close the `AlertDialog` with the back button by calling `.setCancelable(false)`.
 
-Finally, the .dismiss() method will force our AlertDialog to close.
+Finally, the `.dismiss()` method will force our `AlertDialog` to close.
 
 ## DialogFragment
 
-It’s also possible to create an AlertDialog within a fragment. Before we discover how to do this, let's first remind ourselves what a fragment is by looking at the definition given in the official Android documentation:
+It’s also possible to create an `AlertDialog` within a fragment. Before we discover how to do this, let's first remind ourselves what a fragment is by looking at the definition given in the official Android documentation:
 
-A fragment represents a modular portion of the user interface within an activity. A fragment has its own lifecycle, receives its own input events, and you can add or remove fragments while the containing activity is running.
+"A fragment represents a modular portion of the user interface within an activity. A fragment has its own lifecycle, receives its own input events, and you can add or remove fragments while the containing activity is running."
 
-An AlertDialog can be displayed inside a fragment if it's contained in a DialogFragment. Here's how a DialogFragment is described in the documentation:
+An `AlertDialog` can be displayed inside a fragment if it's contained in a `DialogFragment`. Here's how a DialogFragment is described in the documentation:
 
-A fragment that displays a dialog window, floating on top of its activity's window. This fragment contains a Dialog object, which it displays as appropriate based on the fragment's state.
+"A fragment that displays a dialog window, floating on top of its activity's window. This fragment contains a Dialog object, which it displays as appropriate based on the fragment's state."
 
-Creating a dialog this way is generally more complex and lengthy, but it gives us greater flexibility, including the API of fragment lifecycle callback methods.
+> [!NOTE]
+> Creating a dialog this way is generally more complex and lengthy, but it gives us greater flexibility, including the API of fragment lifecycle callback methods.
 
-To create our own DialogFragment, we have to create a class that inherits from DialogFragment:
+To create our own `DialogFragment`, we **have to** create a class that inherits from `DialogFragment`:
 
 ```kotlin
 class ReactionDialogFragment : DialogFragment() {
@@ -212,9 +215,9 @@ class ReactionDialogFragment : DialogFragment() {
 }
 ```
 
-We simply pass the same dialog to the onCreateDialog method as we did before.
+We simply pass the same dialog to the `onCreateDialog` method as we did before.
 
-Next, in MainActivity, start this dialog by clicking the button:
+Next, in `MainActivity`, start this dialog by clicking the button:
 
 ```kotlin
 alertDialogButton.setOnClickListener {
@@ -222,7 +225,7 @@ alertDialogButton.setOnClickListener {
 }
 ```
 
-We end up with the same result as we would with a simple AlertDialog, but now our dialog has a fragment lifecycle and the corresponding features.
+We end up with the same result as we would with a simple `AlertDialog`, but now our dialog has a fragment lifecycle and the corresponding features.
 
 
 
