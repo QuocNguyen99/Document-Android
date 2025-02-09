@@ -1,17 +1,21 @@
 # Permissions
-Permissions protect user privacy by restricting access to sensitive device functions. You have probably seen them earlier: almost every app asks you for some sort of permission. In this topic, you will learn more about how they work and how can you set them up.
+Permissions protect user privacy by restricting access to sensitive device functions. You have probably seen them earlier: almost every app asks you for some sort of permission.
 
 ## About permissions
 
-Permissions restrict access to sensitive sensors or data on your device. Before Android 6.0, users saw a list of permissions required for the app before it was installed. By installing it, you automatically granted all of them. That wasn't all that cool, because some developers abused this system. For example, a flashlight app could have permission to see contacts, send text messages, or access calendar.
+Permissions restrict access to sensitive sensors or data on your device. Before Android **6.0**, users saw a list of permissions required for the app before it was installed. By installing it, you automatically granted all of them. That wasn't all that cool, because some developers abused this system. For example, a flashlight app could have permission to see contacts, send text messages, or access calendar.
 
-Thankfully, this behavior has changed: now, apps ask you whether you want to allow some dangerous permissions: location, camera, microphone, storage access, etc. It's called runtime permissions. There are still some permissions that don't need approval, for example, Internet access, running at startup, and so on. These type of permissions are called install-time permissions. They are considered harmless, and that's why they don't need to be approved. There are also special permissions available, but they are defined by the manufacturers of the phone and usually protect access to specific actions, like drawing over apps or defining settings. They are different for every manufacturer.
+Thankfully, this behavior has changed: now, apps ask you whether you want to allow some dangerous permissions: location, camera, microphone, storage access, etc. It's called **runtime permissions**. There are still some permissions that don't need approval, for example, Internet access, running at startup, and so on.
+
+These type of permissions are called **install-time permissions**. They are considered harmless, and that's why they don't need to be approved.
+
+There are also **special permissions** available, but they are defined by the manufacturers of the phone and usually protect access to specific actions, like drawing over apps or defining settings. They are different for every manufacturer.
 
 ## Permissions and user experience
 
 A runtime permissions request looks like an alert which contains the icon, a name of permission to be approved, and two or three buttons (depending on the OS version):
 
-![alt text](permission_and_ux.png)
+![alt text](/resources/permission_and_ux.png)
 
 Sometimes, these alerts are self-explanatory: when you are downloading a Camera app, it will not work without permission to access camera. But permission to access contacts in the Notes app may be not so easy to understand. That's why it's important to request them at the right moment.
 
@@ -27,7 +31,7 @@ Take some time to think about how to appropriately ask for permission in your ap
 
 ## Declaring permissions
 
-To declare a permission (both an install-time and runtime) you need to add it to the manifest file. Permissions can be added within the <manifest> tag before <application> tag like this:
+To declare a permission (both an install-time and runtime) you need to add it to the manifest file. Permissions can be added within the `<manifest>` tag before `<application>` tag like this:
 
 
 ```xml
@@ -49,7 +53,8 @@ You should add every permission your app needs to function. If the requested per
 ## Checking for a runtime permission
 
 
-After declaring a permission in the manifest, you can wait for the user to attempt a specific action that requires permission. There is a method to check whether your app has already been granted the required permission — the checkSelfPermission() method:
+After declaring a permission in the manifest, you can wait for the user to attempt a specific action that requires permission.
+There is a method to check whether your app has already been granted the required permission — the `checkSelfPermission()` method:
 
 ```kotlin
 if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
@@ -61,16 +66,21 @@ if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
 ```
 
 
-This method takes Context and the permission name as parameters, and returns an Int. The returned Int is either PackageManager.PERMISSION_GRANTED, which equals 0, or PackageManager.PERMISSION_DENIED, which equals -1. We should request permission if checkSelfPermission returned PERMISSION_DENIED.
+This method takes `Context` and the permission name as parameters, and returns an Int. The returned Int is either `PackageManager.PERMISSION_GRANTED`, which equals 0, or `PackageManager.PERMISSION_DENIED`, which equals -1. We should request permission if `checkSelfPermission` returned `PERMISSION_DENIED`.
 
-You can request permissions using Activity Result APIs or requestPermissions(). We will look at Activity Result APIs first.
+You can request permissions using Activity Result APIs or `requestPermissions()`. We will look at Activity Result APIs first.
 
 ## Requesting permission using Activity Result APIs
 
 
-Activity Result APIs is a new programming interface for exchanging data between activities. It allows for creating a launcher with a specified contract and register a callback to be invoked when the result arrives.
+Activity Result APIs is a new programming interface for exchanging data between activities.
+It allows for creating a launcher with a specified contract and register a callback to be invoked when the result arrives.
 
-There are two contracts that can help us: RequestPermission and RequestMultiplePermissions. As their names suggest, the first one is used to request one permission, and the second one can be used to request two or more permissions at once. We need to register the contract in activity. You can do it using registerForActivityResult() which accepts a contract and a callback as parameters:
+There are two contracts that can help us: 
+- `RequestPermission` 
+- `RequestMultiplePermissions`.
+
+As their names suggest, the first one is used to request one permission, and the second one can be used to request two or more permissions at once. We need to register the contract in activity. You can do it using `registerForActivityResult()` which accepts a contract and a callback as parameters:
 
 ```kotlin
 private val cameraRequestPermissionLauncher =
@@ -101,7 +111,7 @@ private fun onRequestCameraPermissionResult(granted: Boolean) {
 }
 ```
 
-For RequestMultiplePermissions(), the callback will receive Map<String, Boolean> with a result for each permission request:
+For `RequestMultiplePermissions()`, the callback will receive `Map<String, Boolean>` with a result for each permission request:
 
 ```kotlin
 private val requestAllPermissionsLauncher =
@@ -113,7 +123,7 @@ private val requestAllPermissionsLauncher =
         }
     }
 ```
-To check if the permission was denied before and you need to show the explanation before asking for permission, use shouldShowRequestPermissionRationale():
+To check if the permission was denied before and you need to show the explanation before asking for permission, use `shouldShowRequestPermissionRationale()`:
 
 ```kotlin
 if (ActivityCompat
@@ -185,16 +195,14 @@ private fun onRequestCameraPermissionResult(granted: Boolean) {
 }
 ```
 
-In this method, we've created an AlertDialog, which explains once again why we request this permission and allows the user to either switch to the Settings and allow permissions manually, or cancel and get back to the application without these permissions.
-
-That's it! Run the app and try to request a permission now. Next, let's look at a way of doing it that's a bit more challenging.
+In this method, we've created an `AlertDialog`, which explains once again why we request this permission and allows the user to either switch to the Settings and allow permissions manually, or cancel and get back to the application without these permissions.
 
 ## Requesting permissions with `requestPermissions()`
 
 
 In some existing applications, you may encounter an older way of requesting permissions. There's no callback: instead, you pass an arbitrary number as requestCode to the permission request, and the response contains that code, so you can figure out which request it answers.
 
-The requestPermissions() method is part of the Activity class, and can be called directly within its subclasses (such as ComponentActivity, or AppCompatActivity). It takes two arguments: an array of permissions, and a request code. The request code is an Int you would like to use, but bigger or equal to 0.
+The `requestPermissions()` method is part of the `Activity` class, and can be called directly within its subclasses (such as `ComponentActivity`, or `AppCompatActivity`). It takes two arguments: an array of permissions, and a request code. The request code is an Int you would like to use, but bigger or equal to 0.
 
 
 > [!NOTE]
@@ -235,12 +243,12 @@ when {
 }
 ```
 
-After clicking any button (or closing the alert), the onRequestPermissionsResult() method will be called.
+After clicking any button (or closing the alert), the `onRequestPermissionsResult()` method will be called.
 
 > [!CAUTION]
 > The use of onRequestPermissionsResult() for handling permission request results is deprecated (with exceptions for compatibility requirements). It is recommended to use the Activity Result APIs as shown in the previous section.
 
-To check if the app was granted the requested permissions, we can override an onRequestPermissionsResult(). After the user chooses which permissions to approve or deny, this method is called. This method has three parameters: a requestCode, a permissions array, and a grantResults array.
+To check if the app was granted the requested permissions, we can override an `onRequestPermissionsResult()`. After the user chooses which permissions to approve or deny, this method is called. This method has three parameters: a requestCode, a permissions array, and a grantResults array.
 
 ```kotlin
 override fun onRequestPermissionsResult(
@@ -276,7 +284,7 @@ override fun onRequestPermissionsResult(
 }
 ```
 
-We will use when to check the request code. MEDIA_REQUEST_CODE in this example is a constant which is equal to 1 (but you can choose any number you like). Because Android allows you to request several permissions at a time, we get the results back as an array, too.
+We will use when to check the request code. `MEDIA_REQUEST_CODE` in this example is a constant which is equal to 1 (but you can choose any number you like). Because Android allows you to request several permissions at a time, we get the results back as an array, too.
 
 Keep in mind that if the user closes the alert without choosing any options, the results array might be empty. Treat an empty array as "Denied" to avoid potential problems with security exceptions because you're trying to access some permission without approval.
 
