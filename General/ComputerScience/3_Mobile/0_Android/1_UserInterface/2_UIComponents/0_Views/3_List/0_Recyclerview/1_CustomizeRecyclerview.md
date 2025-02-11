@@ -1,6 +1,4 @@
-# Customizing RecyclerView
-
-The `RecyclerView` widget is very flexible — it allows you to make a lot of customizations. In this topic, you will learn how to update adapter contents, handle clicks, add dividers and spaces, customize animations, try out different layout managers, and use programmatic scroll.
+# Customize RecyclerView
 
 ## Changing adapter contents
 
@@ -304,5 +302,28 @@ recyclerView.layoutManager!!.startSmoothScroll(object : LinearSmoothScroller(thi
 There are, of course, many other things that can be tuned. For example, [this Stack Overflow answer](https://stackoverflow.com/a/53756296/3050249) shows how to scroll to the center of an item.
 
 
-## ref
+## reference:
+
 - [Customize RecyclerView](https://hyperskill.org/learn/step/19037)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

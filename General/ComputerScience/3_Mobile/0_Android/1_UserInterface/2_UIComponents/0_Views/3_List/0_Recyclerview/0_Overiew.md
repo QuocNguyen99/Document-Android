@@ -19,31 +19,6 @@ As explained, RecyclerView is used to display data. The way each item looks can 
 - `getItemCount()` allows RecyclerView to determine the total number of items in the list.
 
 You might be wondering, "what is `LayoutInflater` and what's actually happening here?" `LayoutInflater` is a class that can turn layouts into View objects, which is exactly what we need. The method responsible for this is `inflate()`. And we pass it three arguments: the ID of the layout resource we require, the root **ViewGroup** to use, and `false`, which specifies that an attachment should not be made to the parent. We are then able to receive a View object.
-
 ## reference:
 
 - [Recyclerview](https://hyperskill.org/learn/step/18600)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
