@@ -1,7 +1,5 @@
 # references
 
-- [Child Fragments and ViewPager2 with Fragments](https://hyperskill.org/learn/step/13812)
-- [Parcel and Bundle](https://hyperskill.org/learn/step/27364)
 - [BroadcastReceiver](https://hyperskill.org/learn/step/17215)
 - [Room](https://hyperskill.org/learn/step/14235)
 - [Spinners](https://hyperskill.org/learn/step/29465)
