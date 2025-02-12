@@ -1,7 +1,5 @@
 # references
 
-- [RecyclerView Adapter mastery](https://hyperskill.org/learn/step/20429)
-- [ViewPager 2](https://hyperskill.org/learn/step/14783)
 - [Child Fragments and ViewPager2 with Fragments](https://hyperskill.org/learn/step/13812)
 - [Parcel and Bundle](https://hyperskill.org/learn/step/27364)
 - [BroadcastReceiver](https://hyperskill.org/learn/step/17215)
