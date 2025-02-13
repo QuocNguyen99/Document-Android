@@ -1,6 +1,5 @@
 # references
 
-- [Spinners](https://hyperskill.org/learn/step/29465)
 - [Menu, Options, Popup](https://hyperskill.org/learn/step/30757)
 - [CPU profiling](https://hyperskill.org/learn/step/23388)
 - [SharedPreferences](https://hyperskill.org/learn/step/11957)
