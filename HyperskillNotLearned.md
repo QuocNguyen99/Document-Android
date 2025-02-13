@@ -1,7 +1,5 @@
 # references
 
-- [BroadcastReceiver](https://hyperskill.org/learn/step/17215)
-- [Room](https://hyperskill.org/learn/step/14235)
 - [Spinners](https://hyperskill.org/learn/step/29465)
 - [Menu, Options, Popup](https://hyperskill.org/learn/step/30757)
 - [CPU profiling](https://hyperskill.org/learn/step/23388)
