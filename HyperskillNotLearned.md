@@ -1,7 +1,5 @@
 # references
 
-- [CPU profiling](https://hyperskill.org/learn/step/23388)
-- [SharedPreferences](https://hyperskill.org/learn/step/11957)
 - [Crashlytics](https://hyperskill.org/learn/step/30735)
 - [Introduction to Testing in Android Studio](https://hyperskill.org/learn/step/40233)
 - [Espresso basics](https://hyperskill.org/learn/step/28557)
