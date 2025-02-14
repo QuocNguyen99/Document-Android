@@ -1,6 +1,5 @@
 # references
 
-- [Crashlytics](https://hyperskill.org/learn/step/30735)
 - [Introduction to Testing in Android Studio](https://hyperskill.org/learn/step/40233)
 - [Espresso basics](https://hyperskill.org/learn/step/28557)
 - [Asynchronous programming techniques & problems](https://hyperskill.org/learn/step/14503)
