@@ -182,14 +182,160 @@ actual values, helping us pinpoint the issue. When we encounter a failed test, w
 - Rerun the test to verify that it passes after the fix.
 
 
+Espresso has a structure similar to JUnit tests because it is based on JUnit, but it includes additional methods that allow us to interact with the user interface.
+Here is an example Espresso test for our app:
+
+```kotlin
+@RunWith(AndroidJUnit4::class)
+class EspressoBasicsTest {
+
+    @get:Rule
+    val activityRule = ActivityScenarioRule(MainActivity::class.java)
+
+    @Test
+    fun testGreetingIsDisplayedOnAppLaunch() {
+        onView(withText(R.string.greeting))
+            .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun testInputIsCorrectlyDisplayed() {
+        val inputText = "Jetbrains Academy"
+        val expectedText = "JETBRAINS ACADEMY"
+
+        onView(withId(R.id.et_text))
+            .perform(typeText(inputText), closeSoftKeyboard())
+
+        onView(withId(R.id.rb_uppercase))
+            .perform(click())
+
+        onView(withId(R.id.bt_display))
+            .perform(click())
+
+        onView(withId(R.id.tv_display))
+            .check(matches(withText(expectedText)))
+    }
+}
+```
+
+- The `@RunWith` annotation from `org.junit.runner.RunWith` is used to specify the test runner. 
+
+> [!NOTE]
+> The test runner is in charge of executing the test cases on a physical device or emulator.
+
+- The `EspressoBasicsTest` class holds our test cases. 
+- Before we execute the test cases, we first need to launch our app. You can do it by specifying a JUnit rule. 
+The `@get:Rule` annotation is used to declare a JUnit rule.  The JUnit's rule annotation is imported from `org.junit.Rule`.
+We are using the `ActivityScenarioRule`, a JUnit rule that launches an activity before a test starts and finishes it after the test ends.
+- we specified two test methods using the `@Test` annotation from `org.junit.Test`, Here is where Espresso comes in.
+- Espresso provides the `onView()` method from `androidx.test.espresso.Espresso.onView`, which is our entry point to interact with views. 
+`onView()` takes in a ViewMatcher, a [hamcrest matcher](https://www.slideshare.net/shaiyallin/hamcrest-matchers) used to locate views in the current view hierarchy.
+- It then returns a `ViewInteraction` object with which we can use the method `perform()` to perform actions on the matched view or `check()` to make assertions
+The `perform()` method takes in **ViewActions**, whereas the `check()` method takes in a **ViewAssertion**.
+
+## ViewMatchers
+
+**ViewMatchers**, as the name suggests, are basically matcher objects for matching views that implement the `Matcher<View>` interface from the Hamcrest library.
+They are used to specify criteria or conditions for finding views within the current view hierarchy.
+A view must meet the specified conditions in order to be matched
+You can pass one or more `ViewMatchers` to the `onView()` method which returns a `ViewInteraction` object that you can use to perform actions or check assertions on the matched view.
+
+There are many built-in methods that return `ViewMatchers` in Espresso 
+
+## View Matchers in Espresso
+
+| Matcher                   | Description |
+|---------------------------|-------------|
+| **`withId()`**            | Matches a view with the provided ID. |
+| **`withText()`**          | Matches a view with the provided text. |
+| **`withContentDescription()`** | Matches a view with the provided content description. |
+| **`isEnabled()`**         | Matches a view that is enabled. |
+| **`isChecked()`**         | Matches a view that is checked (e.g., when using a checkbox). |
+| **`isDisplayed()`**       | Matches a view that is partially or completely displayed in the current view hierarchy. |
+| **`isCompletelyDisplayed()`** | Matches a view that is completely displayed in the current view hierarchy. |
+
+You can also combine multiple matchers using combination matchers such as `allOf()` or `anyOf()` and inverse a matcher using `not()`. For example, you can write:
+
+```kotlin
+onView(allOf(withId(R.id.button), not(withText("OK")), isDisplayed()))
+```
+
+## ViewActions
+
+ViewActions are objects that can be passed to the `ViewInteraction.perform()` method to perform an action on a view, such as clicking, typing, scrolling, and so on.
 
 
+| Action             | Description |
+|--------------------|-------------|
+| **`click()`**      | Performs a single click on the view. |
+| **`doubleClick()`** | Performs a double click on the view. |
+| **`longClick()`**  | Performs a long click on the view. |
+| **`typeText()`**   | Types the provided text into an `EditText` view. |
+| **`clearText()`**  | Clears any text from an `EditText` view. |
+| **`swipeLeft()`**  | Performs a swipe left gesture on the view. |
+| **`swipeRight()`** | Performs a swipe right gesture on the view. |
 
 
+You can also chain multiple `ViewActions` together by using commas. For example:
+
+```kotlin
+onView(withId(R.id.edit_text))
+    .perform(clearText(), typeText("Hello World!"))
+```
+
+Sometimes, you may need to perform an action that is not provided by Espresso or customize an existing one.
+In that case, you can create your own custom `ViewAction` by implementing the `ViewAction` interface or extending one of its subclasses (such as `GeneralClickAction`)
+
+## ViewAssertions
+
+We can use ViewAssertions on the `ViewInteraction.check()` method to perform assertions on views, such as checking a view's visibility, text, color, and so on.
 
 
+The `matches()` method from `androidx.test.espresso.assertion.ViewAssertions` is the most basic method that returns a `ViewAssertion` object that can be used to make assertions. 
+The `matches()` method is a helper method that wraps a `ViewMatcher` object into a `ViewAssertion` object. 
 
 
+`matches()` assertion is used to assert the state of the currently selected view. 
+If the matcher provided inside the `matches()` method matches the conditions of the view returned when the `onView()` method was called, then the test passes. Otherwise, it fails.
+
+## Running Espresso tests
+
+Running Espresso tests in Android Studio is simple. Just click the green icon beside the test class then **Run 'NameOfTestClass'** to run the entire test methods in your class or click on the green icon beside a specific test method and then **Run 'NameOfTestMethod'** to run it:
+
+![alt text](/resources/running_espresso_test.png)
+
+## Tips and extras
+
+Espresso provides the `closeSoftkeyboard()` method, a top-level action that can be used to close the soft keyboard.
+
+
+> [!WARNING]
+>  When using closeSoftKeyboard() or scrollTo(), if the keyboard is already closed or the view is already visible on screen, the methods have no effect.
+
+It's recommended that you close the keyboard when it is not needed. You can also use the `scrollTo()` method to scroll to a view that is loaded but off the screen:
+
+
+Other top level actions include `pressBack()` and `openActionBarOverflowOrOptionsMenu(context: Context)` (covered in other Espresso topics).
+
+Note that top-level actions are not tied to any particular view, for example, you don't need an `EditText` to press the back button but you need it to perform a typing action. With that being said, you can use these methods wherever you need them in your test method or inside `perform()`:
+
+```kotlin
+fun test() {
+    // You can use it inside perform maybe after clicking a button
+    onView(...)
+        .perform(click(), pressBack())
+
+    // Or as a standalone
+    pressBack()
+}
+```
+
+
+For adapter views, such as `ListView` or `GridView`, the `onView()` method may not be sufficient, and the `onData()` method should be used instead.
+
+This does not apply to `RecyclerView`, a more complex adapter view requiring special handling. The `onData()` method in Espresso takes an **ObjectMatcher** as an argument and returns a `DataInteraction` object.
+
+The `DataInteraction` object allows you to perform actions using the `perform()` method and assertions using the `check()` method similar to how you would do it when using `onView()` with some added functionalities. 
 
 
 
