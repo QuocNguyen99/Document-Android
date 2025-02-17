@@ -1,6 +1,5 @@
 # references
 
-- [Coroutine builders: overview](https://hyperskill.org/learn/step/13749)
 - [Structured Concurrency & Cancellation](https://hyperskill.org/learn/step/18891)
 - [Сontext and Dispatchers](https://hyperskill.org/learn/step/20498)
 - [Coroutines in Android](https://hyperskill.org/learn/step/31892)
