@@ -1,6 +1,5 @@
 # references
 
-- [Asynchronous programming techniques & problems](https://hyperskill.org/learn/step/14503)
 - [Handlers](https://hyperskill.org/learn/step/13046)
 - [Suspending functions](https://hyperskill.org/learn/step/13722)
 - [RGB](https://hyperskill.org/learn/step/8819)
