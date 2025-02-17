@@ -1,6 +1,5 @@
 # references
 
-- [Suspending functions](https://hyperskill.org/learn/step/13722)
 - [RGB](https://hyperskill.org/learn/step/8819)
 - [Coroutine builders: overview](https://hyperskill.org/learn/step/13749)
 - [Structured Concurrency & Cancellation](https://hyperskill.org/learn/step/18891)
