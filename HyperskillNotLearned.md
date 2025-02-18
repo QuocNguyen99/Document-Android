@@ -1,6 +1,5 @@
 # references
 
-- [Сontext and Dispatchers](https://hyperskill.org/learn/step/20498)
 - [Coroutines in Android](https://hyperskill.org/learn/step/31892)
 - [State management](https://hyperskill.org/learn/step/26094)
 - [Networking Basics](https://hyperskill.org/learn/step/29476)
