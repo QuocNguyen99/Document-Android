@@ -1,6 +1,5 @@
 # references
 
-- [Coroutines in Android](https://hyperskill.org/learn/step/31892)
 - [State management](https://hyperskill.org/learn/step/26094)
 - [Networking Basics](https://hyperskill.org/learn/step/29476)
 - [Memory-efficient data structures in Android](https://hyperskill.org/learn/step/22820)
