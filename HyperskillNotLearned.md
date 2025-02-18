@@ -1,6 +1,5 @@
 # references
 
-- [State management](https://hyperskill.org/learn/step/26094)
 - [Networking Basics](https://hyperskill.org/learn/step/29476)
 - [Memory-efficient data structures in Android](https://hyperskill.org/learn/step/22820)
 - [Structural design patterns](https://hyperskill.org/learn/step/17649)
