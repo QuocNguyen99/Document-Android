@@ -1,6 +1,5 @@
 # references
 
-- [Structural design patterns](https://hyperskill.org/learn/step/17649)
 - [Facade pattern](https://hyperskill.org/learn/step/19222)
 - [Builder pattern](https://hyperskill.org/learn/step/16735)
 - [Colors](https://hyperskill.org/learn/step/14914)
