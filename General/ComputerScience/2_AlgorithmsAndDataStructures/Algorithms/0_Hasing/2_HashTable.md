@@ -25,7 +25,9 @@ Now let's figure out how it works. Since we're using the identity function, the 
 
 ## Hash set vs hash map
 
-There are two types of hash tables. The one above is called a **hash set**. We can use it in scenarios where we only need to check if a value is present: for example, the book scenario in the introduction. 
+**There are two types of hash tables**. The one above is called a **hash set**. We can use it in scenarios where we only need to check if a value is present: for example, the book scenario in the introduction.
+
+Standard Java's `HashSet` wraps `HashMap` and utilizes its keys, leaving values unused. So, `HashSet` just reuses the existing code without reinventing anything but wastes some memory.
 
 We can still add or remove elements to a hash set, but in most cases we are not interested in getting a value out of a hash set. This happens because we already have an equal value that we need in order to search a hash table. Implementations of hash sets are `unordered_set` in C++ and `HashSet` in Java.
 
@@ -33,6 +35,13 @@ We can still add or remove elements to a hash set, but in most cases we are not 
 ![alt text](/resources/hash_set.png)
 
 
-Another type of **hash table** is a hash map. Imagine you want to keep a phone book of names and numbers of friends, and want to search for phone numbers using a friend's name. If you kept a hash set of the name-number pairs, you would need to know the number to be able to search. Here, hash maps can help you. 
+Another type of **hash table** is a hash map. Imagine you want to keep a phone book of names and numbers of friends, and want to search for phone numbers using a friend's name. If you kept a hash set of the name-number pairs, you would need to know the number to be able to search. Here, hash maps can help you.
+
+It stores an array of `Node` also known as **buckets**, and every node contains a key hash, a reference to the key, and to the value.
+Nodes are positioned inside a bucket array according to their hashes.
+Hash collisions are solved by linking nodes to each other, which forms a list inside one bucket.
+Search operation (`Map.get`, `Map.containsKey`) determines a bucket by key hash and checks for key equality.
+In case of collision, a list of nodes is traversed until a node with an equal key is reached.
+This is called a **hash table with closed addressing** because key-value pairs are "closed" (locked) to a certain position.
 
 They are very similar to hash sets, but they store pairs. The first entry in the pair is called the key, and the second is the value. Only the hash of the key is used, and, when searching, we look for the value associated with a key. In the example above, the keys would be the names, and the values would be the phone numbers. Implementations of hash maps are `unordered_map` in C++ and `HashMap` in Java.

@@ -1,6 +1,5 @@
 # references
 
-- [Memory-efficient data structures in Android](https://hyperskill.org/learn/step/22820)
 - [Structural design patterns](https://hyperskill.org/learn/step/17649)
 - [Facade pattern](https://hyperskill.org/learn/step/19222)
 - [Builder pattern](https://hyperskill.org/learn/step/16735)
