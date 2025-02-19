@@ -1,6 +1,5 @@
 # references
 
-- [Networking Basics](https://hyperskill.org/learn/step/29476)
 - [Memory-efficient data structures in Android](https://hyperskill.org/learn/step/22820)
 - [Structural design patterns](https://hyperskill.org/learn/step/17649)
 - [Facade pattern](https://hyperskill.org/learn/step/19222)
