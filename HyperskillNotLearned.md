@@ -1,8 +1,5 @@
 # references
 
-- [Facade pattern](https://hyperskill.org/learn/step/19222)
-- [Builder pattern](https://hyperskill.org/learn/step/16735)
-- [Colors](https://hyperskill.org/learn/step/14914)
 - [Simplistic hash functions](https://hyperskill.org/learn/step/40136)
 - [Cryptographic hash functions](https://hyperskill.org/learn/step/30149)
 - [The basic ideas of cryptography](https://hyperskill.org/learn/step/17731)
