@@ -2,7 +2,6 @@
 
 - [Cryptographic hash functions](https://hyperskill.org/learn/step/30149)
 - [The basic ideas of cryptography](https://hyperskill.org/learn/step/17731)
-- [Adapter pattern](https://hyperskill.org/learn/step/17657)
 - [Base64 and other bases](https://hyperskill.org/learn/step/20898)
 - [Understanding JSON Web Tokens](https://hyperskill.org/learn/step/27642)
 - [Vector and raster graphics](https://hyperskill.org/learn/step/14210)
