@@ -1,6 +1,5 @@
 # references
 
-- [Understanding JSON Web Tokens](https://hyperskill.org/learn/step/27642)
 - [Vector and raster graphics](https://hyperskill.org/learn/step/14210)
 - [Graphic file formats](https://hyperskill.org/learn/step/14344)
 - [Drawables overview](https://hyperskill.org/learn/step/12832)
