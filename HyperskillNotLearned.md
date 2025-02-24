@@ -1,7 +1,5 @@
 # references
 
-- [Graphic file formats](https://hyperskill.org/learn/step/14344)
-- [Drawables overview](https://hyperskill.org/learn/step/12832)
 - [Customizing ProgressBar and SeekBar](https://hyperskill.org/learn/step/28526)
 - [Graphics overview. Implementing a Drawable](https://hyperskill.org/learn/step/13899)
 - [ItemDecoration](https://hyperskill.org/learn/step/39548)
