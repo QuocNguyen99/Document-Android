@@ -1,6 +1,5 @@
 # references
 
-- [Vector and raster graphics](https://hyperskill.org/learn/step/14210)
 - [Graphic file formats](https://hyperskill.org/learn/step/14344)
 - [Drawables overview](https://hyperskill.org/learn/step/12832)
 - [Customizing ProgressBar and SeekBar](https://hyperskill.org/learn/step/28526)
