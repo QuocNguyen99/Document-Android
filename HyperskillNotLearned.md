@@ -1,6 +1,5 @@
 # references
 
-- [Base64 and other bases](https://hyperskill.org/learn/step/20898)
 - [Understanding JSON Web Tokens](https://hyperskill.org/learn/step/27642)
 - [Vector and raster graphics](https://hyperskill.org/learn/step/14210)
 - [Graphic file formats](https://hyperskill.org/learn/step/14344)
