@@ -40,6 +40,122 @@ You also can use this style for a more modern look:
 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
 ```
 
+How can you customize `ProgressBar`?
+
+You should set `android:progressDrawable`. But let's create one first:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<!--our_progress_drawable.xml-->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@android:id/background">
+        <shape>
+            <corners android:radius="5dp" />
+            <gradient
+                android:startColor="#B300BFFF"
+                android:centerColor="#00BFFF"
+                android:centerY="0.75"
+                android:endColor="#CE00BFFF"
+                android:angle="270"
+                />
+        </shape>
+
+    </item>
+
+    <item android:id="@android:id/secondaryProgress">
+        <clip>
+            <shape>
+                <corners android:radius="5dp" />
+                <gradient
+                    android:startColor="#B30062FF"
+                    android:centerColor="#0062FF"
+                    android:centerY="0.75"
+                    android:endColor="#CE0062FF"
+                    android:angle="270"
+                    />
+            </shape>
+        </clip>
+    </item>
+
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <corners android:radius="5dp" />
+                <gradient
+                    android:startColor="#B30800FF"
+                    android:centerColor="#0800FF"
+                    android:centerY="0.75"
+                    android:endColor="#CE0800FF"
+                    android:angle="270"
+                    />
+            </shape>
+        </clip>
+    </item>
+
+</layer-list>
+```
+
+Here we've defined `<layer-list>` with three items:
+
+- `@android:id/background`
+
+- `@android:id/secondaryProgress`
+
+- `@android:id/progress`,
+
+which define `background`, `secondaryProgress`, and `progress`, `respectively`. In this example, we used shapes but items could be also `Color` or `9-patch`. However, vector drawable won't work here.
+
+Now, let's apply our `progressDrawable` to `ProgressBar`:
+
+```xml
+<ProgressBar
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:indeterminateOnly="false"
+    android:maxHeight="20dp"
+    android:minHeight="20dp"
+    android:progress="25"
+    android:progressDrawable="@drawable/our_progress_drawable"
+    android:secondaryProgress="50" />
+```
+
+![alt text](/resources/custom_progress_bar.png)
+
+but what if we wanted to customize indeterminate `ProgressBar`? In such case we should create a drawable that will rotate:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<!--rotate_drawable.xml-->
+
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromDegrees="0"
+    android:pivotX="50%"
+    android:pivotY="50%"
+    android:toDegrees="360">
+    <shape
+        android:innerRadiusRatio="4"
+        android:shape="ring"
+        android:thicknessRatio="5.333"
+        android:useLevel="false">
+        <size
+            android:width="18dp"
+            android:height="18dp" />
+
+        <gradient
+            android:centerColor="#880800FF"
+            android:centerY="50%"
+            android:endColor="#ff0800FF"
+            android:startColor="#000800FF"
+            android:type="sweep"
+            />
+    </shape>
+</rotate>
+```
+
+![alt text](/resources/custom_circle_progressbar.gif)
+
 ## SeekBar
 `SeekBar` is an extension of `ProgressBar`. The difference is that now we have a draggable thumb.
 The fact that SeekBar is the extension of the `ProgressBar` means that they have mostly the same attributes.
