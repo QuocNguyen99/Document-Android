@@ -1,6 +1,5 @@
 # references
 
-- [Graphics overview. Implementing a Drawable](https://hyperskill.org/learn/step/13899)
 - [ItemDecoration](https://hyperskill.org/learn/step/39548)
 - [Bitmap](https://hyperskill.org/learn/step/16539)
 - [Animation APIs overview](https://hyperskill.org/learn/step/47653)
