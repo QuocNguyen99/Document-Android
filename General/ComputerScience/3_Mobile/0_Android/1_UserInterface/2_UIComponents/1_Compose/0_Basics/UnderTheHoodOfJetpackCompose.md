@@ -48,7 +48,7 @@ fun App($composer: Composer) {
 
 Let’s assume that when this code first executes result is null. This inserts a group into the gap array and the loading screen runs.
 
-![Group with key 123](../../../../../resources/Gap_compose_group_123.png)
+![Group with key 123](/resources/Gap_compose_group_123.png)
 
 The second time the function runs let’s assume that result is no longer null so that the second branch of the if statement executes.
 
@@ -58,7 +58,7 @@ The compiler then moves the gap to the current cursor position and extends the g
 
 At this point, the code is executed as normal, and the new UI — the header and the body — is inserted.
 
-![Group with key 456](../../../../../resources/Gap_compose_group_456.png)
+![Group with key 456](/resources/Gap_compose_group_456.png)
 
 This concept is that we call *Positional Memoization* and this is the concept that Compose is built around
 
@@ -219,3 +219,10 @@ $composer.end()?.updateScope { nextComposer ->
 
 The `?` (null check) here indicates that if no model object (like `count`) is read during the execution of `Counter`, then the system doesn’t need to track how to update this composable because it knows the UI won’t change. If there are no changes, `updateScope` is unnecessary.
 If a change occurs, Jetpack Compose knows how to restart the `Composable` by calling `Counter`(nextComposer).
+
+
+
+
+
+
+

@@ -12,9 +12,10 @@ or `img.setImageBitmap(Bitmap)`. These methods change the internal state of the 
 
 
 **Manipulating views manually increases the likelihood of errors. 
-If a piece of data is rendered in multiple places, 
-it’s easy to forget to update one of the views that shows it.
-It’s also easy to create illegal states**, when two updates conflict in an unexpected way. 
+If a piece of data is rendered in multiple places, it’s easy to forget to update one of the views that shows it.
+It’s also easy to create illegal states , when two updates conflict in an unexpected way.**
+
+
 For example, an update might try to set a value of a node that was just removed from the UI. 
 In general, the software maintenance complexity grows with the number of views that require updating.
 
@@ -26,7 +27,7 @@ Over the last several years, **the entire industry has started shifting to a dec
 
 a few noteworthy things about this function
 
-- The function is annotated with the @Composable annotation. All Composable functions must have this annotation; **this annotation informs the Compose compiler that this function is intended to convert data into UI.**
+- The function is annotated with the `@Composable` annotation. All Composable functions must have this annotation; **this annotation informs the Compose compiler that this function is intended to convert data into UI.**
 
 - The function doesn't return anything. Compose functions that emit UI do not need to return anything, because they describe the desired screen state instead of constructing UI widgets.
 
@@ -36,8 +37,15 @@ With many imperative object-oriented UI toolkits, you initialize the UI by insta
 
 **In Compose's declarative approach, widgets are relatively stateless and do not expose setter or getter functions.** In fact, widgets are not exposed as objects. **You update the UI by calling the same composable function with different arguments.** This makes it easy to provide state to architectural patterns such as a `ViewModel`, as described in the [Guide to app architecture](https://developer.android.com/topic/architecture). Then, your composables are responsible for transforming the current application state into a UI every time the observable data updates.
 
-![](../../../../../resources/mmodel-flow-data.png)
-**Figure 1**. The app logic provides data to the top-level composable function. That function uses the data to describe the UI by calling other composables, and passes the appropriate data to those composables, and on down the hierarchy.
+
+- The app logic provides data to the top-level composable function. That function uses the data to describe the UI by calling other composables, and passes the appropriate data to those composables, and on down the hierarchy.
+
+![](/resources/mmodel-flow-data.png)
+
+
+- When the state changes, the composable functions are called again with the new data. This causes the UI elements to be redrawn--this process is called recomposition.
+
+![alt text](/resources/recomposition_after_receive_data.png)
 
 ## Dynamic content
 
@@ -264,4 +272,9 @@ In some cases, a composable function might run for every frame of a UI animation
 For example, if your widget tried to read device settings, it could potentially read those settings hundreds of times a second, with disastrous effects on your app's performance.
 
 If your composable function needs data, it should define parameters for the data. You can then move expensive work to another thread, outside of composition, and pass the data to Compose using mutableStateOf or LiveData.
+
+## Reference
+
+
+- https://developer.android.com/develop/ui/compose/mental-model
 
