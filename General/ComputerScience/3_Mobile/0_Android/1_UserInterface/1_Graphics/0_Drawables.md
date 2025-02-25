@@ -500,3 +500,6 @@ But `measureText()` is potentially slow and depends on text length, so let's cac
     }
 ```
 
+## Reference
+
+- https://hyperskill.org/learn/step/13899
