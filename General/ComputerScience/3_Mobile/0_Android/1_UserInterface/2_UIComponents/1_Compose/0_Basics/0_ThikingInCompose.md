@@ -31,6 +31,9 @@ a few noteworthy things about this function
 
 - The function doesn't return anything. Compose functions that emit UI do not need to return anything, because they describe the desired screen state instead of constructing UI widgets.
 
+> [!NOTE]
+> Unlike the convention for naming regular Kotlin functions, which use the camelCase style, Composable functions should be named starting with a capital letter in the PascalCase style.
+
 ## The declarative paradigm shift
 
 With many imperative object-oriented UI toolkits, you initialize the UI by instantiating a tree of widgets. You often do this by inflating an XML layout file. Each widget maintains its own internal state, and exposes getter and setter methods that allow the app logic to interact with the widget.
