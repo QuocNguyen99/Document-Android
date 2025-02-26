@@ -18,7 +18,7 @@ It means compose able to find where the state or input read and recompose only t
 
 Let’s take a look recomposition scope sample below :
 
-![alt text](../../../../../resources/RecompositionScope.png)
+![alt text](/resources/RecompositionScope.png)
 
 **Recomposition scope usually marked by opening and closing function bracket**, In term of hierarchy we see that `Button Scope` is inside `Greeting Scope` as well, but in term of recomposition `Greeting Scope` and `Button Scope `is able to recompose independently, Compose may recompose `Greeting Scope `without recompose `Button Scope` or recompose `Button Scope` without recompose `Greeting Scope` or recompose both of them in one recomposition process.
 
