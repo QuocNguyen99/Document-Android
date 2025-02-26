@@ -3,14 +3,12 @@
 ## State and Jetpack Compose
 
 
-State in an app is any value that can change over time. This is a very broad definition and encompasses everything from a Room database to a variable in a class.
-
-This guide focuses on the connection between state and composables, and on the APIs that Jetpack Compose offers to work with state more easily.
-
+**State** is any value that can be changed at any point in time during the execution of an application.
 
 ### State and composition
 
-**Compose is declarative and as such the only way to update it is by calling the same composable with new arguments.** These arguments are representations of the UI state. Any time a state is updated a recomposition takes place.
+**Compose is declarative and as such the only way to update it is by calling the same composable with new arguments, recomposition needs to occur.** These arguments are representations of the UI state.
+To track state changes, Jetpack Compose has its own special observable system of type `State<T>` and `MutableState<T>`. This system monitors the value parameter and triggers a recomposition whenever it changes.
 
 > [!NOTE]
 > Key term:
@@ -22,9 +20,9 @@ This guide focuses on the connection between state and composables, and on the A
 **Composable functions can use the `remember` API to store an object in memory. A value computed by `remember` is stored in the Composition during initial composition, and the stored value is returned during recomposition. `remember` can be used to store both mutable and immutable objects.**
 
 > [!NOTE]
->  Các đối tượng được lưu trữ bởi remember sẽ được hủy bỏ khi composable tương ứng bị loại bỏ hoặc không còn cần thiết nữa.
+>  Objects stored by remember will be discarded when the corresponding composable is removed or no longer needed.
 
-#### mutableStateOf
+### State observing
 
 `mutableStateOf` creates an observable `MutableState<T>`, which is an observable type integrated with the compose runtime.
 
@@ -34,9 +32,6 @@ interface MutableState<T> : State<T> {
     override var value: T
 }
 ```
-
-Any changes to `value` schedules recomposition of any composable functions that read `value`.
-
 
 There are three ways to declare a MutableState object in a composable:
 
@@ -55,34 +50,106 @@ Example:
 ```kotlin
 var count by rememberSaveable { mutableStateOf(0) }
 ```
-> [!Caution]
-> Using mutable objects such as ArrayList<T> or mutableListOf() as state in Compose causes your users to see incorrect or stale data in your app. Mutable objects that are not observable, such as ArrayList or a mutable data class, are not observable by Compose and don't trigger a recomposition when they change. Instead of using non-observable mutable objects, the recommendation is to use an observable data holder such as State<List<T>> and the immutable listOf().
 
+### State observing with Collection
 
-#### derivedStateOf
+Let's say we have not just one value but a whole list
+For example, a shopping list of items to buy at the store. We can pass it as an argument to `mutableStateOf(value = mutableListOf(“candy”, “chocolate”, “cookies”))`,
+but when we add or remove elements from the list, nothing will change because `mutableStateOf()` tracks the object as a whole, not its internal content.
+In this case, the `mutableStateListOf("candy", "chocolate", "cookies")` function comes to play.
 
-Sử dụng derivedStateOf: derivedStateOf cho phép bạn tạo ra một trạng thái phụ thuộc vào một hoặc nhiều trạng thái khác. Khi bất kỳ trạng thái nào mà nó phụ thuộc vào thay đổi, trạng thái được tạo ra bởi derivedStateOf cũng sẽ thay đổi, và tất cả các Composable đang lắng nghe trạng thái đó sẽ được recompose.
+We can also use the `Collection<T>.toMutableStateListOf()` extension function to transform an existing list.
+Now, Compose will be notified whenever the list changes and the list displayed on the screen will be updated.
+
+Similarly, we can use `mutableStateMapOf()` to create an observable `Map<T>`.
+
+Or You can use the others approach. Use an observable data holder such as `State<List<T>>` and the immutable `listOf()`.
+
+### Derived State
+
+Let's imagine a different situation.
+Suppose we have TextField, and we need to check whether the length of the username matches the minimum set size with each entered character.
 
 ```kotlin
-val count1 by remember { mutableStateOf(0) }
-val count2 by remember { mutableStateOf(0) }
-val sum by derivedStateOf { count1 + count2 }
+const val MIN_LENGTH = 5
+val username = mutableStateOf("")
+
+@Composable
+fun UsernameBlock() {
+    Log.d("Recomposition", "UsernameBlock Recomposition")
+
+    Column {
+        Log.d("Recomposition", "Column Recomposition")
+
+        val isMinLength = username.value.length >= MIN_LENGTH
+
+        if (!isMinLength) {
+            Text("At least 5 symbols", color = Color.Red)
+        }
+
+        Surface {
+            Log.d("Recomposition", "TextField Recomposition")
+
+            TextField(value = username.value, onValueChange = { username.value = it })
+        }
+    }
+}
 ```
 
-#### Other supported types of state
+Result:
+
+![alt name](/resources/derived_state_example.gif)
+
+As you can see, each time the value of the `TextField` changes, the entire `UsernameBlock` composable is recomposed.
+This is because the `Column` composable depends on the state of `username`.
+Thus, we trigger unnecessary recompositions, despite the fact that the composition on the screen does not change until the text length reaches the set minimum.
+
+`derivedStateOf` allows you to create a state that depends on one or more other states.
+This function has a single calculation parameter that takes functions as an argument that performs specific calculations and returns the result of their calculations.
+When any of the states it depends on changes, the state created by `derivedStateOf` will also change, and all Composables listening to that state will be recomposed.
+
+Let's try to improve our code:
+
+```kotlin
+const val MIN_LENGTH = 5
+val username = mutableStateOf("")
+val derivedState = derivedStateOf { 
+    username.value.length >= MIN_LENGTH 
+}
+
+@Composable
+fun UsernameBlock() {
+    Log.d("Column", "UsernameBlock Recomposition")
+
+    Column {
+        Log.d("Column", "Column Recomposition")
+
+        if (!derivedState.value) {
+            Text("At least 5 symbols", color = Color.Red)
+        }
+
+        Surface {
+            Log.d("Column", "Surface Recomposition")
+
+            TextField(value = username.value, onValueChange = { username.value = it })
+        }
+    }
+}
+```
+
+![alt text](/resources/derived_state_example2.gif)
+
+### Other supported types of state
 
 Compose doesn't require that you use `MutableState<T>` to hold state; it supports other observable types. Before reading another observable type in Compose, **you must convert it to a `State<T>` so that composables can automatically recompose when the state changes.**
 
-Compose ships with functions to create State<T> from common observable types used in Android apps. Before using these integrations, add the appropriate artifact(s) as outlined below:
+Compose ships with functions to create `State<T>` from common observable types used in Android apps. Before using these integrations, add the appropriate artifact(s) as outlined below:
 
-- Flow: `collectAsStateWithLifecycle()`
+- Flow: `collectAsStateWithLifecycle()` and `collectAsState()`
 
-`collectAsStateWithLifecycle() `collects values from a Flow in a lifecycle-aware manner, allowing your app to conserve app resources. It represents the latest emitted value from the Compose State. Use this API as the recommended way to collect flows on Android apps.
+Both `collectAsStateWithLifecycle()` and `collectAsState()` collect values from a `Flow` and transform them into Compose State, representing the latest emitted value. `collectAsStateWithLifecycle()` is **lifecycle-aware**, helping conserve app resources on Android, and is the recommended API for collecting flows. `collectAsState()` offers similar functionality but lacks lifecycle awareness.
 
-- Flow: `collectAsState()`
-`collectAsState` is similar to `collectAsStateWithLifecycle`, because it also collects values from a Flow and transforms it into Compose State.
-
-Use collectAsState for platform-agnostic code instead of collectAsStateWithLifecycle, which is Android-only.
+Use collectAsState for platform-agnostic code instead of `collectAsStateWithLifecycle`, which is Android-only.
 
 - Live Data: `observeAsState()`
 
@@ -96,8 +163,54 @@ Use collectAsState for platform-agnostic code instead of collectAsStateWithLifec
 > [!IMPORTANT]
 > Compose automatically recomposes from reading `State` objects. If you use another observable type such as `LiveData` in Compose, you should convert it to State before reading it. Make sure that type conversion happens in a composable, using a composable extension function like `LiveData<T>.observeAsState()`.
 
+### Custom Compose state
+
+You are not limited to these integrations. You can build an extension function for Jetpack Compose that reads other observable types.
+If your app uses a custom observable class, convert it to produce `State<T>` using the `produceState()` API. This function allows you to use subscription-driven states such as `Flow`, `LiveData`, or `RxJava` directly in composable ones
+
 > [!NOTE]
-> You are not limited to these integrations. You can build an extension function for Jetpack Compose that reads other observable types. If your app uses a custom observable class, convert it to produce `State<T>` using the `produceState` API.
+> unlike mutableStateOf() and derivedStateOf(), the produceState() function is a composable that returns an object of type `State<T>`. As a result, this function can only be called within another composable.
+
+Let's try create a generic extension function with a `@Composable` annotation to convert the state using `LiveData` as an example now:
+
+```kotlin
+@Composable
+fun <T> LiveData<T>.observeAsState(): State<T?> { 
+    val liveData = this 
+    val owner = LocalLifecycleOwner.current
+    // we need to call the produceState() function, which will return an object of the State<T> type.
+    // This function has two required parameters: initialValue of generic type and a producer parameter,
+    val state = produceState(initialValue = liveData.value) {
+        /**
+        Note that inside the lambda expression of the producer parameter you can execute
+        both regular functions and suspended functions.
+        This is because produceState launches a coroutine scoped to the composition. 
+        This means that the producer function will be launched when produceState() 
+        enters composition and will be canceled when it leaves composition.
+        **/
+        liveData.observe(owner) { recentData ->
+            value = recentData
+        }
+    }
+    return state
+}
+```
+
+Now we just need to call the extension function on the LiveData object and handle this state in the way we need, for example, as shown here:
+
+```kotlin
+val liveData = MutableLiveData(0)
+
+@Composable
+fun LiveStateBlock() {
+    val liveState = liveData.observeAsState()
+
+    Button(onClick = { liveData.value = liveData.value!! + 1 }) {
+        Text("Clicks: ${liveState.value}")
+    }
+}
+```
+
 
 ## Stateful versus stateless
 
@@ -209,7 +322,8 @@ Simple state hoisting can be managed in the composable functions itself. However
 
 ## Retrigger remember calculations when keys change
 
->In general, `remember` takes a calculation lambda parameter. When `remember` is first run, it invokes the calculation lambda and stores its result. During recomposition, `remember` returns the value that was last stored.
+In general, `remember` takes a calculation lambda parameter. When `remember` is first run, it invokes the calculation lambda and stores its result. During recomposition, `remember` returns the value that was last stored.
+
 Apart from caching state, you can also use `remember` to store any object or result of an operation in the Composition that is expensive to initialize or calculate. You might not want to repeat this calculation in every recomposition. 
 
 `remember` stores the value until it leaves the Composition. However, **there is a way to invalidate the cached value**. The `remember` API also takes a `key` or `keys` parameter. If any of these keys change, the next time the function recomposes, **`remember` invalidates the cache and executes the calculation lambda block again. This mechanism gives you control over the lifetime of an object in the Composition**. The calculation remains valid until the inputs change, instead of until the remembered value leaves the Composition.
@@ -240,3 +354,8 @@ private fun BackgroundBanner(
     }
 }
 ```
+
+## References
+
+- https://developer.android.com/develop/ui/compose/state
+- https://hyperskill.org/learn/step/28475
