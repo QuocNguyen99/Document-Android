@@ -3,7 +3,7 @@
 
 Compose transforms state into UI elements, via these [phases](../UIArchitecture/3_Phases.md):
 
-![](../../../../../resources/composition-layout-drawing.svg)
+![](/resources/composition-layout-drawing.svg)
 
 
 **This document focuses on the layout of elements**, explaining some of the building blocks Compose provides to help you lay out your UI elements.
@@ -30,7 +30,7 @@ Compose provides a collection of ready-to-use layouts to help you arrange your U
 - Use `Row` to place items horizontally on the screen
 - Use `Box` to put elements on top of another. 
 
-![](../../../../../resources/layout-column-row-box.svg)
+![](/resources/layout-column-row-box.svg)
 
 
 > [!NOTE]
@@ -103,7 +103,7 @@ In the SearchResult example, the UI tree layout follows this order:
 9. Now that the Column node has measured, sized, and, placed its children, it can determine its own size and placement.
 10. Now that the root node Row has measured, sized, and placed its children, it can determine its own size and placement
 
-![](../../../../../resources/search-result-layout.svg)
+![](/resources/search-result-layout.svg)
 
   </p>
 </details>
@@ -146,40 +146,4 @@ Compose provides a large variety of composables based on Material Design with th
 
 Material components make heavy use of slot APIs, a pattern Compose introduces to bring in a layer of customization on top of composables. This approach makes components more flexible, as they accept a child element which can configure itself rather than having to expose every configuration parameter of the child. Slots leave an empty space in the UI for the developer to fill as they wish. For example, these are the slots that you can customize in a `TopAppBar`:
 
-![](../../../../../resources/layout-appbar-slots.png)
-
-
-# TL; DR
-
-## Goals of layouts in Compose
-
-The Jetpack Compose implementation of the layout system has two main goals:
-- High performance
-- Ability to easily write custom layouts
-
-## Defination about Compose function
-A composable function is a function emitting Unit that describes some part of your UI. The function takes some input and generates what's shown on the screen.
-
-## The Layout model
-
-The parents measure before their children, but are sized and placed after their children.
-
-During the Layout phase, the tree is traversed using the following 3 step algorithm:
-
-Measure children: A node measures its children, if any.
-Decide own size: Based on those measurements, a node decides on its own size.
-Place children: Each child node is placed relative to a node’s own position.
-
-## Responsive layouts
-
-Compose offers out of the box a few mechanisms to facilitate adapting your composable layouts to various screen configurations:
-
-### 1. Constraints
-
-In order to know the constraints coming from the parent and design the layout accordingly, you can use a BoxWithConstraints. The measurement constraints can be found in the scope of the content lambda. You can use these measurement constraints to compose different layouts for different screen configurations
-
-### 2. Slot-based layouts
-
-Compose provides a large variety of composables based on Material Design such as: Drawer, FloatingActionButton, and TopAppBar... 
-
-A pattern Compose introduces to bring in a layer of customization on top of composables. This approach makes components more flexible, as they accept a child element which can configure itself rather than having to expose every configuration parameter of the child. 
+![](/resources/layout-appbar-slots.png)

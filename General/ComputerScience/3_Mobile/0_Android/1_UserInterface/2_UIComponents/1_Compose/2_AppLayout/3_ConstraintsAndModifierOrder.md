@@ -24,8 +24,7 @@ In the layout phase, [the algorithm](../UIArchitecture/3_Phases.md#layout) that 
   
   <p>
   
-![](../../../../../resources/composables-modifiers.png)
-
+![](/resources/composables-modifiers.png)
 As shown in Figure 2, the implementation of the Image and Text composables themselves consist of a chain of modifiers wrapping a single layout node. The implementations of Row and Column are simply layout nodes that describe how to lay out their children.
 
   </p>
@@ -48,13 +47,13 @@ The layout phase follows a [three-step algorithm](../UIArchitecture/3_Phases.md#
 A constraint can be one of the following:
 
 - **Bounded**: The node has a maximum and minimum width and height.
-![](../../../../../resources/bounded-constraints.png)
+![](/resources/bounded-constraints.png)
 - **Unbounded**: The node is not constrained to any size. The maximum width and height bounds are set to infinity.
-![](../../../../../resources/unbounded-constraints.png)
+![](/resources/unbounded-constraints.png)
 - **Exact**: The node is asked to follow an exact size requirement. The minimum and maximum bounds are set to the same value.
-![](../../../../../resources/exact-constraints.png)
+![](/resources/exact-constraints.png)
 - **Combination**: The node follows a combination of the above constraint types. For example, a constraint could bound the width while allowing for an unbounded maximum height, or set an exact width but provide a bounded height.
-![](../../../../../resources/combination-constraints.png)
+![](/resources/combination-constraints.png)
 
 ### How constraints are passed from parent to child
 
@@ -88,7 +87,7 @@ The following sections describe specific modifiers that impact constraints.
 For example, the following UI tree should be rendered in a container of `300dp` by `200dp`. The constraints are bounded, allowing widths between `100dp` and `300dp`, and heights between `100dp` and `200dp`:
 
 <div style="display: flex; align-items: center;">
-  <img src="../../../../../resources/size-modifier.png" alt="Image" style="margin-right: 10px; width:50%"/>
+  <img src="/resources/size-modifier.png" alt="Image" style="margin-right: 10px; width:50%"/>
   <p>
   
   ```kotlin
@@ -124,7 +123,7 @@ fun BoundedConstraintsExample() {
 The size modifier adapts incoming constraints to match the value passed to it. In this example, the value is 150dp:
 
 <div style="display: flex; align-items: center;">
-  <img src="../../../../../resources/size-modifier-2.png" alt="Image" style="margin-right: 10px; width:50%"/>
+  <img src="/resources/size-modifier-2.png" alt="Image" style="margin-right: 10px; width:50%"/>
   <p>
 
 ```kotlin
@@ -197,13 +196,13 @@ Box(
 }
 ```
 
-![](../../../../../resources/size-modifier-3.png)
+![](/resources/size-modifier-3.png)
 
 
 Note that chaining multiple size modifiers does not work. The first size modifier sets both the minimum and maximum constraints to a fixed value. Even if the second size modifier requests a smaller or larger size, it still needs to adhere to the exact bounds passed in, so it won't override those values:
 
 <div style="display: flex; align-items: center;">
-  <img src="../../../../../resources/size-modifier-4.png" alt="Image" style="margin-right: 10px; width:50%"/>
+  <img src="/resources/size-modifier-4.png" alt="Image" style="margin-right: 10px; width:50%"/>
   <p>
 
 ```kotlin
@@ -242,7 +241,7 @@ A chain of two size modifiers, in which the second value passed in (50dp) does n
 Use the requiredSize modifier instead of size if you need your node to override the incoming constraints. The requiredSize modifier replaces the incoming constraints and passes the size you specify as exact bounds.
 
 <div style="display: flex; align-items: center;">
-  <img src="../../../../../resources/requiredsize-modifier.png" alt="Image" style="margin-right: 10px; width:50%"/>
+  <img src="/resources/requiredsize-modifier.png" alt="Image" style="margin-right: 10px; width:50%"/>
   <p>
 
 ```kotlin
@@ -276,11 +275,11 @@ fun RequiredSizeModifierExample() {
 
 The `size` modifier adapts both the `width` and `height` of the constraints. With the width `modifier`, you can set a fixed `width` but leave the `height` undecided. Similarly, with the `height` `modifier`, you can set a fixed `height`, but leave the `width` undecided:
 
-![](../../../../../resources/width-height-modifier.png)
+![](/resources/width-height-modifier.png)
 
 
 #### `sizeIn` modifier
 
 The sizeIn modifier lets you set exact minimum and maximum constraints for width and height. Use the sizeIn modifier if you need fine-grained control over the constraints.
 
-![](../../../../../resources/sizein-modifier.png)
+![](/resources/sizein-modifier.png)

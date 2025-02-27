@@ -175,37 +175,38 @@ An illustration of a transition is given below. Take a look at how and what attr
 ```kotlin
 Transitions: {
     default: {
-        from: 'start',
-        to: 'end',
-        pathMotionArc: 'startHorizontal',
-        duration: 900
-        staggered: 0.4,
-        onSwipe: {
-                anchor: 'box1',
-                maxVelocity: 4.2,
-                maxAccel: 3,
-                direction: 'end',
-                side: 'start',
-                mode: 'velocity'
-         }
-        KeyFrames: {
-        KeyPositions: [
-            {
-            target: ['a'],
-            frames: [25, 50, 75],
-            percentX: [0.4, 0.8, 0.1],
-            percentY: [0.4, 0.8, 0.3]
+            from: 'start',
+            to: 'end',
+            pathMotionArc: 'startHorizontal',
+            duration: 900
+            staggered: 0.4,
+            onSwipe: {
+                    anchor: 'box1',
+                    maxVelocity: 4.2,
+                    maxAccel: 3,
+                    direction: 'end',
+                    side: 'start',
+                    mode: 'velocity'
             }
-        ],
-        KeyCycles: [
-            {
+            KeyFrames: {
+            KeyPositions: [
+                {
                 target: ['a'],
-                frames: [0, 50, 100],
-                period: [0 , 2 , 0],
-                rotationX: [0, 45, 0],
-                rotationY: [0, 45, 0], 
-            }
-        ]
+                frames: [25, 50, 75],
+                percentX: [0.4, 0.8, 0.1],
+                percentY: [0.4, 0.8, 0.3]
+                }
+            ],
+            KeyCycles: [
+                {
+                    target: ['a'],
+                    frames: [0, 50, 100],
+                    period: [0 , 2 , 0],
+                    rotationX: [0, 45, 0],
+                    rotationY: [0, 45, 0], 
+                }
+            ]
+        }
     }
 }
 ```
@@ -284,7 +285,7 @@ To enable debugging we simply can do that with the “debug” parameter.
 
 Note that by default the debug value is set to **EnumSet.of(MotionLayoutDebugFlags.NONE)**
 
-![alt text](../../../../../resources/debug_motion_path.png)
+![alt text](/resources/debug_motion_path.png)
 
 Here you can see that the paths are denoted by a dotted line.
 
