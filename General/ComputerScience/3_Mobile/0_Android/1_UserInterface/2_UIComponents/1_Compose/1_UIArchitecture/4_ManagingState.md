@@ -15,13 +15,6 @@ To track state changes, Jetpack Compose has its own special observable system of
 > Initial composition: creation of a Composition by running composables the first time.
 > Recomposition: re-running composables to update the Composition when data changes.
 
-### State in composables
-
-**Composable functions can use the `remember` API to store an object in memory. A value computed by `remember` is stored in the Composition during initial composition, and the stored value is returned during recomposition. `remember` can be used to store both mutable and immutable objects.**
-
-> [!NOTE]
->  Objects stored by remember will be discarded when the corresponding composable is removed or no longer needed.
-
 ### State observing
 
 `mutableStateOf` creates an observable `MutableState<T>`, which is an observable type integrated with the compose runtime.
@@ -43,13 +36,7 @@ These declarations are equivalent, and are provided as syntax sugar for differen
 
 You can use the remembered value as a parameter for other composables or even as logic in statements to change which composables are displayed. 
 
-
-While `remember` helps you retain state across recompositions, the state is not retained across configuration changes. For this, you must use `rememberSaveable`. `rememberSaveable` automatically saves any value that can be saved in a Bundle. For other values, you can pass in a custom saver object.
-Example:
-
-```kotlin
-var count by rememberSaveable { mutableStateOf(0) }
-```
+[Read more about remember](/General/ComputerScience/3_Mobile/0_Android/1_UserInterface/2_UIComponents/1_Compose/1_UIArchitecture/5_Remember.md)
 
 ### State observing with Collection
 
