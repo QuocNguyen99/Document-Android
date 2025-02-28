@@ -173,7 +173,7 @@ fun ArtistCard(/*...*/) {
 
 #### Offset
 
-To position a layout relative to its original position, add the offset modifier and set the offset in the x and y axis. Offsets can be positive as well as non-positive. **The difference between padding and offset is that adding an offset to a composable does not change its measurements**(offset  không thêm không gian vào composable mà chỉ thay đổi vị trí vẽ của nó trong không gian bố trí hiện tại.):
+To position a layout relative to its original position, add the offset modifier and set the offset in the x and y axis. Offsets can be positive as well as non-positive. **The difference between padding and offset is that adding an offset to a composable does not change its measurements**:
 
 ```kotlin
 @Composable
