@@ -96,7 +96,7 @@ fun Greeting() {
 
 ### 2. Pay attention to Inline Composable Function
 
-Based on Part 1 example this code will invoke onlyColumn Scope , right? because component that read state on line number 9 is at Column Scope . Let’s find out.
+Based on Part 1 example this code will invoke only `Column` Scope , right? because component that read state on line number 9 is at `Column` Scope . Let’s find out.
 
 ```kotlin
 @Composable

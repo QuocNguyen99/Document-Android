@@ -3,13 +3,13 @@
 
 Jetpack Compose is designed using a declarative approach, enabling the creation of highly reusable and intuitive UI layouts. However, a challenge arises when the information provided at the root of the layout is needed at the very end of the node. There's no issue with simple UI structures, but consider a scenario like the figure below where you need to construct a highly complex layout involving more than ten levels of various Composable function calls.
 
-![](../../../../../resources/composition_local.avif)
+![](/resources/composition_local.avif)
 
 In such a scenario, you would need to relay the necessary information from the root to the end, and all Composable functions situated in between must also transmit this information, even if they don't actually utilize it. This approach complicates the entire set of Composable functions, making them more extensive and burdened with unrelated information. Consequently, it could potentially reduce the maintainability of your code.
 
 To tackle this issue, **Compose offers CompositionLocal which allows you to create tree-scoped named objects that can be used as an implicit way to have data flow through the UI tree, enabling access to the required information at any time and at any level of the node whenever needed like the figure below:**
 
-![](../../../../../resources/composition_local_provider.avif)
+![](/resources/composition_local_provider.avif)
 
 
 In many scenarios, **CompositionLocal** is used to pass relatively "static" information that doesn’t change much once created. A familiar example might be the MaterialTheme object, which aids in ensuring consistency across your Compose UI components.
