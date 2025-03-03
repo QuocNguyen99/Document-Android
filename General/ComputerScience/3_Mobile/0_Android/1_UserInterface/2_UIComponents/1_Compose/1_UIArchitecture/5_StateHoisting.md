@@ -46,106 +46,79 @@ fun ChatBubble(
 
 #### Hoisting within composables
 
+Hoisting the state implies moving it up in the hierarchy so it's managed by a parent composable or the screen, rather than by individual UI elements.
+
+Understanding state hoisting necessitates a comprehension of **stateful** and **stateless** functions. 
+
+- A stateful function is one that includes any state storage mechanism; for instance, a `remember` or `rememberSaveable` function. It can manage, store, and share the state with child or grandchild composables.
+-  In contrast, a stateless function does not manage or store the state; it simply displays the state provided by a parent composable or sends events back to the parent. 
+
 **If you need to share your UI element state with other composables and apply UI logic to it in different places**, you can hoist it higher in the UI hierarchy. This also makes your composables more reusable and easier to test.
 
-
-<details>
-  <summary style="color: orange;">
-  <b>
-  Example to Understand how to hoisting within composables
-  </b>
-  </summary>
-  
-  <p>
-  
-The following example is a chat app that implements two pieces of functionality:
-
-- The `JumpToBottom` button scrolls the messages list to the bottom. The button performs UI logic on the list state.
-- The `MessagesList` list scrolls to the bottom after the user sends new messages. UserInput performs UI logic on the list state.
-
-![](../../../../../resources/state-hoisting-chat.png)
-
-**Figure 1**. Chat app with a `JumpToBottom` button and scroll to bottom on new messages
-
-The composable hierarchy is as follows:
-
-![](../../../../../resources/state-hoisting-initial-tree.png)
-**Figure 2**. Chat composable tree
-
-The `LazyColumn` state is hoisted to the conversation screen so the app can perform UI logic and read the state from all composables that require it:
-
-![](../../../../../resources/state-hoisting-animated.gif)
-**Figure 3**. Hoisting `LazyColumn` state from the `LazyColumn` to the `ConversationScreen`
-
-The code is as follows:
+Example, Consider a simple form with multiple text fields. Each text field can have its own state — the current text.
+However, The screen containing the form usually needs to know the overall state(the data entered across all fields).
+By employing state hoisting, we can manage all these states at the form level.
 
 ```kotlin
+
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+
 @Composable
-private fun ConversationScreen(/*...*/) {
-    val scope = rememberCoroutineScope()
-
-    val lazyListState = rememberLazyListState() // State hoisted to the ConversationScreen
-
-    MessagesList(messages, lazyListState) // Reuse same state in MessageList
-
-    UserInput(
-        onMessageSent = { // Apply UI logic to lazyListState
-            scope.launch {
-                lazyListState.scrollToItem(0)
-            }
-        },
-    )
+fun FormScreen() {
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    Column {
+        AppTextField(
+            label = "Email",
+            value = email,
+            onValueChange = { email = it }
+        )
+        AppTextField(
+            label = "Password",
+            value = password,
+            onValueChange = { password = it }
+        )
+        Button(onClick = { /* Handle business logic */ }) {
+            Text("Submit")
+        }
+    }
 }
 
 @Composable
-private fun MessagesList(
-    messages: List<Message>,
-    lazyListState: LazyListState = rememberLazyListState() // LazyListState has a default value
-) {
-
-    LazyColumn(
-        state = lazyListState // Pass hoisted state to LazyColumn
-    ) {
-        items(messages, key = { message -> message.id }) { item ->
-            Message(/*...*/)
-        }
-    }
-
-    val scope = rememberCoroutineScope()
-
-    JumpToBottom(onClicked = {
-        scope.launch {
-            lazyListState.scrollToItem(0) // UI logic being applied to lazyListState
-        }
-    })
+fun AppTextField(label: String, value: String, onValueChange: (String) -> Unit) {
+    TextField(
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(label) }
+    )
 }
 ```
 
-`LazyListState` is hoisted as high as required for the UI logic that has to be applied. Since it is initialized in a composable function, it is stored in the Composition, following its lifecycle.
+we have a `FormScreen` composable that contains two pieces of state: `email` and `password`.
+Each state is managed at the form level using remember and `mutableStateOf`.
+We then pass each piece of state down to an `AppTextField` composable, along with a corresponding `onValueChange` callback, which updates the state when the text changes.
 
-Note that `lazyListState` is defined in the `MessagesList` method, with the default value of `rememberLazyListState()`. This is a common pattern in Compose. It makes composables more reusable and flexible. You can then use the composable in different parts of the app which might not need to control the state. This is usually the case while testing or previewing a composable. This is exactly how `LazyColumn` defines its state.
+The `AppTextField` accepts a `label`, the current `value`, and an `onValueChange` callback as parameters. 
+This setup makes each text field a pure (stateless) composable of its state, with no internal state management. Let's look at this setup in the form of a diagram.
 
-> [!NOTE]
-> Key point: Hoist state to the lowest common ancestor and avoid passing it to composables that don't need it.
+![alt text](/resources/state_hoisting_example.png)
 
+Another important aspect is that data flows in one direction—from `FormScreen` to `TextField`—while events that update the state, such as user inputs, flow in the opposite direction.
+This pattern is known as a [unidirectional data flow](/General/ComputerScience/3_Mobile/0_Android/3_Architecture/2_StateManagement/UnidirectionalDataFlow.md).
+It makes it easier to track how data and events move through the app, thus simplifying debugging and problem-solving.
 
-![](../../../../../resources/state-hoisting-lca.png)
-
-**Figure 5**. Lowest common ancestor for LazyListState is ConversationScreen
-
-
-  </p>
-</details>
-
-
+It also helps prevent bugs that happen when data changes unexpectedly or moves in ways you didn’t intend—this is a common problem in **bidirectional data flow**, where data can go back and forth.
 
 #### Plain state holder class as state owner
 
-When a composable contains complex UI logic that involves one or multiple state fields of a UI element, it should delegate that responsibility to `state holders`, like a plain state holder class. This makes the composable's logic more testable in isolation, and reduces its complexity. This approach favors [the separation of concerns principle](../../../../../General/DesignPrinciple/SeparationOfConcernsPrinciple.md): **the composable is in charge of emitting UI elements, and the state holder contains the UI logic and UI element state.**
+When a composable contains complex UI logic that involves one or multiple state fields of a UI element, it should delegate that responsibility to `state holders`, like a plain state holder class. This makes the composable's logic more testable in isolation, and reduces its complexity. This approach favors [the separation of concerns principle](/General/DesignPrinciple/SeparationOfConcernsPrinciple.md): **the composable is in charge of emitting UI elements, and the state holder contains the UI logic and UI element state.**
 
 Plain state holder classes provide convenient functions to callers of your composable function, so they don't have to write this logic themselves.
 
-These plain classes are created and remembered in the Composition. Because they follow the [composable's lifecycle](../UIArchitecture/LifecycleOfComposables.md), they can take types provided by the Compose library such as `rememberNavController()` or `rememberLazyListState()`.
+These plain classes are created and remembered in the Composition. Because they follow the [composable's lifecycle](/General/ComputerScience/3_Mobile/0_Android/1_UserInterface/2_UIComponents/1_Compose/1_UIArchitecture/LifecycleOfComposables.md), they can take types provided by the Compose library such as `rememberNavController()` or `rememberLazyListState()`.
 
 <details>
   <summary style="color: orange;">
@@ -220,3 +193,9 @@ One of the main benefits of using a ViewModel in your Android application is tha
 > The `ViewModel`, as the implementation of a screen level state holder, handles the business logic used to produce screen UI state. **You should hoist the UI state to the `ViewModel`, not because it will handle configuration changes for free, but because it makes sense for your architecture**.
 
 However, a `ViewModel` instance does not survive system-initiated process death. To have the UI state survive this, use the Saved State module for `ViewModel`, which contains the `SavedStateHandle` API.
+
+
+## Reference
+
+- https://developer.android.com/develop/ui/compose/state
+- https://hyperskill.org/learn/step/40623
