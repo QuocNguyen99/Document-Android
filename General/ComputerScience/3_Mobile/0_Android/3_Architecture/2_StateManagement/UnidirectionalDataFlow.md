@@ -9,7 +9,7 @@ The UI update loop for an app using unidirectional data flow looks like this:
 - **Update state**: An event handler might change the state.
 - **Display state**: The state holder passes down the state, and the UI displays it.
 
-![](../../resources/state_hosting.avif)
+![](/resources/state_hosting.avif)
 
 Following this pattern when using Jetpack Compose provides several advantages:
 
