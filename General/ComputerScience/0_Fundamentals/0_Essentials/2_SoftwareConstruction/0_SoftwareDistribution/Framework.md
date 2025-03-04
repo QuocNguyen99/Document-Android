@@ -12,4 +12,4 @@ The most common principle that comes with frameworks is Inversion of Control (Io
 
 In a framework, unlike in libraries or standard user applications, the overall program's flow of control is dictated not by the caller but by the framework. It means the framework calls your code, and not vice versa:
 
-![alt text](../../../resources/IOCFramework.png)
+![alt text](/resources/IOCFramework.png)
