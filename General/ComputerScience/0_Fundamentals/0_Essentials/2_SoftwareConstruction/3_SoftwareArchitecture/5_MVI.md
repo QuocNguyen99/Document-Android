@@ -1,17 +1,35 @@
-## MVI
-
-MVI (Model-View-Intent) is also a popular architecture in modern Android development since Jetpack Compose has brought declarative programming to our lives.
-
-MVI pattern focuses on the single source of truth principle to provide immutable states to other layers and unidirectional and immutability of states that represent the result of user actions and configure UI screens.
-
+# MVI Architecture (Model-View-Intent)
 
 ![](/resources/mvi-func2.avif)
 
+MVI (Model-View-Intent) is an architectural pattern used in Android development that emphasizes unidirectional data flow and clear separation of concerns. It consists of three main components:
 
-Unlike MVVM and MVP, the definition of each component of the MVI (Model-View-Intent) is slightly different:
+- **Model**: Represents the application's state, including data and business logic.
+The Model ensures immutability and manages the application's state.
+- **View**: Responsible for displaying the UI based on the current state of the `Model`.
+The `View` also collects user interactions and converts them into `Intents`.
+- **Intent**: Represents user actions or events. `Intents` are sent from the `View` to the `Model` to trigger state updates or perform other operations.
 
-Intent: Intent is a definition of interfaces and functions that handle user actions (UI events, such as button click events). The functions transform UI events into Model’s interfaces and deliver the result to Model for manipulating it. As its name implies, we could say we have the intention to perform Model functions.
 
-Model: The definition of Model in MVI is completely different compared to MVP and MVVM. In MVI, Model is a functional mechanism that takes the output from Intent and manipulates it to UI states that could be rendered in View. The UI states are immutable and come from business logic, which follows single source of truth and unidirectional data flow.
 
-View: View in MVI has the same responsibilities as MVP and MVVM, which represents the screen and user interactions, such as listeners, and does not contain business logic. One of the biggest differences in implementation from other patterns is that the MVI ensures unidirectional data flow, so View renders UI elements depending on UI states that come from the Model.
+## Advantages
+
+1. **Unidirectional data flow**: Simplifies state management, making state transitions clear and predictable.
+2. **Separation of concerns**: Clearly separates state management from UI rendering, resulting in cleaner and more maintainable code. 
+3. **Scalability**: Easily handles complex state transitions and business logic, making it suitable for large applications.
+4. **Testability**: Simplifies unit testing for state transitions and business logic due to the clear separation of components.
+5. **Consistent user experience**: Ensures the UI always reflects the current state of the application, providing a predictable and smooth user experience.
+
+## Disadvantages
+
+1. **Increased complexity**: MVI introduces additional complexity to the application architecture, especially when applying reactive programming concepts and unidirectional data flow.
+2. **Steep learning curve**: Developers new to MVI or reactive programming may struggle to understand and implement this pattern.
+3. **Boilerplate code**: MVI often requires writing extra code to manage unidirectional data flow, event handling, and state management, leading to repetitive code that can be difficult to maintain.
+4. **Performance concerns**: Depending on implementation and application size, MVI may introduce performance overhead due to additional data transformations, event handling, and state updates.
+5. **Integration challenges with other components**: When used with XML layouts, referencing ViewModels can make the architecture less efficient, leading to dependencies between View and ViewModel.
+
+
+## References
+
+- https://ebdz.dev/blog/mvi-ampamp-mobile-dev?utm_source=chatgpt.com
+- https://www.scaler.com/topics/android/mvi-architecture-android/?utm_source=chatgpt.com
