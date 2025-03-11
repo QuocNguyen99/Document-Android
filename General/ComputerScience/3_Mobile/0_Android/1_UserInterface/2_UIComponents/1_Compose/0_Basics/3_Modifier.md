@@ -518,6 +518,22 @@ fun Modifier.changeColorWhenClicked() = composed {
 
 - There are a lot of ways to achieve the same result on UI. For instance, you can use `Spacer` to separate the image from the text. Or instead of applying padding in `Row`, you can use padding in every composable. 
 However, doing something with less is better if it does not complicate the code. Imagine that the component count in `Row` can be much more.
+- Combine `modifier` with `remember` when working with `Modifier.clickable` because **a new of the clickable modifier is being created every time**.
+Consider remembering the entire modifier such as:
+
+```kotlin
+val modifier = remember(viewModel) {
+        val event = object: UiEvent {
+            override fun onClick() {
+                viewModel.action()
+            }
+        }
+        Modifier.clickable { event.onClick() }
+    }
+```
+
+> [!NOTE]
+> The addition of the viewModel as a parameter to the remember to ensure a new version of clickable() gets created if/when the viewModel changes.
 
 
 ## Reference
