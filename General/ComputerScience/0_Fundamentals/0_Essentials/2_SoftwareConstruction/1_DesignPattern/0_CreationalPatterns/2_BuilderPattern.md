@@ -55,7 +55,7 @@ Having a director class in your program isn’t strictly necessary.
 You can always call the building steps in a specific order directly from the client code.
 However, the director class might be a good place to put various construction routines so you can reuse them across your program.
 
-reference:
+## reference:
 
 [builder-design-pattern](https://refactoring.guru/design-patterns/builder)
 
