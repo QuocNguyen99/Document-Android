@@ -4,15 +4,17 @@ Builder pattern is a creational design pattern that allows you to create objects
 
 This approach allows creating fundamentally the same objects using one constructor, but they can be modified to depict different types of objects. 
 
-## Builder pattern goal
-
-The main goal of this pattern is to separate the construction of a complex object from its representation so that the same construction process can create different representations.
-
 
 ## Problem
 
 Imagine a complex object that requires laborious, step-by-step initialization of many fields and nested objects.
 Such initialization code is usually buried inside a monstrous constructor with lots of parameters. 
+
+
+## Builder pattern goal
+
+The main goal of this pattern is to separate the construction of a complex object from its representation so that the same construction process can create different representations.
+
 
 ## Example
 
