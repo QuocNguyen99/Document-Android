@@ -1,7 +1,8 @@
 # **Programming Paradigms Overview**
 
 ## 1. **Procedural Programming**
-- **Key Concept**: Organizes code into procedures or functions, where each procedure performs a specific task.  
+- **Key Concept**: Procedural programming is a subset of imperative programming, where programs are structured using procedures (functions) to organize and execute instructions sequentially.
+Imperative programming, in contrast, is a broader paradigm that focuses on how a program achieves a result by specifying a sequence of commands. 
 - **Approach**: Executes instructions sequentially, using loops and conditional statements.  
 - **Advantages**:  
   - Easy to understand and follow.  
