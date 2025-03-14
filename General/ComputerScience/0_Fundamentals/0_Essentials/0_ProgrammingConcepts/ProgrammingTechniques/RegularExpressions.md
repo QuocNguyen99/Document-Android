@@ -10,7 +10,8 @@ A **regular expression** (regex or regexp for short) is a sequence of characters
 **Regexps** may be regarded as a kind of sublanguage that most programming languages support, but there are some differences in syntax called "**flavors**". In this topic, we will consider **regexps** in isolation from programming languages to understand the general idea.
 
 
-you can visit the [regexp site](https://regex101.com/) to play around with regular expressions from our examples. Choose **PCRE** as the flavor. It means **P**erl **C**ompatible **R**egular **E**xpressions which are the most common standard in practice.
+> [!TIP]
+> you can visit the [regexp site](https://regex101.com/) to play around with regular expressions from our examples. Choose **PCRE** as the flavor. It means **P**erl **C**ompatible **R**egular **E**xpressions which are the most common standard in practice.
 
 The real power of regular expressions comes when you start using special metacharacters called **wildcards**. They allow you to define a pattern, so you can match strings that do not necessarily contain an identical sequence of characters. You can skip some characters in a string or match different characters in the same positions, or even repeat a character several times.
 
