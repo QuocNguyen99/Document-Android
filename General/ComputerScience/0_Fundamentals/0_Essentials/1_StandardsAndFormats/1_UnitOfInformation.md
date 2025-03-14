@@ -21,9 +21,9 @@ The processing of information takes place in the processor. This is a device tha
 
 The computer industry has historically used the units **kilobyte**, **megabyte**, and **gigabyte** in at least two slightly different measurement systems, which are slightly contradictory to each other.
 
-- The first one is a decimal-based system, which uses bytes in powers of ten: **kilobyte** (10^3 bytes), **megabyte** (10^6 bytes), **gigabyte** (10^9 bytes), and so on. These units are used by the International System of Units (SI).
+- The first one is a **decimal-based system**, which uses bytes in powers of ten: **kilobyte** (10^3 bytes), **megabyte** (10^6 bytes), **gigabyte** (10^9 bytes), and so on. These units are used by the International System of Units (SI).
 
-- The second one is a binary-based system that uses bytes in powers of two: **kibibyte** (2^10 bytes), **mebibyte** (2^20 bytes), **gibibyte** (2^30 bytes), and so on. This system was actively used to describe computer memory.
+- The second one is a **binary-based system that uses bytes in powers of two**: **kibibyte** (2^10 bytes), **mebibyte** (2^20 bytes), **gibibyte** (2^30 bytes), and so on. This system was actively used to describe computer memory.
 
 To reduce confusion, the `International Electrotechnical Commission (IEC)` proposed using prefixes kilo, mega, and giga only for the decimal-based system. For the binary-based system, they introduced new prefixes: **kibi**, **mebi**, and **gibi**. Here, 'bi' stands for binary. So, a kibibyte (KiB) equals 1,024 bytes, distinguishing it from a kilobyte (kB), which equals 1,000 bytes.
 
