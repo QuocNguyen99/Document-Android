@@ -9,7 +9,7 @@ One useful way to maintain a good object structure is by using a structural desi
 
 ## Definition
 
-**Structural design patterns** simplify the structure by defining the relationships between objects.
+**Structural design patterns simplify the structure by defining the relationships between objects**.
 Using these patterns, you will have a better understanding of whether we need to inherit, compose, or make and maintain any other relationships between system components.
 
 Various design patterns help build a larger structure by defining how each component should be organized.
