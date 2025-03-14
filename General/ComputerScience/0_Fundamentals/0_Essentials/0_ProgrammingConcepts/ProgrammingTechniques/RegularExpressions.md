@@ -29,4 +29,4 @@ The question mark `?` is a special character that means “the preceding charact
 If part of the actual regex happens to be a special character, this can be managed with the escape character. When you create strings with special characters, you can escape them using a double backslash `\\`
 
 
-So, if you need to find a special character such as a dot or a question mark, you can escape it with `\\`. The characters on which you used the escape symbol `\\` will not be interpreted as special.
+So, if you need to find a special character such as a dot or a question mark, you can escape it with `\\.` The characters on which you used the escape symbol `\\` will not be interpreted as special.
