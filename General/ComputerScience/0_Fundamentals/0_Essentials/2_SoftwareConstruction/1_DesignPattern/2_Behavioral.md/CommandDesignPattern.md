@@ -1,134 +1,46 @@
 # Command Design Pattern
 
-## Giới thiệu
 
-* Command (hay còn gọi là Action, Transaction) là một mẫu thiết kế thuộc nhóm hành vi (Behavioral Pattern).
-* Command pattern là một pattern cho phép bạn chuyển đổi một request thành một object độc lập chứa tất cả thông tin về request. Việc chuyển đổi này cho phép bạn tham số hoá các methods với các yêu cầu khác nhau như log, queue (undo/redo), transtraction.
-* Khái niệm Command Object giống như một class trung gian được tạo ra để lưu trữ các câu lệnh và trạng thái của object tại một thời điểm nào đó.
-* Command dịch ra nghĩa là ra lệnh. Commander nghĩa là chỉ huy, người này không làm mà chỉ ra lệnh cho người khác làm. Như vậy, phải có người nhận lệnh và thi hành lệnh. Người ra lệnh cần cung cấp một class đóng gói những mệnh lệnh. Người nhận mệnh lệnh cần phân biệt những interface nào để thực hiện đúng mệnh lệnh.
-* Tần suất sử dụng: khá cao
+## Problem
 
-## Kiến trúc
+When handling buttons with different functions, a common approach is to create multiple subclasses for each button. However, this leads to tight coupling between the GUI and business logic, making the code fragile and hard to maintain.
 
-Các thành phần trong mô hình:
+The Command Design Pattern offers a better solution by encapsulating requests as objects, allowing for the decoupling of the sender and receiver. This enhances code flexibility and scalability.
 
-* _Command :_ là một interface hoặc abstract class, chứa một phương thức trừu tượng thực thi (execute) một hành động (operation). Request sẽ được đóng gói dưới dạng Command.
-* _ConcreteCommand :_ là các implementation của Command. Định nghĩa một sự gắn kết giữa một đối tượng Receiver và một hành động. Thực thi execute() bằng việc gọi operation đang hoãn trên Receiver.
-* _Client:_ tiếp nhận request từ phía người dùng, đóng gói request thành ConcreteCommand thích hợp và thiết lập receiver của nó.
-* _Invoker:_ tiếp nhận ConcreteCommand từ Client và gọi execute() của ConcreteCommand để thực thi request.
-* _Receiver :_ đây là thành phần thực sự xử lý business logic cho case request. Trong phương thức execute() của ConcreteCommand chúng ta sẽ gọi method thích hợp trong Receiver.
+![NOTE]
+>  a "volatile" variable is a directive to the compiler, indicating that a variable's value can be changed unexpectedly by external events
 
-## Ưu & nhược điểm
+## Key Components
 
-#### Ưu điểm
+- Command Interface:
+Declares an `execute()` method for executing operations.
 
-* Đảm bảo nguyên tắc Single Responsibility
-* Đảm bảo nguyên tắc Open/Closed
-* Có thể thực hiện hoàn tác
-* Giảm kết nối phụ thuộc giữa Invoker và Receiver
-* Cho phép đóng gói yêu cầu thành đối tượng, dễ dàng chuyển dữ liệu giữa các thành phần hệ thống
+- Concrete Command:
+Implements the `execute()` method by invoking corresponding operations on the receiver.
 
-#### Nhược điểm
+- Receiver:
+Knows how to perform the operations associated with carrying out a request.
 
-* Khiến code trở nên phức tạp hơn, sinh ra các lớp mới gây phức tạp cho mã nguồn.
+- Invoker:
+Asks the command to carry out the request.
 
-## Khi nào thì sử dụng
+- Client:
+Creates a concrete command object and sets its receiver.
 
-Dưới đây chúng ta có thể liệt kê một số trường hợp mà khi gặp sẽ phải cân nhắc sử dụng Command pattern:
+## Benefits:
 
-* Khi cần tham số hóa các đối tượng theo một hành động thực hiện (biến action thành parameter)
-* Khi cần tạo và thực thi các yêu cầu vào các thời điểm khác nhau (delay action)
-* Khi cần hỗ trợ tính năng undo, log, callback hoặc transaction
-* Phối hợp nhiều Command với nhau theo thứ tự
+- Decoupling: Separates the object that invokes the operation from the one that knows how to perform it.
 
-## Code ví dụ
+- Undo/Redo Functionality:
+Supports reversible operations by storing state.
 
-### Tạo Receiver
+- Command Queuing: Allows for queuing of requests, enabling delayed or scheduled execution.
 
-```java
-public class Fan {
-    public void turnOn() {
-        System.out.println("Turn on");
-    }
 
-    public void turnOff() {
-        System.out.println("Turn off");
-    }
-}
-```
 
-### Tạo interface ICommand
+## Considerations:
 
-```java
-public interface ICommand {
-    void execute();
-    void undo();
-}
-```
-
-### Tạo Commander
-
-```java
-public class Remote {
-    private final ICommand turnOnCommand;
-    private final ICommand turnOffCommand;
-
-    public Remote(ICommand turnOnCommand, ICommand turnOffCommand) {
-        this.turnOnCommand = turnOnCommand;
-        this.turnOffCommand = turnOffCommand;
-    }
-
-    public void turnOnButtonClick() {
-        turnOnCommand.execute();
-    }
-
-    public void turnOffButtonClick() {
-        turnOffCommand.execute();
-    }
-}
-```
-
-### Implement 2 Commander
-
-```java
-class TurnOffCommand implements ICommand {
-    private final Fan fan;
-
-    public TurnOffCommand(Fan fan) {
-        this.fan = fan;
-    }
-
-    public void execute() {
-        fan.turnOff();
-    }
-
-    public void undo() {
-        fan.turnOn();
-    }
-}
-
-class TurnOnCommand implements ICommand {
-    private final Fan fan;
-
-    public TurnOnCommand(Fan fan) {
-        this.fan = fan;
-    }
-
-    public void execute() {
-        fan.turnOn();
-    }
-
-    public void undo() {
-        fan.turnOff();
-    }
-}
-```
-
-### Sử dụng
-
-```ja
-
-```
+**Complexity**, Introducing numerous command classes can increase the system's complexity.
 
 
 
