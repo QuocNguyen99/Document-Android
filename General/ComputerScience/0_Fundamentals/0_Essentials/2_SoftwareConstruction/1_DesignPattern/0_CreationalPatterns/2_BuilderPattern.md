@@ -42,6 +42,15 @@ Having a director class in your program isn’t strictly necessary.
 You can always call the building steps in a specific order directly from the client code.
 However, the director class might be a good place to put various construction routines so you can reuse them across your program.
 
+## Prospects
+- **Single Responsibility Principle**. You can isolate complex construction code from the business logic of the product.
+- You can construct objects step-by-step, defer construction steps or run steps recursively.
+- You can reuse the same construction code when building various representations of products.
+
+## Consequences
+
+- The overall complexity of the code increases since the pattern requires creating multiple new classes.
+
 ## reference:
 
 [builder-design-pattern](https://refactoring.guru/design-patterns/builder)
