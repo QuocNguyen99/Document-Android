@@ -14,13 +14,6 @@ This creates a conflict: either the customer wastes time, or the store wastes re
 
 The object with an interesting state is called the **publisher**, while the objects that want to track its changes are called **subscribers**.
 
-The pattern suggests adding a subscription mechanism to the publisher class. This mechanism includes:
-
-- An array to store subscriber references.
-- Methods to add and remove subscribers.
-When an event occurs, the publisher notifies all subscribers by calling a notification method on their objects.
-
-To avoid tight coupling, all subscribers implement a common interface, and the publisher interacts with them through this interface. This allows flexibility and ensures compatibility, even when new subscriber classes are added or different types of publishers are used.
 
 ## Structure
 
@@ -30,7 +23,7 @@ issues events of interest to other objects. These events occur when the publishe
 - **The Subscriber interface**:
 declares the notification interface.
 In most cases, it consists of a single update method.
-The method may have several parameters that let the publisher pass some event details along with the update.
+
 - **Concrete Subscribers**:
 the implementation of the Interface that perform some actions in response to notifications issued by the publisher.
 All of these classes must implement the same interface so the publisher isn’t coupled to concrete classes.
@@ -39,6 +32,10 @@ All of these classes must implement the same interface so the publisher isn’t 
 creates publisher and subscriber objects separately and then registers subscribers for publisher updates.
 
 ![alt text](/resources/observer_design_pattern.png)
+
+## Pseudocode
+
+![alt text](/resources/observer_pseudocode.png)
 
 ## Prospects
 

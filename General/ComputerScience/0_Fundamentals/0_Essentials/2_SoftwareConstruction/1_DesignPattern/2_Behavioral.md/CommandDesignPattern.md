@@ -12,34 +12,38 @@ The Command Design Pattern offers a better solution by encapsulating requests as
 
 ## Key Components
 
-- Command Interface:
+- **Command Interface**:
 interface usually declares **just a single method** for executing the command.
 
-- Concrete Command:
+- **Concrete Command**:
 Implements the method from the interface.
 Concrete Commands act as intermediaries, passing requests to business logic objects.
 They can store parameters as fields and be made immutable by setting these fields through the constructor.
 
-- the Sender (Invoker):
+- **the Sender (Invoker)**:
 triggers a Command object instead of directly interacting with the receiver.
 The command is pre-created by the Client and passed to the sender via the constructor, ensuring flexibility and decoupling.
 
-- Receiver:
+- **Receiver**:
 The Receiver class contains the business logic.
 Almost any object may act as a receiver.
 Most commands only handle the details of how a request is passed to the receiver, while the receiver itself does the actual work.
 
-- Client:
+- **Client**:
 The Client creates and configures concrete command objects.
 The client must pass all of the request parameters, including a receiver instance, into the command’s constructor.
 After that, the resulting command may be associated with one or multiple senders.
 
 ![alt text](/resources/command_design_pattern.png)
 
+## Pseudocode
+
+![alt text](/resources/command_pseudocode.png)
+
 ## Prospects:
 
-- Single Responsibility Principle. You can decouple classes that invoke operations from classes that perform these operations.
--  Open/Closed Principle. You can introduce new commands into the app without breaking existing client code.
+- **Single Responsibility Principle**. You can decouple classes that invoke operations from classes that perform these operations.
+-  **Open/Closed Principle**. You can introduce new commands into the app without breaking existing client code.
 - You can assemble a set of simple commands into a complex one.
 
 
