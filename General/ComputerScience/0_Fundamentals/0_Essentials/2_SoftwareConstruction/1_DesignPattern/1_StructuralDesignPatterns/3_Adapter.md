@@ -1,106 +1,39 @@
 # Adapter pattern
 
-**The adapter pattern** is a structural design pattern that connects different objects with incompatible interfaces.
-This pattern consists of a single class whose main purpose is to adapt the interface of one object so that another object can interact with it.
+## Problem
 
+In a stock market app, data is downloaded in XML format, but a 3rd-party analytics library only supports JSON format.
 
+Directly modifying the library to accept XML is risky and might break existing code or be impossible without access to the source code. This incompatibility issue makes it difficult to integrate the new library into the app.
 
-## Example
+## Solution
 
-![alt text](/resources/adapter_pattern_example.png)
+You can create an adapter. This is a special object that converts the interface of one object so that another object can understand it.
 
+## Structure
 
-```kotlin
-// USoutlet class
-class USOutlet {
-    fun getSocket(): String {
-        return "US"
-    }
-    
-    fun fits(powerPlug: PowerPlug): Boolean {
-        return this.getSocket() == powerPlug.getSocket()
-    }
-}
-```
+- **The Client**:
+is a class that contains the existing business logic of the program.
 
+- **The Client Interface**: describes a protocol that other classes must follow to be able to collaborate with the client code.
 
-```kotlin
-// PowerPlug interface
-interface PowerPlug {
-    fun getSocket(): String
-}
+- **The Service** is some useful class (usually 3rd-party or legacy).
+The client can’t use this class directly because it has an incompatible interface.
 
-// EUplug class
-class EUPlug : PowerPlug {
-    override fun getSocket(): String {
-        return "EU"
-    }
-}
+![alt text](/resources/adapter_design_pattern.png)
 
-// USplug class
-class USPlug : PowerPlug {
-    override fun getSocket(): String {
-        return "US"
-    }
-}
+## Pseudocode
 
-```
+![alt text](/resources/adapter_pseudocode.png)
 
-Adapter
+## Prospects
 
-```kotlin
-// Adapter class
-class Adapter(private val plug: EUPlug) : PowerPlug {
-    override fun getSocket(): String {
-        return "US" // Convert EU plug to US socket
-    }
-}
-```
+- **Single Responsibility Principle**. You can separate the interface or data conversion code from the primary business logic of the program.
+- **Open/Closed Principle**. You can introduce new types of adapters into the program without breaking the existing client code, as long as they work with the adapters through the client interface
 
-Application
+## Consequences
 
-```kotlin
+- The overall complexity of the code increases because you need to introduce a set of new interfaces and classes.
 
-// Main function to test the adapter pattern
-fun main() {
-    val powerPlug = EUPlug()
-    val powerOutlet = USOutlet()
-    
-    if (powerOutlet.fits(powerPlug)) {
-        println("Plug fits!")
-    } else {
-        println("Error: Plug does not fit!")
-    }
-    
-    val plugAdapter = Adapter(powerPlug)
-    
-    if (powerOutlet.fits(plugAdapter)) {
-        println("Plug fits with adapter!")
-    } else {
-        println("Error: Plug still does not fit!")
-    }
-}
-
-```
-
-## Conslusion
-
-This is just an abstract example of how this pattern can be utilized.
-Mostly you can use it when you don't want to rewrite large chunks of existing code to connect it to your newly written objects which are incompatible with it.
-But it can also increase the complexity of code sometimes. So if you're working on a relatively small project, it is better just to rewrite some of the code so that the necessary objects are compatible.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## References
+- https://refactoring.guru/design-patterns/adapter
