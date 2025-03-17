@@ -1,31 +1,35 @@
-# Facade pattern
+# Facade
 
-The **facade design pattern** is a structural design pattern that provides the client with an **interface**
-for accessing parts of the system which could be hidden to avoid showing the complexity of the code
+## Problem
 
-Usually, this pattern is used when you need to provide
-a simple way to access a library or a framework.
+Imagine that you must make your code work with a broad set of objects that belong to a sophisticated library or framework.
+Ordinarily, you’d need to initialize all of those objects, keep track of dependencies, execute methods in the correct order, and so on.
 
-## Facade pattern goal
-
-A facade works through an interface with the same name. If you have worked with a library or a framework with lots of different classes, you could have worked with them using special objects. These objects were probably created as a facade.
-
-The facade interface provides simplified access to methods of classes that are hidden from the client.
+As a result, the business logic of your classes would become tightly coupled to the implementation details of 3rd-party classes, making it hard to comprehend and maintain.
 
 
-It could be constricted access, compared to direct access to these classes.
-But this approach will relieve clients from functions in which users are not interested. 
+## Solution
 
-But, as you can guess, a facade object could become a god object, meaning that it could do or know too much.
-So, if it becomes too big, consider diverting some of its functions by creating other facade objects.
+A Facade is a class that provides a simplified interface to a complex system. It hides unnecessary details and only exposes the essential functionality that the client needs.
 
+## Structure
 
+- **The Facade** provides convenient access to a particular part of the subsystem’s functionality.
+It knows where to direct the client’s request and how to operate all the moving parts.
 
+- **An Additional Facade** class can be created to prevent polluting a single facade with unrelated features that might make it yet another complex structure. Additional facades can be used by both clients and other facades.
 
+- **The Client** uses the facade instead of calling the subsystem objects directly.
 
+![alt text](/resources/facade_design_pattern.png)
 
+## Prospects
 
+You can isolate your code from the complexity of a subsystem.
 
+## Consequences
+
+A facade can become a god object coupled to all classes of an app.
 
 
 
