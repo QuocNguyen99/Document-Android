@@ -1,84 +1,57 @@
-# Bridge pattern
+# Bridge
 
-When your project starts to get larger and more complicated, every little change in some of its parts can affect other parts.
-This may prevent you from developing new features for your project so as to avoid all the mess that can happen.
-One of the few fixes for such a problem is presented in the form of a structural design pattern called Bridge.
+## Problem
 
-**Bridge** is a structural design pattern that works on separation of **abstraction** and **implementation** to make their independent development possible. 
+For example, When trying to extend a `Shape` hierarchy (e.g., `Circle` and `Square`) with colors (e.g., `Red` and `Blue`), the number of subclasses grows exponentially.
 
-so let's start from the basics. 
+For example, adding `RedCircle` and `BlueSquare` is manageable, but introducing new shapes or colors leads to class explosion, making the code complex and hard to maintain.
 
-- **Abstraction** — A layer that represents the working process to the users and allows them to interact with the system.
-This layer isn't doing any real work, as it only delegates it to the implementation.
+## Solution
 
-- **Implementation** — A layer that defines and represents all the actual working processes within your system.
-Usually, users don't directly interact with it.
+Instead of creating subclasses for each `Shape`-`Color` combination, the `Color` code is extracted into a separate hierarchy (e.g., Red and Blue). The `Shape` class holds a reference to a `Color` object, acting as a bridge between the two hierarchies.
 
-## Bridge applicability
+This way, adding new shapes or colors becomes independent, avoiding exponential growth in the class hierarchy.
 
-Using separation of abstraction and implementation, you can maintain two independent development directions.
-This will allow you to simultaneously work on a UI avoiding interference to your API-related parts and vice versa.
+## Structure
 
-## Bridge in pseudocode
+- **The Abstraction**:
+provides high-level control logic. It relies on the implementation object to do the actual low-level work.
 
-Now let's try to depict our TV with a remote in pseudocode.
-First, we will have to describe our TVs.
-They will be created through the TV interface:
+- **The Implementation**:
+declares the interface that’s common for all concrete implementations.
+An abstraction can only communicate with an implementation object via methods that are declared here.
 
-```
-interface TV is
-  method isEnabled()
-  method enable()
-  method disable()
-```
-This method will be used for each new implementation class.
-Now we'll make two implementation classes called SmartTV and SimpleTV:
+- **Concrete Implementations**: contain platform-specific code.
 
-```
-class SmartTV implements TV is
-  ...
+- **Refined Abstractions**(Optional): provide variants of control logic. Like their parent, they work with different implementations via the general implementation interface.
 
-class SimpleTV implements TV is
-  ...
-```
-
-This way, abstraction will delegate all the work to implementation referencing that particular field.
-It will be a simple remote which can turn on and turn off our TV:
-
-```
-class Remote is
-  field tv: TV
-  
-  constructor Remote(tv: TV) is
-    this.tv = tv
-  
-  method power() is
-    if (tv.isEnabled()) then
-      tv.disable()
-    else
-      tv.enable()
-```
-
-This structure will allow you to create several variations of objects which will be independent of each other.
+- Usually, the **Client** is only interested in working with the abstraction. However, it’s the client’s job to link the abstraction object with one of the implementation objects.
 
 
+![alt text](/resources/bridge_design_pattern.png)
 
 
+## Pseudocode
+
+![alt text](/resources/bridge_pseudocode.png)
 
 
+## Prospects
 
+- **Single Responsibility Principle.**
+You can focus on high-level logic in the abstraction and on platform details in the implementation.
+-  **Open/Closed Principle**.
+You can introduce new abstractions and implementations independently from each other.
+- You can create platform-independent classes and apps.
+- The client code works with high-level abstractions.
+It isn’t exposed to the platform details.
 
+## Conssequences
 
+- You might make the code more complicated by applying the pattern to a highly cohesive class.
 
-
-
-
-
-
-
-
-
-
+## Reference
+- https://refactoring.guru/design-patterns/bridge
 
 
 
