@@ -23,6 +23,10 @@ It knows where to direct the client’s request and how to operate all the movin
 
 ![alt text](/resources/facade_design_pattern.png)
 
+## Pseudocode
+
+![alt text](/resources/facade_pseudocode.png)
+
 ## Prospects
 
 You can isolate your code from the complexity of a subsystem.

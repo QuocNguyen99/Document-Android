@@ -28,6 +28,10 @@ Note that the factory method doesn’t have to create new instances all the time
 
 ![alt text](/resources/factory_method_design_pattern.png)
 
+## Pseudocode
+
+![alt text](/resources/factory_method_pseudocode.png)
+
 ## Prospects
 
 - **Single Responsibility Principle**. You can move the product creation code into one place in the program, making the code easier to support.

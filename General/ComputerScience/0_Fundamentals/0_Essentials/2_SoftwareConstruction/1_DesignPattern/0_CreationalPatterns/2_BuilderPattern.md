@@ -42,6 +42,10 @@ Having a director class in your program isn’t strictly necessary.
 You can always call the building steps in a specific order directly from the client code.
 However, the director class might be a good place to put various construction routines so you can reuse them across your program.
 
+## Pseudoocode
+
+![alt text](/resources/pseudocode_builder.png)
+
 ## Prospects
 - **Single Responsibility Principle**. You can isolate complex construction code from the business logic of the product.
 - You can construct objects step-by-step, defer construction steps or run steps recursively.
