@@ -48,7 +48,9 @@ After that, the resulting command may be associated with one or multiple senders
 - The code may become more complicated since you’re introducing a whole new layer between senders and receivers.
 
 
+## reference
 
+- https://refactoring.guru/design-patterns/command
 
 
 

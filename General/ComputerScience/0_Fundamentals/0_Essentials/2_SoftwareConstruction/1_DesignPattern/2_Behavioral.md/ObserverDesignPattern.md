@@ -22,19 +22,35 @@ When an event occurs, the publisher notifies all subscribers by calling a notifi
 
 To avoid tight coupling, all subscribers implement a common interface, and the publisher interacts with them through this interface. This allows flexibility and ensures compatibility, even when new subscriber classes are added or different types of publishers are used.
 
+## Structure
 
-## Benefits
+- **The Publisher**:
+issues events of interest to other objects. These events occur when the publisher changes its state or executes some behaviors. Publishers contain a subscription infrastructure that lets new subscribers join and current subscribers leave the list.
 
-- Decoupling:
-Promotes loose coupling between the subject and observers, allowing them to vary independently.
+- **The Subscriber interface**:
+declares the notification interface.
+In most cases, it consists of a single update method.
+The method may have several parameters that let the publisher pass some event details along with the update.
+- **Concrete Subscribers**:
+the implementation of the Interface that perform some actions in response to notifications issued by the publisher.
+All of these classes must implement the same interface so the publisher isn’t coupled to concrete classes.
 
-- Scalability:
-Facilitates the addition of new observer types without modifying existing subject code.
+- **The Client**:
+creates publisher and subscriber objects separately and then registers subscribers for publisher updates.
 
-## Considerations
+![alt text](/resources/observer_design_pattern.png)
 
-- Performance:
-With numerous observers, the notification process can become time-consuming, potentially impacting performance.
-- Consistency:
-Observers might experience inconsistent states if they rely on a specific sequence of notifications.
+## Prospects
 
+- **Open/Closed Principle**.
+You can introduce new subscriber classes without having to change the publisher’s code (and vice versa if there’s a publisher interface).
+
+- You can establish relations between objects at runtime.
+
+## Consequences
+
+- Subscribers are notified in random order.
+
+## reference
+
+- https://refactoring.guru/design-patterns/observer
