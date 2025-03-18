@@ -7,8 +7,8 @@ When handling buttons with different functions, a common approach is to create m
 
 The Command Design Pattern offers a better solution by encapsulating requests as objects, allowing for the decoupling of the sender and receiver. This enhances code flexibility and scalability.
 
-![NOTE]
->  a "volatile" variable is a directive to the compiler, indicating that a variable's value can be changed unexpectedly by external events
+>[!NOTE]
+> A "volatile" variable is a directive to the compiler, indicating that a variable's value can be changed unexpectedly by external events
 
 ## Key Components
 
