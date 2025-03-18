@@ -22,7 +22,7 @@ The key concept that represents different kinds of tests is the test pyramid. Th
 
 At the lower levels, there are more tests and they go faster, as they are small and aimed at testing individual functions or features.
 
-![alt text](../resources/software_testing_pyramid.png)
+![alt text](/resources/software_testing_pyramid.png)
 
 
 ## Unit testing
@@ -82,7 +82,7 @@ The test goes through the following stages:
 which compares the actual output with the expected one;
 - Acceptance criteria return the result: pass or fail.
 
-![alt text](../resources/unit_test_step.png)
+![alt text](/resources/unit_test_step.png)
 
 >![NOTE]
 > Note that we use unit tests to test our program without its external dependencies such as databases, 
@@ -298,7 +298,7 @@ After each test
 
 The following diagram illustrates this order to help you better understand the test class lifecycle:
 
-![alt text](../resources/order_test_class.png)
+![alt text](/resources/order_test_class.png)
 
 ### Test instance per class
 
@@ -308,7 +308,7 @@ In this mode, a new instance of the test class will be created only once,
 therefore if your test methods rely on a state stored in its non-static variables, you may need to reset that state in `@BeforeEach` or `@AfterEach` methods.
 
 
-![alt text](../resources/the_order_test_instance_per_class.png)
+![alt text](/resources/the_order_test_instance_per_class.png)
 
 
 
