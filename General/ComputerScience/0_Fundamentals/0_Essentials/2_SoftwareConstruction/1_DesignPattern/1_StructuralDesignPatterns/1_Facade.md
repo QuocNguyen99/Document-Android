@@ -17,7 +17,7 @@ A Facade is a class that provides a simplified interface to a complex system. It
 - **The Facade** provides convenient access to a particular part of the subsystem’s functionality.
 It knows where to direct the client’s request and how to operate all the moving parts.
 
-- **An Additional Facade** class can be created to prevent polluting a single facade with unrelated features that might make it yet another complex structure. Additional facades can be used by both clients and other facades.
+- **An Additional Facade** (Optional) class can be created to prevent polluting a single facade with unrelated features that might make it yet another complex structure. Additional facades can be used by both clients and other facades.
 
 - **The Client** uses the facade instead of calling the subsystem objects directly.
 

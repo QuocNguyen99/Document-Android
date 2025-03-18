@@ -1,4 +1,4 @@
-# Command Design Pattern
+# Command
 
 
 ## Problem
@@ -20,7 +20,7 @@ Implements the method from the interface.
 Concrete Commands act as intermediaries, passing requests to business logic objects.
 They can store parameters as fields and be made immutable by setting these fields through the constructor.
 
-- **the Sender (Invoker)**:
+- **The Sender (Invoker)**:
 triggers a Command object instead of directly interacting with the receiver.
 The command is pre-created by the Client and passed to the sender via the constructor, ensuring flexibility and decoupling.
 

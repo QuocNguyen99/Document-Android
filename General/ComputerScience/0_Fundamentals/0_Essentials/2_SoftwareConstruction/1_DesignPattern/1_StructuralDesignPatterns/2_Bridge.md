@@ -50,6 +50,11 @@ It isn’t exposed to the platform details.
 
 - You might make the code more complicated by applying the pattern to a highly cohesive class.
 
+## The defference from `Bridge` and `Factory Method`
+- Factory Method pattern is a creational pattern. It is responsible for creating instances of other objects.
+- Bridge is a structural pattern. It solves a problem regarding the structure of your code.
+Bridge is responsible for decoupling an abstraction from an implementation. 
+
 ## Reference
 - https://refactoring.guru/design-patterns/bridge
 
