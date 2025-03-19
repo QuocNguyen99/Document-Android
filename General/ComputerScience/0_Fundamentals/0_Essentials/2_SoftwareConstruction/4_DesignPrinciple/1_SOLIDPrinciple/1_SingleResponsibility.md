@@ -6,7 +6,8 @@ Then how can we set the boundaries of what different parts are responsible for i
 
 Imagine we're working on a new application for smartphones. It has such functions as an alarm clock, reminders, and stopwatch. Because they are all related to time, they can be united in one class. In trying to gather similar functions together we instead create a God object.
 
-- **A God object** is an object that knows too much or does too much.
+> [!NOTE]
+> A God object is an object that knows too much or does too much.
 
 In our case, it's better to isolate these three functions from each other, so we can update them independently without polluting the code with unnecessary details.
 
@@ -24,11 +25,18 @@ After launching the app, users start downloading it and leave reviews suggesting
 
 - tune methods
 
-The problem is, if we update the volume methods, it could interfere with the time methods. So, to keep things organized and avoid confusion, we decide to split the class into smaller parts, each responsible for only one task, and delegate the responsibilities accordingly. You can ask, what will the AlarmClock do then? The answer is simple: **it will call other classes and orchestrate their work depending on a user request.** So We can also reuse `Tune` and `Volume` classes for the `Reminder`.
+The problem is, if we update the volume methods, it could interfere with the time methods. So, to keep things organized and avoid confusion, we decide to split the class into smaller parts, each responsible for only one task, and delegate the responsibilities accordingly.
+
+You can ask, what will the AlarmClock do then? The answer is simple: **it will call other classes and orchestrate their work depending on a user request.** So We can also reuse `Tune` and `Volume` classes for the `Reminder`.
+
+![alt text](/resources/SingleResponsibilityBoundaries.png)
 
 To draw boundaries for responsibilities, ask yourself: **are these the same responsibilities for a user or not? If they are the same, bind the methods together. If they are not, divide them to create classes that have only one reason to change.**
 
 > [!CAUTION]
 > The core of the principle is not about breaking the code into small isolated pieces. You gather what belongs to the same responsibility in one place, and then separate units with different responsibilities from each other.
 
-![alt text](/resources/SingleResponsibilityBoundaries.png)
+
+
+## Reference
+- https://hyperskill.org/learn/step/8963
