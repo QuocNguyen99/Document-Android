@@ -9,31 +9,66 @@ The Interface Segregation Principle (ISP) is based on two key points:
 
 In other words, to make our interfaces accurate, we should make them specific, so we won't have to implement needless methods in the future.
 
-## Segregating responsibilities
+## Example
 
-To illustrate this principle, let's take a look at the decomposition of the interface for making meals in a fictional robot cafe.
+We modeled a very simplified parking lot.
 
-The main feature of the "La Cuisine Avec Des Robots" cafe is that all the waiters and cooks are robots. This interface shows what they can do with a meal:
+```java
+public interface ParkingLot {
 
-![alt text](/resources/segregating_responsibilities_before.png)
+    void parkCar();    // Decrease empty spot count by 1
+    void unparkCar(); // Increase empty spots by 1
+    void getCapacity();    // Returns car capacity
+    double calculateFee(Car car); // Returns the price based on number of hours
+    void doPayment(Car car);
+}
 
-The problem is that making a new meal requires programming a lot of actions. Even if we don't know whether we'll serve the dish in the cafe or only develop a new one in the kitchen, we should implement all the methods for cooks and waiters.
+class Car {
 
-It seems that we're tying together two different responsibilities in one interface, so we need to divide it.
+}
+```
 
-![alt text](/resources/segregating_responsibilities_after.png)
+It is the type of parking lot where you pay an hourly fee.
+Now consider that we want to implement a parking lot that is free.
 
-Now we can implement the interface `SERVEABLE` only for the dishes that we want to add to the menu and experiment with `PREPAREABLE` meals independently.
+```java
+public class FreeParking implements ParkingLot {
 
-## Segregating specializations
+    @Override
+    public void parkCar() {
 
-We have good interfaces now, so let's try to implement all the methods for making the "Le velouté" soup.
+    }
 
-We can boil ingredients of a soup and then serve the dish with a spoon, so another challenge comes up right away: what should we do with the `FRY` and `SERVE_WITH_FORK` methods? As you know, to implement an interface, we should define all the methods in it.
+    @Override
+    public void unparkCar() {
 
-Should we define methods with an empty body? Or maybe we need to return an error? Raise an exception? The best solution is not to have all these methods in the first place! First, we match our interfaces with the responsibilities of cooks and waiters, and then we specialize them for different kinds of meals:
+    }
 
-![alt text](/resources/segregating_specialization.png)
+    @Override
+    public void getCapacity() {
+
+    }
+
+    @Override
+    public double calculateFee(Car car) {
+        return 0;
+    }
+
+    @Override
+    public void doPayment(Car car) {
+        throw new Exception("Parking lot is free");
+    }
+}
+```
+Our parking lot interface was composed of 2 things: Parking related logic (park car, unpark car, get capacity) and payment related logic.
+
+But it is too specific. Because of that, our `FreeParking` class was forced to implement payment-related methods that are irrelevant. Let's separate or segregate the interfaces.
+
+![alt text](/resources/interface_seregation_principle_example.png)
+
+We've now separated the parking lot. With this new model, we can even go further and split the PaidParkingLot to support different types of payment.
 
 
-Though this decomposition works fine for this specific task, defining interfaces with just one method is not going to magically solve all the other cases. **Try to find those methods that are integral to your interfaces, and keep your eye on degenerate methods in the implementations.**
+## Reference 
+- https://hyperskill.org/learn/step/10089
+- https://www.freecodecamp.org/news/solid-principles-explained-in-plain-english/
