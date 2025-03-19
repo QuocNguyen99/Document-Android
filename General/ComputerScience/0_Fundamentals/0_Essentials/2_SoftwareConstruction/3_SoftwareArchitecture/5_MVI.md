@@ -31,5 +31,5 @@ The `View` also collects user interactions and converts them into `Intents`.
 
 ## References
 
-- https://ebdz.dev/blog/mvi-ampamp-mobile-dev?utm_source=chatgpt.com
-- https://www.scaler.com/topics/android/mvi-architecture-android/?utm_source=chatgpt.com
+- https://ebdz.dev/blog/mvi-ampamp-mobile-dev
+- https://www.scaler.com/topics/android/mvi-architecture-android

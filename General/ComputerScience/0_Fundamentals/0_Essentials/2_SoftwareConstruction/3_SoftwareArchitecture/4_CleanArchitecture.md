@@ -1,5 +1,7 @@
 # Clean Architecture
 
+The Clean Architecture **is a software architecture** proposed by Robert C. Martin (better known as Uncle Bob).
+
 ![](/resources/CleanArchitecture.jpg)
 
 ## The Dependency Rule
@@ -71,7 +73,8 @@ This layer is where all the details go. The Web is a detail. The database is a d
 - **Potential Performance Overhead**: Extra layers and dependency inversion can introduce slight performance trade-offs.
 - **Not Always Necessary**: Overengineering for small projects can slow development without significant benefits.
 
-
+## Reference
+- https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 
 
 

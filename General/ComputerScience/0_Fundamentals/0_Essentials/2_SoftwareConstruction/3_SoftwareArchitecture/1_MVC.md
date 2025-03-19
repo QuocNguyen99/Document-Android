@@ -14,6 +14,5 @@ When a user interacts with the View, the Controller processes the input, updates
 - Easy to test and debug.
 - Easy separation of `Model` and `View` components.
 ## Disadvantages of MVC
-- Suitable only for large projects; for small projects, the model becomes bulky and time-consuming due to data transfer overhead.
 - `Controller` complexity increases over time.
 - `Controller` is tied to the `View`, so changes in the `View` require corresponding changes in the `Controller`.
