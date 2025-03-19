@@ -78,6 +78,15 @@ This provides a layer of abstraction and allows the `Robot` class to interact wi
 
 - **High cohesion** indicates that a component performs a single task or a group of related tasks, leading to more understandable and maintainable code.
 
+## Working with cohesion and coupling
+
+The chart below illustrates the possible consequences based on the degree of cohesion and coupling.
+
+![alt text](/resources/possible_consequences_coupling_and_cohesion_chart.png)
+
+> [!IMPORTANT]
+> Ideally, your objects should have low coupling and high cohesion. 
+> When trying to lower your coupling, you shouldn't forget about increasing your cohesion and vice versa.
 
 ## Conclusion
 
