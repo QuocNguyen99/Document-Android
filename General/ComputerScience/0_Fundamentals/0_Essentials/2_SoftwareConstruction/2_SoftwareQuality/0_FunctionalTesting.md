@@ -57,7 +57,9 @@ It makes no sense to send a program that has not passed this test for deeper tes
 
 **Regression testing** is often done after a smoke test and some code changes. Its goal is to confirm that these changes have not negatively impacted the existing functionality/feature set
 
+## Reference
 
+- https://hyperskill.org/learn/step/13438
 
 
 
