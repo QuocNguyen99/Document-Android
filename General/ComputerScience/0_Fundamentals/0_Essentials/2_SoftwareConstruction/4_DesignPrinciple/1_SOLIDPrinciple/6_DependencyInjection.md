@@ -36,8 +36,3 @@ There are three main types of DI:
 2. **Property(Setter) Injection** — dependencies are passed through a separate setter method. Implementation of this injector varies depending on the language.
 3. **Constructor Injection — dependencies** are provided through the class constructor.
    
-   
-
-| ƯU ĐIỂM                                                                                                                                                                         | KHUYẾT ĐIỂM                                                                                                                                                                                                                                                                             |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| * Giảm sự kết dính giữa các module<br>* Code dễ bảo trì, dễ thay thế module<br>* Rất dễ test và viết Unit Test<br>* Dễ dàng thấy quan hệ giữa các module (Vì các dependecy đều được inject vào constructor) | * Khái niệm DI khá “khó tiêu”, các developer mới sẽ gặp khó khăn khi học<br>* Sử dụng interface nên đôi khi sẽ khó debug, do không biết chính xác module nào được gọi<br>* Các object được khởi tạo toàn bộ ngay từ đầu, có thể làm giảm performance<br>* Làm tăng độ phức tạp của code |

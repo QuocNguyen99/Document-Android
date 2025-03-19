@@ -86,3 +86,7 @@ Let's summarize what we know about coupling and cohesion.
 - You should try to achieve loose coupling. Loose coupling makes parts of your code less interdependent on each other. The easiest way you can achieve it is with interfaces and dependency injection.
 
 - Parts of your code should have high cohesion, so that they can be more focused. This will make them more reusable and easier to test.
+
+
+## Reference
+- https://hyperskill.org/learn/step/21478
