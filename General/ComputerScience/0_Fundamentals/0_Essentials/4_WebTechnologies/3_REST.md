@@ -1,9 +1,12 @@
 # REST
 
-**REST (Representational State Transfer)** is a fairly common way of interaction between client applications and services on the Internet. It is a set of restrictions considered when creating applications and web services. This architectural style was developed to help easily build convenient web services. A service written with regard to REST rules is called **RESTful**.
+**REST (Representational State Transfer)** is a fairly **common way of interaction between client applications and services** on the Internet.
+**It is a set of restrictions considered** when creating applications and web services. 
+This architectural style was developed to help easily build convenient web services.
+A service written with regard to REST rules is called **RESTful**.
 
 > [!CAUTION]
-> REST is NOT a protocol or a standard. REST usually works on top of HTTP and is one of the possible ways to use HTTP. It is not a standard, but rather a set of useful recommendations.
+> REST is NOT a protocol or a standard. REST usually works on top of HTTP and is one of the possible ways to use HTTP. It is not a standard, REST is a set of useful recommendations.
 
 ## Short history
 
@@ -22,11 +25,13 @@ Abiding by the following six important principles guarantees that you write a RE
 
 3. **Cacheable**. A request-response pair can be marked as cached and stored on the user side. It is possible to draw an analogy to web page caching: if a page was downloaded once, it could be accessed without addressing the server again.
 
-4. **Uniform interface**. REST architecture specifies that any REST service must be understandable without its developer.
+4. **Uniform interface**. 
+It standardizes communication using URIs, HTTP methods (GET, POST, PUT, DELETE), and media types (JSON, XML), making APIs predictable and easy to use.
+This principle ensures a consistent way for clients to interact with resources.
 
-5. **Layered system**. A client cannot just tell whether it is connected directly to the end server or an intermediary along the way.
+1. **Layered system**. The client does not know if it is directly connected to the main server or passing through intermediaries like proxies or load balancers.
 
-6. **Code on demand [Optional]**. On request, the service must give executable code in the form of an applet or script to be executed on the client's side. In practice, it is very seldom used.
+2. **Code on demand [Optional]**. On request, the service must give executable code in the form of an applet or script to be executed on the client's side. In practice, it is very seldom used.
 
 ## HTTP methods for RESTful services
 

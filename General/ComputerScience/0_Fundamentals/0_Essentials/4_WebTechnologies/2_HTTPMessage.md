@@ -15,6 +15,30 @@ In the HTTP protocol, all messages consist of text strings. Both requests and re
 
 3. **Body** in which the message data is located.
 
+Example:
+
+```bash
+GET /ewordly-service/topic/list?page=1&limit=3 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2FiMGNhOTI3N2I1YmQxZWNjNTFjNmUiLCJhY2Nlc1Rva2VuRXhwaXJ5IjoiMjAyNS0wMi0xMlQxNDoxODoyNy45NDRaIiwiaWF0IjoxNzM5MjgzNTA3LCJleHAiOjE3MzkzNjk5MDd9.VX_vBqvxmiFVR3Et7BC_dVpKfm89Aum-AJsDKTtdsrY
+User-Agent: PostmanRuntime/7.43.0
+Accept: */*
+Postman-Token: 5bd37ba9-316e-490f-9d3b-af3bc5ae4ca2
+Host: mionix.ddns.net
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+ 
+HTTP/1.1 403 Forbidden
+Server: nginx/1.18.0 (Ubuntu)
+Date: Thu, 20 Mar 2025 06:48:17 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 53
+Connection: keep-alive
+X-Powered-By: Express
+ETag: W/"35-6C0YABQYGKqodn17c9SuUdKRqxw"
+ 
+{"message":"Invalid token with message: jwt expired"}
+```
+
 > [!NOTE]
 > The start line and the header are required attributes, so the other parts may be empty.
 

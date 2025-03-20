@@ -5,7 +5,7 @@ A web server or an HTTP server is a program on a computer that can process clien
 
 When a server starts, it always waits for requests and answers each request by sending back the requested information.
 
-The HTTP server is a part of the client-server model.
+The HTTP server is a part of the client-server interaction model.
 
 ![alt text](/resources/client_serer_model.png)
 
