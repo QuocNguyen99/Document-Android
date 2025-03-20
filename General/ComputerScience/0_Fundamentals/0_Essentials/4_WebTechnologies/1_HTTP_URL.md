@@ -26,7 +26,7 @@ Now let's look at this template in more detail:
 
 ## Absolute and relative URLs
 
-[](/resources/absolute_and_relative_url.png)
+![](/resources/absolute_and_relative_url.png)
 
 
 You should remember that it would work only on the same site, while you cannot refer to another site by a relative path.
