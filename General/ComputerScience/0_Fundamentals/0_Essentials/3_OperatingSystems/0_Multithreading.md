@@ -34,3 +34,6 @@ As the pizza shop sales are growing, now one worker is not enough for the whole 
 ![alt text](/resources/Parallel_processing.png)
 
 Now each of them works independently, and this is a case of **parallel processing**. Each task in parallel processing is running in a continuous period as a whole unit process.
+
+## Reference
+- https://hyperskill.org/learn/step/9332

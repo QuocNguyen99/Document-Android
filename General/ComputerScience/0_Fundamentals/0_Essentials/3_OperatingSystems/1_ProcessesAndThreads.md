@@ -14,7 +14,7 @@ It's cheaper to arrange access to shared resources once than to do so each time 
 
 In computer science, a **thread** of execution is a sequence of instructions within a process that can be scheduled and run independently.
 
-Each thread has its own executor, which can manage only one thread at a time.
+Each thread has its own **executor**, which can manage only one thread at a time.
 
 Multiple threads within the same process can operate concurrently (switching between tasks) or in parallel (simultaneously, if multiple executors are available), depending on how they are scheduled and the resources available.
 
@@ -37,3 +37,9 @@ Key Difference:
 In some cases, workers (threads) can perform multiple roles within the same pizza shop (process). For instance, a worker might serve as both a cashier and a cook at different times. This kind of concurrency isn't about multiple workers doing tasks simultaneously, but about a single worker switching between roles efficiently. These roles typically involve tasks that are quick and do not demand significant time or shared resources, classifying them as **lightweight**.
 
 When tasks are lightweight and require minimal shared resources, it is more efficient to execute them within a single thread using time-slicing. In this approach, the executor quickly switches between tasks, creating the illusion that they are happening simultaneously. This form of concurrency is known as **internal** or lightweight concurrency, as it involves minimal task demands and does not require multiple threads.
+
+> [!IMPORTANT]
+> Internal Concurrency focuses on managing concurrency within a single process, while Lightweight Concurrency is a method of achieving concurrency efficiently, usually within the same process.
+
+## Reference
+- https://hyperskill.org/learn/step/9420
