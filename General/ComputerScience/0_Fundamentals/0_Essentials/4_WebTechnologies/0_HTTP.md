@@ -6,7 +6,11 @@ A **client** is a customer of a service, and a **server** is a computer that ser
 
 ![alt text](/resources/http.png)
 
-Data exchange between the client and the server takes place due to the **HTTP**. HTTP stands for **HyperText Transfer Protocol**. A **protocol** is a set of rules and conventions that define a uniform way to exchange data between different programs and handle errors. Like a waiter in a restaurant, it accepts your requests, takes them to the server for processing, and then comes back to you with a response.
+Data exchange between the client and the server takes place due to the **HTTP**. HTTP stands for **HyperText Transfer Protocol**. It accepts your requests, takes them to the server for processing, and then comes back to you with a response.
+
+> [!NOTE]
+> A protocol is a set of rules and conventions that define a uniform way to exchange data between different programs and handle errors.
+
 
 ## What is HTTPS
 
