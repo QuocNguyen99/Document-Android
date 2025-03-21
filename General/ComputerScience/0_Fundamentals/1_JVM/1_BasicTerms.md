@@ -8,7 +8,10 @@ JVMs are available for many hardware and software platforms, so you can run the 
 
 Java Development Kit, or JDK, is a package to develop programs for the Java Platform. It includes JRE to run the programs and tools for developers: Java compiler, debugger, archiver, documentation generator, etc.
 
-At the compilation stage, compilers translate source code into `.class` files that contain bytecode and can be executed by JVM. Note that if you're using JVM languages other than Java, you will need to download compilers separately, as they are not bundled with JDK.
+At the compilation stage, compilers translate source code into `.class` files that contain bytecode and can be executed by JVM.
+
+> [!WARNING]
+> Note that if you're using JVM languages other than Java, you will need to download compilers separately, as they are not bundled with JDK.
 
 ## Java Runtime Environment (JRE)
 
@@ -23,3 +26,8 @@ The relationship between JVM, JRE, and JDK
 The following image illustrates the relationship between JVM, JRE, and JDK:
 
 ![alt text](/resources/JDKRelationship.png)
+
+
+
+## Reference
+- https://hyperskill.org/learn/step/3499
