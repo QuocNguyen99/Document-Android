@@ -2,7 +2,8 @@
 
 A **database** is a collection of data that is specifically organized for rapid search and retrieval processed by a computer.
 
-The difference between a database and a usual file is that a file may be structured or not, but a database must have a specific structure.
+> [!CAUTION]
+> The difference between a database and a usual file is that a file may be structured or not, but a database must have a specific structure.
 
 
 Obviously, we'd say that this file has some kind of structure, but from a computer's perspective, it's still a plain file, until you write a program that manages data in it. Usually, the information in databases is compressed and stored as binaries rather than plain text, so it's clear that this kind of structure is meant for computers, not humans.
@@ -12,11 +13,11 @@ Unlike us, computers can easily understand the binary format of data, but what a
 
 ## Database Management System
 
-A Database Management System (DBMS) is a type of software that allows users to define, create, and control data.
+**A Database Management System (DBMS) is a type of software that allows users to define, create, and control data.**
 
 A DBMS can optimize queries and retrieve data from а database in an optimal way. It is a mediator between the user and the database, which means that users can work with it through the interface of a DBMS. In addition, it can also help isolate data from the users.
 
-Another goal of this software is to help people work with different types of databases without exposing their actual differences.
+**Another goal of this software is to help people work with different types of databases without exposing their actual differences.**
 
 Most database management systems have pretty good descriptions and tutorials on their websites. There are also specific languages like SQL that you need to learn to start working with them, but if you know some programming languages, you can work with a database with their tools instead. For example, there are many libraries in Python and Java that can work with DBMS.
 
