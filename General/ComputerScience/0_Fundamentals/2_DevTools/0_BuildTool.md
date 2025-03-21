@@ -4,15 +4,15 @@ A build tool is a program that automates the process of creating executable appl
 
 ## What can build tools do?
 
-1. Downloading and adding dependencies. This is especially convenient when your project depends on a large number of libraries.
+1. **Downloading and adding dependencies**. This is especially convenient when your project depends on a large number of libraries.
 
-2. Compiling source code into bytecode. Build tools will invoke the compiler for all the files in your project.
+2. **Compiling source code into bytecode**. Build tools will invoke the compiler for all the files in your project.
 
-3. Packaging compiled code. You will have a production-ready application archive like JAR, APK, or some other.
+3. **Packaging compiled code**. You will have a production-ready application archive like JAR, APK, or some other.
 
-4. Running tests. For example, testing the application archive every time to check if it works correctly. It allows programmers to avoid bugs after modifying the application.
+4. **Running tests**. For example, testing the application archive every time to check if it works correctly. It allows programmers to avoid bugs after modifying the application.
 
-5. Deploying to a production environment.
+5. **Deploying to a production environment**.
 
 ## Build tools for Java-based projects
 There are three main build tools for Java-based projects: Apache Ant, Apache Maven, and Gradle.
@@ -38,9 +38,7 @@ One of the best things about Gradle is its Groovy-based domain-specific language
 > [!NOTE]
 > Please, note, that DSL is a computer language specialized to a particular application domain (like build automation). This is in contrast to a general-purpose language (GPL), which is broadly applicable across domains.
 
-### The key concepts
-
-The key features of Gradle are as follows:
+### The key features of Gradle
 
 - **Settings files**. Gradle uses several types of settings files to describe how to build a project.
 
@@ -54,13 +52,13 @@ The key features of Gradle are as follows:
 
 - **DSL (based on Groovy and Kotlin)** for writing scripts in settings files.
 
-The key concepts of Gradle: projects and tasks.
+### The key concepts of Gradle
 
-- A project might represent either something to be built (e.g. a JAR file or ZIP archive) or a thing to do (e.g. deploying the application). Every Gradle build contains one or more projects.
+- A **project** might represent either something to be built (e.g. a JAR file or ZIP archive) or a thing to do (e.g. deploying the application). Every Gradle build contains one or more projects.
 
-- A task is a single piece of work that a build performs. This can include compiling classes, running tests, generating docs, and so on. Every project is essentially a collection of one or several tasks.
+- A **task** is a single piece of work that a build performs. This can include compiling classes, running tests, generating docs, and so on. Every project is essentially a collection of one or several tasks.
 
-The most basic structure:
+### The most basic structure
 
 
 ```
@@ -84,9 +82,9 @@ Here is brief info about all the generated files:
 - The `settings.gradle` file specifies which projects to include in your build. This file is optional for a build that has only one project, but it is mandatory for a multi-project build.
 
 
-#### Gradle build configuration
+### Gradle build configuration
 
-##### Plugins
+#### Plugins
 
 The plugins section adds some plugins to extend the capabilities of the project, for example, to add new tasks or properties.
 
@@ -106,9 +104,10 @@ plugins {
 
 Here, `id` is a globally unique identifier, or name, for plugins. Core Gradle plugins are special in that they provide short names, such as `"java"` or `"application"`.
 
-**Gradle does not limit the maximum number of plugins used in a project.**
+> [!NOTE]
+> Gradle does not limit the maximum number of plugins used in a project.
 
-##### Repositories and dependencies
+#### Repositories and dependencies
 
 Usually, you don't need to write your program from scratch – you use already written pieces of code, either yours or other developers'. This is where the dependency system comes in handy.
 
