@@ -1,7 +1,5 @@
 # Graphic file formats
 
-Graphic file formats are designed for optimal organization and preservation of graphic data in a file. 
-
 **Graphic file format** is a way of organizing image information into a file. It determines how the information in the file will be stored: for example, raster or vector, two-dimensional or three-dimensional.
 
 

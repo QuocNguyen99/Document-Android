@@ -20,13 +20,16 @@ Another type of computer graphics that you have probably come across more than o
 **Vector graphics** are a way of representing images through mathematical formulas.
 Unlike raster images, vector images do not require information about each pixel. They are formed by simple geometric objects: a point, a line segment, an arc of a circle, etc.
 
-It takes little space to store vector images, and, most interestingly, the size of the image does not affect the size of the file.
-When scaling a vector image, the mathematical formulas with which it is described are recalculated.
-It helps to avoid the loss of quality.
+> [!TIP]
+> It takes little space to store vector images, and, most interestingly, the size of the image does not affect the size of the file.
+> When scaling a vector image, the mathematical formulas with which it is described are recalculated.
+> It helps to avoid the loss of quality.
 
-This makes vector graphics optimal for high-precision graphics, in which it is important to maintain clear and sharp contours. Vector graphics is used for icons, logos, illustrations, diagrams, and mapping, but with vector graphics it is difficult to achieve detailed, photorealistic images with lots of complex color transitions. Vector images are often stored in the following file formats: SVG, AI, WMF, EMF, and others.
+This makes vector graphics optimal for high-precision graphics, in which it is important to maintain clear and sharp contours. Vector graphics is used for icons, logos, illustrations, diagrams, and mapping. 
+Vector images are often stored in the following file formats: SVG, AI, WMF, EMF, and others.
 
-
+> [!WARNING]
+> vector graphics it is difficult to achieve detailed, photorealistic images with lots of complex color transitions
 
 
 
