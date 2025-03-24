@@ -4,9 +4,13 @@ It is a fact that programmers can spend more time reading code written by others
 
 ## Source file names
 
-If a Kotlin file contains a single class or interface (potentially with related top-level declarations), its name should be the same as the name of the class, with the .kt extension appended. It applies to all types of classes and interfaces. If a file contains multiple classes, or only top-level declarations, choose a name describing what the file contains, and name the file accordingly. **Use an upper camel case with an uppercase first letter** (also known as Pascal case), for example, ProcessDeclarations.kt.
+**Use an upper camel case with an uppercase first letter** (also known as Pascal case), for example, `ProcessDeclarations.kt`.
 
-**The name of the file should describe what the code in the file does. Therefore, you should avoid using meaningless words such as Util in file names.**
+> [!TIP]
+> If a Kotlin file contains a single class or interface (potentially with related top-level declarations), its name should be the same as the name of the class, with the .kt extension appended. 
+> It applies to all types of classes and interfaces. If a file contains multiple classes, or only top-level declarations, choose a name describing what the file contains, and name the file accordingly. 
+
+**The name of the file should describe what the code in the file does. Therefore, you should avoid using meaningless words such as `Util` in file names.**
 
 ## Class layout
 
@@ -20,7 +24,7 @@ The contents of a class should go in the following order:
 
 4. Companion object
 
-> [!NOTE]
+> [!TIP]
 > Put nested classes next to the code that uses those classes. If the classes are intended to be used externally and aren't referenced inside the class, put them in the end, after the companion object.
 
 ## Interface implementation layout
@@ -31,7 +35,7 @@ When implementing an interface, keep the implementing members in the same order 
 
 Package and class naming rules in Kotlin are quite simple:
 
-- Names of packages are always lowercase and do not use underscores (org.example.project). Using multi-word names is generally discouraged, but if you do need to use multiple words, you can either just concatenate them together or use the camel case (org.example.myProject).
+- Names of packages are always lowercase and do not use underscores (org.example.project). Using multi-word names is generally discouraged, but if you do need to use multiple words, you can either just concatenate them together or use **the camel case** (org.example.myProject).
 
 - Names of classes and objects start with an uppercase letter and use the camel case:
 
