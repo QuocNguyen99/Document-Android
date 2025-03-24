@@ -34,11 +34,15 @@ println(myMutableList) // [1, 2, 3, 4, 5, 6]
 ```
 
 As you can see, this code changed the internal state of the `myMutableList` by adding another integer number. When we invoked the `add()` function, we changed not the variable itself but the list it represents.
-If you are familiar with the Java programming language, it may be easier for you to think about Kotlin val variables as Java final variables. They are quite similar: both prohibit reassigning a value to the variable but allow changing the internal state of the object.
+
+> [!TIP]
+> If you are familiar with the Java programming language, it may be easier for you to think about Kotlin val variables as Java final variables.
+> They are quite similar: both prohibit reassigning a value to the variable but allow changing the internal state of the object.
 
 #### Const variables
 
-In Kotlin, there is also a const modifier, which is used before the val keyword to declare a compile-time constant. The value of a const variable is known at compile time and won't be changed at runtime, There are some restrictions on when the const modifier can be applied. First, it can only be used with a String or a primitive type variable.
+In Kotlin, there is also a const modifier, which is used before the val keyword to declare a compile-time constant. The value of a const variable is known at compile time and won't be changed at runtime, There are some restrictions on when the const modifier can be applied.
+- First, it can only be used with a String or a primitive type variable.
 
 ```kotlin
 const val CONST_INT = 127
@@ -48,8 +52,7 @@ const val CONST_STRING = "I am constant"
 const val CONST_ARRAY = arrayOf(1, 2, 3) // error: only primitives and strings are allowed
 ```
 
-
-Besides, const variables need to be declared on top level, outside of any functions:
+- Besides, const variables need to be declared on top level, outside of any functions:
 
 ```kotlin
 const val MY_INT_1 = 1024 // correct line
@@ -59,7 +62,7 @@ fun main() {
 }
 ```
 
-#### When to use val variables
+### When to use val variables
 
 A good practice is to use val variables by default. Then, when it appears to be necessary for the code, change them to var variables
 This approach allows you to write programs with the minimum number of mutable variables, which leads to fewer errors.
@@ -136,18 +139,24 @@ If your programs take advantage of multithreading, you need to know about the `l
 - `LazyThreadSafetyMode.SYNCHRONIZED` means that the value is only computed in one thread, and all threads will get the same value. It's the default option, so you can omit it if you wish:
 
 ```kotlin
-val a: String by lazy(LazyThreadSafetyMode.SYNCHRONIZED) { //... }
+val a: String by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+     //... 
+     }
 ```
 - `LazyThreadSafetyMode.PUBLICATION` specifies that the lambda can be called several times with an uninitialized lazy object value, but the value that is returned first will be used:
 
 ```kotlin
-val a: String by lazy(LazyThreadSafetyMode.PUBLICATION) { //...}
+val a: String by lazy(LazyThreadSafetyMode.PUBLICATION) {
+     //...
+     }
 ```
 
 - `LazyThreadSafetyMode.NONE` means there's no synchronization at all, so if we call the variable from different threads, its value can't be uniquely defined. Using this option isn't recommended if your program allows a lazy object to be called for the first time from more than one thread:
 
 ```kotlin
-val a: String by lazy(LazyThreadSafetyMode.None) { //..}
+val a: String by lazy(LazyThreadSafetyMode.None) {
+     //..
+     }
 ```
 
 You may be wondering why the keyword by is used before lazy? Well, it's to do with delegates. This is how we **delegate** the implementation of the corresponding property to a lambda.
@@ -179,7 +188,8 @@ fun initA(a: String) {
 This method allows us to set the value of `a` in the `initA()`
 function at a convenient point after the object has been created.
 
-Note that `lateinit` variables must be declared with `var`, unlike those declared with `lazy()`.
+> [!NOTE]
+> lateinit variables must be declared with var, unlike those declared with lazy().
 
 We can also check whether the property has already been initialized.
 To see how this works, let's add a function to our class.
@@ -269,9 +279,9 @@ class MyDerivedClass : MyIntermediateClass() {
 Visibility modifiers are special keywords that define which part of your code is allowed to use. There are four access modifiers in Kotlin: **private**, **protected**, **internal**, and **public**.
 
 - The `public` keyword is used to tell the compiler that something should be available to everywhere
-- When using `private`, data will only be available within a specific class.
+- If you mark a declaration as `private`, it will only be visible inside the file that contains the declaration.
 - `protected` is the same as `private`, except it can be seen in subclasses.
-- The `internal` modifier means that who sees the declaring class sees its `internal` members
+- If you mark it as `internal`, it will be visible everywhere in the same module.
 
 ## Visibility of constructors in a class
 

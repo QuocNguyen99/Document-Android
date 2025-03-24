@@ -9,11 +9,16 @@ An object is a part of memory that stores some sort of information. Variables an
 
 A simple example of an object is a `String` that stores a message. Let's take a closer look at it.
 
-First of all, a message has a **state**: it contains not only a sequence of symbols but also the size of the sequence, that is, the length of the message. In Kotlin, something that allows you to access the state of an object is called a **property**.Some **functions** are bound to a specific type. This makes using the objects more logical because functions represent the behavior of those objects. These functions are also called **member functions** or **methods**.
+First of all, a message has a **state**:
+it contains not only a sequence of symbols but also the size of the sequence, that is, the length of the message.
+In Kotlin, something that allows you to access the state of an object is called a **property**.
+Some **functions** are bound to a specific type.
+This makes using the objects more logical because functions represent the behavior of those objects.
+These functions are also called **member functions** or **methods**.
 
 ## Copying by reference
 
-In programming, copying something is a very common operation. We use = in almost all the cases.
+In programming, copying something is a very common operation. We use `=` in almost all the cases.
 
 If you create a variable and assign an object to it, another variable can point to the same object as well. 
 
@@ -27,7 +32,7 @@ In Kotlin, similar rules apply. If you create a variable and assign an object to
 
 An object can be either mutable or immutable.
 
-You already know that `Int`, `String`, `Float`, and `Double` in Kotlin are objects. But there is a nuance. These variables behave just like the primitive types of data in other programming languages, but at the same time, they are objects – in other words, unchangeable objects.
+You already know that `Int`, `String`, `Float`, and `Double` in Kotlin are objects. But there is a nuance. These variables behave just like the primitive types of data in other programming languages, but at the same time, **they are objects – in other words, unchangeable objects.**
 
 ## Structural vs referential equality
 
@@ -154,21 +159,30 @@ class Client {
 
 ### Additional features
 
-If you want to add a getter and/or a setter to a property in a constructor, just "move" the property out
+If you want to add a getter and/or a setter to a property in a constructor, just "move" the property out.
 Remember that in this case, you need to use another variable, not the property from the constructor:
 Keep in mind that when initializing your property, the setter will not be called.
+So if you have sepecial property, please self call it in the init block.
 ```kotlin
-class Client(name: String) {
-    var name: String = name
-        set(value) {
-            println("The name is changing. Old value is $field. New value is $value.")
-            field = value
-        }
-}
+fun increment(count: Int) = count + 1
 
-val client = Client("Annie")  // without output
-client.name = "Ann"           // The name is changing. Old value is Annie. New value is Ann.
+    class Client(name: String) {
+        var name: String = name
+            set(value) {
+                println("The name is changing. Old value is $field. New value is $value.")
+                field = value
+            }
+    }
+
+fun main() {
+
+
+    val client = Client("Annie")  // without output
+    println(client.name)   // Annie
+    client.name = "Tom"           // The name is changing. Old value is Annie. New value is Ann.
+
+}
 ```
 
-> [!NOTE]
+> [!WARNING]
 > You cannot use a setter for val variables: the set() function reassigns the variable, which is not possible for val
