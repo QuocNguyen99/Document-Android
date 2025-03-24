@@ -26,13 +26,17 @@ The following restrictions are imposed on the relations in the relational data m
 
 The order of the rows and columns in the relations is not important.
 
-## Entity integrity
+## Integrity
 
 **Integrity** is the conformity of a data model with certain rules. There are two kinds of integrity: **entity integrity** and **referential integrity**.
 
-The integrity of the entity means that there cannot be two identical tuples (rows) in the table. As in the real world, we cannot have two absolutely identical objects, for example, there are no identical students, they are all distinct. To maintain the integrity of an entity, the concept of a **primary key** (PK) is introduced.
+### Entity integrity
 
-## Referential integrity
+The integrity of the entity means that there cannot be two identical tuples (rows) in the table.
+As in the real world, we cannot have two absolutely identical objects, for example, there are no identical students, they are all distinct.
+To maintain the integrity of an entity, the concept of a **primary key** (PK) is introduced.
+
+### Referential integrity
 
 **Referential integrity** occurs when we have two connected relations. The relationship of the relations is provided using a **foreign key (FK)**. A foreign key is an attribute of a relation (subordinate/dependent) that points to the primary key of another relation (main/master). Referential integrity means that there cannot be a foreign key in the main table that points to a nonexistent tuple in the subordinate table.
 

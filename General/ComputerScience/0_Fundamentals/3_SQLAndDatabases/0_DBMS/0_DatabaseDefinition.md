@@ -19,7 +19,10 @@ A DBMS can optimize queries and retrieve data from а database in an optimal way
 
 **Another goal of this software is to help people work with different types of databases without exposing their actual differences.**
 
-Most database management systems have pretty good descriptions and tutorials on their websites. There are also specific languages like SQL that you need to learn to start working with them, but if you know some programming languages, you can work with a database with their tools instead. For example, there are many libraries in Python and Java that can work with DBMS.
+> [!NOTE]
+> Most database management systems have pretty good descriptions and tutorials on their websites.
+> There are also specific languages like SQL that you need to learn to start working with them, but if you know some programming languages, you can work with a database with their tools instead.
+> For example, there are many libraries in Python and Java that can work with DBMS.
 
 ## Access to data
 
@@ -29,7 +32,9 @@ Of course, you can store the files locally, but as they grow in number, you won'
 
 One of the best features of databases is their ability to keep and restore data correctly. It doesn't mean that a DBMS knows how to be correct, but once you define the rules with the configuration or schema, you can be sure that nothing will break these rules.
 
-If several people have simultaneous access to the same data, there may be a problem. Updates in files usually follow the "last save wins" rule,  which leads to a conflict of updates. 
+> [!WARNING]
+> If several people have simultaneous access to the same data, there may be a problem.
+> Updates in files usually follow the "last save wins" rule,  which leads to a conflict of updates. 
 
 Meanwhile, databases isolate different users and can be configured to resolve conflicts between their updates.
 

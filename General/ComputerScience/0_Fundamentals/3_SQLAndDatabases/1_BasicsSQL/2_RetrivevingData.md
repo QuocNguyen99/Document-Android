@@ -38,7 +38,8 @@ After the `SELECT` keyword, we list the columns that we want to select and speci
 | ... | ...  | ...             | ...              | ...             | ...              |
 | 5   | 19   | Rain Shower     | 16               | 13              | 5                |
 
-**The type of data extraction when you select a subset of table columns is called projection.**
+> [!NOTE]
+> The type of data extraction when you select a subset of table columns is called projection.
 
 
 ## Expressions
@@ -72,7 +73,9 @@ FROM
 
 ## Logical table
 
-A data management system hides the way your data is physically stored behind an abstract concept of a **logical table**. All you need to know to be able to run a query is the **database schema—table** names, column names and types—and appropriate access permissions. Internally, the query processor maps table and column references from queries to physical data such as files, network connections, and even the results of executing other queries.
+A data management system hides the way your data is physically stored behind an abstract concept of a **logical table**.
+All you need to know to be able to run a query is the **database schema—table names, column names and types—and appropriate access permissions**.
+Internally, the query processor maps table and column references from queries to physical data such as files, network connections, and even the results of executing other queries.
 
 
 ## Logic and comparison expressions
@@ -137,8 +140,9 @@ Here are the three operators from boolean algebra that you are already familiar 
 
 - `OR` returns `True` if at least one of the operands is `True`. Otherwise, returns `False`.
 
-Please note the order of operators given above,
-as they are sorted according to their priority (meaning that if we have all three operands in the expression, first we proceed with `NOT`, then comes `AND`, and finally `OR`).
+> [!TIP]
+> Please note the order of operators given above,
+> as they are sorted according to their priority (meaning that if we have all three operands in the expression, first we proceed with `NOT`, then comes `AND`, and finally `OR`).
 
 In order to hire the right person for the project, we need a candidate to meet two requirements: be a Middle or a Senior and know SQL.
 
@@ -148,7 +152,8 @@ FROM staff
 WHERE (status="Middle" OR status="Senior") AND skills="SQL"
 ```
 
-Please note the parentheses that we use with the `OR` operand.
-It's an important tool for prioritizing the `OR` condition over `AND`.
-If we do not use it, `SQL` would first process the `AND` operand and only then `OR`, making the query request irrelevant.
+> [!WARNING]
+> Please note the parentheses that we use with the `OR` operand.
+> It's an important tool for prioritizing the `OR` condition over `AND`.
+> If we do not use it, `SQL` would first process the `AND` operand and only then `OR`, making the query request irrelevant.
 
