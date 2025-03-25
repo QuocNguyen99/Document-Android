@@ -66,5 +66,9 @@ println(triple)
 To work with the values, we can use **first**, **second**, and **third** properties or the `componentN` method to extract the values. The N value of `componentN` stands for the number of the component; for example, component1 represents the first property or value of a `Triple`.
 
 
-Like in the case of `Pair`, with the `copy()` method you can create a new Triple based on another Triple or change some properties. You must preserve the order of properties. Remember: the properties of a Triple are immutable, read-only. You must create a new Triple to change the values, or use the `copy` function to create a new Triple and assign it whatever values you want based on a previous object.
+Like in the case of `Pair`, with the `copy()` method you can create a new Triple based on another Triple or change some properties. You must preserve the order of properties. 
+
+> [!WARNING]
+> the properties of a Triple are immutable, read-only. 
+> You must create a new Triple to change the values, or use the copy function to create a new Triple and assign it whatever values you want based on a previous object.
 
