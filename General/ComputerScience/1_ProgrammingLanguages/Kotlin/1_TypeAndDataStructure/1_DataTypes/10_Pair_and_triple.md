@@ -38,8 +38,9 @@ println(pairTwo.component2()) // I am another Pair
 
 Besides, we can use the `copy()` method to copy `Pair` objects and change their properties using the name of the parameter
 
-
-Remember: the properties of a `Pair` are immutable, read-only. You must create a new `Pair` to change the values, or use the `copy` function to create a new Pair and assign it whatever values you want based on a previous object.
+> [!WARNING]
+> The properties of a `Pair` are immutable, read-only. 
+> You must create a new `Pair` to change the values, or use the `copy` function to create a new Pair and assign it whatever values you want based on a previous object.
 
 ```kotlin
 val pair = Pair("marks", listOf(8.0, 9.0, 10.0))
