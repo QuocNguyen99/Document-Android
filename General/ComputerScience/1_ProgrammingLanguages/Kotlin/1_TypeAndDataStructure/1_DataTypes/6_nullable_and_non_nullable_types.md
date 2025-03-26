@@ -21,13 +21,14 @@ This `?`. pair of symbols is called a **safe call** in Kotlin.
 
 So, Kotlin introduces **nullable types** that differ from **non-nullable** ones
 
-- In Kotlin, a nullable type is a variable that can hold a null value, in contrast to a non-nullable type, which cannot.
+- In Kotlin, a **nullable type** is a variable that can hold a null value
 
-- In Kotlin, a non-nullable is a type that cannot hold a null value.
+- In Kotlin, a **non-nullable** is a type that cannot hold a null value.
 
 ### Avoiding NPEs. Null safety
 
-Null safety is a crucial feature in Kotlin's design. Kotlin's type system aims to get rid of null references, which commonly lead to bugs and crashes in software development.
+Null safety is a crucial feature in Kotlin's design.
+Kotlin's type system aims to get rid of null references, which commonly lead to bugs and crashes in software development.
 
 ### Save calls
 If you need to have access to properties or call methods of a nullable object, you must check if it's null first.
