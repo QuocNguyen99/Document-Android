@@ -79,7 +79,7 @@ fun main() {
 }
 ```
 
-## Proper usage of each class
+## Best practice
 
 Best scenarios for using `StringBuilder`:
 
