@@ -24,7 +24,7 @@ val numbers = IntArray(5) // an array of 5 integer numbers
 println(numbers.joinToString())
 ```
 
-They are filled by the default values of the corresponding types (0 for numeric types).
+They are filled by the default values of the corresponding types (`0` for numeric types).
 You cannot change the size of an array, but you can modify the elements.
 
 Another option is to use the Array constructor that takes the array size and the function that returns values of array elements given its index or a constant value or using a combination of the apply scope function and the `fill() `method that fills an array with the specified element.
@@ -43,11 +43,12 @@ println("Only -1: ${onlyMinusOne.joinToString()}")
 ## Comparing arrays
 
 To compare two arrays, invoke the `contentEquals()` function of an array and pass another array as the argument.
-the operators `==` and `!=` do not compare the contents of arrays, they compare only the variables that point to the same object
+the operators `==` and `!=` **do not compare the contents of arrays**, they compare only the variables that point to the same object
 
 ## Multi-dimensional array
 
-It makes it very easy to represent things that have many dimensions: for example, 3D objects with length, height, and width. The universe we live in could be described with four measurements, time being the fourth dimension, so it is 4D. Higher levels like 5D and so
+It makes it very easy to represent things that have many dimensions: for example, 3D objects with length, height, and width. 
+The universe we live in could be described with four measurements, time being the fourth dimension, so it is 4D. Higher levels like 5D and so
 
 ### Creating 2D arrays of different types
 
