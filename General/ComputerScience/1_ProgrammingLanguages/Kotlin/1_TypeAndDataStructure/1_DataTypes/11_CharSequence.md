@@ -3,21 +3,21 @@
 CharSequence in Kotlin is an interface that represents a sequence of characters. It is designed to be **immutable**. which means that its contents cannot be changed after it has been created.
 
 
-some of the methods available for CharSequence:
+some of the methods available for `CharSequence`:
 
 - `charAt()` returns the character at the specified index (in this case, the first character).
 
-- `subSequence()` returns a new CharSequence representing a range of characters from the original CharSequence (in this case, the characters from index 1 to 4).
+- `subSequence()` returns a new `CharSequence` representing a range of characters from the original `CharSequence` (in this case, the characters from index 1 to 4).
 
 - `contains()` checks if a specified character or character sequence is present in the CharSequence (in this case, checking if "amp", case-insensitive, is present in the CharSequence).
 
 ## CharSequence vs String (difference)
 
-The most significant difference between CharSequence and String is that CharSequence is an interface, whereas String is a concrete class in Kotlin.
+The most significant difference between `CharSequence` and `String` is that `CharSequence` is an interface, whereas `String` is a concrete class in Kotlin.
 
-CharSequence can be thought of as a more general interface that String implements. Any String is a CharSequence, but not every CharSequence is a String.
+`CharSequence` can be thought of as a more general interface that String implements. Any `String` is a `CharSequence`, but not every `CharSequence` is a String.
 
-Another difference between CharSequence and String is case sensitivity. CharSequence is case-sensitive, while String is case-insensitive
+Another difference between `CharSequence` and `String` is case sensitivity. `CharSequence` is case-sensitive, while `String` is case-insensitive
 
 ```kotlin
 fun main() {
@@ -40,4 +40,4 @@ For example, if we want to read a large file into memory, we may not know the ex
 
 To convert `CharSequence` to String, we can simply use the `toString()` method.
 
-Note that any String object can be also used as a `CharSequence` object, since String implements the `CharSequence` interface.
+Note that any `String` object can be also used as a `CharSequence` object, since `String` implements the `CharSequence` interface.
