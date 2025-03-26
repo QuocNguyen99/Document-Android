@@ -1,14 +1,18 @@
 # Sequences
 
-A sequence is a container where objects are not contained but produced while iterating. What does that mean? Those objects are not processed until it is time to use them: that is, sequences are executed lazily. We won't get an intermediate result at the end of each step.
+A `Sequence` is a container where objects are not contained but produced while iterating.
 
-Sequences offer the same functions as `Iterable`: we can filter, map, or order the items, but under the hood, they work differently and have a great potential for collections with large numbers of items or those requiring a lot of concatenated operations
+What does that mean? Those objects are not processed until it is time to use them: that is, sequences are executed lazily. We won't get an intermediate result at the end of each step.
+
+`Sequences` offer the same functions as `Iterable`: we can filter, map, or order the items, but under the hood,
+they work differently and have a great potential for collections with large numbers of items or those requiring a lot of concatenated operations
 
 
 That brings us two advantages:
 
-- Sequences can be infinite: we can define a sequence by an initial value and an operation (for example), and that sequence will have infinite values.
-- They allow you to avoid intermediate steps: unlike other collections, when a sequence performs several operations (filtering, transformation, etc.), these are applied in a chain to the objects one by one, without the need to create a new collection at each step.
+- **Sequences can be infinite**: we can define a sequence by an initial value and an operation (for example), and that sequence will have infinite values.
+- **They allow you to avoid intermediate steps**: unlike other collections, when a sequence performs several operations (filtering, transformation, etc.), 
+these are applied in a chain to the objects one by one, without the need to create a new collection at each step.
 
 
 ## Creating sequences
@@ -24,16 +28,25 @@ val sequenceOfInts = sequenceOf(1, 2, 3, 4)
 val listOfStrings = listOf("one", "two", "three", "four")
 val sequenceOfStrings = listOfStrings.asSequence()
 ```
-- We can use `generateSequence()`, which receives the first value `(seed)` and a function to apply to that value and constructs an infinite sequence. You may wonder why we might want an infinite sequence. We can, for example, generate values under a certain condition or simply take the elements we want from our sequence.
+- We can use `generateSequence()`, which receives the first value `(seed)` and a function to apply to that value and constructs an infinite sequence. 
+You may wonder why we might want an infinite sequence. 
+
+We can, for example, generate values under a certain condition or simply take the elements we want from our sequence.
 
 ```kotlin
 val sequenceOfEvenNumbers = generateSequence(1) { it + 1 }
     .filter { it % 2 == 0 }
     .take(5)
 println(sequenceOfEvenNumbers.toList()) // [2, 4, 6, 8, 10]
+```
+
+> [!CAUTION]
+> Be careful when using Sequence; if you don't limit the result, it may cause an OutOfMemoryError due to an infinite output.
 
 
 Using the `sequence()` method, we can produce sequence elements one by one. Thanks to `yield()` and `yieldAll()`, we can return one or more elements (`Iterable`) and suspend the execution (wait until these elements are consumed).
+
+
 ```kotlin
 val evenNumbersSequence = sequence {
     yield(2) // return 2 and suspend the function
@@ -60,9 +73,17 @@ We also have two types of operations, depending on whether they generate a new s
 ### Sequence processing
 
 When we work with `Iterables` or `Sequences`, it is important that we identify if we are working lazily or eagerly
-1. Iterable: eager
+#### 1. Iterable: eager
 
-When we work with Iterables, we perform all operations on all the elements. That is, we work in a horizontal or eager way. It means that each and every operation is performed on each of the elements even if they are not subsequently necessary. At each step, a new collection is created. We use that when working with smaller lists or when we do not have many chained operations.
+When we work with `Iterables`, we perform all operations on all the elements. 
+That is, we work in a horizontal or eager way. 
+
+> [!WARNING]
+> It means that each and every operation is performed on each of the elements even if they are not subsequently necessary.
+> At each step, a new collection is created. 
+
+> [!TIP]
+> We use that when working with smaller lists or when we do not have many chained operations.
 
 ```kotlin
 val withIterator = (1..10)
@@ -78,11 +99,22 @@ println()
 println(withIterator) // [4, 8, 12]
 ```
 
-In this example, we filtered all the elements to get only the even numbers and received a new collection with the filtered elements. Then, we map the new collection by multiplying each element by 2. Finally, we take the first 3 numbers. Therefore, **we have performed a total of 10 filtering operations, 5 mapping operations, and 3 takes. That is, a total of 18 operations.**
+In this example, we filtered all the elements to get only the even numbers and received a new collection with the filtered elements. 
+Then, we map the new collection by multiplying each element by 2.
+Finally, we take the first 3 numbers. Therefore, **we have performed a total of 10 filtering operations, 5 mapping operations, and 3 takes. That is, a total of 18 operations.**
 
-2. Sequence: lazy
+#### 2. Sequence: lazy
 
-When we work with sequences, methods are called only when building the result list. That is, we work in a vertical or lazy way. We perform each operation after the terminal operation has been called. The entire chain of operations on each element is processed. There are no intermediate collections involved. That is suitable for collections with many elements or where we perform many chained operations.
+When we work with sequences, methods are called only when building the result list. 
+That is, we work in a vertical or lazy way. 
+
+> [!NOTE]
+> We perform each operation after the terminal operation has been called. 
+> The entire chain of operations on each element is processed. 
+There are no intermediate collections involved.
+
+> [!TIP]
+> That is suitable for collections with many elements or where we perform many chained operations.
 
 ```kotlin
 val withSequence = (1..10).asSequence()
@@ -101,4 +133,5 @@ println()
 
 println(withSequence) // [4, 8, 12]
 ```
-In this example, we take items element by element and perform all the operations (filter, map, and take) on each of them, one by one. Therefore, we have performed a total of 6 filtering operations, 3 mapping operations, and 3 taking operation. That is, a total of 12 operations.
+In this example, we take items element by element and perform all the operations (filter, map, and take) on each of them, one by one. 
+Therefore, we have performed a total of 6 filtering operations, 3 mapping operations, and 3 taking operation. That is, a total of 12 operations.
