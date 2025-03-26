@@ -20,7 +20,8 @@
   - Suitable for small programs or simple tasks.  
 - **Disadvantages**:  
   - Can lead to complex and hard-to-maintain code. 
-  - Error-prone when managing state and execution flow manually.  
+  - Error-prone when managing state and execution flow manually.
+  - Limited support for code reuse.
 
 
 ## 3. **Object-Oriented Programming (OOP)**
