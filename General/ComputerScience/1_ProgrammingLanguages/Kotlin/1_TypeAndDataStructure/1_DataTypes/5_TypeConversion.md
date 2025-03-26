@@ -7,12 +7,14 @@ This is notably critical in Kotlin because it is a statically typed language, wh
 
 The three most common numeric types are: `Int`, `Long`, and `Double`. Sometimes, you may need to assign a value of one numeric type to a variable of another numeric type. In this case, you need to carry out **type conversion** by invoking a special function, for example, `toInt()`, `toLong()`, `toDouble()`, and so on.
 
->![!CAUTION]
+>[!CAUTION]
 > Keep in mind that you need to perform these operations when the target type is larger than the source type
 
 ### Conversion to Short and Byte types
 
-As you know, the Short and Byte types are really small. These types are rarely used, and if you need to store an integer number, you should use Int. To convert something to these type You need to convert `Double` or `Float` to `Int` and then convert the result to `Short` or `Byte`:
+As you know, the `Short` and `Byte` types are really small. 
+These types are rarely used, and if you need to store an integer number, you should use `Int`.
+To convert something to these type You need to convert `Double` or `Float` to `Int` and then convert the result to `Short` or `Byte`:
 
 ```kotlin
 val floatNumber = 10f
@@ -27,14 +29,15 @@ val byteNumber = doubleNumber.toInt().toByte()  // correct way
 
 ### String conversion
 
-Sometimes you need to get a string representation of a value of another type. Kotlin provides the toString() function for that.
+Sometimes you need to get a string representation of a value of another type. Kotlin provides the `toString()` function for that.
 A string can be converted to a number or even to a boolean value **but not to a single character.**
 
-However, if you convert a string to a boolean value, no errors will occur. If the string is `"true"` (case insensitive), it will produce a true `boolean` value, otherwise a `false` one.
+However, if you convert a string to a boolean value, no errors will occur. If the string is `"true"` (case insensitive), it will produce a `true` boolean value, otherwise a `false` one.
 
 ### Problems with type conversion
 
-If you have a value of a floating type, a Double value, for example, you may convert it to a value of an integer type, such as Int or Long the fractional part is simply dropped. Be careful with this conversion!
+If you have a value of a floating type, a `Double` value, for example, you may convert it to a value of an integer type, such as `Int` or `Long` the fractional part is simply dropped. 
+Be careful with this conversion!
 
 ```kotlin
 val d: Double = 12.5
@@ -62,7 +65,7 @@ val n: Int = bigNum.toInt() // -1530494976
 
 In this example, we tried to put the Long variable in Int. A cut occurred, the lower bits of the number remained and the higher bits were lost, the result is again unpredictable. Look at how this happens:
 
-![alt text](../resources/kotlin_type_overflow.png)
+![alt text](/resources/kotlin_type_overflow.png)
 
 **It is important to remember the following points:**
 - Data type overflow errors are programmer errors.
@@ -84,9 +87,10 @@ val longNum: Long = 1000
 val result = num + longNum // 1100, Long
 ```
 
-However, the Byte and Short types are unusual in this respect. If you need to do some calculations with these types, the result of the calculation is Int The picture below illustrates the direction of this casting:
+However, the `Byte` and `Short` types are unusual in this respect.
+If you need to do some calculations with these types, the result of the calculation is `Int` The picture below illustrates the direction of this casting:
 
-![alt text](../resources/kotlin_type_coercion.png)
+![alt text](/resources/kotlin_type_coercion.png)
 
 `Byte` and `Byte`, `Short` and `Short`, `Short` and `Byte`.
 
