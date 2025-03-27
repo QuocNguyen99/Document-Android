@@ -86,5 +86,3 @@ It depends on the programming language. As a rule, in Python and Java, loops are
 In that case, why recursion? Well, it has one certain advantage over loops: in some cases, it is intuitive. If you are certain that some function uses itself, it is much faster to write 3-4 lines of recursive code than to think how exactly a loop should behave. If you are short on time but don't have to worry about memory consumption, recursion is your choice.
 
 So, recursion is usually slower and less memory-efficient, but it saves the developers' time.
-
-
