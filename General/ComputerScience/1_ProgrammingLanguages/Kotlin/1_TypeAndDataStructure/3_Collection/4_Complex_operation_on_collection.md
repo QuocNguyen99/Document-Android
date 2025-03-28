@@ -210,12 +210,15 @@ fun main() {
 
 Zipping is an operation that allows us to obtain a pair based on two elements that occupy the same position in two different collections. This way, you can get a collection of pairs after applying `zip()`.
 
-If the original collections do not have the same size, the result will be a list of pairs limited to the size of the smaller collection, ignoring the remaining elements of the larger one.
+> [!NOTE]
+>  If the original collections do not have the same size, the result will be a list of pairs limited to the size of the smaller collection, ignoring the remaining elements of the larger one.
 
 ## Unzip
 
 Unzipping helps us to perform the reverse transformation. Given a collection of pairs, you can transform it into two collections with `unzip()`. The first one will have the first elements of the pair, the second one – the second elements.
 
+
+### Zip and unzip example
 ```kotlin
 fun main() {
     val listNumbers = listOf(1, 2, 3, 4, 5)
