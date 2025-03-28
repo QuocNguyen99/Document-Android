@@ -1,6 +1,6 @@
 # Introduction to collections
 
-   Collections are containers that support various ways to store and organize different objects and make them easily accessible. A collection usually contains a number of objects (this number may be zero) of the same type. Objects in a collection are called **elements** or **items**. 
+   Collections are **containers** that support various ways to store and organize different objects and make them easily accessible. A collection usually contains a number of objects (this number may be zero) of the same type. Objects in a collection are called **elements** or **items**. 
 Collections are an implementation of abstract data structures that can support the following operations:
 
 - retrieving an element;
@@ -22,22 +22,26 @@ Collections can be **mutable** or **immutable**.
 Immutable collections cannot be changed. That is, they only allow those operations that do not change the elements.
 Immutability can be helpful when you want to store items together without allowing them to be modified in the future.
 
-Kotlin Standard Library provides the implementation for the basic types of collections: **list**, **set**, and **map**. All three exist in mutable and immutable variations.
+Kotlin Standard Library provides the implementation for the basic types of collections: **list**, **set**, and **map**. 
+All three exist in mutable and immutable variations.
 
-Another way to check if an item is contained in a collection is to use the keyword `in`.It works just like the contains() function. Look at the example:
 
-```kotlin
-println(elem in collection)
-
-println(collection.contains(elem))
-```
 ## Map collection
 
-A `Map` **is an immutable collection that holds pairs of objects** (**keys** and **values**) and supports efficiently retrieving values corresponding to each key. As you remember, immutable implies that the size and content of the collection cannot be changed once it's initialized. It's important to remember that `Map` keys are unique: in other words, a `Map` can hold only one value for each individual key.
+A `Map` **is an immutable collection that holds pairs of objects** (**keys** and **values**) and supports efficiently retrieving values corresponding to each key. As you remember, 
+
+> [!TIP]
+> immutable implies that the size and content of the collection cannot be changed once it's initialized.
+
+It's important to remember that `Map` keys are unique: in other words, a `Map` can hold only one value for each individual key, neither keys nor values can be changed after initialization, but in a `MutableMap`, values can be updated
 
 ## Test predicates: checking elements in collection
 
-A **predicate** is a function that returns true or false based on the input. We will get true if the condition matches the predicate and false otherwise. A single predicate always checks for the same condition; different conditions are checked by different predicates.
+A **predicate** is a function that returns `true` or `false` based on the input.
+
+> [!TIP]
+> A single predicate always checks for the same condition; different conditions are checked by different predicates.
+
 
 A predicate is defined based on a lambda function: `(T) -> Boolean`. Also, a predicate can be passed as a function reference
 
@@ -56,16 +60,24 @@ fun main() {
 
 ### Any
 
-With a predicate, the `any()` function will return true if at least one collection element matches the predicate we defined in `any()`. 
-The function can be also called without a predicate to check for emptiness.
+With a predicate, the `any()` function will return `true` if at least one collection element matches the predicate we defined in `any()`. 
+
+> [!TIP]
+> This function can be also called without a predicate to check for emptiness.
 
 ### None
 
-With a predicate, the `none()` function will return true if none of the collection elements matches the predicate indicated in `none()`. Like `any()`, it can also be called without a predicate to check for emptiness.
+With a predicate, the `none()` function will return true if none of the collection elements matches the predicate indicated in `none()`. Like `any()`,
+
+> [!TIP]
+> This can also be called without a predicate to check for emptiness.
 
 ### All
 
-The `all()` function will only return true if all elements in the collection satisfy the given predicate. A special feature of this function is that it will always return true on an empty collection; this trait is also called vacuous truth in math.
+The `all()` function will only return true if all elements in the collection satisfy the given predicate. 
+
+> [!TIP]
+> A special feature of this function is that it will always return true on an empty collection; this trait is also called vacuous truth in math.
 
 ## Ordering elements in collection
 
@@ -171,7 +183,7 @@ To get the element at a specific index position, you can use `elementAt()`. We c
 
 However, in the Kotlin world, things are easier if we use the indexed access operator `[]`, which is equivalent to the `get()` function on lists.
 
-All of them will throw an `IndexOutOfBoundsException` if the index is not within the indicated limits (0.. size-1).
+All of them will throw an `IndexOutOfBoundsException` if the index is not within the indicated limits (`0`.. `size-1`).
 
 In order not to have problems with exceptions when trying to get an invalid index element, we can make use of the following safe calls:
 
@@ -223,7 +235,7 @@ there are two universal interfaces in Kotlin: `Iterable` and `MutableIterable`. 
 
 Classes that inherit from `Iterable` have a set of common methods: `iterator()`, `forEach()`, `contains()`, `count()`, `drop()`, `filter()`, etc.
 
-`MutableIterable`, unlike `Iterable`, also supports removing elements during iterations. For example, `remove()` and `removeAll()`.
+`MutableIterable`, unlike `Iterable`, **also supports removing elements during iterations**. For example, `remove()` and `removeAll()`.
 
 > [!NOTE]
 > It's interesting that they both contain the method drop() which drops a certain element. But unlike remove() from MutableIterable, which really removes a certain element in a certain object, drop() returns a new object.
@@ -269,24 +281,30 @@ Notice that the specific `MutableCollection` methods, unlike `drop()` or `minus(
 
 ## Mapping transformation
 
-With the `map()` and `mapIndexed()` functions, we can create a new collection by applying a transformation lambda function to our source collection.
+With the `map()` and `mapIndexed()` functions, **we can create a new collection by applying a transformation lambda** function to our source collection.
 
 - `map()` transforms a given collection into a new one by applying a transformation lambda function to each element.
 - `mapIndexed()` transforms a given collection into a new one by applying a transformation lambda function to each element and using the element index as the first argument of the lambda.
 
-When do we need map transformations? **You need them whenever you want to get a new collection based on the elements of the original one.**
+> [!TIP]
+> When do we need map transformations? You need them whenever you want to get a new collection based on the elements of the original one.
 
-If you apply a transformation function to the elements and the transformation cannot be performed on some of them, the result for those elements is null. You can check the above example. You can avoid these results using `mapNotNull()` or `mapIndexedNotNull()`.
+If you apply a transformation function to the elements and the transformation cannot be performed on some of them, the result for those elements is `null`.
 
-Why do we need these two functions? If we can't perform a mapping operation, we'll have a `null`, so our collection is `T?`. It is essential to have such operations that allow us to avoid `null` values so that our collection will be of type `T`.
+You can avoid these results using `mapNotNull()` or `mapIndexedNotNull()`.
 
-You have two options to perform a transformation: transform the keys with `mapKeys()` or transform the values associated with the said keys with `mapValues()`.
+Why do we need these two functions?
+If we can't perform a mapping operation, we'll have a `null`, so our collection is `T?`.
+It is essential to have such operations that allow us to avoid `null` values so that our collection will be of type `T`.
+
+You have two options to perform a transformation:
+transform the keys with `mapKeys()` or transform the values associated with the said keys with `mapValues()`.
 
 ### Flatten (flatten/flatMap)
 
 The function `flatten()` returns a single list of all the elements from all collections in the given collection. It is very helpful if we have several collections and we want to get a single collection that concatenates them.
 
-However, this function is not valid for all kinds of collections. Remember, `flatten` returns a `List` or a `sequence`.
+However, this function is not valid for all kinds of collections. Remember, `flatten` returns a `List` or a `Sequence`.
 
 Example:
 
@@ -317,7 +335,6 @@ Example:
 
 ## Group collection
 
-In Kotlin, we have extension functions for grouping collection elements, and one of them is `groupBy()`.
 It takes a lambda function and returns a Map grouped by keys, with the value field containing all the corresponding elements of the collection.
 
 ```kotlin

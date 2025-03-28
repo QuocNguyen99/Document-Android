@@ -73,7 +73,7 @@ fun main() {
     // chunked into 3, the result transformed by applying a lambda with sum
     println(list.chunked(3) { it.sum() }) // [6, 15, 24, 10]
     // chunked into 3, the result transformed into a string
-    println(list.chunked(3) { it.joinToString() }) // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    println(list.chunked(3) { it.joinToString() }) // ["1, 2, 3", "4, 5, 6", "7, 8, 9", "10"] => print [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 }
 ```
 
