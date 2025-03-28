@@ -1,4 +1,4 @@
-## Fold and reduce
+# Fold and reduce
 
 With `fold()` and `reduce()`, we can operate on the elements of a collection as a sequence and return the accumulated result.
 
@@ -83,7 +83,11 @@ acc: 24, i: 5, acc * i: 120
 ```
 
 
-`reduce` **performs one step less because the accumulator is the first element.**. `reduce` will throw an exception if performed on an empty collection. The result of a reduce operation will always be of the same type (or a super type) as the data that is being reduced – we cannot change it to another type.
+`reduce` **performs one step less because the accumulator is the first element.**.
+
+> [!CAUTION]
+> reduce will throw an exception if performed on an empty collection. 
+> The result of a reduce operation will always be of the same type (or a super type) as the data that is being reduced – we cannot change it to another type.
 
 
 ```kotlin

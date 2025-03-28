@@ -1,10 +1,9 @@
 
-
-## Aggregate operations on collections
+# Aggregate operations on collections
  
 It is time to learn to obtain values based on the content of a collection, for example, the maximum value, the average value, an object with the maximum value of a property, etc.
  
-### Basic aggregate function
+## Basic aggregate function
  
 When we work with collections, we have a series of methods to obtain values based on the collection content and get additional information about the content. These methods are known as "aggregation methods":
  
@@ -22,22 +21,25 @@ When we work with collections, we have a series of methods to obtain values base
 > [!CAUTION]
 >  sum() and average() methods only work with numbers, and if the collection is of a different data type, they will throw an exception.
 
-### Aggregate with selector function
+## Aggregate with selector function
  
 Sometimes, we need to specify which value we want to obtain with an aggregate method. In Kotlin, we have special methods to perform these tasks using a **selector function**. They are:
  
  
-- `minByOrNull()` with a selector function, returns the element with the smallest value. It is used as a substitute for the `minBy()` to avoid an exception.
+- `minByOrNull()` with a selector function, returns the element with the smallest value.
  
-- `maxByOrNull()` with a selector function, returns the element with the largest value. It is used as a substitute for the `maxBy()` to avoid an exception.
+- `maxByOrNull()` with a selector function, returns the element with the largest value.
  
-- `minOfOrNull()` with a selector function, returns the smallest return value of the selector itself. It is an evolution of `minOf()`, which throws an exception if the collection is empty.
+- `minOfOrNull()` with a selector function, returns the smallest return value of the selector itself. 
  
-- `maxOfOrNull()` with a selector function, returns the largest return value of the selector itself. It is an evolution of `maxOf()`, which throws an exception if the collection is empty.
+- `maxOfOrNull()` with a selector function, returns the largest return value of the selector itself.
  
 - `sumOf()` with a selector function, returns the sum of its application to all collection elements.
  
-Alternatively, we can also use `minBy()`/`maxBy()` and `maxOf()`/`minOf()` to perform the same tasks, but they throw a `NoSuchElementException` on empty collections. Also, you can use predicates to find the max or min elements.
+Alternatively, we can also use `minBy()`/`maxBy()` and `maxOf()`/`minOf()` to perform the same tasks, but they throw a `NoSuchElementException` on empty collections.
+
+> [!TIP]
+> Also, you can use predicates to find the max or min elements.
  
  
 ```kotlin
@@ -89,7 +91,7 @@ Meanwhile, `maxByOrNull`/`minByOrNull` return the first element yielding the lar
     println(words.maxByOrNull { it.length > 5 }) // michael
     println(words.minByOrNull { it.length > 5 }) // anne
 ```
-### Aggregate with comparator
+## Aggregate with comparator
  
 We can perform the same task as above using a custom comparator with a lambda and the following methods:
  
@@ -105,7 +107,7 @@ We can perform the same task as above using a custom comparator with a lambda an
  
 These methods return `null` on empty collections. However, we also have `maxOfWith()` and `minOfWith()` to perform the same task, and they throw a `NoSuchElementException` on empty collections.
 
-### Counting elements
+## Counting elements
 
 One of the main tasks when working with collections is counting the elements. Obviously, we can make use of `size`. but an interesting fact is that we can also use a **predicate** to count the number of matching collection elements.
 
@@ -123,7 +125,7 @@ fun main() {
 }
 ```
 
-### Distinct elements
+## Distinct elements
 
 The `distinct()` methods returns a list with only the distinct elements in the given collection.
 Also, `distinctBy()` returns a collection containing only the elements with distinct keys returned by the given selector function.

@@ -1,6 +1,6 @@
-## Retrieve collection parts
+# Retrieve collection parts
 
-### Slice
+## Slice
 
 Slicing is a fundamental operation: it returns a range of items from a collection based on their indices.
 
@@ -11,7 +11,7 @@ Slicing is a fundamental operation: it returns a range of items from a collectio
     println(list.slice(0..4)) // [1, 2, 3, 4, 5]
 ```
 
-### Take and drop
+## Take and drop
 You can indicate how many elements to return from a collection using the family of the "take" methods:
 
 - `take()`: returns a collection with n elements from the original collection, starting from the first element. If called with a number larger than the collection size, the whole collection is returned.
@@ -60,7 +60,7 @@ fun main() {
 }
 ```
 
-### Chunked
+## Chunked
 
 Quite often, we need to split a collection into parts of a fixed size.
 
@@ -77,7 +77,7 @@ fun main() {
 }
 ```
 
-### Windowed
+## Windowed
 
 You can also get all possible ranges of collection elements of a defined size. 
 
