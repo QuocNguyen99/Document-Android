@@ -98,17 +98,18 @@ Imagine that you want to know who is queuing at the supermarket or what the firs
 
 `ArrayDeque` and `MutableList` have different performance characteristics for various operations
 
-1. **Adding/removing elements at the beginning**:
+### 1. **Adding/removing elements at the beginning**:
 
 - **ArrayDeque**: Adding or removing an element from the start of the queue typically occurs in constant time `O(1)`. This is due to the bidirectional structure of `ArrayDeque`.
 
 - **MutableList**: Adding or removing an element from the start of the list requires shifting all subsequent elements, making these operations proportional to the size of the list — `O(n)`.
-2. **Adding/removing elements at the end**:
+### 2. **Adding/removing elements at the end**:
 - **ArrayDeque**: Just like at the beginning, adding or removing an element from the end of the queue usually happens in constant time `O(1)`.
 - **MutableList**: Adding an element to the end of the list typically happens in constant time `O(1)`, except when array resizing is required. Removing from the end of the list also happens in `O(1)`.
-3. **Accessing elements**:
+### 3. **Accessing elements**:
 - **ArrayDeque**: Accessing an arbitrary element by index might take longer than in `MutableList` because the internal representation of `ArrayDeque` is a circular buffer.
 
 - **MutableList**: Access to elements by index occurs in constant time `O(1)`.
 
-In practice, the choice between ArrayDeque and MutableList depends on which operations are most frequent and critical for your application.
+> [!TIP]
+> In practice, the choice between ArrayDeque and MutableList depends on which operations are most frequent and critical for your application.

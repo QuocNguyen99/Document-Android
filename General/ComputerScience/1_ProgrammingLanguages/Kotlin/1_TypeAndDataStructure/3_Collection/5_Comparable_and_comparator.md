@@ -4,7 +4,7 @@ In Kotlin, Comparable and Comparator are two interfaces that allow developers to
 
 ### Kotlin Comparable interface
 
-The Comparable interface is used to define the natural ordering of objects. When a class implements Comparable, it must override the `compareTo()` method:
+The `Comparable` interface is used to define the natural ordering of objects. When a class implements `Comparable`, it must override the `compareTo()` method:
 
 ```kotlin
 public operator fun compareTo(other: T): Int
@@ -18,8 +18,6 @@ data class Person(val name: String, val age: Int): Comparable<Person> {
   }
 }
 ```
-
-In this code, the Person class implements the Comparable interface and overrides the `compareTo()` method. The `compareTo()` method compares Person objects based on their age, returning a negative integer if the age of the current object is less than the age of the other object, a positive integer if the age of the current object is greater than the age of the other object, and zero if they are equal.
 
 Now, if we have a list of `Person` objects, we can sort it by their age as follows:
 ```kotlin
@@ -135,4 +133,9 @@ You can see more methods in Kotlin documentation.
 
 ### Differences between Comparable and Comparator
 
-The main difference between `Comparable` and `Comparator` is that `Comparable` defines the natural ordering of objects, while `Comparator` defines a custom ordering of objects. When objects of the same class are being compared, it's recommended to implement `Comparable` to provide a natural ordering for them. When objects of different classes are compared or custom orderings are required, it's recommended to implement `Comparator`.
+The main difference between `Comparable` and `Comparator` is that `Comparable` defines the natural ordering of objects, while `Comparator` defines a custom ordering of objects.
+
+
+> [!TIP]
+> When objects of the same class are being compared, it's recommended to implement `Comparable` to provide a natural ordering for them.
+> When objects of different classes are compared or custom orderings are required, it's recommended to implement `Comparator`.
