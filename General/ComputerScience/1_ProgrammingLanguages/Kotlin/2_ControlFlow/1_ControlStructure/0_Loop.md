@@ -113,16 +113,17 @@ An iterator provides access to collection elements sequentially, regardless of t
 `iterator()` returns a special object that can iterate over the collection.
 
 When the variable of an iterator is created, it points to the position **before** the first element of the collection. If you want to move to the next element, call the `next()` function. 
-it returns "true" if the iteration still has some elements.
+it returns `true` if the iteration still has some elements.
 
-Notice that when the iterator passes through the last element of a collection, it can no longer retrieve elements.
+> [!WARNING]
+> Notice that when the iterator passes through the last element of a collection, it can no longer retrieve elements.
 
-If you try to invoke next() from the iterator after passing the last element in a collection (or for an empty collection), `NoSuchElementException` will be thrown.
+If you try to invoke `next()` from the iterator after passing the last element in a collection (or for an empty collection), `NoSuchElementException` will be thrown.
 In this situation, you should create a new iterator for the collection.
 
 ![alt text](/resources/interators_position.png)
 
-Instead of using the `for` loop, iterators support the `forEach()` function. 
+Instead of using the `for` loop, **iterators** support the `forEach()` function. 
 
 ```kotlin
 var map = mapOf("John" to "chocolate", "Mary" to "sweets", "Sara" to "marmalade")
@@ -145,7 +146,25 @@ iterator.forEach { (key, value) ->
 Another special iterator variation is `MutableIterator`.
 It differs from the previous one in that it works with mutable collections, i.e., with those that can be changed after their creation.
 
-`MutableIterator` extends `Iterator` and provides the `remove()` function, which removes the last collection element returned by the iterator.
+`MutableIterator` extends `Iterator` and provides the `remove()` function, **which removes the last collection element returned by the iterator.**
+
+Ex:
+
+```kotlin
+fun main() {
+    val numbers = mutableListOf(1, 2, 3, 4, 5)
+    val iterator = numbers.iterator() // This is a MutableIterator for a mutable list
+
+    while (iterator.hasNext()) {
+        val number = iterator.next()
+        if (number % 2 == 0) {
+            iterator.remove() // Removes the last returned element if it's even
+        }
+    }
+
+    println(numbers) // Output: [1, 3, 5]
+}
+```
 
 ### List iterator
 

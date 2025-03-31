@@ -27,9 +27,8 @@ Well, keep in mind that your colleagues or maybe even yourself in a couple of we
 
 Actually, there is another possible block called `finally`. All the statements present in this block will always execute regardless of whether an exception occurs in the `try` block or not.
 
-You will find `finally` helpful in situations when you need to perform some finishing actions regardless of whether an exception is thrown.
-
-It is also possible to write try and finally without a catch block
+> [!TIP]
+> You will find `finally` helpful in situations when you need to perform some finishing actions regardless of whether an exception is thrown. It is also possible to write `try` and `finally` without a `catch` block
 
 ## Try-with-resources
 
@@ -78,14 +77,16 @@ FileReader("file.txt").use {
 
 As you see, there are no explicit calls of the `close` method at all. It is implicitly invoked for all objects declared in the first part. The construction guarantees closing all resources in a proper way.
 
-> [!NOTE]
-> Surely, we do our best to write error-free programs. However, it is difficult to foresee all possible problems. The best practice is to place any code concerning system resources in the use method.
+> [!TIP]
+> Surely, we do our best to write error-free programs. However, it is difficult to foresee all possible problems. The best practice is to place any code concerning system resources in the `use` method.
 
 ### Closeable resources
 
-We have dealt with a file input stream to demonstrate how try-with-resources is used. However, not only the resources based on files should be released. Closing is also crucial for other outside sources, like web or database connections. Classes that handle them have a `close` method and, therefore, can be wrapped by the try-with-resources statement.
+We have dealt with a file input stream to demonstrate how try-with-resources is used. However, not only the resources based on files should be released.
 
-For example, let's consider `java.util.Scanner`. Earlier, we used `Scanner` for reading data from the standard input, but it can read data from a file as well. `Scanner` has a close method for releasing outside sources.
+Closing is also crucial for other outside sources, like web or database connections. Classes that handle them have a `close` method and, therefore, can be wrapped by the try-with-resources statement.
+
+For example, let's consider `java.util.Scanner`. Earlier, we used `Scanner` for reading data from the standard input, but it can read data from a file as well. `Scanner` has a `close` method for releasing outside sources.
 
 ```kotlin
 Scanner(File("file.txt")).use { scanner ->
@@ -155,9 +156,9 @@ class CustomCloseable : Closeable {
 
 ## Nothing
 
-**Kotlin is a statically-typed language**. This means every expression in Kotlin has a known type at compile time
+**Kotlin is a statically-typed language. This means every expression in Kotlin has a known type at compile time**
 
-In Kotlin, `Nothing` is a unique type because **it doesn't have an instance**. You might ask when this is useful. It can be used when a function never returns a value, not even Unit.
+In Kotlin, `Nothing` is a unique type because **it doesn't have an instance**. You might ask when this is useful. **It can be used when a function never returns a value, not even Unit.**
 
 In essence, `Nothing` is a subtype of every known type in Kotlin. It means that it can represent a value of any type in terms of type checks.
 

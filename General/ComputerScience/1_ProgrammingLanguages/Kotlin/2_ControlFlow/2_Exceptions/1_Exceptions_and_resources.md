@@ -31,7 +31,7 @@ However, something can go wrong after declaring certain resources, and exception
 
 ### Get familiar with use()
 
-Luckily, the above problem with resources can be solved by the use() method, which manages resources automatically.
+Luckily, the above problem with resources can be solved by the `use()` method, which manages resources automatically.
 
 ```kotlin
 val reader = FileReader("test.txt")
