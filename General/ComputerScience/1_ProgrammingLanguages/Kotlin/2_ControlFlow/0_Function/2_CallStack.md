@@ -15,7 +15,7 @@ The call stack is composed of **stack frames**
 > [!NOTE] 
 > Stack Frame is a data structure that represents a single method within the call stack. that store information about functions that have not yet terminated. The information includes the return address of a function, parameters, local variables, intermediate computations, and some other data.
 
-![alt text](../../resources/stack_frames.png)
+![alt text](/resources/stack_frames.png)
 
 
 As a regular stack, the call stack follows the rule Last In First Out (LIFO). It means stack frames are pushed at the top and move everything down.
@@ -54,7 +54,7 @@ As always, a new stack frame is created. The function parameters (n), address (`
 
 We have two complete stack frames for `main` and `printNextEvenNumber` functions within the execution stack:
 
-![alt text](../../resources/call_stack_example.png)
+![alt text](/resources/call_stack_example.png)
 
 > [!NOTE]
 > Note, both frames have variables named n, but these variables are not the same since they belong to different functions.

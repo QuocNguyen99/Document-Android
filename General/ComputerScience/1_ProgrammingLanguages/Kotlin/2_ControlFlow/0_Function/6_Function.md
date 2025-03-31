@@ -1,15 +1,12 @@
+# Inline functions and reified types in Kotlin
 
-
-
-## Inline functions and reified types in Kotlin
-
-### Inline functions definition
+## Inline functions definition
 
 An `inline` function is a function where it's body is copied and pasted directly into the calling code.
 
 By default, all functions in Kotlin are `non-inline`, meaning that they are executed as separate function calls. 
 
-However, when we mark a function as `inline`, the compiler replaces the function call with the function's body. This reduces the overhead of the function call as well as the creation of unnecessary objects.
+However, when we mark a function as `inline`, **the compiler replaces the function call with the function's body**. This reduces the overhead of the function call as well as the creation of unnecessary objects.
 
 
 Let's look at an example and figure out what is happening:
@@ -36,11 +33,15 @@ In Kotlin, functions are stored in memory in the same way as any other object. W
 
 When the function is called, its code is loaded into memory, and the processor begins to execute this code. Like other objects, functions are stored in the heap, a memory area allocated for storing objects during program execution. When you create a function in a heap, enough memory is allocated to store it, including the function code and any variables or objects needed to run it.
 
-**It is important to understand that each time a function is called, a new instance of the function is created in memory. This means that if a function is called repeatedly, many instances of that function will be created in memory.**
+> [!IMPORTANT]
+> It is important to understand that each time a function is called, a new instance of the function is created in memory. This means that if a function is called repeatedly, many instances of that function will be created in memory.
 
-Overall, **inline functions can be a powerful tool in Kotlin for optimizing performance-critical code by eliminating function call overhead. However, they should be used with care, as inlining too much code can lead to an increased binary size and longer compile time.**
+Overall, **inline functions can be a powerful tool in Kotlin for optimizing performance-critical code by eliminating function call overhead.**
 
-### Benefits of inline functions
+> [!CAUTION]
+> However, they should be used with care, as inlining too much code can lead to an increased binary size and longer compile time.
+
+## Benefits of inline functions
 
 - **Improved performance**: since the code of an inline function is inserted directly into the calling code, there is no need to create an additional function object, which reduces the overhead of function calls.
 
@@ -49,7 +50,7 @@ Overall, **inline functions can be a powerful tool in Kotlin for optimizing perf
 - **Higher-order function optimization**: inlining functions allows us to use higher-order functions without the overhead of function calls, which makes the code faster and more efficient.
 
 
-### When do we use inline functions?
+## When do we use inline functions?
 
 - **Functions that are used as arguments to other functions**: inlining a function that is used as an argument to another function will eliminate the overhead of function calls and improve the performance of the code.
 
@@ -59,7 +60,7 @@ Overall, **inline functions can be a powerful tool in Kotlin for optimizing perf
 
 - **Small functions**: inlining small functions can help reduce the overhead of function calls and improve the performance of the code.
 
-### Inline functions also have some limitations, which we need to keep in mind:
+## Inline functions also have some limitations, which we need to keep in mind:
 
 - **Code duplication**: inlining functions can lead to code duplication, which can increase the size of the compiled code.
 
@@ -67,7 +68,7 @@ Overall, **inline functions can be a powerful tool in Kotlin for optimizing perf
 
 - **Recursive functions**: inline functions cannot be recursive, as inlining a recursive function can lead to an infinite loop.
 
-### Reified type parameters
+## Reified type parameters
 
 In the body of a universal function, you cannot access type `T` because it is available only at compile time but is erased at runtime. So, if you want to use a generic type as a regular class in the body of a function, you need to explicitly pass the class as a parameter, like this:
 

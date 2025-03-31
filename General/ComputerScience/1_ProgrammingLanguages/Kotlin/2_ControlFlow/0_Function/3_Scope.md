@@ -1,7 +1,7 @@
 # Scope
 
 Each variable has a special scope in which it can be used. 
-The scope of a variable is the syntactically-delimited area of code in which this variable or identifier, once declared, can be used in one way or another.
+**The scope of a variable is the syntactically-delimited area of code in which this variable or identifier, once declared, can be used in one way or another.**
 That is, it is visible. For example, the scope can be an entire program, or a function, or a file.
 
 
@@ -74,7 +74,7 @@ println(id)  // prints outer id
 ## Top-level variables
 
 The variables in the program, depending on the scope, can be divided into top-level and local ones.
-Top-level variables are declared outside the body of any class or function, and their scope is the whole file, while local variables are created when you define them, for example, in the body of a function.
+**Top-level variables are declared outside the body of any class or function, and their scope is the whole file**, while local variables are created when you define them, for example, in the body of a function.
 
 Example:
 

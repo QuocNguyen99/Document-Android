@@ -12,7 +12,7 @@ So, anything you can do with a usual function, except renaming, can be done with
 
 Actually, the `main()` function may have input parameters.
 
-They should be called args and stored in an array of strings. And the syntax of main() will look like this:
+They should be called args and stored in an array of strings. And the syntax of `main()` will look like this:
 
 ```kotlin
 fun main(args: Array<String>) {}
@@ -20,11 +20,11 @@ fun main(args: Array<String>) {}
 
 but what's it for?
 
-In simple words, the arguments of the `main()` function are the arguments of the program. You’ve probably used the opportunity of setting it many times in your life, for example, when you’ve opened a file with the "Open with...": in this case the file location is passed using the program arguments.
+In simple words, the arguments of the `main()` function **are the arguments of the program**. You’ve probably used the opportunity of setting it many times in your life, for example, when you’ve opened a file with the "Open with...": in this case the file location is passed using the program arguments.
 
 So, using the `main()` arguments, we transmit some additional external data to the program itself.
 
-## Working with the command line
+### Working with arguments on the command line
 
 To send command line arguments to your application, you need a pre-compiled program.
 
@@ -34,7 +34,7 @@ So, consider how you can pass arguments through the console: firstly, you need a
  java -jar filename.jar args
 ```
 
-## With or without arguments?
+### With or without arguments?
 
 there will be no error when your file contains both versions of `main()` – with and without arguments. The program will just begin by executing `main(args: Array <String>) {}`:
 
@@ -49,4 +49,5 @@ fun main() {
 } // will not be called
 ```
 
-What about the other type, the other number and another name of arguments? Of course, you may have a `main()` function with completely different input parameters in one file, for example, it can be `main(arg: Int)` or `main(a: Double, b: String)`, **but then it will no longer be an entry point**. It’ll be just a common function. In order for the program to start, the program file must contain either a function with the signature `main()` or `main(args: Array<String>)`.
+> [!CAUTION]
+> What about the other type, the other number and another name of arguments? Of course, you may have a `main()` function with completely different input parameters in one file, for example, it can be `main(arg: Int)` or `main(a: Double, b: String)`, **but then it will no longer be an entry point**. It’ll be just a common function. In order for the program to start, the program file must contain either a function with the signature `main()` or `main(args: Array<String>)`.
