@@ -9,18 +9,23 @@ First-class citizens in programming are the objects that:
 1. can be stored as variables,
 2. can be returned by a function,
 3. can be passed to a function as an argument,
-4. don't depend on their name (Ex: An Int with the ten name doesn't need to be 10. And vice versa: the 10 value doesn't need to be stored under the ten name.)
+4. don't depend on their name (Ex: An `Int` with the ten name doesn't need to be `10`. And vice versa: the `10` value doesn't need to be stored under the ten name.)
 5. can be created at the program runtime (the time when the program is working).
 
-For example, an Int is a first-class citizen in Kotlin. In fact, functions are first-class citizens in the Kotlin language too.
+For example, an `Int` is a first-class citizen in Kotlin. 
+In fact, **functions are first-class citizens in the Kotlin language too**.
 
 ## Function types
 
-Kotlin has built-in support for function types. The syntax of a function type is this:
+Kotlin has built-in support for function types.
+The syntax of a function type is this:
 
 `(parameters' types) -> return value type`
 
-In a function type there are **arrow symbols** `(->)` in the **middle**, also, there are **parenthesized parameters' types split by commas** on the **left**, and, finally, the return value **type** is written on the **right**.
+In a function type there are:
+- **arrow symbols** `(->)` in the middle
+- **parenthesized parameters' types split by commas** on the left
+- **the return value type** is written on the right.
 
 Let's recall some functions from previous topics and use them as examples:
 
@@ -40,7 +45,9 @@ fun sayHello() {
 ## Function references as objects
 
 Also, Kotlin allows getting references to functions. 
-To get a reference to a top-level function, we simply need to write double colon (::) before its name and we don't write parentheses and arguments after the name.  Take a look at the example: `::sum` gives us an object of the `(Int, Int) -> Int` type.
+To get a reference to a top-level function, we simply need to write double colon (`::`) before its name and we don't write parentheses and arguments after the name. 
+
+Take a look at the example: `::sum` gives us an object of the `(Int, Int) -> Int` type.
 
 > [!NOTE] 
 > In Kotlin, a top-level function is a function that is defined at the top level of a file, outside of any class or object.
@@ -135,7 +142,7 @@ val person: Person = Person("Sara", "Rogers")
 val personFun: () -> String = person::printFullName
 
 ```
-## Reference to a constructor
+## Reference to a Class constructor
 This reference has the following declaration:
 ```kotlin
 class Person (val name: String){
@@ -152,7 +159,12 @@ val johnFoster: Person = personGenerator("John Foster")
 
 What about more realistic examples? Well, see for yourself.
 
-The String type has the filter method to filter symbols. How does it know which symbols to remove from the string and which ones to leave in it? The answer is simple: this method takes a **predicate** as an argument and then uses it for internal computations. **A predicate is a function that takes an argument and returns a Boolean result**. So in the filter method, the predicate says if the symbol should be left and has the (Char) -> Boolean type.
+The `String` type has the filter method to filter symbols. 
+How does it know which symbols to remove from the string and which ones to leave in it? 
+
+The answer is simple: this method takes a **predicate** as an argument and then uses it for internal computations. **A predicate is a function that takes an argument and returns a Boolean result**.
+
+So in the filter method, the predicate says if the symbol should be left and has the `(Char) -> Boolean` type.
 
 Let's try to use this method. If we want to remove dots from a string, we declare this predicate:
 

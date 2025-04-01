@@ -22,7 +22,7 @@ fun(a: Int, b: Int): Int {
 
 Note that if you want to declare a **lambda without arguments**, you do not need to write the "arrow symbols". A lambda without argument definition looks like this: `{ body }`.
 
-So how can we use a function without a known name?.
+## So how can we use a function without a known name?.
 
 1. You can assign the function to a variable and then invoke it by invoking the variable
 ```kotlin
