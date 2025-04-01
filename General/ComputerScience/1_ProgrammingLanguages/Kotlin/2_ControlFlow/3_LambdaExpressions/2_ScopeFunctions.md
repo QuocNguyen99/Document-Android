@@ -110,7 +110,7 @@ Now, look at the characteristics of the run function:
 ```kotlin
 
 fun main() {
-    val service = MultiportService("https://example.kotlinlang.org", 80)
+    val service = MultiportService("https://example.com", 80)
 
     val result = service.run {
         port = 8080
@@ -153,7 +153,7 @@ There is an **important difference between the scope functions**, which greatly 
 - we change the original context object and can make a long chain of functions around it.
 
 
-### Usecase for 
+### Usecase for `let`, `run` and `with`
 
 - we can assign the result of these functions to a variable or make a long chain and transform different data.
 - Another way to use these functions is making a temporary scope for a variable, performing some actions, getting the results, and forgetting about it.
@@ -214,21 +214,3 @@ there are five practical differences between `this` and `it`.
     val printUser = { user: User -> println("User with :: function reference: ${user.name}, ${user.age}") }
     listOfUsers.forEach(::printUser)  // Replacing `it` by directly referencing `printUser`
 ```
-
-Example:
-
-## Function selection 
-
-You might think: "Hey, I can receive the same result if I, for example, replace run with let and add the word it to a parameter inside the function body. And I can replace run with with." Indeed, in many cases you can do so.
-
-they can help you make code more readable and clear. We can say that scope functions are primarily semantic elements.
-
-However, Kotlin language creators give us the following recommendations (they refer to them in Kotlin coding conventions):
-
-- Executing a lambda on non-null objects: `let`
-- Introducing an expression as a variable in local scope: `let`
-- Object configuration: `apply`
-- Object configuration and computing the result: `run`
-- Running statements where an expression is required: non-extension `run`
-- Additional effects: `also`
-- Grouping function calls on an object: `with`
