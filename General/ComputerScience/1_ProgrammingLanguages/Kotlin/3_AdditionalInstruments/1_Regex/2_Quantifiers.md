@@ -16,6 +16,10 @@ Here is a list of quantifiers to be remembered:
 > [!NOTE]
 > Note that there is also another quantifier, ?, which makes the preceding character optional. It is short for {0,1}. We will not consider this quantifier here because you should already know it.
 
+> [!CAUTION]
+> In regex, quantifiers must always appear immediately after the character, group, or character class they modify. They cannot stand alone or be placed before them.  
+
+
 ### The plus quantifier
 
 Below you can see how we use the **plus** character, which matches one or more occurrences of the preceding character:
@@ -81,6 +85,5 @@ regex.matches("abbbbbbb") // true
 ```
 
 The quantifier that matches not more than `m` instances works similarly.
-
 
 

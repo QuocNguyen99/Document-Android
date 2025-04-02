@@ -10,12 +10,11 @@ There are several pre-defined shorthands for the commonly used character sets:
 
 - `\w` is an alphanumeric character (letter or numeral), short for `[a-zA-Z_0-9]`;
 
-- `\b` is a word boundary. This one is a bit trickier: it doesn't match any specific character but rather matches the boundary between 
-    - an alphanumeric character or underscore and a non-alphanumeric character (for example, a whitespace character) 
-    - a boundary of a string (its end or start). 
-    
-    
-This way, `"\ba"` matches all words (sequences of alphanumeric characters) starting with `"a"`, `"a\b"` matches all words ending with `"a"`, and `"\ba\b"` matches the standalone letter `"a"` when it is surrounded by non-alphanumeric characters (like spaces or punctuation).
+- `\b` is word boundary `\b` matches the boundary between:  
+  - A word character (a-z, A-Z, 0-9, _) and a non-word character (like spaces or punctuation).  
+  - The start or end of a string.
+  
+**Examples:**  `\ba` matches words starting with "a", `a\b` matches words ending with "a", `\ba\b` matches "a" when it stands alone.
 
 There are also negative counterparts of these shorthands
 

@@ -73,8 +73,8 @@ val matchResult = regex.find("Her phone number is +1-234-567-89-01. You can also
 print(matchResult.value) // +1-234-567-89-01
 ```
 
-> [!NOTE]
-> Note that we care about null safety. The text may not contain matches at all and the result of find() is String? so you should use the !! operator or the Elvis operator.
+> [!WARNING]
+> Note that we care about null safety. The text may not contain matches at all and the result of find() is String? so you should use the `!!` operator or the Elvis operator.
 
 The `findAll()` function is required if you want to find **all matches**. It returns all suitable substrings at once:
 
