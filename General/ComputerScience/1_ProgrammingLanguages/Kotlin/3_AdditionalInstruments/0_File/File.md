@@ -3,7 +3,7 @@
 The core class for file processing is **File** from the `java.io` package. Kotlin provides additional functionality over Java implementation through **Extension Functions**. This means that by just importing `java.io.File` into your project, you can use functionality from both Java and Kotlin File implementations. Let's take a closer look at these extension functions.
 
 ### readText
-First, there is `readText()` which helps you read the whole file in just one String variable.
+First, there is `readText()` which helps you read the whole file in just one `String` variable.
 
 ```kotlin
 import java.io.File
@@ -14,7 +14,8 @@ val lines = File(fileName).readText()
 print(lines)
 ```
 
-As you see, we made a mistake and tried to read a different file – new.txt. If there is no such file in the file system, then `FileNotFoundException` is thrown.
+> [!CAUTION]
+> If we try to read a different file – `new.txt`. If there is no such file in the file system, then `FileNotFoundException` is thrown.
 
 Actually, our `file` variable didn't open the file, it just provided a reference with the path to it. What's more, `readText()` automatically opened and closed the file!
 
@@ -25,11 +26,12 @@ We can also provide specific charset for reading the file:
 val line = File(fileName).readText(Charsets.US_ASCII)
 ```
 
-Just keep it in mind that by default `readText()` has `UTF-8` charset encoding, but you can change it whenever you want. Also, Kotlin doesn't recommend using this function with files larger than 2 Gb, because this may cause `OutOfMemoryError`.
+> [!TIP]
+> Just keep it in mind that by default `readText()` has `UTF-8` charset encoding, but you can change it whenever you want.
 
 ### readLines
 
-Function `readLines()` provides the functionality of reading all lines from a file and storing them in a **List**:
+Function `readLines()` provides the functionality of reading all lines from a file and storing them in a `List`:
 
 ```kotlin
 val fileName = "src/reading.txt"
@@ -45,10 +47,10 @@ for (line in lines){
 Function `readBytes()` may be helpful if you need to store file contents as an array of bytes:
 
 > [!NOTE]
-> This function returns the ByteArray. The Array structure is similar to the MutableList, you cannot resize it, but you can modify elements. You can easily convert MutableList to ByteArray and vice versa with toByteArray() and toMutableList() functions.
+> This function returns the `ByteArray`. The `Array` structure is similar to the `MutableList`, you cannot resize it, but you can modify elements. You can easily convert MutableList to `ByteArray` and vice versa with `toByteArray()` and `toMutableList()` functions.
 
-
-It's still not recommended using this option with large files (2 Gb or more). This method is used as an implementation of `readText()` function with conversion to String in Kotlin source files.
+> [!CAUTION]
+> Kotlin doesn't recommend using `readText`, `readLines`, `readBytes` functions with files larger than `2GB`, because this may cause `OutOfMemoryError`.
 
 ### forEachLine
 
@@ -59,14 +61,16 @@ val fileName = "src/reading.txt"
 File(fileName).forEachLine { println(it) }
 ```
 
-This lambda reading approach provides an action (println() in our case) for each line.
+This lambda reading approach provides an action (`println()` in our case) for each line.
 
 
-It's always a possibility that the file you're going to read has already been opened in another process, or it might have access restrictions. In such cases, `AccessDeniedException` is thrown.
 
 ### File separator
 
-In our examples, we used the `fileName` variable with the path value `src/reading.txt`. Note that the file path separator is a platform-dependent character. For example, for Windows it is `\`, and for UNIX and MAC it is `/`.
+In our examples, we used the `fileName` variable with the path value `src/reading.txt`. 
+
+> [!WARNING]
+> Note that the file path separator is a platform-dependent character. For example, for Windows it is `\`, and for UNIX and MAC it is `/`.
 
 To avoid errors when accessing the file, we can use `File.separator` from the library `java.io.File`. `File.separator` returns the value of the system separator depending on the system used. Thus, our example can be as follows:
 
@@ -89,15 +93,19 @@ val myFile = File("MyFile.txt") //file name must be indicated in parentheses
 myFile.writeText("It is awfully hard work doing nothing!")
 ```
 
-**Notice, if you just create a File object, you will not create a file, it's just an object.**
+> [!TIP]
+> Notice, if you just create a File object, you will not create a file, it's just an object.
 
-If the file has access restrictions or has already been opened in another process, `AccessDeniedException` is thrown.
+
+
+> [!CAUTION]
+> It's always a possibility that the file you're going to read or write has already been opened in another process, or it might have access restrictions. In such cases, `AccessDeniedException` is thrown.
 
 ### Overwriting and appending
 
 For this, you can use the same feature `writeText()` for `File()`, which specifies the path to the document we want to overwrite. 
 
-Okay, and what if you wanted to retain the current content of the file and add something else to it? Then we’ll need the `appendText(text: String)` function:
+Okay, and what if you wanted to retain the current content as `String` of the file and add something else to it? Then we’ll need the `appendText(text: String)` function
 
 ### Writing byte arrays
 
@@ -180,7 +188,7 @@ In kotlin `Path` converts the name sequence specified with the base path string 
 
 ## Working with File Hierarchies 
 
-### Getting directory contents and directory's /file's parent with File and Path
+### Getting directory contents and directory's /file's parent with `File` and `Path`
 
 The `Files.listFiles()` function prints the contents (files and directories) of a chosen directory 
 also you can use `Path.listDirectoryEntries()`.
@@ -291,6 +299,7 @@ fileIn.copyTo(fileOut)
 ```
 Be aware that if you need to overwrite the file, you should include an `overwrite` parameter:
 
+```kotlin
 // With File
 val fileIn = File("newFile.txt")
 val fileOut = File("copyNewFile")
@@ -330,36 +339,24 @@ val pathOut = Path("newDir")
 pathIn.copyToRecursively(pathOut, overwrite = true, followLinks = true)
 ```
 
+## File vs Path: When to Use?
+
+###  `File` (java.io.File)
+- Represents a file or directory.
+- Used for **basic file operations** (check existence, delete, create).
+- Does **not handle complex path manipulations**.
+
+###  `Path` (java.nio.file.Path)
+- A more powerful way to handle file paths.
+- Works well with Java New Input/Output (Files) for efficient file operations.
+- Recommended for handling large files or when working with file paths dynamically.
+
+
 ### ZipFile with java.util.zip
 
 The `java.util.zip.ZipFile` class in the Java API is meant for reading entries from ZIP files.
 It acts as an access point to the compressed data within a ZIP archive,
 enabling developers to conveniently extract files and directories while efficiently managing resources.
-
-Here's a simple example of using `ZipFile` to list out ZIP file entries:
-
-```kotlin
-
-import java.util.zip.ZipFile;
-import java.util.Enumeration;
-import java.util.zip.ZipEntry;
-
-public class ZipFileExample {
-    public static void main(String[] args) {
-        try (ZipFile zipFile = new ZipFile("example.zip")) {
-            Enumeration<? extends ZipEntry> entries = zipFile.entries();
-            
-            while (entries.hasMoreElements()) {
-                ZipEntry entry = entries.nextElement();
-                System.out.println("Entry Name: " + entry.getName());
-            }
-        } catch (IOException e) {
-            System.err.println("Error opening ZIP file: " + e.getMessage());
-        }
-    }
-}
-    
-```
 
 ### Opening and Accessing ZipFile in Java
 
@@ -387,8 +384,13 @@ fun openAndAccessZipFile(filePath: String) {
 }
 
 fun main() {
-    val zipFilePath = "path/to/your/zipfile.zip"
-    openAndAccessZipFile(zipFilePath)
+    try {
+        val zipFilePath = "path/to/your/zipfile.zip"
+        openAndAccessZipFile(zipFilePath)
+    } catch (IOException e) {
+        System.err.println("Error opening ZIP file: " + e.getMessage());
+    }
+
 }
 ```
 
@@ -468,7 +470,7 @@ try {
 zipFile.close();
 ```
 
-> [!NOTE]
+> [!CAUTION]
 > Don't forget to properly handle resources to avoid leaks. 
 > You can use the try-with-resources statement for automatic resource management.
 
