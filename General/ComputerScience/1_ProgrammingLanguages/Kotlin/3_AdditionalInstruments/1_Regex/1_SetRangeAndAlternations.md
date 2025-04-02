@@ -46,10 +46,11 @@ The same works for letter ranges, such as `"[a-z]"` or `"[A-Z]"`. These ranges m
 val anyLetterPattern = "[a-zA-Z]" // matches any letter "a", "b", ..., "A", "B", ...
 ```
 
-> [!NOTE]
+> [!WARNING]
 > Note that although the range [A-z] is technically valid, it includes additional symbols that are placed between uppercase and lowercase letters in the ASCII table.
 
-you can easily put several ranges in one set and mix them with separate characters in any order:
+> [!TIP]
+> you can easily put several ranges in one set and mix them with separate characters in any order:
 
 ```kotlin
 val anyLetterPattern = "[a-z!?.A-Z]" // matches any letter as well as "!", "?", and "."
@@ -67,38 +68,23 @@ regex.matches("b") // false
 regex.matches("c") // false
 regex.matches("d") // true
 ```
-
-The same works for ranges:
-
-```kotlin
-val regex = "[^1-6]".toRegex()
-
-regex.matches("1") // false
-regex.matches("2") // false
-regex.matches("0") // true
-regex.matches("9") // true
-```
-
 ## Avoiding characters in sets
 
-The general rule is that you do not need to avoid special characters within sets if they are used in their literal meaning. 
 
+- **Literal characters** inside sets `[ ]` don’t need escaping.
+- Example: `[.?!]` matches `.`, `?`, and `!` only.
 
-For example, the set `[.?!]` will match a single period, a question mark, an exclamation mark, and nothing else. However, the characters used to define a set or a range should be avoided or put in a neutral position – in case we look for their literal symbols:
-
-- to match the hyphen character, we should put it in the **first or in the last** position in the set: `"[-a-z]"` matches lowercase letters and the hyphen, and `"[A-Z-]"` matches uppercase letters and the hyphen;
-
-- The caret `^` does not need to be escaped if it is placed anywhere other than at the beginning of a character set. For example, the set `"[^a-z^]"` matches everything except lowercase letters and the caret character itself.
-
-- square brackets should always be escaped:
-
-```kotlin
-val regex = Regex("[\\[\\]]") // matches "[" and "]"
-```
+## 🔹 Handling Special Cases:
+- **Hyphen (`-`)**: Place it first or last to match literally.  
+  - Example: `[-a-z]` (matches hyphen + lowercase letters), `[A-Z-]` (matches hyphen + uppercase letters).  
+- **Caret (`^`)**: Escaping is needed **only if at the start** of the set.  
+  - Example: `[^a-z^]` (matches everything except lowercase letters and `^`).  
+- **Square brackets (`[]`)**: Always escape them (`\[ \]`) to match literally.
+  - Example: `val regex = Regex("[\\[\\]]") // matches "[" and "]"`
 
 ## Alternations
 
-So far, we've been talking about single characters. However, there's also a way to match longer sequences. The vertical bar | is used to match character sequences either before or after the symbol:
+So far, we've been talking about **single characters**. However, there's also a way to match **longer sequences**. The vertical bar `|` is used to match character sequences either before or after the symbol:
 
 ```kotlin
 val regex = "yes|no|maybe".toRegex() // matches "yes", "no", or "maybe", but not "y" or "e"
