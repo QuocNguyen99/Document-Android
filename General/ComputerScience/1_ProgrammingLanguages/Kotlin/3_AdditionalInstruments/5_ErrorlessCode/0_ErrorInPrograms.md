@@ -55,8 +55,7 @@ We can state the fact that coffee and tea are both related to a specific type: d
 
 The following picture illustrates a simplified hierarchy of exceptions:
 
-
-![alt text](../resources/Overview_of_the_exception_hierarchy.png)
+![alt text](/resources/Overview_of_the_exception_hierarchy.png)
 
 As you can see, the foundation of this hierarchy is the type `Throwable`. It is the root of the hierarchy, and all exceptions somehow belong to this type. It provides a set of useful methods for handling exceptions.
 
@@ -105,11 +104,11 @@ In Kotlin, type Any is a **supertype** for all types (**Any is at the top of the
 
 While type `Any` is a supertype for all types that do not support null, `Any?` is a supertype for types that can be either `null` or not. **From this fact, it follows that type Any? is a supertype for type Any**
 
-![alt text](../resources/super_type_for_any.png)
+![alt text](/resources/super_type_for_any.png)
 
 Non-null type is a subtype of its nullable equivalents, for example, type `Number` is a subtype of type `Number?`, and type `Int` is a subtype of type `Int?`. Let's see what it looks like:
 
-![alt text](../resources/non_null_type_is_a_subtype_of_its_nullable_equivalents.png)
+![alt text](/resources/non_null_type_is_a_subtype_of_its_nullable_equivalents.png)
 
 This is why you can store a non-null `Number` value in a nullable `Number?` variable, but you cannot store a nullable `Number?` value in a non-null `Number` variable.
 
@@ -119,4 +118,4 @@ This is why you can store a non-null `Number` value in a nullable `Number?` vari
 
 Like any other type, `Unit` is a subtype of `Any`. It can also be a nullable `Unit?`, which is a subtype of `Any?`.
 
-![alt text](../resources/unit_type.png)
+![alt text](/resources/unit_type.png)
