@@ -40,7 +40,7 @@ or `fromEpochMilliseconds()` to create an instance based on milliseconds.
 ```
 ## Instant Methods
 
-Instant offers a number of methods that allow you to obtain various data or transform the Instant. For example, `plus` and `minus` methods allow you to add or subtract temporal units.
+Instant offers a number of methods that allow you to obtain various data or transform the Instant. For example, `plus` and `minus` `Duration` methods allow you to add or subtract temporal units.
 
 ```kotlin
 import kotlinx.datetime.Clock
@@ -77,18 +77,20 @@ import kotlinx.datetime.*
 fun main() {
     val currentInstant = Clock.System.now() // val currentInstant: Instant
 
-    val zonedDateTime = currentInstant
-        .toLocalDateTime(TimeZone.currentSystemDefault()) // val zonedDateTime: LocalDateTime
-    val backToInstant = zonedDateTime
-        .toInstant(TimeZone.currentSystemDefault()) // val backToInstant: Instant
+    val zonedDateTime: LocalDateTime = currentInstant
+        .toLocalDateTime(TimeZone.currentSystemDefault()) /
+    val backToInstant: Instant = zonedDateTime
+        .toInstant(TimeZone.currentSystemDefault())
     println(zonedDateTime)
     println(backToInstant)
 }
 ```
 ## Best Practices and Common Mistakes When Working with Instant
 
+> [!IMPORTANT]
+> It's important to remember that Instant always represents time in UTC. 
 
-It's important to remember that Instant always represents time in UTC. Therefore, if you want to display time in a specific time zone, you will need to convert the Instant to another date and time type such as `LocalDateTime` or `ZonedDateTime`. Also, remember that Instant does not contain information about the time zone.
+Therefore, if you want to display time in a specific time zone, you will need to convert the `Instant` to another date and time type such as `LocalDateTime` or `ZonedDateTime`. Also, remember that `Instant` does not contain information about the time zone.
 
 ## TimeZone classes
 
@@ -113,8 +115,8 @@ println(tz3)                               // Europe/Paris
 val tz4 = TimeZone.of("UTC+2")             // UTC + 2 hours time zone
 println(tz4)                               // UTC+02:00
 ```
-
-In case the provided parameter of the `of()` function isn't valid, the `IllegalTimeZoneException` is thrown.
+> [!CAUTION]
+> In case the provided parameter of the `of()` function isn't valid, the `IllegalTimeZoneException` is thrown.
 
 ## DateTimePeriod class
 

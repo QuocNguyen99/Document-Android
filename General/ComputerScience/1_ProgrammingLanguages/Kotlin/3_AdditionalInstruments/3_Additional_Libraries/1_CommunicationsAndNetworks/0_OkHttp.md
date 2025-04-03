@@ -37,7 +37,10 @@ Response caching allows `OkHttp` to avoid repeating requests over the network. T
 
 The best practice is to have one instance of `OkHttpClient()` that is accessible throughout the whole application. Otherwise, two cache instances might stomp on each other, corrupt the response cache, and possibly crash your application.
  
-`OkHttp` response caching uses HTTP headers to determine cache behavior. It can be configured on the server, for example, how long responses are cached with response headers like `Cache-Control: max-age=1000`. You can also prevent OkHttp from using caches with `CacheControl.FORCE_NETWORK`. Alternatively, you can force it to use cache instead of network with `CacheControl.FORCE_CACHE`. All that can be done by passing a `CacheControl` value into `cacheControl()` method of `Request.Builder`.
+`OkHttp` **response caching uses HTTP headers to determine cache behavior**. 
+It can be configured on the server, for example, how long responses are cached with response headers like `Cache-Control: max-age=1000`. 
+
+You can also prevent OkHttp from using caches with `CacheControl.FORCE_NETWORK`. Alternatively, you can force it to use cache instead of network with `CacheControl.FORCE_CACHE`. All that can be done by passing a `CacheControl` value into `cacheControl()` method of `Request.Builder`.
 
 > [!CAUTION]
 > Be aware that forcing the use of cache can result in response code 504 known as an Unsatisfiable request error if there is no cache data. Otherwise, it will show cached data until the latest data is downloaded.

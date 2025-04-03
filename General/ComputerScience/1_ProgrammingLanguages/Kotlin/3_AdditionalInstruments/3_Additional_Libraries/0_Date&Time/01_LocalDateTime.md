@@ -4,7 +4,7 @@ While the `Instant` class of the `kotlinx-datetime` library can be used for date
 
 ## LocalDateTime class
 
-The `LocalDateTime` class is used to represent date and time data for a **certain time zone** and can provide human-readable date and time components. It doesn't hold a specific moment in time (as the `Instant` class does), but identifies the time and date in a certain country or time zone.
+The `LocalDateTime` class is used to represent date and time data for a **certain time zone** and can provide human-readable date and time components. **It doesn't hold a specific moment in time** (as the `Instant` class does), but identifies the time and date in a certain country or time zone.
 
 `LocalDateTime` can be instantiated from an `Instant` with the help of the `Instant` class `toLocalDateTime(timezone: TimeZone)` member function, which takes a `TimeZone` object as a parameter, as in the following example:
 
@@ -41,7 +41,7 @@ It can be also created from an ISO 8601 string with the help of the `String` ext
 val dateTime4: LocalDateTime = "2022-02-22T22:10:00".toLocalDateTime()
 ```
 
-Alternatively, you can use the `LocalDateTime.parse()` function with an ISO 8601 string as a parameter:
+Alternatively, you can use the `LocalDateTime.parse()` function with an **ISO 8601 format string** as a parameter:
 
 ```kotlin
 val dateTime5: LocalDateTime = LocalDateTime.parse("2022-01-01T12:30:00Z")
@@ -151,7 +151,8 @@ println(before)
 ```
 
 > [!CAUTION]
-> LocalDateTime arithmetic operations are purposefully left out due to the daylight saving time transitions. The library authors suggest doing all date and time arithmetic operations with the Instant class and converting to LocalDateTime only when needed.
+> `LocalDateTime` arithmetic operations are purposefully left out due to the daylight saving time transitions. 
+> The library authors suggest doing all date and time arithmetic operations with the `Instant` class and converting to `LocalDateTime` only when needed.
 
 An `Instant` can be instantiated from `LocalDateTime` with the help of the `LocalDateTime` class `toInstant(timezone: TimeZone)` member function, which takes a `TimeZone` object as a parameter, as in the following example:
 
