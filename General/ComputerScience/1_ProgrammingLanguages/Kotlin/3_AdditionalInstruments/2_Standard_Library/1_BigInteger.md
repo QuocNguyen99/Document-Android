@@ -10,10 +10,11 @@ This is also the reason why operations with numbers can sometimes lead to **over
 
 Luckily for us, the Java Class Library provides a class called `BigInteger` for processing very large numbers (both positive and negative). The size of a stored number is limited only by the available amount of memory. So, when you use Kotlin/JVM environment, you can use `BigIntegers`.
 
+> [!IMPORTANT]
+> The `BigInteger` class is **immutable** which means functions and operators of the class return new instances instead of changing existing ones.
 
-The `BigInteger` class is **immutable** which means functions and operators of the class return new instances instead of changing existing ones.
-
-Although this type can store any integers, including small numbers, you should not use `BigInteger` unless you absolutely have to. There is always a performance hit associated with its use. `BigInteger` operations are slower than operations on built-in integer types.
+> [!TIP]
+> Although this type can store any integers, including small numbers, you should not use `BigInteger` unless you absolutely have to. There is always a performance hit associated with its use. `BigInteger` operations are slower than operations on built-in integer types.
 
 ## Functions of BigInteger
 

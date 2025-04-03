@@ -25,10 +25,12 @@ val number = 100000.50000
 val bigDecimal = number.toBigDecimal()
 ```
 
-> [!NOTE]
-> It is extremely important to keep in mind that BigDecimal is an immutable class. Immutability implies that you cannot change an existing instance of BigDecimal, even if it was declared with the var keyword. If you try to modify an existing object, it is created again.
+> [!IMPORTANT]
+> It is extremely important to keep in mind that `BigDecimal` is an immutable class. 
+> Immutability implies that you cannot change an existing instance of `BigDecimal`, even if it was declared with the var keyword. If you try to modify an existing object, it is created again.
 
-You might remember that in the case of Double and Float, there are a few potential problems with the floating point representation. For instance, the result of adding `0.2` and `0.1` won't be `0.3`, which affects the accuracy of further calculations:
+You might remember that in the case of `Double` and `Float`, there are a few potential problems with the floating point representation. 
+For instance, the result of adding `0.2` and `0.1` won't be `0.3`, which affects the accuracy of further calculations:
 
 ```kotlin
 println(0.1 + 0.2) // 0.30000000000000004
