@@ -29,9 +29,10 @@ Therefore, it has to be imported into a program:
 
 A pixel’s color can be read/set as an integer using the `getRGB(x, y)`/`setRGB(x, y, rgb)` function, where `x` and `y` are the column and row pixel positions respectively, and `rgb` is the pixel color as an integer.
 
-A Kotlin integer has a size of 32 bits, so it can hold the color values for both the 24-bit RGB and 32-bit ARGB color schemes.
+> [!NOTE]
+> A Kotlin integer has a size of 32 bits, so it can hold the color values for both the 24-bit RGB and 32-bit ARGB color schemes.
 
-In the following code example, an image file is read. Then, for each pixel in the created `BufferedImage` instance, the red color is set to 255, while the green and the blue colors remain unchanged. The `BufferedImage` instance is then saved as a new file. Note that a new `Color` instance has to be created.
+In the following code example, an image file is read. Then, for each pixel in the created `BufferedImage` instance, the red color is set to `255`, while the green and the blue colors remain unchanged. The `BufferedImage` instance is then saved as a new file. Note that a new `Color` instance has to be created.
 
 ```kotlin
 import java.io.File                   // Import the File class for file handling
