@@ -2,23 +2,27 @@
 
 ## Hash functions
 
-Hash functions are algorithms that take an input (or 'message') and return an output of fixed length. 
+Hash functions are algorithms that take an input and return an output of fixed length. 
 
 ## MD5 and SHA
 
-MD5 and SHA are two of the most well-known and widely used hash functions. MD5, which stands for 'Message Digest algorithm 5', produces a 128-bit hash, while SHA-1 produces a 160-bit hash. SHA-256, a more secure version of SHA, produces a 256-bit hash, and SHA-512 produces a 512-bit hash.
+`MD5` and `SHA` are two of the most well-known and widely used hash functions. 
+
+- `MD5`, which stands for "Message Digest algorithm 5", produces a `128-bit` hash.
+- `SHA-256`, a more secure version of `SHA`, produces a `256-bit` hash, `SHA-1` produces a 160-bit hash and `SHA-512` produces a `512-bit` hash.
 
 
-Although MD5 is faster and produces a shorter hash than SHA-512, it has been shown to be vulnerable to collision attacks, where two different inputs produce the same hash. Therefore, MD5 has fallen out of use in favor of more secure hash functions like SHA-512.
+Although `MD5` is faster and produces a shorter hash than `SHA-512`, it has been shown to be vulnerable to collision attacks, where two different inputs produce the same hash.
+Therefore, `MD5` has fallen out of use in favor of more secure hash functions like `SHA-512`.
 
-> [!NOTE]
+> [!IMPORTANT]
 > It's important to note that hash functions provide one-way encryption, meaning it is computationally infeasible to retrieve the original message from the hash. Therefore, they are primarily used for verification and comparison rather than decryption.
 
 ## MessageDigest Class
 
-The MessageDigest class in Kotlin is part of the Java Cryptography Architecture (JCA) and provides functionality for cryptographic hash functions.
+The `MessageDigest` class in Kotlin **is part of the Java Cryptography Architecture (JCA)** and provides functionality for cryptographic hash functions.
 
-It allows you to create instances of various hash algorithms, such as MD5, SHA-1, SHA-256, SHA-512, etc. 
+It allows you to create instances of various hash algorithms, such as `MD5`, `SHA-1`, `SHA-256`, `SHA-512`, etc. 
 
 **The primary use** of the `MessageDigest` class is to compute the hash value (digest) of a given input message or data. This can be useful in several scenarios, including:
 
@@ -33,6 +37,9 @@ To use the `MessageDigest` class in Kotlin, you need to follow these steps:
 1. Get an instance of the `MessageDigest` class for the desired algorithm using the `getInstance()` method, specifying the algorithm name (e.g., "SHA-512").
 
 2. Call the `update()` method on the `MessageDigest` instance to provide the input data or message to be hashed. You can update the digest multiple times if needed.
+
+> [!TIP]
+> For large data, such as files, use `update()` in chunks instead of loading everything into memory at once. This helps efficiently process large inputs without excessive memory usage.
 
 3. Call the `digest()` method to compute the final hash value as an array of bytes.
 
