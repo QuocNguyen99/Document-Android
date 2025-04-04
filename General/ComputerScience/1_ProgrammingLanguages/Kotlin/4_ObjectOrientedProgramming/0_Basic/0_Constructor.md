@@ -16,11 +16,13 @@ The primary constructor is the right tool for that. It does not contain any code
 Usually, to define a constructor, you should put the keyword constructor before its parameters. **Kotlin's primary constructor allows you to omit the keyword.**
 
 ## Property declarations
-You can put simple property declarations inside the primary constructor. To declare a read-only property, put the keyword val in the parentheses before the argument name. For a mutable property, use the keyword var.
+You can put simple property declarations inside the primary constructor.
+To declare a read-only property, put the keyword `val` in the parentheses before the argument name.
+For a mutable property, use the keyword `var`.
 
 ## Default and named arguments
 
-Default values in primary constructors are set in the same way as in the class body. You declare the property with a keyword val or var and place the default value after the assignment operator:
+Default values in primary constructors are set in the same way as in the class body. You declare the property with a keyword `val` or `var` and place the default value after the assignment operator:
 ```kotlin
 class Size(var width: Int = 1, var height: Int = 1) {
     val area: Int = width * height
@@ -31,7 +33,7 @@ class Size(var width: Int = 1, var height: Int = 1) {
 
 Primary constructors cannot contain any code: they only set the values of class properties based on the passed arguments.
 
-Sometimes, we want to set some of our properties based on other properties' values or other sources of information.
+- Sometimes, we want to set some of our properties based on other properties' values or other sources of information.
 In such cases, we would use initializer blocks, which are prefixed with the keyword `init`:
 
 ```kotlin
@@ -52,7 +54,7 @@ class Size(_width: Int, _height: Int) {
 }
 ```
 
-The keyword `init` signifies a block of code that serves as an extension of the primary constructor
+- The keyword `init` signifies a block of code that serves as an extension of the primary constructor
 For example, **the code below prints a message after the object properties have been set in the primary constructor**:
 
 ```kotlin
@@ -63,7 +65,9 @@ class Size(val width: Int, val height: Int) {
 }
 ```
 
-There may be several initializer blocks in the class body. In this case, property initializers and `init` blocks are executed in the order of their appearance:
+- There may be several initializer blocks in the class body. 
+
+In this case, property initializers and `init` blocks are executed in the order of their appearance:
 
 ```kotlin
 class Size(_width: Int, _height: Int) {
@@ -127,12 +131,35 @@ Creating several constructors for a class is almost as simple as creating just o
 
 **The constructor signature consists of the number, the types, and the order of the parameters**. To create a valid constructor, you need to make sure it has a unique list of parameters.
 
+```kotlin
+class Person {
+    var name: String
+    var age: Int
+
+    // Primary constructor
+    constructor(name: String, age: Int) {
+        this.name = name
+        this.age = age
+    }
+
+    // Secondary constructor with a different signature
+    constructor(name: String) : this(name, 18) // Default age = 18
+
+    // Another secondary constructor with a different parameter type
+    constructor(age: Int) : this("Unknown", age)
+
+    fun printInfo() {
+        println("Name: $name, Age: $age")
+    }
+}
+```
+
 > [!CAUTION]
 > Note that you cannot use the val and var keywords in the secondary constructor.
 
 ## Constructors delegation
 
-If a class has a primary constructor, each secondary constructor needs to call the primary one, either directly or indirectly through another secondary constructor(s). This is called delegation.
+If a class has a primary constructor, each secondary constructor needs to call the primary one, either directly or indirectly through another secondary constructor(s). **This is called delegation**.
 
 Delegation to another constructor of the same class is done with the keyword `this` placed after the constructor arguments and before the constructor body:
 
@@ -147,7 +174,9 @@ class Size(val width: Int, val height: Int) {
 }
 ```
 
-Delegation to the primary constructor becomes the first statement of a secondary constructor, so the properties are initialized before the secondary constructor code is executed. Initializer blocks, if present, are also executed before the secondary constructor. If a class has no primary constructor, the delegation happens implicitly.
+> [!IMPORTANT]
+> Delegation to the primary constructor becomes the first statement of a secondary constructor, so the properties are initialized before the secondary constructor code is executed. 
+> Initializer blocks, if present, are also executed before the secondary constructor. If a class has no primary constructor, the delegation happens implicitly.
 
 ### Constructor execution
 
@@ -189,7 +218,7 @@ In the context of object-oriented programming (OOP), **overriding** is a mechani
 
 ### Overriding constructors in Kotlin
 
-As mentioned before, constructors cannot be overridden in Kotlin. However, you can define constructors in subclasses that use or "extend" constructors of the superclass.
+As mentioned before, constructors cannot be overridden in Kotlin. However, you can define constructors in subclasses that use or **extend** constructors of the superclass.
 
 
 When declaring a subclass, we can use the keywords `open`, `final`, and `override` to control inheritance and polymorphism.
@@ -300,7 +329,10 @@ Derived class secondary
 
 ## Overriding properties
 
-The primary mechanism works for properties as it does for methods. When redeclaring properties from a superclass in a derived class, they must be preceded by the override keyword and possess a compatible type.
+> [!NOTE]
+> The primary mechanism works for properties as it does for methods. 
+
+When redeclaring properties from a superclass in a derived class, they must be preceded by the override keyword and possess a compatible type.
 ```kotlin
 open class Shape {
     open val vertexCount: Int = 0
@@ -310,7 +342,11 @@ class Triangle : Shape() {
     override val vertexCount = 3
 }
 ```
-A declared property can be overridden either by a property featuring an initializer or one with a `get` method. Overriding a `val` property with a `var` property is allowed, **but the opposite is not permitted**. This is due to the fact that a `val` property inherently includes a `get` method, and when overridden as a `var`, a `set` method is also declared in the derived class
+A declared property can be overridden either by a property featuring an initializer or one with a `get` method. 
+
+> [!CAUTION]
+> Overriding a `val` property with a `var` property is allowed, but the opposite is not permitted. 
+> This is due to the fact that a `val` property inherently includes a `get` method, and when overridden as a `var`, a `set` method is also declared in the derived class
 
 ```kotlin
 interface Shape {
