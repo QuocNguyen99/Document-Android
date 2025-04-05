@@ -1,6 +1,9 @@
 # Enum
 
-"How can I store a bunch of constants in one place and handle them all at the same time?" Well, for this question Kotlin has an answer and we call that answer **Enums**. Basically, **Enums** represent a logical set of constants, and they make our code clearer and more readable. Let's take a closer look at them.
+"How can I store a bunch of constants in one place and handle them all at the same time?" Well, for this question Kotlin has an answer and we call that answer **Enums**. 
+
+
+Basically, **Enums** represent a logical set of constants, and they make our code clearer and more readable. Let's take a closer look at them.
 
 
 `enum` is a keyword, which allows us to create our own enumeration (the word that `enum` represents) just from a usual class:
@@ -57,5 +60,35 @@ enum class Rainbow(val color: String, val rgb: String) {
 
 4.  `valueOf()` returns an instance of Enum by its name with String type and case sensitivity
 
-If there isn't any appropriate instance of Enum then IllegalArgumentException will be thrown. Please, note that this method is case sensitive.
+If there isn't any appropriate instance of Enum then `IllegalArgumentException` will be thrown. Please, note that this method is case sensitive.
 
+```kotlin
+enum class Color(val hex: String) {
+    RED("#FF0000"),
+    GREEN("#00FF00"),
+    BLUE("#0000FF")
+}
+
+fun main() {
+    // name - Get the name of Enum instance
+    val colorName = Color.RED.name
+    println("Color name: $colorName")  // Output: Color name: RED
+
+    // ordinal - Get the position of Enum instance
+    val colorOrdinal = Color.RED.ordinal
+    println("Color ordinal: $colorOrdinal")  // Output: Color ordinal: 0
+
+    // entries - Get all instances of Enum
+    val allColors = Color.entries
+    println("All colors: ${allColors.joinToString(", ") { it.name }}")  
+    // Output: All colors: RED, GREEN, BLUE
+
+    // valueOf() - Get an instance by name (case-sensitive)
+    try {
+        val greenColor = Color.valueOf("GREEN")
+        println("Color found: $greenColor")  // Output: Color found: GREEN
+    } catch (e: IllegalArgumentException) {
+        println("Error: ${e.message}")
+    }
+}
+```

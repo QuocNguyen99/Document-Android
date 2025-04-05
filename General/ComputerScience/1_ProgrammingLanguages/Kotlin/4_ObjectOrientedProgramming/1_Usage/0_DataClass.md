@@ -42,7 +42,12 @@ Why do we need such a long piece of code just for standard stuff? That's the rig
 data class Client(val name: String, val age: Int, val gender: String)
 ```
 
-Wait! Where are all my functions now? Actually, with the `data` keyword, you don't need them anymore. It will magically work as if you have already implemented them all. This keyword will also provide `toString()` ,`copy()` and `componentN()` functions with default behavior (equals and hashCode). We'll look at `copy()` and `componentN()`a bit later, but right now you need to remember several rules here:
+Wait! Where are all my functions now? Actually, with the `data` keyword, you don't need them anymore. 
+**It will magically work as if you have already implemented them all**. 
+
+This keyword will also provide `toString()` ,`copy()` and `componentN()` functions with default behavior (equals and hashCode). 
+
+We'll look at `copy()` and `componentN()`a bit later, but right now you need to remember several rules here:
 1.  You can only count on properties that are inside the constructor.
 ```kotlin
 data class Client(val name: String, val age: Int, val gender: String) {
@@ -67,12 +72,6 @@ fun main() {
     println(john) // Client(name='John', age=29, gender='Male', balance=0)
 }
 ```
-
-
-The `componentN()` functions correspond to the properties in their order of declaration: `component1()`, `component2()`, ..., for all data class properties. The Component functions generated for data classes make it possible to use them in destructuring declarations
-
-> [!NOTE]
-> In Kotlin, a destructuring declaration is a feature that allows you to separate the properties of an object or a collection into individual variables, which can then be used separately in your code.
 
 ## Argument naming in overridden functions
 
@@ -151,3 +150,6 @@ for ((_, _, isAdmin) in usersData) {
 ```
 
 the `componentN` operator skipped `name` and `age` properties, so they cannot be used in the cycle.
+
+> [!TIP]
+> Destructuring in Kotlin just make the code clearly. Traditional loops are better when needing full object access or prioritizing performance and clarity.

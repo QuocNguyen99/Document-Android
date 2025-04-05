@@ -55,7 +55,7 @@ sealed class CustomError(type: String)
 
 ## Sealed class vs enum
 
-Enum constants have only one single type, while sealed classes offer multiple instances with greater flexibility. We can conclude that an enum is used to represent a fixed set of values, while a sealed class is a class used to represent a fixed set of subclasses of the type of the given class.
+Enum constants have only one single type, while sealed classes offer multiple instances with greater flexibility. **We can conclude that an enum is used to represent a fixed set of values, while a sealed class is a class used to represent a fixed set of subclasses of the type of the given class.**
 
 ```kotlin
 enum class Staff(numberOfLessons: Int)  {
@@ -113,3 +113,8 @@ open class B : A() // class B is direct subclass of class A
 open class C : B() // class C is indirect subclass of class A and direct subclass of class B
 ```
 
+> [!TIP]
+> In Kotlin, when working with a sealed class, objects like `Success`, `Error`, and `Loading` are often declared as `object` rather than `class`. 
+> This is because they represent unique, unchanging states throughout the application's lifecycle. 
+> Using `object` ensures that there is only a single instance of each state, saving memory and improving performance. 
+> On the other hand, if `class` was used, multiple instances would need to be created for each state, which is unnecessary in this case.
