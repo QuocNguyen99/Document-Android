@@ -19,7 +19,7 @@ object Engine {
 }
 ```
 
-When you use object declaration, the constructor is not available because Kotlin does it itself. To get an instance of our playing field, use `Engine` declaration. We can use it anywhere and it will return the same object every time.
+When you use `object` declaration, the constructor is not available because Kotlin does it itself. To get an instance of our playing field, use `Engine` declaration. We can use it anywhere and it will return the same object every time.
 
 ```kotlin
 val engine = Engine.getEngine()

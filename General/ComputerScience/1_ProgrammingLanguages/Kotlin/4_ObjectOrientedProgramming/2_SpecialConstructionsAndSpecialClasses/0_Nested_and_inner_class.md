@@ -58,7 +58,7 @@ For example, both `Cat` and `Bow` may have the property `color`. How can you acc
 
 **The qualified this expression will help!**
 
-Write this@Cat.color in the inner class code and you will get the color of the outer class, while using color or this.color will always give you the color property of the current class
+Write `this@Cat.color` in the inner class code and you will get the color of the outer class, while using color or `this.color` will always give you the color property of the current class
 
 
 ### Rules for Inner classes

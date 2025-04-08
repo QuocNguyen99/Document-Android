@@ -102,9 +102,9 @@ class Deck() {
 
 ## Limitations of companion objects
 
-Only one companion object is available for each class. That means you can't create multiple companion objects for a class because Kotlin does not support this behavior, even if they have different names
+- Only one companion object is available for each class. That means you can't create multiple companion objects for a class because Kotlin does not support this behavior, even if they have different names
 
-There is one more limitation: we cannot create a companion object inside another singleton (or a companion object) because that violates the global access principle.
+- We cannot create a companion object inside another singleton (or a companion object) because that violates the global access principle.
 
 ```kotlin
 object OuterSingleton {
@@ -128,4 +128,7 @@ class Dog {
 /*prints WUF-WUF*/
 System.out.println(Dog.createSound());
 ```
-As you may know, Kotlin doesn’t have the `static` keyword. If you need something common to all instances of a class, you can use a `companion` object
+As you may know, Kotlin doesn’t have the `static` keyword. 
+
+> [!TIP]
+> If you need something common to all instances of a class, you can use a `companion` object
