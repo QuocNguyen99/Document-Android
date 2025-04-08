@@ -50,6 +50,23 @@ fun main() {
     println(person1.hashCode() == person3.hashCode()) // false
 }
 ```
+### Standard Formula
+```kotlin
+override fun hashCode(): Int {
+    var result = field1?.hashCode() ?: 0
+    result = 31 * result + (field2?.hashCode() ?: 0)
+    // Repeat for other fields...
+    return result
+}
+```
+
+
+> [!NOTE]
+> The value `31` was chosen because it is an odd prime. 
+> If it were even and the multiplication overflowed, information would be lost, as multiplication by `2` is equivalent to shifting. 
+> The advantage of using a prime is less clear, but it is traditional.
+> A nice property of `31` is that the multiplication can be replaced by a shift and a subtraction for better performance: `31 * i == (i << 5) - i`.
+> Modern VMs do this sort of optimization automatically.
 
 ### The equals method
 

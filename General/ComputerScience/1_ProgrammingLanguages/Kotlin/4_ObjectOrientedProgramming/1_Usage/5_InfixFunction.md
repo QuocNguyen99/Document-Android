@@ -24,9 +24,10 @@ fun main() {
 
 You can create infix functions whenever you want: for example, to improve the readability of your code or create a DSL (Domain Specific Language).
 
-**But remember**, infix function calls have lower precedence than arithmetic operators or other elements defined in the language, like type casts and the `rangeTo` operator.
+> [!WARNING]
+> But remember, infix function calls have lower precedence than arithmetic operators or other elements defined in the language, like type casts and the `rangeTo` operator.
 
 On the other hand, an infix function's call precedence is higher than that of the boolean operators `&&` and `||`, `is` and `in` checks, and some other operators.
 
 > [!NOTE]
-> Remember also that infix functions always require both the receiver and the parameter to be specified and that you must use this to reference the current receiver.
+> Remember also that infix functions always require both the receiver and the parameter to be specified and that you must use `this` keyword to reference the current receiver.
