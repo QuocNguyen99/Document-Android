@@ -1,6 +1,7 @@
 # Companion object
 
-In many cases, you need only one singleton for a class, and using its full name may seem wordy. In this case, you can use another Kotlin feature, the companion object.
+**You can declare any number of objects inside another object**. 
+**But in many cases, you need only one singleton for a class**, and using its full name may seem wordy. In this case, you can use another Kotlin feature, the companion object.
 
 ## Companion object
 
