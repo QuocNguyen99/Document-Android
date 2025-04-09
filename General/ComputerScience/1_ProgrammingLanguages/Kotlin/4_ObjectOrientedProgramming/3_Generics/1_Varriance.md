@@ -1,7 +1,8 @@
 # Variance
 
 
-For example, we know that Int is a subtype of Number. Imagine we have `Box<T>`: now, is `Box<Int>` a subtype of `Box<Number>`, or is `Box<Dog>` a subtype of `Box<Animal>?` Let's see:
+For example, we know that `Int` is a subtype of `Number`. 
+Imagine we have `Box<T>`: now, is `Box<Int>` a subtype of `Box<Number>`, or is `Box<Dog>` a subtype of `Box<Animal>?` Let's see:
 
 ```kotlin
 class Box<T>
@@ -50,7 +51,7 @@ Variance applies when you have a type relationship between two types and you wan
 - **Contravariance**: a generic class is called contravariant on the type parameter when the following holds: `Dog` is a subtype of `Animal`, `Box<Animal>` is a subtype of `Box<Dog>`
     - This is usually allowed when the generic parameter is only used in "input" positions, but not in "output" positions, for example, in the parameters of methods.
     - Note that when you define a class with contravariance using the `in` keyword, it restricts the usage of the type `T` inside the class. We declare the `Box` class with the `in` modifier on the type parameter `T`. This allows us to assign `Box<Animal>` to variables of type `Box<Dog>` and `Box<Cat>`, since `Animal` is a superclass of both `Dog` and `Cat`. 
-    - The in keyword is telling the compiler that the generic class (or interface) consumes values of type `T` and never produces them
+    - The `in` keyword is telling the compiler that the generic class (or interface) consumes values of type `T` and never produces them
 
     ```kotlin
         interface Comparator<in T> {

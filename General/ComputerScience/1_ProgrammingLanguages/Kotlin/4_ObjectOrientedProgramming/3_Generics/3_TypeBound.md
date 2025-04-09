@@ -2,7 +2,7 @@
 
 Sometimes we need to restrict the type parameter inside a generic function or class.  For example, we have a generic class `Storage<T>` and we want to make it store only books without creating one more class. In such a situation, we should use **type bounds**.
 
-We can add our limitation by adding a constraint T : Book inside angle brackets:
+We can add our limitation by adding a constraint `T : Book` inside angle brackets:
 
 ```kotlin
 class Storage<T : Book>() {

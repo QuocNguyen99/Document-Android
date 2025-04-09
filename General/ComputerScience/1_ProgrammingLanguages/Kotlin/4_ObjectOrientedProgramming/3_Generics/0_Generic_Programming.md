@@ -85,6 +85,7 @@ val nonGenericInstance: NonGenericClass = NonGenericClass("abc")
 val str: String = nonGenericInstance.get() // Compile-time error: Type mismatch
 ```
 
-After an invocation of the get() method, we obtain an Any, not a String or an Integer. We cannot get a string directly from the method.
+After an invocation of the `get()` method, we obtain an `Any`, not a `String` or an Integer. We cannot get a string directly from the method.
 
-Now we can see the main advantage of generics over the Any class. Because there is no need to perform an explicit type-cast, we never get a runtime exception. If we do something wrong, we can see it at compile-time.
+> [!TIP]
+> Now we can see the main advantage of generics over the `Any` class. Because there is no need to perform an explicit type-cast, we never get a runtime exception. If we do something wrong, we can see it at compile-time.
