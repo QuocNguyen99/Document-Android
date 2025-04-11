@@ -16,7 +16,7 @@ class MyAnimalClass : Animal {
 }
 ```
 
-Then, each **field**  or **method** declared in the interface, needs to be declared in the class with the keyword override. as it shows that we "overwrite" the general case of the interface with the specifics of its implementation.
+Then, each **field**  or **method** declared in the interface, needs to be declared in the class with the keyword `override`.
 
 ## Adding default implementation
 

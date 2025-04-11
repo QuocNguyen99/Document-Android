@@ -14,7 +14,7 @@ Some of them work in totally different fields, others compete in the same field.
 
 ## Threads
 
-A more convenient way of running simultaneous tasks in a single program is threading. 
+**A more convenient way of running simultaneous tasks in a single program** is threading. 
 It is supported by almost all programming languages including Kotlin.
 
 **Every thread is bound to a process, and a process can create its threads.** 
@@ -48,15 +48,15 @@ A coroutine is a piece of code that can be **suspended** and **resumed**. The id
 
 Let's go back to the analogy with a firm. We can compare a coroutine with a usual task that can be done by an employee. 
 
-First, the task is created, and then assigned to a person.
+1. First, the task is created, and then assigned to a person.
 
-When the person is ready, they decide what to do: start handling the task or transfer it to another person.
+2. When the person is ready, they decide what to do: start handling the task or transfer it to another person.
 
-When someone starts working on the task, there's no guarantee it will be done right away.
+3. When someone starts working on the task, there's no guarantee it will be done right away.
 
-For example, say the task was to call another department, and the person called but nobody answered.
+4. For example, say the task was to call another department, and the person called but nobody answered.
 
-Then that person can "suspend" the task, that is, postpone it for a while. During this gap, the person can take another task and start working on it, or, if there are no more assigned tasks, they can take a break.
+5. Then that person can "suspend" the task, that is, postpone it for a while. During this gap, the person can take another task and start working on it, or, if there are no more assigned tasks, they can take a break.
 
 **The advantage here is that a person is expensive since you have to pay them, but a task is cheap. If a person can handle multiple tasks, why not do just that?**
 

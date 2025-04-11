@@ -1,8 +1,12 @@
 # Abstract classes
 
-an abstract class is a class that cannot be instantiated directly but serves as a blueprint for other classes. It acts as a partially implemented class, providing a common structure and behavior that subclasses can inherit and build upon.
+an abstract class is a class that cannot be instantiated directly but serves as a blueprint for other classes.
+It acts as a partially implemented class, providing a common structure and behavior that subclasses can inherit and build upon.
 
-An abstract class can have both abstract and non-abstract members (properties and methods). To declare a member as abstract, you must use the abstract keyword explicitly. Notice that an abstract member does not have a body (an implementation) in its class.
+An abstract class can have both abstract and non-abstract members (properties and methods).
+
+To declare a member as abstract, you must use the `abstract` keyword explicitly. 
+Notice that an abstract member does not have a body (an implementation) in its class.
 
 ```kotlin
 abstract class Animal(val id: Int) {
@@ -97,5 +101,5 @@ abstract class WildShape : Polygon() {
 
 
 When deciding between abstract classes and interfaces, consider the following guidelines:
-- Use abstract classes when you want to provide a default implementation or when you need to maintain internal state within the base class.
-- Use interfaces when you want to define a contract of behavior that multiple unrelated classes can implement or when you need to achieve multiple inheritance.
+- Use `abstract` classes when you want to **provide a default implementation** or when you need to **maintain internal state within the base class**.
+- Use `interface` when you want to **define a contract of behavior that multiple unrelated classes can implement** or **when you need to achieve multiple inheritance**.
