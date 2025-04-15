@@ -37,7 +37,7 @@ As you can see, scopes can and often should be nested, which includes both.
 
 ## Manual cancellation
 
-With an access to the context, we can now have even more control.
+With an access to the `context`, we can now have even more control.
 It offers two methods to cancel work:
 - `cancel()` → Cancels the entire coroutine scope, stopping everything inside it.
 - `cancelChildren()` → Cancels only the child coroutines, allowing the parent coroutine to continue.

@@ -41,20 +41,19 @@ But what's the handler and what else can we put there?
 
 ## Jobs, ExceptionHandlers, Dispatchers
 
-**The most important elements we can add to the context** are `Job`, `ExceptionHandler`, and `Dispatcher`and the others else (CoroutineName...).
+**The most important elements we can add to the context** are `Job`, `ExceptionHandler`, `Dispatcher`and the others else (`CoroutineName`...).
 
 - **Job** represents the work itself, including the hierarchy of children jobs. It has a state (Active/Completed/Cancelled) and defines how a failure or cancellation propagates to parent and children jobs.
 
-- **ExceptionHandler** handles uncaught exceptions in a coroutine or its children. It can be very helpful for logging, but note that it doesn't provide a way to catch the exception, so it cannot be used to recover from failures – we have `try/catch` for that. Also, it has to be installed on the root coroutine only, because children automatically propagate uncaught errors to the parent all the way up to the root.
+- **ExceptionHandler** handles uncaught exceptions in a coroutine or its children. **It can be very helpful for logging, but note that it doesn't provide a way to catch the exception**, so it cannot be used to recover from failures – we have `try/catch` for that. Also, it has to be installed on the root coroutine only, because children automatically propagate uncaught errors to the parent all the way up to the root.
 
 - **Dispatcher** defines which thread or threads will be used to run the coroutine code.
 
-
-> [!CAUTION]
+### Important
 
 - It's important to note that even though we can add multiple jobs, handlers, or dispatchers to the coroutine builder, **a coroutine can only have one element of each type, so the last one always overrides all previous**. For example, `CoroutineScope(SupervisorJob() + handler1 + handler2)` will use `handler2`.
 
-- Another important fact is that if we don't provide an element of each type, the default one will be used. There is a default error handler and a default dispatcher for each platform. as for the job, if it's not provided, a new one will be created for us. There can't be a single default job, because each one represents its own coroutine.
+- **Another important fact is that if we don't provide an element of each type, the default one will be used.** There is a default error handler and a default dispatcher for each platform. as for the job, if it's not provided, a new one will be created for us. There can't be a single default job, because each one represents its own coroutine.
 
 ## More about Dispatchers
 
