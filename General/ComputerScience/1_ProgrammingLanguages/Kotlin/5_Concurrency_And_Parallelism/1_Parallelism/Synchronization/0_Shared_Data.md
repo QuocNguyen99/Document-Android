@@ -132,6 +132,34 @@ Thus, when the main thread changes the values of the number and ready variables,
 
 The `@Volatile` annotation allows us to provide visibility to data changes. Thus, this annotation becomes very useful when you have multithreading in a program and access a block of code in parallel with multiple threads.
 
+Example:
+
+```kotlin
+class Counter {
+    @Volatile
+    var count = 0
+}
+
+fun main() {
+    val counter = Counter()
+
+    // Thread tăng count
+    Thread {
+        repeat(10) {
+            counter.count++
+            println("Tăng: ${counter.count}")
+            Thread.sleep(100)
+        }
+    }.start()
+
+    // Main thread in giá trị count mỗi 100ms
+    repeat(10) {
+        Thread.sleep(100)
+        println("Đọc: ${counter.count}")
+    }
+}
+```
+
 ## Other cases of visibility
 
 Sometimes we don't need to use the `@Volatile` annotation. The following procedures will also guarantee visibility:

@@ -60,7 +60,7 @@ The class Thread has a method called `start()`, which is used to start a thread
 
 At some point, after you invoke this method, the method run will be invoked automatically, but it won't happen immediately.
 
-Also, if you set the value of the `start` parameter to true (it's the default value), you can start the thread without invoking the method `start()`
+Also, if you set the value of the `start` parameter to `true` (it's the default value), you can start the thread without invoking the method `start()`
 
 ## Thread working
 

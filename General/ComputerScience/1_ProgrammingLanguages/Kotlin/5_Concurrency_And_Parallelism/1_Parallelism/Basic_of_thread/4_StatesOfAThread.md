@@ -19,7 +19,7 @@ In Kotlin, the state of a thread is defined by the `Thread.State` enum with six 
 
 - `TIMED_WAITING`: the thread is waiting for another thread for a specified time (e.g., sleep, join with timeout);
 
-- `TERMINATED`: the thread is terminated when the run function completes execution or an uncaught exception occurs. Once the thread terminates, it never gets back to its runnable state.
+- `TERMINATED`: the thread is terminated when the run function completes execution or an uncaught exception occurs. **Once the thread terminates, it never gets back to its runnable state.**
 
 To obtain the current state of a thread, we use the parameter `state`.
 
@@ -48,7 +48,7 @@ Finally, when a thread is completed, the state is `TERMINATED`. Besides, the mai
 The above states have been discussed in Kotlin terms.
 The real lifecycle of a thread is slightly different.
 
-For example, the `RUNNABLE` state is actually more complex than it might seem: in this state, a thread might actually be running or it might be ready to run.
+For example, the `RUNNABLE` state is actually more complex than it might seem: **in this state, a thread might actually be running or it might be ready to run.**
 
 Below, you may see the simplified lifecycle of a thread in the OS terminology. 
 

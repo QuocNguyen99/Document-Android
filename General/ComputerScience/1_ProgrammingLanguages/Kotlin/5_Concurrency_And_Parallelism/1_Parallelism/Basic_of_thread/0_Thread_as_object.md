@@ -38,6 +38,9 @@ fun main() {
 
 - `t.priority` returns the priority of the given thread.
 
-- `t.isDaemon` checks whether the thread is a **daemon**. A daemon thread (comes from UNIX terminology) is a low priority thread that runs in the background to perform tasks such as garbage collection and so on. The JVM does not wait for daemon threads to stop before exiting, while it does so for non-daemon threads.
+- `t.isDaemon` checks whether the thread is a **daemon**. 
+
+> [!NOTE]
+> A daemon thread (comes from UNIX terminology) is a low priority thread that runs in the background to perform tasks such as garbage collection and so on. The JVM does not wait for daemon threads to stop before exiting, while it does so for non-daemon threads.
 
 Each characteristic can be changed by setting a new value
