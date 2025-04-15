@@ -43,7 +43,15 @@ but that obscures the logic of the code and also becomes messy when more than on
 
 ## Futures and Reactive extensions
 
-There are multiple libraries and SDKs that do just that with so-called [Futures/Promises](https://en.wikipedia.org/wiki/Futures_and_promises) 
+There are multiple libraries and SDKs that do just that with so-called [Futures and Promises](https://en.wikipedia.org/wiki/Futures_and_promises) 
+
+**Futures and Promises** are concepts in asynchronous programming: 
+
+A Promise is used to assign a value that will be available in the future, while a Future is an object that waits to receive that value. 
+
+The promise is typically used by the producer to fulfill or reject a task, and the future is used by the consumer to monitor and handle the result when it's ready. 
+
+They help write cleaner asynchronous code and avoid deeply nested callbacks.
 
 A typical promise code would look like that:
 
@@ -63,10 +71,10 @@ fun sendData() {
 Now `submitRequest` and `processResult` are on the same level again (even if we still have an extra nesting), but we can now add more then steps in between without going deeper.
 
 It looks nicer, but it has its own problems:
-errors are still not easy to handle and traditional if/else and loops are not supported out of the box.
+Although the code looks cleaner, it still comes with challenges: handling errors is tricky, and traditional control structures like if/else and loops aren’t natively supported.
 
 [Reactive Extensions](https://en.wikipedia.org/wiki/ReactiveX) such as 
-RX libraries (RxJava, RxJS) partially solve that last problem by treating each result as a stream of values and providing
+RX libraries (`RxJava`, `RxJS`) partially solve that last problem by treating each result as a stream of values and providing
 a rich set of helper functions (called operators) to work with that stream, but that adds even more complexity.
 
 ## Coroutines and Suspending functions
