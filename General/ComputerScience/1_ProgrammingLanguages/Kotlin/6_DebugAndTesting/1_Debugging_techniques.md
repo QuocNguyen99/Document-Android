@@ -113,10 +113,10 @@ fun threadSafeFunction() {
 }
 ```
 
-2. Avoid Shared Mutable State
+2. **Avoid Shared Mutable State**
 
 Minimize state shared between threads or make it immutable. 
-In Kotlin, you can use val for immutable variables and `ImmutableList` for unmodifiable collections after creation.
+In Kotlin, you can use `val` for immutable variables and `ImmutableList` for unmodifiable collections after creation.
 
 ```kotlin
 val immutableList = listOf(1, 2, 3) // ImmutableList

@@ -1,8 +1,10 @@
 # Unit Test
 
-We will consider one that is performed by developers: unit testing. 
+We will consider one that is performed by developers: **unit testing**. 
 This is probably the most popular methodology: it implies testing the behavior of a unit of an application.
-A unit is a portion of code that does exactly one task, so it's the smallest testable part of an application.
+
+> [!NOTE]
+> A unit is a portion of code that does exactly one task, so it's the smallest testable part of an application.
 
 ### Steps to test a unit
 
@@ -10,26 +12,26 @@ The main idea of unit testing is to isolate a specific unit and check that it wo
 
 The test goes through the following stages:
 
-- We create two datasets: the input and the expected output;
-- We define acceptance criteria: some conditions determining if the unit works as expected 
+- We **create two datasets**: the input and the expected output;
+- We **define acceptance criteria**: some conditions determining if the unit works as expected 
 (usually, the acceptance criterion is a comparison of the actual output with the expected one);
-- We pass the created input dataset to the tested unit;
+- We **pass the created input dataset to the tested unit**;
 - The input invokes code of the tested unit;
 - The code produces an output;
 - The produced output is checked by the acceptance criteria, 
 which compares the actual output with the expected one;
-- Acceptance criteria return the result: pass or fail.
+- **Acceptance criteria return the result**: `pass` or `fail`.
 
 ![alt text](/resources/unit_test_step.png)
 
->![NOTE]
+> [!NOTE]
 > Note that we use unit tests to test our program without its external dependencies such as databases, 
 > web services, and so on, which would fall into the category of integration tests.
 
 
 ## Manual Vs Automated
 
-All these steps can be carried out manually or automated. 
+All these steps can be carried out **manually** or **automated**. 
 It is in fact very uncommon to opt for manual unit testing, and there are a couple of sound reasons for that. 
 
 - First, testing is a really repetitive process: every time you make a small change in your code, you have to retest it. 
@@ -48,13 +50,17 @@ Unit testing is an essential part of a developer's daily work. Even though it is
 
 
 In Kotlin, methods may return values or change the internal state of objects. 
-To verify the correctness of any method, you may compare the value returned by that method with the expected value or compare the internal state of an object modified by that method with the expected internal state.
+
+**To verify the correctness of any method, you may compare the value returned by that method with the expected value or compare the internal state of an object modified by that method with the expected internal state**.
+
 Of course, you can do the tests manually, but it tends to be tedious and time-consuming. 
 That's why some frameworks were developed to provide convenient tools for automated unit testing. The most popular of them is **JUnit**.
 
-Test functions should have clear and descriptive names that make it easy to understand the purpose of the test and identify the source of a failure or bug when running multiple tests. 
-A common naming convention is to use the format `FunctionName_TestCondition_ExpectedOutcome`. 
-This helps to clearly communicate the purpose of the test, including the method being tested, the inputs or conditions that the method is being called with, and the expected outcome
+> [!TIP]
+> Test functions should have clear and descriptive names that make it easy to understand the purpose of the test and identify the source of a failure or bug when running multiple tests. 
+> A common naming convention is to use the format >
+> `FunctionName_TestCondition_ExpectedOutcome`. 
+> This helps to clearly communicate the purpose of the test, including the method being tested, the inputs or conditions that the method is being called with, and the expected outcome
 
 ## Assertions
 
@@ -121,12 +127,12 @@ test {
 
 After that, run the following command in the Terminal window (make sure you are in your project's root directory):
 
-```kotlin
+```bash
 ./gradlew test
 ```
 Once the tests are executed, you will get this output:
 
-```
+```bash
 ...
 > Task :test
 CalculatorTest > when adding 1 and 2 expect 3() PASSED
@@ -174,14 +180,14 @@ That is why we should execute each test using a new instance of the tested class
 
 ### Test class instance lifecycle
 
-First, let's talk about how JUnit5 executes our tests. 
+First, let's talk about how `JUnit5` executes our tests. 
 It creates a new instance of the test class before executing each test method.
 This way, it ensures execution of individual test methods in isolation to avoid possible side effects produced by any changes of state of the test class instance.
 
 
 > [!NOTE]
-> @TestInstance annotation controls the test class instance lifecycle.
-> It is set to TestInstance.Lifecycle.PER_METHOD by default but can be changed if necessary.
+> `@TestInstance` annotation controls the test class instance lifecycle.
+> It is set to `TestInstance.Lifecycle.PER_METHOD` by default but can be changed if necessary.
 
 Also, JUnit5 has special annotations to designate any methods as lifecycle methods,
 such as `@BeforeAll`, `@AfterAll`, `@BeforeEach`, or `@AfterEach`.
