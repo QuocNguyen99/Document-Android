@@ -26,6 +26,6 @@ JSON is a widespread format for data exchange on the Internet because of its str
 - most programming languages have functions and libraries for reading and creating JSON structures.
 
 
-JSON is a popular format for transmitting structured data over a network. When you serialize data to JSON, you can easily deserialize it back without losing any information. One of the main advantages of JSON over plain text is that it allows you to describe relationships between objects through nesting and key-value pairs. Many of the websites you visit likely use JSON as well.
+JSON is a popular format for transmitting structured data over a network. When you [serialize](/ComputerScience/1_ProgrammingLanguages/Kotlin/3_AdditionalInstruments/6_AdditionalCodeTools/0_Annotation/1_Serialize.md) data to JSON, you can easily deserialize it back without losing any information. One of the main advantages of JSON over plain text is that it allows you to describe relationships between objects through nesting and key-value pairs. Many of the websites you visit likely use JSON as well.
 
 

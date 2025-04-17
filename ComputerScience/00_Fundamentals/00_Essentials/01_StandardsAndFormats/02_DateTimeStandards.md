@@ -73,7 +73,7 @@ A date is formatted as `YYYY-MM-DD` (**extended**) or `YYYYMMDD` (**basic**), wh
 20121120
 ```
 
-Time is formatted as `Thh:mm:ss.fff`, `Thh:mm:ss` (**extended**), `Thhmmss` or `Thhmmss.fff` (**basic**)
+Time is formatted as `Thh:mm:ss.fff` (**extended**), `Thh:mm:ss` (**basic**), `Thhmmss`(**basic**) or `Thhmmss.fff` (**extended**)
 
 where 
 - `T` is used as an indicator that the string that follows represents time.

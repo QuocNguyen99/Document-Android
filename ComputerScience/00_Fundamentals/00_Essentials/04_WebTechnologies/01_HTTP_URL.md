@@ -4,9 +4,7 @@
 
 URL address has a certain structure based on the following template:
 
-```
-<scheme>://<login>:<password>@<host>:<port>/<path>?<request parameters>#<anchor>
-```
+`<scheme>://<login>:<password>@<host>:<port>/<path>?<request parameters>#<anchor>`
 
 Now let's look at this template in more detail:
 
