@@ -21,7 +21,7 @@ Typically, nothing is placed right at the edge because it's inconvenient for use
 
 Designers usually set the markup values for these properties in advance during their work. An example of this can be seen in the picture below:
 
-![alt text](/resources/layout_grid_ui_ux.png)
+![alt text](/resources/layout_grid_ui_ux.png.png)
 
 ## Layout grid views
 
