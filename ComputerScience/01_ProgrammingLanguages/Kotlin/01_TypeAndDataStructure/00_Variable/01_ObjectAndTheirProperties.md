@@ -95,7 +95,7 @@ println(a === anotherA) // false
 ```
 
 As you can see, when we change the value of the variable `a = 200`, 
-we do not change its object, the variable a is assigned a new reference to the object with the value 200.
+we do not change its object, the variable a is assigned a new reference to the object with the value `200`.
 
  Now, let's look at an example with modifiable objects:
 

@@ -7,7 +7,7 @@ To declare a variable, Kotlin provides two keywords:
 - var (for variable) declares a mutable variable, which can be changed (as many times as needed).
 - const is used for variables (with val) **that are known at compile-time**.
 
-#### Val variables and mutability
+### Val variables and mutability
 
 It is important to note that `val` is not a synonym of **immutable**
 
@@ -39,7 +39,7 @@ As you can see, this code changed the internal state of the `myMutableList` by a
 > If you are familiar with the Java programming language, it may be easier for you to think about Kotlin val variables as Java final variables.
 > They are quite similar: both prohibit reassigning a value to the variable but allow changing the internal state of the object.
 
-#### Const variables
+### Const variables
 
 In Kotlin, there is also a const modifier, which is used before the val keyword to declare a compile-time constant. The value of a const variable is known at compile time and won't be changed at runtime, There are some restrictions on when the const modifier can be applied.
 - First, it can only be used with a String or a primitive type variable.
@@ -296,6 +296,6 @@ class Student private constructor(val name: String) {
     }
 }
 
-val anna: Student = Student("Anna")     //Cannot access '<init>': it is private in 'Student'
-val mark: Student = Student("Mark", 23)
+val anna: Student = Student("Anna")     // Error Cannot access 'constructor(name: String): Student': it is private in '/Student'.
+val mark: Student = Student("Mark", 23) // ok
 ```
