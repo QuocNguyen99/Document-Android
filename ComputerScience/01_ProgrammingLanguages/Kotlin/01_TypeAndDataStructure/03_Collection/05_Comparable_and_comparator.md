@@ -1,8 +1,8 @@
-## Comparable and Comparator
+# Comparable and Comparator
 
 In Kotlin, Comparable and Comparator are two interfaces that allow developers to compare objects of the same or different classes. **Both interfaces are commonly used to sort and order collections of objects based on one or more attributes**
 
-### Kotlin Comparable interface
+## Kotlin Comparable interface
 
 The `Comparable` interface is used to define the natural ordering of objects. When a class implements `Comparable`, it must override the `compareTo()` method:
 
@@ -82,7 +82,7 @@ fun main() {
 }
 ```
 
-### Kotlin Comparator interface
+## Kotlin Comparator interface
 
 **The Comparator interface is used to define a custom ordering of objects.** When a class implements `Comparator`, it must override the `compare()` method, which takes two objects of the same type as arguments and returns an integer value. It returns zero if the arguments are equal, a negative number if the first argument is less than the second, or a positive number if the first argument is greater than the second. Here's how it works:
 
@@ -131,7 +131,7 @@ fun main() {
 
 You can see more methods in Kotlin documentation.
 
-### Differences between Comparable and Comparator
+## Differences between Comparable and Comparator
 
 The main difference between `Comparable` and `Comparator` is that `Comparable` defines the natural ordering of objects, while `Comparator` defines a custom ordering of objects.
 

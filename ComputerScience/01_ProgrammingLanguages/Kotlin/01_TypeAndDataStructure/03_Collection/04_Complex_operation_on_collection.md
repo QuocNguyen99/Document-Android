@@ -108,7 +108,7 @@ acc: 24, i: 5, acc * i: 120
     }
 ```
 
-### Reverse order
+## Reverse order
 
 Sometimes, we need to perform the actions in the reverse order. We can use `foldRight()` and `reduceRight()` to apply operations from right to left. However, remember that the operation arguments change their order: first goes the element and then the accumulated value.
 
@@ -132,7 +132,7 @@ fun main() {
 }
 ```
 
-### Accumulate result with indices
+## Accumulate result with indices
 
 In some tasks, you may need to use the index to perform the calculation. You can apply operations that take element indices as parameters. Kotlin has `reduceIndexed()` and `foldIndexed()`, which use the index as the first parameter. Also, we can use `reduceRightIndexed()` and `foldRightIndexed()` to perform the action form right to left.
 
@@ -170,7 +170,7 @@ fun main() {
 }
 ```
 
-### Work with nullable collections
+## Work with nullable collections
 
 **All the reduce operations that we have presented throw an exception on empty collections**. If we want to get null, we must use the same methods but ending with `*OrNull()`: `reduceOrNull()`, `reduceRightOrNull()`, `reduceIndexedOrNull()`, and `reduceRightIndexedOrNull()`.
 
