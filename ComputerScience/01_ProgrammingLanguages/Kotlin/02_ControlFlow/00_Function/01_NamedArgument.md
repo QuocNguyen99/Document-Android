@@ -26,7 +26,7 @@ val amount = calcEndDayAmount(
 
 You can also call a function with named and regular (positional) arguments, as long as named arguments are placed after positional ones:
 
-```kotrlin
+```kotlin
 calcEndDayAmount(1000, ticketPrice = 10, soldTickets = 500)  // 6000
 ```
 

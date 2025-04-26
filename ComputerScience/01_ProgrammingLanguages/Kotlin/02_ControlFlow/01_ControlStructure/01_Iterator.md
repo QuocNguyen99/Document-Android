@@ -1,114 +1,6 @@
-# Loop
+# Interators
 
-
-Kotlin provides several special statements to repeat blocks of code multiple times. These statements are known as loops
-
-## Loops: repeat statement
-
-To use the simplest loop, write `repeat(n)` and a sequence of statements in curly braces `{...}`. `n` is an integer that determines how many times these statements are going to be repeated.
-
-
-```kotlin
-repeat(n) {
-    // statements
-}
-```
-
-> [!NOTE]
-> If n is zero or a negative number, Kotlin will ignore the loop. If n is one, the statements will be executed only once.
-
-## While loop
-
-```kotlin
-    while (i < 5) {
-        println(i)
-        i++
-    }
-```
-## Do...while loop
-
-A `do...while` loop is executed first, after that the program tests a condition.
-
-```kotlin
-do {
-    // body: do something
-} while (condition)
-```
-
-## For loop
-
-This is the syntax the for loop has:
-```kotlin
-for (element in source) {
-    // body of loop
-}
-```
-Iterating through a range
-
-```kotlin
-for (i in 1..4) {
-    println(i)    
-}
-```
-
-Iterating in the backward order
-
-```kotlin
-for (i in 4 downTo 1) {
-    println(i)
-}
-```
-
-> [!NOTE]
-> Note that it is required to use in 4 downTo 1, not in 4..1, to iterate the range in reverse order.
-
-Excluding the upper limit
-
-```kotlin
-for (i in 1 until 4) {
-    println(i)
-}
-```
-
-Specifying a step
-
-```kotlin
-for (i in 1..7 step 2) {
-    println(i)
-}
-//output
-//1
-//3
-//5
-//7
-
-```
-You can also use it for backward iteration.
-
-```kotlin
-for (i in 7 downTo 1 step 2) {
-    println(i)
-}
-```
-
-Iterating through a MutableList
-
-```kotlin
-for (element in mutList) {
-    // body of loop
-}
-```
-Iterating by indexes
-
-```kotlin
-for (index in daysOfWeek.indices){
-   // body of loop
-}
-
-```
-## Interators
-
-### Iterator and immutable collections
+## Iterator and immutable collections
 An iterator provides access to collection elements sequentially, regardless of their type. It can be seen as a movable pointer to an element of the collection.
 `iterator()` returns a special object that can iterate over the collection.
 
@@ -141,7 +33,7 @@ iterator.forEach { (key, value) ->
 */
 ```
 
-### Iterator and mutable collections
+## Iterator and mutable collections
 
 Another special iterator variation is `MutableIterator`.
 It differs from the previous one in that it works with mutable collections, i.e., with those that can be changed after their creation.
@@ -166,7 +58,7 @@ fun main() {
 }
 ```
 
-### List iterator
+## List iterator
 
 
 Lists have a special type of iterator called `ListIterator`. It allows you to iterate through the list in both directions: forward and backward, while iterators for `Set` or `Map` can iterate only forward. Also, `ListIterator` is able to get the positions of the next and previous elements.
@@ -211,30 +103,3 @@ mutableListIterator.set("don't know")// i , don't know, Claire
 mutableListIterator.add("John")
 println(words)// i, don't know, John, Claire
 ```
-
-## Labels
-
-Technically, it's just an identifier with the @ sign at the end, for example: `loop@`, `kotlin@`. You can use almost any word with it, apart from the reserved words in Kotlin. What do you need labels for? Well, you can add your label to a loop:
-
-
-```kotlin
-loop@ for (i in 1..3) { 
-    for (j in 1..3) {
-        println("i = $i, j = $j")   
-        if (j == 3) break@loop  
-    }  
-}  
-```
-
-Both the inner and outer for loops are terminated at the third iteration. The output is this:
-
-```bash
-i = 1, j = 1
-i = 1, j = 2
-i = 1, j = 3
-```
-
-
-
-
-

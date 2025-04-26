@@ -49,3 +49,13 @@ The method takes a functional expression, executes it, and, by calling `close()`
 The main difference between `Closeable` and `AutoCloseable` is that the former has a limited exception type – **it can throw only** `IOException` **and its inheritors**. Meanwhile, in `AutoCloseable` the exception range has been expanded to `Exception`.
 
 We can invoke the use function on any object which implements `AutoCloseable` or `Closeable`, but `AutoCloseable` is newer and more flexible.
+
+
+
+
+
+
+
+
+
+
