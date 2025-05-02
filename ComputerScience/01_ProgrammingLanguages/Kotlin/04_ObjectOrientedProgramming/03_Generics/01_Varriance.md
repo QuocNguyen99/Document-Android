@@ -29,7 +29,7 @@ Variance applies when you have a type relationship between two types and you wan
 
 
 
-- **Covariance**: a generic class is called covariant on the type parameter when the following holds: `Class<A>` is a subtype of `Class<B>` if A is a subtype of B (preserved subtyping relation).
+- **Covariance**: a generic class is called covariant on the type parameter when the following holds: `Class<A>` is a subtype of `Class<B>` if `A` is a subtype of `B` (preserved subtyping relation).
     - The relationship is preserved in the same direction when the classes are used as generic parameters. If `Dog` is a subtype of `Animal`, `Box<Dog>` is a subtype of `Box<Animal>`.**This is usually allowed when the generic parameter is only used in "output" positions (like return values), but not in "input" positions (like method parameters).**
     - For example, Kotlin’s `List` interface represents a **read-only** collection, which means that if `Dog` is a subtype of `Animal`, then `List<Dog>` is a subtype of `List<Animal>`. `List` is defined with the `out` modifier. The `out` variance modifier is used to declare a class as covariant on a certain type parameter.
     - Example: 

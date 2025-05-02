@@ -1,4 +1,4 @@
-## Type bound
+# Type bound
 
 Sometimes we need to restrict the type parameter inside a generic function or class.  For example, we have a generic class `Storage<T>` and we want to make it store only books without creating one more class. In such a situation, we should use **type bounds**.
 
@@ -31,7 +31,7 @@ By default, all type parameters are constrained by the type `Any?`. `SomeGeneric
 > [!CAUTION]
 > As constraints, we can set not only classes but interfaces, too. Do not try to extend one generic class from another — it will lead to an error.
 
-### Usage with functions
+## Usage with functions
 
 Type bounds can be used with generic functions, too. The principle of usage with functions is the same as with classes.
 
@@ -40,7 +40,7 @@ Type bounds can be used with generic functions, too. The principle of usage with
 fun <T : Book> sortByDate(list: List<T>) { ... }
 ```
 
-### Multiple bounds
+## Multiple bounds
 
 If you need multiple type bounds, you need to use the **where-clause** to separate them.
 
@@ -53,7 +53,7 @@ fun <T> sortByDate(list: List<T>)
 > When you use multiple bounds, the first type should be a class or an interface. The following types must be interfaces.
 
 
-### Definitely non-nullable types
+## Definitely non-nullable types
 
 
 In addition to the type bounds we've covered, there's another concept that is essential to understand when working with generics, especially in the context of interoperability with Java—the concept of **definite non-nullability**. This is particularly useful when dealing with generic Java classes and interfaces.
