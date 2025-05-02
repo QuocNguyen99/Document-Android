@@ -119,7 +119,7 @@ print(client.getInfo()) // client is the receiver object
 ```
 
 >[!NOTE]
->Note, if the developer hides some information and your code cannot get it, the extension function can't have access too. So, it works more like a simple function, not a member function
+> Note, if the developer hides some information and your code cannot get it, the extension function can't have access too. So, it works more like a simple function, not a member function
 
 ## Secondary constructor
 
@@ -155,7 +155,7 @@ class Person {
 ```
 
 > [!CAUTION]
-> Note that you cannot use the val and var keywords in the secondary constructor.
+> Note that you cannot use the `val` and `var` keywords in the secondary constructor.
 
 ## Constructors delegation
 
@@ -333,6 +333,7 @@ Derived class secondary
 > The primary mechanism works for properties as it does for methods. 
 
 When redeclaring properties from a superclass in a derived class, they must be preceded by the override keyword and possess a compatible type.
+
 ```kotlin
 open class Shape {
     open val vertexCount: Int = 0

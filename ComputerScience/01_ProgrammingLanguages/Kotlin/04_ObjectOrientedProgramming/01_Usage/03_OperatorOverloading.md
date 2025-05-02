@@ -103,3 +103,20 @@ Square brackets `[]` are translated to calls to `get` and `set`.
 | a < b | a.compareTo(b) < 0 |
 | a >= b | a.compareTo(b) >= 0 |
 | a <= b | a.compareTo(b) <= 0 |
+
+
+Example to override default operation:
+
+```kotlin
+class Counter(var value: Int) {
+    operator fun timesAssign(n: Int) {
+        value = value * 2 * n
+    }
+}
+
+fun main() {
+    var c = Counter(5)
+    c *= 3
+    println(c.value)  // 30
+}
+```

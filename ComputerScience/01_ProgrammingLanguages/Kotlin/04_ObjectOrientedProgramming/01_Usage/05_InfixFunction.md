@@ -3,7 +3,7 @@
 ## Infix notation
 
 The infix notation is used in arithmetical and logical code.
-It is characterized by the placement of operators between operands: for example, `2 + 3`, where "+" is the infix operator.
+It is characterized by the placement of operators between operands: for example, `2 + 3`, where `+` is the infix operator.
 
 To define an infix function, you must meet the following requirements.
 
@@ -31,3 +31,26 @@ On the other hand, an infix function's call precedence is higher than that of th
 
 > [!NOTE]
 > Remember also that infix functions always require both the receiver and the parameter to be specified and that you must use `this` keyword to reference the current receiver.
+
+## Practical Examples
+
+
+```kotlin
+// String concatenation
+infix fun String.concat(other: String): String = this + other
+val greeting = "Hello" concat "World"  // HelloWorld
+
+// Map creation
+infix fun <K, V> K.to(value: V): Pair<K, V> = Pair(this, value)
+val map = mapOf(1 to "One", 2 to "Two")
+
+// Custom class with infix function
+class Person(val name: String) {
+    infix fun likes(thing: String): String = "$name likes $thing"
+}
+
+val john = Person("John")
+println(john likes "coding")  // John likes coding
+```
+
+
