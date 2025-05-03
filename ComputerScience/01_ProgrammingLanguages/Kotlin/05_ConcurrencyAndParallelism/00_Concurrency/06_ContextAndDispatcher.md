@@ -137,21 +137,59 @@ Kotlin offers a solution for that problem. It's called `withContext`. As the nam
 As shown before, it inherits the context and, if the dispatcher is specified, switches the execution to a new thread. **But now the execution order is sequential.**
 
 
+## Parallelism in coroutine
 
+While `withContext` execute task sequently, In case of Running multitask we have to use:
 
+### 1. `async` + `await`
 
+- Used for running multiple coroutines concurrently.
+- Returns a `Deferred` result that can be **awaited**.
+- Useful when you want to run tasks in parallel and combine their results.
 
+```kotlin
+import kotlinx.coroutines.*
 
+fun main() = runBlocking {
+    val task1 = async { performTask1() }
+    val task2 = async { performTask2() }
 
+    // Await results of all tasks
+    val result1 = task1.await()
+    val result2 = task2.await()
 
+    println("Results: $result1, $result2")
+}
 
+suspend fun performTask1(): String {
+    println("Starting task 1")
+    delay(1000) // Simulate a long-running task
+    return "Task 1 Completed"
+}
 
+suspend fun performTask2(): String {
+      println("Starting task 2")
+    delay(1000) // Simulate a long-running task
+    return "Task 2 Completed"
+}
+```
 
+### 2. `launch`
 
+- Each `launch` creates a new coroutine that runs independently.
+- Since these coroutines are created within the same coroutineScope, they execute concurrently (in parallel).
 
+```kotlin
+suspend fun loadScreenInOwnScope(): Unit = coroutineScope {
+    launch { loadImage("image_1") }
+    launch { loadImage("image_2") }
+    launch { preCache("image_3") } 
+}
+```
 
-
-
+### Use case
+- If you wanted to collect results from each task, you would use async instead of `launch`
+- `launch` is used when you want to fire-and-forget a coroutine. You don't need a result from the coroutine, and you just want to perform some work concurrently.
 
 
 

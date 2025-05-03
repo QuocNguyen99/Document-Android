@@ -28,8 +28,8 @@ Concurrency is the ability to manage multiple tasks by switching between them, m
 - **Parallelism**: Parallelism involves performing multiple tasks simultaneously using separate resources. It is like having two chefs, one preparing a salad and the other grilling chicken, with both tasks happening at the same time. Parallelism focuses on running tasks in parallel, improving speed by utilizing multiple processing units.
 
 Key Difference:
-- Concurrency switches between tasks to give the illusion of simultaneous progress.
-- Parallelism executes tasks at the same time, using multiple resources to enhance performance.
+- **Concurrency** switches between tasks to give the illusion of simultaneous progress.
+- **Parallelism** executes tasks at the same time, using multiple resources to enhance performance.
 
 ## Internal or lightweight concurrency
 

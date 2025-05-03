@@ -168,3 +168,8 @@ Sometimes we don't need to use the `@Volatile` annotation. The following procedu
 
 - changes of variables inside a thread are always visible to any other threads after it successfully returns from `join` (we used this at the beginning of this article).
 
+
+
+
+
+
