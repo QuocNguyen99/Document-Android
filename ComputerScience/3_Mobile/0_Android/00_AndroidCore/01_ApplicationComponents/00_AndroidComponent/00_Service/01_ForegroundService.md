@@ -9,7 +9,7 @@ Examples of apps that use foreground services include the following:
 
        When you use a **foreground service**, you must display a notification so that users are actively aware that the service is running. This notification cannot be dismissed unless the service is either stopped or removed from the foreground.
 
-<img src="../../../resources/foreground_service.png" alt="drawing" width="400"/>
+<img src="/resources/foreground_service.png" alt="drawing" width="400"/>
 
 #### User can dismiss notification by default
 

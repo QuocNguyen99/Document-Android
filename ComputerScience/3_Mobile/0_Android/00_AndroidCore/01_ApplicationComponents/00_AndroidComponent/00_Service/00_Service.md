@@ -229,4 +229,4 @@ class ExampleService : Service() {
 }
 ```
 
-![](../../../resources/service_lifecycle.png)
+![](/resources/service_lifecycle.png)

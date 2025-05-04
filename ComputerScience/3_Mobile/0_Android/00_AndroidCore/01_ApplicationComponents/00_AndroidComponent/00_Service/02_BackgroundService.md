@@ -324,6 +324,6 @@ Also, if multiple activities in your application bind to the same service and th
 
 #### Managing the lifecycle of a bound service
 
-Additionally, if your service is started and accepts binding, then when the system calls your onUnbind() method, you can optionally return true if you want to receive a call to onRebind() the next time a client binds to the service. onRebind() returns void, but the client still receives the `IBinder` in its onServiceConnected() callback.
+Additionally, if your service is started and accepts binding, then when the system calls your `onUnbind()` method, you can optionally return true if you want to receive a call to `onRebind()` the next time a client binds to the service. `onRebind()` returns void, but the client still receives the `IBinder` in its `onServiceConnected()` callback.
 
-![lifecycle_of_bound_service](../../../resources/lifecycle_of_bound_service.png)
+![lifecycle_of_bound_service](/resources/lifecycle_of_bound_service.png)
