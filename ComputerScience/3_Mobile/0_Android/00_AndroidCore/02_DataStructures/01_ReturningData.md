@@ -183,7 +183,7 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
 
 - Besides, if you intend to design components or activities that other apps will utilize to get results, it's critical to provide detailed documentation. Clear, well-explained interfaces and expectations will make the data exchange between apps smooth and reliable, minimizing potential issues and enhancing the user experience.
 
-- In case you want to receive a result in a separate class outside `ComponentActivity` or `Fragment`, you can do so by using the `ActivityResultRegistry` directly. The ActivityResultRegistry is the one responsible for storing the result callbacks in the activity. You can learn more if you are interested in how that works.
+- In case you want to receive a result in a separate class outside `ComponentActivity` or `Fragment`, you can do so by using the `ActivityResultRegistry` directly. The `ActivityResultRegistry` is the one responsible for storing the result callbacks in the activity. You can learn more if you are interested in how that works.
 
 ## reference
 
