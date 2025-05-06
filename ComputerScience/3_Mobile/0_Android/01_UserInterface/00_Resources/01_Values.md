@@ -145,3 +145,31 @@ This allows users to change text size without re-scaling the whole user interfac
 
 The resource system retrieves the dimension and multiplies it by `resources.displayMetrics.density` for `dp`,
 or by `resources.displayMetrics.scaledDensity` for `sp`, giving the value in pixels for the current screen density and user's preference.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

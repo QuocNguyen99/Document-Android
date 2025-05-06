@@ -55,3 +55,21 @@ You can access it by using the `getQuantityString()` method from the Resources c
 val newMessages = 5
 val notification = resources.getQuantityString(R.plurals.notification, newMessages, newMessages)
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
