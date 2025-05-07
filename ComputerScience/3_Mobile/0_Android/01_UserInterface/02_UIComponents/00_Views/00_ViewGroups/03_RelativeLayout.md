@@ -1,6 +1,6 @@
 # RelativeLayout
 
-RelativeLayout contains child views in relative positions, meaning that each element can be positioned relative to another one, or relative to the layout itself (top, bottom, left, right, center).
+`RelativeLayout` contains child views in relative positions, meaning that each element can be positioned relative to another one, or relative to the layout itself (top, bottom, left, right, center).
 
 By default, each element is horizontally aligned to the left and vertically to the top of your layout. If you don't change these attributes, each element will be placed on top of the previous one. 
 
