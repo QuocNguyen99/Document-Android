@@ -10,7 +10,8 @@ Dependency injection is a technique where an object, often referred to as a clie
 
 ## The types of dependency injection commonly used:
 
-**1. Constructor Injection**: The dependencies are passed to the class constructor, as shown in the UserDataRepository example. This is the most common form of DI and is preferred due to its immutability and thread safety.
+**1. Constructor Injection**: The dependencies are passed to the class constructor, as shown in the `UserDataRepository` example.
+This is the most common form of DI and is preferred due to its immutability and thread safety.
 
 ```kotlin
 class UserDataRepository(private val localDataSource: LocalDataSource) {
