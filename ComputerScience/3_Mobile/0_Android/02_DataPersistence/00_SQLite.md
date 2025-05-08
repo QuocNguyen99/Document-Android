@@ -132,7 +132,7 @@ private val threadLocalStatement = ThreadLocal<SQLiteStatement>()
 
 fun getInsertStatement(): SQLiteStatement {
     var statement = threadLocalStatement.get()
-    if (statement == null) {
+    if (statement == null) {                                                            
         statement = db.compileStatement("INSERT INTO ...")
         threadLocalStatement.set(statement)
     }

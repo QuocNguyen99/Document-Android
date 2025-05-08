@@ -181,7 +181,7 @@ class TransactionsAdapter(transactions: List<Item>) :
     /**The purpose of our newly overridden getItemViewType method is to help the Adapter distinguish between these types. 
     We can use any integers we like to represent view types. 
     We'll receive these values later, when new ViewHolders are requested, and determine which one to instantiate:**/
-    override fun getItemViewType(position: Int): Int =
+    override fun getItemViewType(position: Int): In t =
         when (getItem(position)) {
             is Item.Day -> 0
             is Item.Transaction -> 1
