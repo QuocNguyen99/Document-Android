@@ -63,7 +63,7 @@ Considering the common architectural principles mentioned in the previous sectio
 Classes in your app depend on other classes in order to function properly.
 You can use either of the following design patterns to gather the dependencies of a particular class:
 
-- **Dependency injection (DI)**: Dependency injection allows classes to define their dependencies without constructing them. At runtime, another class is responsible for providing these dependencies.
+- **Dependency injection (DI)**: Dependency injection allows c  lasses to define their dependencies without constructing them. At runtime, another class is responsible for providing these dependencies.
 - **Service locator**: The service locator pattern provides a registry where classes can obtain their dependencies instead of constructing them.
 
 These patterns allow you to scale your code because they provide clear patterns for managing dependencies without duplicating code or adding complexity.
