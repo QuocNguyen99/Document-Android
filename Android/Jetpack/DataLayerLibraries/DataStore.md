@@ -33,4 +33,4 @@ Lưu ý: Nếu bạn cần hỗ trợ các tập dữ liệu lớn hoặc phức
 
 ## So sánh DataStore và SharePreference
 
-![](../../../resources/DataStore.png)
+![](/resources/DataStore.png)
