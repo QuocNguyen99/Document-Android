@@ -8,7 +8,7 @@ There are three entities involved in streams of data:
 * **(Optional) Intermediaries** can modify each value emitted into the stream or the stream itself.
 * A **consumer** consumes the values from the stream.
 
-![](../resources/flow-entities.png)
+![](/resources/flow-entities.png)
 
 In Android, a Repository is typically a producer of UI data that has the user interface (UI) as the consumer that ultimately displays the data.
 
@@ -229,24 +229,6 @@ class LatestNewsActivity : AppCompatActivity() {
     }
 }
 ```
-
-## Comparing StateFlow and LiveData
-
-    `StateFlow` and [`LiveData`](https://developer.android.com/topic/libraries/architecture/livedata) have similarities. Both are observable data holder classes, and both follow a similar pattern when used in your app architecture.
-
-**Note, however, that `StateFlow` and [`LiveData`](https://developer.android.com/topic/libraries/architecture/livedata) do behave differently:**
-
-* `StateFlow` requires an initial state to be passed in to the constructor, while `LiveData` does not.
-
-* Khi sử dụng LiveData, khi một Activity hoặc Fragment chuyển sang trạng thái STOPPED, hệ thống sẽ tự động hủy đăng ký (unregister) các consumer (người tiêu dùng) để tránh lãng phí tài nguyên và tránh tình trạng rò rỉ bộ nhớ.
-  
-  Tuy nhiên, khi sử dụng StateFlow hoặc bất kỳ flow nào khác, việc thu thập (collect) các giá trị từ flow đó không tự động dừng lại khi Activity hoặc Fragment chuyển sang trạng thái STOPPED. Điều này có thể dẫn đến tình trạng tiêu thụ tài nguyên nếu không đảm bảo việc dừng thu thập (collect) khi không cần thiết.
-  
-  Để đạt được hành vi tương tự với LiveData, bạn cần phải thu thập (collect) các giá trị từ flow đó bên trong một Lifecycle.repeatOnLifecycle block. Điều này đảm bảo rằng việc thu thập (collect) sẽ tự động dừng lại khi Activity hoặc Fragment chuyển sang trạng thái STOPPED.
-
-## SharedFlow
-
-        Trong Kotlin Flow, hàm shareIn trả về một SharedFlow, là một flow nóng (hot flow) phát ra giá trị cho tất cả các consumer sử dụng nó. SharedFlow là một phiên bản tổng quát của StateFlow có thể tùy chỉnh được. Bạn có thể tạo một SharedFlow mà không cần sử dụng hàm shareIn.
 
 
 
