@@ -2,16 +2,15 @@
 
 In Android, a deep link is a link that takes you directly to a specific destination within an app.
 
-The Navigation component lets you create two different types of deep links: **explicit and implicit.**
-
-## Create an explicit deep link
+## Explicit deep link
 
 An explicit deep link is a single instance of a deep link that uses a `PendingIntent` to take users to a specific location within your app. 
 
-When a user opens your app via an explicit deep link, the navigation stack is cleared and replaced with the destination of the deep link. If you are using nested graphs, the start destination from each level of the nested graphs is also added to the stack. This means that when a user presses the Back button from the deep link destination, they will navigate back through the start destinations of the nested graphs, just as if they had entered your app from the main entry point.
+When a user opens your app via an explicit deep link, the navigation stack is cleared and replaced with the destination of the deep link. 
+If you are using nested graphs, the start destination from each level of the nested graphs is also added to the stack.
+This means that when a user presses the Back button from the deep link destination, they will navigate back through the start destinations of the nested graphs, just as if they had entered your app from the main entry point.
 
-You can use the `NavDeepLinkBuilder` class to construct a `PendingIntent`, as shown in the example below. Note that if the provided context is not an `Activity`, the constructor uses `PackageManager.getLaunchIntentForPackage()` as the default activity to launch, if available.
-
+You can use the `NavDeepLinkBuilder` class to construct a `PendingIntent`, as shown in the example below. 
 
 ```kotlin
 val pendingIntent = NavDeepLinkBuilder(context)
@@ -21,7 +20,12 @@ val pendingIntent = NavDeepLinkBuilder(context)
     .createPendingIntent()
 ```
 
-By default, `NavDeepLinkBuilder` **launches your explicit deep link into the default launch Activity that is declared in your app's manifest**. If your NavHost is in another activity, you must specify its component name when creating the deep link builder:
+> [!NOTE]
+> Note that if the provided context is not an `Activity`, the constructor uses `PackageManager.getLaunchIntentForPackage()` as the default activity to launch, if available.
+
+
+By default, `NavDeepLinkBuilder` **launches your explicit deep link into the default launch Activity that is declared in your app's manifest**. 
+If your `NavHost` is in another activity, you must specify its component name when creating the deep link builder:
 
 ```kotlin
 val pendingIntent = NavDeepLinkBuilder(context)
@@ -35,9 +39,11 @@ val pendingIntent = NavDeepLinkBuilder(context)
 If you have an existing `NavController`, you can also create a deep link by using `NavController.createDeepLink()`.
 
 > [!CAUTION]
-> These APIs allow deep linking to any screen in your app. If a screen requires that the user perform some action, such as logging in, before they can access that screen, follow the guidance on Conditional Navigation to conditionally redirect the user when they reach that screen using a deep link.
+> These APIs allow deep linking to any screen in your app. 
+> If a screen requires that the user perform some action, such as logging in, before they can access that screen, 
+> follow the guidance on Conditional Navigation to conditionally redirect the user when they reach that screen using a deep link.
 
-## Create an implicit deep link
+## Implicit deep link
 
 An implicit deep link refers to a specific destination in an app. When the deep link is invoked—for example, when a user clicks a link—Android can then open your app to the corresponding destination.
 
@@ -64,7 +70,8 @@ When apply the info for implicit deep link Note the following:
 - Query parameters with default or nullable values are optional (e.g., `http://www.example.com/users/{id}?arg1={arg1}&arg2={arg2}` matches `http://www.example.com/users/4?arg2=28`).
 - Extraneous query parameters do not affect URI matching (e.g., `http://www.example.com/users/{id}` matches `http://www.example.com/users/4?extraneousParam=7`).
 
-To enable implicit deep linking, you must also make additions to your app's `Manifest.xml` file. Add a single `<nav-graph>` element to an activity that points to an existing navigation graph, as shown in the following example:
+To enable implicit deep linking, you must also make additions to your app's `Manifest.xml` file. 
+Add a single `<nav-graph>` element to an activity that points to an existing navigation graph, as shown in the following example:
 
 
 ```xml

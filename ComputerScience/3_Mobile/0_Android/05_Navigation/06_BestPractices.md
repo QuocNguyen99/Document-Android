@@ -82,4 +82,7 @@ fun MyApp() {
      })
      contactDetailsDestination()
   }
+}
 ```
+
+

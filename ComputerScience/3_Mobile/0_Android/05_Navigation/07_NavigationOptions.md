@@ -1,6 +1,7 @@
 # Navigation options
 
-Navigation options, represented as `NavOptions`. This class contains all of the special configuration for transitioning to and back from the target destination, including animation resource configuration, pop behavior, and whether the destination should be launched in single top mode.
+Navigation options, represented as `NavOptions`. This class contains all of the special configuration for transitioning to and back from the target destination, 
+including animation resource configuration, pop behavior, and whether the destination should be launched in single top mode.
 
 ## Compose
 
