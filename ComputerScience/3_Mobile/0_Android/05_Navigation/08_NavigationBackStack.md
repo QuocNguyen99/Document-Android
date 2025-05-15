@@ -17,16 +17,30 @@ These are the core facts you should consider regarding the behavior of the back 
 You can also use `popBackStack()` to navigate to a particular destination. To do so, use one of its overloads.
 These overloads take the user to the destination associated with the given identifier. **Critically, they pop everything on the stack above that destination.**
 
-These overloads also take an `inclusive` boolean. It determines whether the `NavController` should also pop the specified destination off the back stack after having navigated to it.
+These overloads also take an `inclusive` boolean. 
+- `inclusive = true` the specified destination in the popUpTo call, along with all destinations added after it, will be removed from the back stack.
+- `inclusive = false`: Only the destinations that come after the specified destination will be removed, leaving the specified destination itself on the stack.
+
+Example: 
+Imagine a multi-step registration process: `Step1 -> Step2 -> Step3 -> Summary`. 
+After the user completes registration and reaches the Summary screen, we want to remove all the previous steps from the back stack. 
+This ensures users cannot go back to modify any step after submission.
+
+```kotlin
+navController.navigate("summary") {
+    popUpTo("step1") { inclusive = true }
+}
+```
 
 ### Handle a failed pop back
 
-When the `popBackStack()` returns false, a subsequent call to `NavController.getCurrentDestination()` returns `null`. This means the app has popped the last destination off the back stack. In this case, the user sees only a blank screen.
+When the `popBackStack()` returns `false`, a subsequent call to `NavController.getCurrentDestination()` returns `null`. 
+This means the app has popped the last destination off the back stack. In this case, the user sees only a blank screen.
 
 This can occur in the following cases:
 
-- popBackStack() did not pop anything from the stack.
-- popBackStack() did pop a destination off the back stack and the stack is now empty.
+- `popBackStack()` did not pop anything from the stack.
+- `popBackStack()` did pop a destination off the back stack and the stack is now empty.
 
 To resolve this, you must then navigate to a new destination or call `finish()` on your activity to end it. The following snippet demonstrates this:
 
@@ -39,15 +53,18 @@ if (!navController.popBackStack()) {
 
 ### Pop up to a destination
 
-To remove destinations from the back stack when navigating from one destination to another, add a `popUpTo()` argument to the associated `navigate()` function call. You can include an argument for the `inclusive` parameter with a value of true to indicate that the destination you have specified in `popUpTo()` should also pop off back stack.
+To remove destinations from the back stack when navigating from one destination to another, add a `popUpTo()` argument to the associated `navigate()` function call. 
+You can include an argument for the `inclusive` parameter with a value of `true` to indicate that the destination you have specified in `popUpTo()` should also pop off back stack.
 
-To implement this programmatically, pass `popUpTo()` to `navigate()` as part of NavOptions with `inclusive` set to true. This works in both Compose and Views.
+To implement this programmatically, pass `popUpTo()` to `navigate()` as part of `NavOptions` with `inclusive` set to `true`. This works in both Compose and Views.
 
 ### Save state when popping up
 
 When you use `popUpTo` to navigate to a destination, you can optionally save the back stack and the states of all destinations popped off the back stack.
 
 To do this programmatically, specify `saveState = true` when adding `popUpTo` to your navigation options.
+
+You can also specify `restoreState = true` in your navigation options to automatically restore the back stack and the state associated with the destination.
 
 ## Reference a destination using NavBackStackEntry
 
@@ -116,7 +133,9 @@ val viewModel: MyViewModel by navGraphViewModels(R.id.my_graph) {
 
 ## Dialog and the Backstack
 
-One or more dialog destinations can only exist on the top of the back stack. This is because when the user navigates to a destination that is not a dialog destination, the `NavController` automatically pops all dialog destinations off the top of the stack. This ensures that the current destination is always fully visible over other destinations on the back stack.
+One or more dialog destinations can only exist on the top of the back stack. 
+This is because when the user navigates to a destination that is not a dialog destination, the `NavController` automatically pops all dialog destinations off the top of the stack. 
+This ensures that the current destination is always fully visible over other destinations on the back stack.
 
 ## Circular navigation
 
