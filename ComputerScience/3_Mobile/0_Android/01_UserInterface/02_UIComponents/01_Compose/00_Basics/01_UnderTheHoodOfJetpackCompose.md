@@ -1,7 +1,7 @@
 # Under the hood of Jetpack Compose
 
 
-## What does @Composable mean?
+## What does `@Composable` mean?
 
 - `@Composable` is not an annotation processor but acts as a language keyword, similar to `suspend` in Kotlin.
 - When a function is marked with `@Composable`, it changes the function's type, and it can only be called inside another `@Composable` function.
@@ -76,9 +76,14 @@ fun App(items: List<String>, query: String) {
 }
 ```
 
-The function takes in a list of string items and a query and then performs a filter computation on the list. We can wrap this computation in a call to `remember`: `remember` is something that knows how to appeal to the slot table. `remember` looks at items and stores the list and query in the slot table. The filter computation then runs and `remember` stores the result before passing it back.
+The function takes in a list of string items and a query and then performs a filter computation on the list. 
+We can wrap this computation in a call to `remember`: `remember` is something that knows how to appeal to the slot table. 
+`remember` looks at items and stores the list and query in the slot table. 
+The filter computation then runs and `remember` stores the result before passing it back.
 
-The second time the function executes, `remember` looks at the new values being passed in and compares them with the old values. If neither of them has changed, then the filter operation is skipped and the previous result returned. That’s positional memoization.
+The second time the function executes, `remember` looks at the new values being passed in and compares them with the old values. 
+If neither of them has changed, then the filter operation is skipped and the previous result returned. 
+That’s positional memoization.
 
 ## Storing parameters
 To illustrate how a Composable function’s parameters are stored, Look at the example :
