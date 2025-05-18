@@ -31,7 +31,7 @@ Because composables accept state and expose events, the unidirectional data flow
 
 ## Unidirectional data flow in Jetpack Compose
 
-[See more about Definition of UDF](../../../../../General/DesignPattern/UnidirectionalDataFlow.md)
+[See more about Definition of UDF](/General/DesignPattern/UnidirectionalDataFlow.md)
 
 **Composables work based on state and events.**
 
@@ -198,3 +198,25 @@ fun MyComposable(viewModel: MyViewModel) {
 }
 
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

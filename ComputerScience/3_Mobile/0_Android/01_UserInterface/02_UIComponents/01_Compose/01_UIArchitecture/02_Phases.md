@@ -15,9 +15,9 @@ Compose has three main phases:
 3. **Drawing**: How it renders. UI elements draw into a Canvas, usually a device screen.
 
 
-![](../../../../../resources/state_and_recomposition.avif)
+![](/resources/state_and_recomposition.avif)
 
-Thứ tự các giai đoạn này thường giống nhau, cho phép dữ liệu chảy theo một hướng từ bố cục, composition đến layout để vẽ tạo ra một khung hình(also known as [unidirectional data flow](../../../../../General/DesignPattern/UnidirectionalDataFlow.md)). `BoxWithConstraints` and `LazyColumn` and `LazyRow` là những ngoại lệ đáng chú ý, trong đó thành phần của các con của nó phụ thuộc vào layout phase của parent.
+Thứ tự các giai đoạn này thường giống nhau, cho phép dữ liệu chảy theo một hướng từ bố cục, composition đến layout để vẽ tạo ra một khung hình(also known as [unidirectional data flow](/General/DesignPattern/UnidirectionalDataFlow.md)). `BoxWithConstraints` and `LazyColumn` and `LazyRow` là những ngoại lệ đáng chú ý, trong đó thành phần của các con của nó phụ thuộc vào layout phase của parent.
 
 Bạn có thể giả định một cách an toàn rằng ba giai đoạn này hầu như diễn ra cho mọi khung hình, nhưng vì mục đích hiệu suất:
 - Compose tránh lặp lại công việc sẽ tính toán cùng một kết quả từ cùng một dữ liệu đầu vào trong tất cả các giai đoạn này. 
@@ -34,12 +34,12 @@ Phần này mô tả cách thực thi ba giai đoạn Compose cho các composabl
 In the composition phase.the Compose runtime executes composable functions and **outputs a tree structure** that represents your UI. 
 
 
-![](../../../../../resources/composition.gif)
+![](/resources/composition.gif)
 
 The tree representing your UI that is created in the composition phase.
 
 A subsection of the code and UI tree looks like the following:
-![](../../../../../resources/code-subsection.png)
+![](/resources/code-subsection.png)
 
 Trong các ví dụ này, mỗi hàm có khả năng kết hợp trong mã sẽ ánh xạ tới một nút bố cục duy nhất trong cây giao diện người dùng. Trong các ví dụ phức tạp hơn, các thành phần kết hợp có thể chứa logic và luồng điều khiển, đồng thời tạo ra một cây khác với các State khác nhau.
 
@@ -47,7 +47,7 @@ Trong các ví dụ này, mỗi hàm có khả năng kết hợp trong mã sẽ 
 
 Trong Layout phase, Compose sử dụng UI tree được tạo trong giai đoạn composition làm đầu vào. Tập hợp các nút bố trí chứa tất cả thông tin cần thiết để quyết định kích thước và vị trí của từng nút trong không gian 2D.
 
-![](../../../../../resources/layout.gif)
+![](/resources/layout.gif)
 
 During the layout phase, the tree is traversed using the following **three step algorithm**:
 
@@ -62,7 +62,7 @@ During the layout phase, the tree is traversed using the following **three step 
 
 Nhớ lại cây giao diện người dùng từ phần trước:
 
-![](../../../../../resources/code-subsection.png)
+![](/resources/code-subsection.png)
 
 Đối với cây này, thuật toán hoạt động như sau:
 
@@ -196,7 +196,7 @@ Using the layout composable to create a custom layout enable to you mainipulate 
 
 Example :
 <div style="display: flex; align-items: center;">
-  <img src="../../../../../resources/layout_modifier.png" alt="Image" style="margin-right: 10px; width:30%"/>
+  <img src="/resources/layout_modifier.png" alt="Image" style="margin-right: 10px; width:30%"/>
   <p>
 
 ```kotlin
@@ -251,7 +251,7 @@ And finally
 
 **Compose only items that would be visible. This is the main ideas behind `Subcompose Layout`. It needs to do the measurement pass first for some child composeables, and then secondly to use that size information to determine whether to compose other children**. Meaning the measurement step in the layout phase need to happen before the composition phase of some children.This deferred composition is called subcomposition,and it is precisely why lazy components are build on top of subcompose layout, which enables them to add content on demand while scrolling.
 
-![](../../../../../resources/subcomnpose_layout.png)
+![](/resources/subcomnpose_layout.png)
 
 #### BoxWithConstraints
 
@@ -299,7 +299,7 @@ fun IntrinsicExample(){
 
 Trong giai Drawing, cây lại được duyệt từ trên xuống dưới và lần lượt từng nút sẽ tự vẽ trên màn hình.
 
-![](../../../../../resources/drawing.gif)
+![](/resources/drawing.gif)
 
 **Figure 1**. The drawing phase draws the pixels on the screen.
 
@@ -313,7 +313,7 @@ Sử dụng ví dụ trước, nội dung cây được vẽ theo cách sau:
 
 - The first and second `Text` draw themselves, respectively.
 
-![](../../../../../resources/drawing-ui-tree.gif)
+![](/resources/drawing-ui-tree.gif)
 
 **Figure 1**. A UI tree and its drawn representation.
 
@@ -406,7 +406,7 @@ Canvas(modifier = modifier) {
 }
 ```
 
-![](../../../../../resources/phases-state-read-draw.svg)
+![](/resources/phases-state-read-draw.svg)
 
 ## Optimizing state reads
 

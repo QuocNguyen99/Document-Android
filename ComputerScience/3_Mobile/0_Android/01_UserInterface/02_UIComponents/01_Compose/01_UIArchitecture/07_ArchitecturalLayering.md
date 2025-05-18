@@ -13,7 +13,7 @@ Jetpack Compose is not a single monolithic project; it is created from a number 
 
 The major layers of Jetpack Compose are:
 
-![](../../../../../resources/layering-major-layers.svg)
+![](/resources/layering-major-layers.svg)
 
 
 Each layer is built upon the lower levels, combining functionality to create higher level components. Each layer builds on public APIs of the lower layers to verify the module boundaries and enable you to replace any layer should you need to. Let's examine these layers from the bottom up.

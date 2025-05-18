@@ -1,32 +1,6 @@
 # Side-effects in Compose 
->[!NOTE]
->Trong Jetpack Compose, một trong những tình huống phổ biến nhất mà các hiện tượng Side-Effects có thể xảy ra là bên trong một hàm Composable. Khác với các hàm bình thường, các hàm Composable có thể được gọi lại để cập nhật giao diện người dùng do các kích hoạt khác nhau, chẳng hạn như việc recomposition. Do đó, thực hiện logic miền trực tiếp bên trong các hàm Composable có thể rủi ro, vì nó có thể dẫn đến hành vi không mong muốn hoặc không nhất quán trong giao diện người dùng do các lần gọi lại này.
->Ví dụ, giả sử bạn muốn tạo một kết hợp của  text và text field, và bạn muốn hiển thị một >thông báo toast với một thông báo mặc định lần đầu tiên nó xuất hiện. Bạn có thể tạo một >cài đặt đơn giản như ví dụ sau:
->
->```kotlin
->@Composable
->fun HomeScreen(defaultValue: String = "Hello, Compose!") {
->  Column {
->    val (value, onValueChanged) = remember { mutableStateOf(defaultValue) }
->
->    val context = LocalContext.current
->    Toast.makeText(context, defaultValue, Toast.LENGTH_SHORT).show()
->
->    Text(text = value)
->
->    TextField(value = value, onValueChange = onValueChanged)
->  }
->}
->```
->Tuy nhiên, khi chạy mã này, bạn có thể nhận thấy một vấn đề. Mỗi khi bạn sửa đổi đầu vào của ô văn bản, thông báo mặc định ("Xin chào, Compose!") lại xuất hiện dưới dạng một thông báo toast. Điều này xảy ra vì các thay đổi trạng thái cho ô văn bản kích hoạt recomposition, từ đó cập nhật giao diện Compose và vô tình gây ra việc hiển thị thông báo toast một cách lặp đi lặp lại.
->
->Hiện tượng này được gọi là "Side-Effects", nó tham chiếu đến việc xuất hiện các hành vi không mong muốn được kích hoạt bên trong chương trình. Tuy nhiên, thường cần thiết cho giao diện người dùng tương tác với logic domain, như lấy dữ liệu mạng, truy vấn cơ sở dữ liệu và thực hiện các hoạt động quan trọng khác. Tương tác này là rất quan trọng trong hầu hết các ứng dụng để đảm bảo giao diện người dùng phản ánh trạng thái và dữ liệu hiện tại được xử lý bởi hệ thống nền.
->
->Composables trong Jetpack Compose được thiết kế để là "pure" hoặc không có hiệu ứng phụ. Điều này có nghĩa là chúng không nên thay đổi trạng thái toàn cục hoặc tác động đến thế giới bên ngoài. Thay vào đó, chúng chỉ nên tạo ra giao diện người dùng dựa trên các đầu vào mà chúng nhận được và không nên có bất kỳ hành vi không thể đoán trước nào.
->
->Để giải quyết thách thức của các hiện tượng Side-Effects, Jetpack Compose giới thiệu một khái niệm được biết đến là "effect handler.".
 
-However, sometimes side-effects are necessary, for example, **to trigger a one-off event** such as showing a snackbar or navigate to another screen given a certain state condition. These actions should be called from a controlled environment that is aware of the lifecycle of the composable. In this page, you'll learn about the different side-effect APIs Jetpack Compose offers.
+Sometimes side-effects are necessary, for example, **to trigger a one-off event** such as showing a snackbar or navigate to another screen given a certain state condition. These actions should be called from a controlled environment that is aware of the lifecycle of the composable. In this page, you'll learn about the different side-effect APIs Jetpack Compose offers.
 
 When you need to make changes to the state of the app. **you should use the Effect APIs so that those side effects are executed in a predictable manner.**
 
