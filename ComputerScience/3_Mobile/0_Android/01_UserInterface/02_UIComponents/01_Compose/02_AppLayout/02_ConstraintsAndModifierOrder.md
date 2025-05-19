@@ -8,7 +8,7 @@ This page describes how chained modifiers affect constraints and, in turn, the m
 
 To understand how modifiers influence each other, it's helpful to visualize how they appear in the UI tree, **which is generated during the composition phase.**
 
-![](../../../../../resources/modifier-wrapping.png)
+![](/resources/modifier-wrapping.png)
 
 Adding more than one modifier to a composable creates a chain of modifiers. When you chain multiple modifiers, each modifier node wraps the rest of the chain and the layout node within. For example, when you chain a `clip` and a `size` modifier, the `clip` modifier node wraps the `size` modifier node, which then wraps the `Image` layout node.
 
