@@ -23,3 +23,8 @@ fun main() {
 ```
 
 Function types can optionally have an additional receiver type, which is specified before the dot in the notation: ` A.(B) -> C { body }`  **represents functions that can be called on a receiver object A with a parameter B, return a value C, and perform any action in the body.**
+
+> [!WARNING]
+> Lambda with Receiver that can not access directly to the private member of receiver
+
+
