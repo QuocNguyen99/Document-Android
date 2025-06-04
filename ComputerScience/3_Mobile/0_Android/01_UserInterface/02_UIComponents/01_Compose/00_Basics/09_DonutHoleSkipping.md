@@ -1,4 +1,4 @@
-# Donut Hold Skipping in Jetpack Compose
+# Donut Hole Skipping in Jetpack Compose
 
 ## Recompostion Scope
 For example :
@@ -117,16 +117,16 @@ We see that the body of `MyComponent` was executed during the very first composi
 
 Let's visualize the composables in example 2 with this lens and see how they are being recomposed. Anything with the chequered pattern represents that it was recomposed.
 
-![alt text](../../../../../resources/StateInitDonut.png)
+![alt text](/resources/StateInitDonut.png)
 State before any of these functions are composed
 
-![alt text](../../../../../resources/StateDonutRenderFirst.png)
+![alt text](/resources/StateDonutRenderFirst.png)
 Counter = 0 First composition, all composable functions and their scopes are executed and composed
 
-![alt text](../../../../../resources/StateDonutSkipMyComponentAndButtonFun.png)
+![alt text](/resources/StateDonutSkipMyComponentAndButtonFun.png)
 
 Counter = 1 Only Button Scope and CustomText, & CustomText Scope are recomposed. MyComponent, MyComponent Scope & Button are skipped from recomposition.
-![alt text](../../../../../resources/StateDonutSkipMyComponentAndButtonFun2.png)
+![alt text](/resources/StateDonutSkipMyComponentAndButtonFun2.png)
 
 Counter = 2 Only Button Scope and CustomText, & CustomText Scope are recomposed. MyComponent, MyComponent Scope & Button are skipped from recomposition.
 
@@ -221,7 +221,7 @@ State before any of these functions are composed
 ![alt text](/resources/StateDonutRenderFirst.png)
 Counter = 0 First composition, all composable functions and their scopes are executed and composed
 
-![alt text](![alt text](/resources/StateDonutSkipButtonFun.png))
+![alt text](/resources/StateDonutSkipButtonFun.png)
 Counter = 1 Everything except CustomButton is recomposed again
 
 ![alt text](/resources/StateDonutSkipButtonFun2.png)
