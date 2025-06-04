@@ -68,7 +68,7 @@ CustomText function 2
 ```
 
 
-![alt text](../../../../../resources/RecompositionExample1.png)
+![alt text](/resources/RecompositionExample1.png)
 
 When the value of the the counter changes, we previously noticed that both these scopes were being reinvoked and here's why:
 
@@ -104,7 +104,7 @@ Button 2
 CustomText function 2
 ```
 
-![alt text](../../../../../resources/RecompositionExample2.png)
+![alt text](/resources/RecompositionExample2.png)
 
 We see that the body of `MyComponent` was executed during the very first composition along with the body of the `Button` composable and theCustomText composable. However, every subsequent recomposition only causes the `Button` and the `CustomText` composable to be invoked again while the body of `MyComponent` is skipped altogether.
 
@@ -215,16 +215,16 @@ Everytime time the value of the `counter` changes, `CustomButton` function and `
 However, there's something unique about the behavior of Jetpack Compose that's worth highlighting and you probably missed it when you looked at the logs of this example. In order to visualize this, let's look at the donut diagram for Example 3
 
 
-![alt text](../../../../../resources/StateInitDonut.png)
+![alt text](/resources/StateInitDonut.png)
 State before any of these functions are composed
 
-![alt text](../../../../../resources/StateDonutRenderFirst.png)
+![alt text](/resources/StateDonutRenderFirst.png)
 Counter = 0 First composition, all composable functions and their scopes are executed and composed
 
-![alt text](![alt text](../../../../../resources/StateDonutSkipButtonFun.png))
+![alt text](![alt text](/resources/StateDonutSkipButtonFun.png))
 Counter = 1 Everything except CustomButton is recomposed again
 
-![alt text](../../../../../resources/StateDonutSkipButtonFun2.png)
+![alt text](/resources/StateDonutSkipButtonFun2.png)
 Counter = 2 Everything except CustomButton is recomposed again
 
 What makes Compose special is the fact that its able to skip the recomposition of CustomButton while recomposing its parent (MyComponent) and its child (CustomText) 🤯
