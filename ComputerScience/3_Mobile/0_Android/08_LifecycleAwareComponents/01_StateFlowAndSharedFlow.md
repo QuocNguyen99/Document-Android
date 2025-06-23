@@ -11,9 +11,8 @@ optimally emit state updates and emit values to multiple consumers.
 
 ## SharedFlow
 - Hot stream used to emit events.
-- Does not store state unless `replay > 0`.
-- You can configure `replay` to buffer emitted values.
-- Suitable for use cases like **one-time events**, button clicks, or navigation.
+- A SharedFlow “broadcasts” data to all active collectors in real time — like an event bus. 
+- Everyone who’s collecting at the time of emission sees it, and you can configure how many items to replay to latecomers. Does not store state unless `replay > 0`. You can configure `replay` to buffer emitted values.
 
 ## Usage in Android
 
