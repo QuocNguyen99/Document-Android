@@ -74,7 +74,10 @@ To declare your service, add a `service` element as a child of the `application`
 > To ensure that your app is secure, always use an explicit intent when starting a `Service` and don't declare intent filters for your services. Using an implicit intent to start a service is a security hazard because you cannot be certain of the service that responds to the intent, and the user cannot see which service starts. Beginning with Android 5.0 (API level 21), the system throws an exception if you call `bindService()` with an implicit intent.
 
 You can ensure that your service is available to only your app by including the [android:exported](https://developer.android.com/guide/topics/manifest/service-element#exported) attribute and setting it to `false`. This effectively stops other apps from starting your service, even when using an explicit intent.
-Managing the lifecycle of a service
+
+The `Intent` should contain either contain the complete class name of a specific service implementation to start or a specific package name to target. 
+
+## Managing the lifecycle of a service
 
 ### Creating a started service
 
