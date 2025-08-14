@@ -4,7 +4,7 @@ Dependency Injection (DI) enhances the management, maintenance, and scalability 
 
 ## Understanding Dependency Injection
 
-Dependency Injection (DI) might sound complex, but it's actually a straightforward concept that makes coding easier and cleaner, especially in Android apps using Kotlin. Let's break it down: Imagine you're assembling a computer. Instead of manufacturing each component yourself—like the processor, memory, or graphics card—you select and acquire these components from various suppliers. That's what DI does with objects in programming. It's all about giving an object the things it needs (dependencies) from the outside rather than having it create those things itself.
+Dependency injection is a technique where an object, often referred to as a client, receives other objects that it depends on—known as dependencies. The pattern aims to decouple the construction of dependencies from the client that uses them, leading to more modular, testable, and maintainable code. In Kotlin, especially within Android development, DI is crucial for efficiently managing the lifecycle and configuration of dependencies.
 
 Consider you're working on an app with a class `UserDataRepository` used to fetch user data. To do so, it requires an object `LocalDataSource` to get the data. Instead of creating `LocalDataSource` inside `UserDataRepository`, we tell `UserDataRepository` to expect a `LocalDataSource` from the outside when it's being created. Here's what it looks like in code:
 
@@ -215,6 +215,45 @@ Here, the `UserContainer` is prepared during the ViewModel's initialization phas
 By introducing scoped containers like UserContainer, we effectively manage the lifecycle and scope of our dependencies. This not only leads to better memory management but also enhances the modularity and maintainability of the application. Scoping is particularly beneficial in complex applications with multiple components requiring varied dependencies.
 
 
+## Disadvantages of using manual DI containers in Android development
+
+While DI Containers bring numerous benefits to Android development, including better modularity and maintainability, the use of manual DI containers also has its disadvantages. This section will explore the drawbacks of relying on manual DI containers, providing insights into the potential challenges developers might face when implementing this approach in their applications.
+
+
+### 1. Complexity in large-scale applications
+
+Although effective in small to medium-sized projects, manual DI containers can become cumbersome in larger applications. As the number of dependencies grows, so does the complexity of managing them:
+
+- **Increased Boilerplate Code**: The manual setup of dependencies often results in a significant amount of boilerplate code, making the codebase more verbose and harder to maintain.
+
+- **Difficulty in Tracking Dependencies**: In large projects, tracking and managing all dependencies can be difficult, leading to potential errors or oversight in dependency management.
+
+### 2. Limited flexibility and scalability
+
+Manual DI containers can be less flexible when it comes to scaling or modifying an application:
+
+- **Tight Coupling with Implementation**: Since dependencies are often hard-coded, it can lead to tight coupling with specific implementations, making it difficult to switch out components or test alternative implementations.
+
+- **Challenges in Refactoring**: Refactoring an application with a manual DI approach can be more challenging, as changes in one part of the code may necessitate updates across various other parts of the codebase.
+
+### 3. Potential for human error
+
+Manual DI relies heavily on the developer's attention to detail:
+
+- **Increased Risk of Errors**: The manual process of injecting dependencies increases the risk of human error. While constructor injection inherently reduces the risk of missing dependencies through its compile-time checks, field and method injection can be prone to oversights during dependency initialization, potentially leading to runtime issues. This necessitates careful management in these injection methods.
+
+- **Inconsistencies in Dependency Management**: Different developers may implement DI in slightly different ways, leading to inconsistencies in how dependencies are managed and injected.
+
+### 4. Testing difficulties
+
+While DI generally aids in testing, manual DI containers can sometimes complicate this process:
+
+- **Complex Setup for Testing**: Setting up a testing environment may require extensive configuration of the DI container, especially if the application has many interconnected dependencies.
+
+- **Limited Isolation for Unit Testing**: Achieving isolated unit tests can be more challenging, as manual DI containers might not easily allow for mocking or replacing dependencies.
+
+
 ### reference
 
 - ["Vanilla" DI in Android](https://hyperskill.org/learn/step/43530)
+- [DI Containers](https://hyperskill.org/learn/step/41527)
