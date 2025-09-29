@@ -1,10 +1,9 @@
 # Asynchronous Flow
+While suspending functions return a single value asynchronously, Kotlin Flows allow returning multiple asynchronously computed values.
 
-A suspending function asynchronously returns a single value, but how can we return multiple asynchronously computed values? This is where Kotlin Flows come in.
+## Flow basics and feature
 
-## Flow
-
-a `Sequence<Int>` type for synchronously computed values:
+A `Sequence<Int>` handles synchronously computed values:
 
 ```kotlin
 fun simple(): Sequence<Int> = sequence { // sequence builder
@@ -19,13 +18,9 @@ fun main() {
 }
 ```
 
-
-Flow is a reactive stream, To represent the stream of values that are being computed asynchronously,
-we can use a `Flow<Int>` type just like we would use 
-
+For asynchronous streams, use `Flow<Int>`:
 
 ```kotlin
-              
 fun simple(): Flow<Int> = flow { // flow builder
     for (i in 1..3) {
         delay(100) // pretend we are doing something useful here
@@ -45,24 +40,17 @@ fun main() = runBlocking<Unit> {
     simple().collect { value -> println(value) } 
 }
 ```
-Output
-```bash
-I'm not blocked 1
-1
-I'm not blocked 2
-2
-I'm not blocked 3
-3
-```
 
-- A builder function of `Flow` type is called `flow`.
-- Code inside a `flow { ... }` builder block can suspend.
-- The function is no longer marked with a `suspend` modifier.
-- Values are **emitted** from the flow using an `emit` function.
-- Values are **collected** from the flow using a `collect` function.
-## Flows are cold
+Key points:
 
-Flows are **cold** streams similar to sequences.**The code inside a flow builder does not run until the flow is collected**. This becomes clear in the following example:
+- Use `flow { }` builder to create flows
+- Code inside flow builders can suspend
+- No `suspend` modifier on the function itself
+- Values are **emitted** with `emit()` function
+- Values are **collected** with `collect()` function
+
+### Flows are cold
+Flows are cold streams - code inside a flow builder only runs when collected:
 
 ```kotlin
 fun simple(): Flow<Int> = flow { 
@@ -83,9 +71,9 @@ fun main() = runBlocking<Unit> {
 }
 ```
 
-Output
+Output:
 
-```bash
+```kotlin
 Calling simple function...
 Calling collect...
 Flow started
@@ -98,20 +86,48 @@ Flow started
 2
 3
 ```
+The `simple()` function returns quickly without waiting. Flow execution starts fresh each time it's collected.
 
-This is a key reason the simple function (which returns a flow) is not marked with suspend modifier. 
-The `simple()` call itself returns quickly and does not wait for anything. 
-The flow starts afresh every time it is collected and that is why we see "Flow started" every time we call collect again.
+### Collecting from a flow
 
-## Flow cancellation basics
+As `collect` is a suspend function, it needs to be executed within a coroutine.
+It takes a lambda as a parameter that is called on every new value.
 
-Flows adhere to the general cooperative cancellation of coroutines. 
-As usual, flow collection can be cancelled when the flow is suspended in a cancellable suspending function (like `delay`). 
+> [!CAUTION]
+> Since it's a suspend function, the coroutine that calls collect may suspend until the flow is closed.
 
-- The following example shows how the flow gets cancelled on a timeout when running in a `withTimeoutOrNull` block and stops executing its code:
+If you want to collect the multiple value from the several flow, you need to create  new coroutine from the current one.
 
 ```kotlin
-          
+fun main() = runBlocking {
+    val flowA = flow {
+        repeat(3) {
+            emit("A$it")
+            delay(400)
+        }
+    }
+    val flowB = flow {
+        repeat(3) {
+            emit("B$it")
+            delay(700)
+        }
+    }
+
+    val jobA = launch {
+        flowA.collect { println("From A: $it") }
+    }
+    val jobB = launch {
+        flowB.collect { println("From B: $it") }
+    }
+
+    joinAll(jobA, jobB)
+}
+```
+
+### Flow cancellation basics
+Flows honor coroutine cancellation when suspended in cancellable functions like `delay`:
+
+```kotlin
 fun simple(): Flow<Int> = flow { 
     for (i in 1..3) {
         delay(100)          
@@ -127,8 +143,10 @@ fun main() = runBlocking<Unit> {
     println("Done")
 }
 ```
+
 Output:
-```kotlin
+
+```bash
 Emitting 1
 1
 Emitting 2
@@ -136,10 +154,9 @@ Emitting 2
 Done
 ```
 
-- In the case where you have a busy loop with coroutines you must explicitly check for cancellation. 
-You can add `.onEach { currentCoroutineContext().ensureActive() }`, but there is a ready-to-use `cancellable()` operator provided to do that:
+For busy loops, use the `cancellable()` operator:
 
-```kotlin          
+```kotlin
 fun main() = runBlocking<Unit> {
     (1..5).asFlow().cancellable().collect { value -> 
         if (value == 3) cancel()  
@@ -148,32 +165,69 @@ fun main() = runBlocking<Unit> {
 }
 ```
 
-
-> [!NOTE]
-> However, most other flow operators do not do additional cancellation checks on their own for performance reasons.
+> [!NOTE] 
+> Most flow operators don't perform additional cancellation checks for performance reasons.
 
 ## Flow builders
 
-The `flow { ... }` builder from the previous examples is the most basic one. 
-There are other builders that allow flows to be declared:
+Besides `flow { }`, you can use:
 
-- The `flowOf` builder defines a flow that emits a fixed set of values.
+- `flowOf` builder to emit fixed values
+- `.asFlow()` extension function to convert **collections and sequences** to flows
 
-- Various collections and sequences can be converted to flows using the `.asFlow()` extension function.
+### callbackFlow
+
+`callbackFlow` is a flow builder that **lets you convert callback-based APIs into flows**.
+
+When you want to wrap an external listener, broadcast receiver, or any async API that uses callbacks, not suspending functions.
+
+```kotlin
+interface MyListener {
+    fun onEvent(value: Int)
+}
+
+fun myListenerFlow(): Flow<Int> = callbackFlow {
+    val listener = object : MyListener {
+        override fun onEvent(value: Int) {
+            trySend(value) // emit to flow
+        }
+    }
+    // Simulate registering the listener
+    registerListener(listener)
+    // Remove listener when the flow is cancelled
+    awaitClose { unregisterListener(listener) }
+}
+
+// --- Mock implementation for demo purposes ---
+fun registerListener(listener: MyListener) {
+    // Simulate callback events from another thread
+    GlobalScope.launch {
+        delay(100)
+        listener.onEvent(1)
+        delay(100)
+        listener.onEvent(2)
+    }
+}
+fun unregisterListener(listener: MyListener) { /* cleanup if needed */ }
+
+// --- Usage ---
+fun main() = runBlocking {
+    myListenerFlow().collect { println("Flow received: $it") }
+}
+```
+
+> [!NOTE]
+> Unlike the `flow` builder, `callbackFlow` allows values to be emitted from a different `CoroutineContext` with the `send` function or outside a coroutine with the `trySend` function.Because internally, callbackFlow uses a channel
 
 ## Intermediate flow operators
 
-You can transform a flow using operators, just like you would with a list or sequence. 
-These operators take an **upstream flow** and create a new **downstream flow** with the transformation applied.
+Intermediaries can use intermediate operators to modify the stream of data without consuming the values. 
 
-The operators are cold, meaning they don’t do anything until the flow is actually collected. 
-Calling an operator is not a suspending function — it just defines a new flow and returns it immediately without running any code yet.
+### Map operator
 
-The basic operators have familiar names like `map` and `filter`. 
-An important difference of these operators from sequences is **that blocks of code inside these operators can call suspending functions**.
+Flow operators transform one flow into another:
 
 ```kotlin
-         
 suspend fun performRequest(request: Int): String {
     delay(1000) // imitate long-running asynchronous work
     return "response $request"
@@ -186,14 +240,11 @@ fun main() = runBlocking<Unit> {
 }
 ```
 
+
+Important difference: operator blocks can call suspending functions.
+
 ### Transform operator
-
-The most flexible operator for transforming flows is `transform`. 
-You can use it to do simple things like `map` or `filter`, but also more complex logic.
-
-> [!TIP]
-> With `transform`, you have full control — you can emit any values you want, and as many times as you need.
-
+`transform` allowing emit multiple response value for each input value:
 
 ```kotlin
 (1..3).asFlow() // a flow of requests
@@ -205,12 +256,7 @@ You can use it to do simple things like `map` or `filter`, but also more complex
 ```
 
 ### Size-limiting operators
-
-Size-limiting intermediate operators like `take` cancel the execution of the flow when the corresponding limit is reached. 
-
-> [!CAUTION]
-> Cancellation in coroutines is always performed by throwing an exception,
->  so that all the resource-management functions (like `try { ... }` `finally { ... }` blocks) operate normally in case of cancellation
+Operators like `take` cancel flow execution when limits are reached:
 
 ```kotlin
 fun numbers(): Flow<Int> = flow {
@@ -228,31 +274,30 @@ fun main() = runBlocking<Unit> {
     numbers() 
         .take(2) // take only the first two
         .collect { value -> println(value) }
-}        
+}
 ```
-Output
+Output:
 ```bash
 1
 2
 Finally in numbers
 ```
-
 ## Terminal flow operators
+Terminal operators are suspending functions that start flow collection:
 
-Terminal operators on flows are **suspending functions** that start a collection of the flow. 
-The `collect` operator is the most basic one, but there are other terminal operators
-
-- Conversion to various collections like `toList` and `toSet`.
-- Operators to get the `first` value and to ensure that a flow emits a `single` value.
-- Reducing a flow to a value with `reduce` and `fold`.
+- `collect` - basic collection
+- `toList`, `toSet` - conversion to collections
+- `first`, `single` - get specific values
+- `reduce`, `fold` - reduce to a single value
 
 ## Flows are Sequential
+Flow processing happens sequentially from upstream to downstream:
 
-Flows process values one at a time in order, from upstream to downstream. 
-When you collect a flow, each emitted value goes through all intermediate operators (like `filter`, `map`) sequentially, then reaches the final collect.
+> [!NOTE]
+> - **upstream flow**, is a meaning the producer and any intermediate operators applied before or above operator
+> - **downstream flow**, the intermediate operators after current consideration operator along with the consumer
 
 ```kotlin
-
 (1..5).asFlow()
     .filter {
         println("Filter $it")
@@ -263,9 +308,9 @@ When you collect a flow, each emitted value goes through all intermediate operat
         "string $it"
     }.collect { 
         println("Collect $it")
-    }    
+    }
 ```
-Output
+Output:
 ```bash
 Filter 1
 Filter 2
@@ -277,11 +322,9 @@ Map 4
 Collect string 4
 Filter 5
 ```
+
 ## Flow context
-
-When you collect a flow, it always runs in **the context of the calling coroutine** — not the context where the flow was created.
-
-For example:
+Flows always run in the context of the collecting coroutine:
 
 ```kotlin
 withContext(context) {
@@ -290,99 +333,315 @@ withContext(context) {
     }
 }
 ```
+This is called **context preservation**.
 
-This behavior is called **context preservation** 
 
-> [!CAUTION]
-> A common pitfall when using `withContext`, Usually, `withContext` is used to change the context in the code using Kotlin coroutines, 
-> but code in the `flow { ... }` builder has to honor the context preservation property and is not allowed to emit from a different context.
+> [!CAUTION] 
+> You cannot emit from a different context in flow builders:
 
 ```kotlin
-fun simple(): Flow<Int> = flow {
-    // The WRONG way to change context for CPU-consuming code in flow builder
+// WRONG - emitting from different context
+flow {
     withContext(Dispatchers.Default) {
-        for (i in 1..3) {
-            Thread.sleep(100) // pretend we are computing it in CPU-consuming way
-            emit(i) // emit next value
-        }
+        emit(value) // Will throw IllegalStateException
     }
 }
-
-fun main() = runBlocking<Unit> {
-    simple().collect { value -> println(value) } 
-}        
 ```
-Ouput
-```bash
-Exception in thread "main" java.lang.IllegalStateException: Flow invariant is violated:
-		Flow was collected in [CoroutineId(1), "coroutine#1":BlockingCoroutine{Active}@5511c7f8, BlockingEventLoop@2eac3323],
-		but emission happened in [CoroutineId(1), "coroutine#1":DispatchedCoroutine{Active}@2dae0000, Dispatchers.Default].
-		Please refer to 'flow' documentation or use 'flowOn' instead at ...
-```
-## flowOn operator
+### flowOn operator
+To change the `CoroutineContext` of a flow, flowOn changes the `CoroutineContext` of the upstream flow
 
-The correct way to change the context of a flow is shown in the example below:
+The downstream flow is not affected and executes on the `CoroutineContext` used to `collect` from the flow.
 
 ```kotlin
-fun simple(): Flow<Int> = flow {
-    for (i in 1..3) {
-        Thread.sleep(100) // pretend we are computing it in CPU-consuming way
-        log("Emitting $i")
-        emit(i) // emit next value
-    }
-}.flowOn(Dispatchers.Default) // RIGHT way to change context for CPU-consuming code in flow builder
-
-fun main() = runBlocking<Unit> {
-    simple().collect { value ->
-        log("Collected $value") 
-    } 
-}            
+class NewsRepository(
+    private val newsRemoteDataSource: NewsRemoteDataSource,
+    private val userData: UserData,
+    private val defaultDispatcher: CoroutineDispatcher
+) {
+    val favoriteLatestNews: Flow<List<ArticleHeadline>> =
+        newsRemoteDataSource.latestNews
+            .map { news -> // Executes on the default dispatcher
+                news.filter { userData.isFavoriteTopic(it) }
+            }
+            .onEach { news -> // Executes on the default dispatcher
+                saveInCache(news)
+            }
+            // flowOn affects the upstream flow ↑
+            .flowOn(defaultDispatcher)
+            // the downstream flow ↓ is not affected
+            .catch { exception -> // Executes in the consumer's context
+                emit(lastCachedNews())
+            }
+}
 ```
+
+With this code, the `onEach` and `map` operators use the `defaultDispatcher`, whereas the `catch` operator and the consumer are executed on `Dispatchers.Main` used by `viewModelScope`.
+
+
+> [!NOTE]
+> If there are multiple `flowOn` operators, each one changes the upstream from its current location.
+
+
+As the data source layer is doing I/O work, you should use a dispatcher that is optimized for I/O operations:
+
+```kotlin
+class NewsRemoteDataSource(
+    ...,
+    private val ioDispatcher: CoroutineDispatcher
+) {
+    val latestNews: Flow<List<ArticleHeadline>> = flow {
+        // Executes on the IO dispatcher
+        ...
+    }
+        .flowOn(ioDispatcher)
+}
+```
+
+### `buffer()`
+
+The emitter doesn’t have to wait for the collector to finish before emitting the next value.
+
+
+```kotlin
+fun main() = runBlocking {
+    println("=== buffer() ===")
+    val time = measureTimeMillis {
+        slowFlowEmit100ms()
+            .onEach { log("Emitted $it") }
+            .buffer() // do not blocked by collector
+            .collect { value ->
+                log("Collecting $value ...")
+                delay(300)
+                log("Done   $value")
+            }
+    }
+    println("Total time ~ ${time}ms\n")
+}
+fun slowFlowEmit100ms(): Flow<Int> = flow {
+    repeat(3) { i ->
+        delay(100) // slow-ish emitter
+        emit(i + 1)
+    }
+}
+```
+
+### `conflate()`
+
+Skip intermediate values, keep the latest
+
+```kotlin
+fun main() = runBlocking {
+    println("=== conflate() ===")
+    val time = measureTimeMillis {
+        fastFlow()
+            .onEach { log("Emitted $it") }
+            .conflate()
+            .collect { value ->
+                log("Collecting $value ...")
+                delay(300)
+                log("Done   $value")
+            }
+    }
+    println("Total time ~ ${time}ms\n")
+}
+
+fun fastFlow(): Flow<Int> = flow {
+    // Emit quickly (no delay here to exaggerate the effect)
+    emit(1)
+    emit(2)
+    emit(3)
+}
+```
+
+Output :
+
+```bash
+Emitted 1
+Emitted 2
+Emitted 3
+Collecting 1 ... (300ms)
+Done 1
+Collecting 3 ... (300ms)
+Done 3
+```
+
+### collectLatest
+
+Cancel previous work when a new value arrives
+
+```kotlin
+fun main() = runBlocking {
+    println("=== collectLatest ===")
+    val time = measureTimeMillis {
+        fastFlow()
+            .onEach { log("Emitted $it") }
+            .collectLatest { value ->
+                log("Start   $value")
+                try {
+                    delay(300) // long work
+                    log("Finish  $value")
+                } finally {
+                    // This runs when the block is cancelled by a newer value
+                    log("Cancel  $value (if not finished)")
+                }
+            }
+    }
+    println("Total time ~ ${time}ms\n")
+}
+```
+
+```bash
+Emitted 1
+Start 1
+Emitted 2
+Cancel 1 (if not finished)
+Start 2
+Emitted 3
+Cancel 2 (if not finished)
+Start 3
+Finish 3
+```
+
+## Composition and Flattening 
+
+### zip
+
+
+Combines two flows into one by pairing values in order: 
+(A1 with B1), (A2 with B2), etc.
+If either flow is slower, zip waits for both to be ready.
+
+```kotlin
+
+fun main() = runBlocking {
+    println("=== zip ===")
+    val numbers = flowOf(1, 2, 3).onEach { delay(100) }  // emit every 100ms
+    val words = flowOf("one", "two", "three").onEach { delay(200) } // emit every 200ms
+
+    numbers.zip(words) { number, word -> "$number:$word" }
+        .collect { println(it) }
+}
+```
+
+Output:
+
+```bash
+1:one
+2:two
+3:three
+```
+
+### combine
+
+Latest Combination
+
+Whenever either flow emits, combine with the latest value from the other.
+Emits right away when any source updates.
+
+```kotlin
+fun main() = runBlocking {
+    println("=== combine ===")
+    val a = flowOf(1, 2, 3).onEach { delay(300) }
+    val b = flowOf("one", "two", "three").onEach { delay(400) }
+
+    a.combine(b) { num, word -> "$num + $word" }
+        .collect { println(it) }
+}
+```
+
+### flatMapConcat
+
+Sequential Flattening, Each request waits for the previous one to finish.
+
+```kotlin
+fun main() = runBlocking {
+    println("=== flatMapConcat ===")
+    flowOf("A", "B", "C")
+        .flatMapConcat { item ->
+            flow {
+                println("Start job $item")
+                delay(500)
+                emit("Done $item")
+            }
+        }
+        .collect { println(it) }
+}
+```
+
+Output:
+
+```bash
+Start job A
+Done A
+Start job B
+Done B
+Start job C
+Done C
+```
+
+### flatMapMerge
+
+Parallel Flattening, All requests are started at the same time, and results appear as soon as each finishes.
+
+```kotlin
+fun main() = runBlocking {
+    println("=== flatMapMerge ===")
+    flowOf("A", "B", "C")
+        .flatMapMerge { item ->
+            flow {
+                println("Start job $item")
+                delay(500)
+                emit("Done $item")
+            }
+        }
+        .collect { println(it) }
+}
+```
+
+Output:
+
+```bash
+Start job A
+Start job B
+Start job C
+Done A
+Done B
+Done C
+```
+
 ## Flow exceptions
 
-`Flow` collection can complete with an exception when an emitter or code inside the operators throw an exception. There are several ways to handle these exceptions.
-
-### Collector try and catch 
+Wrap your collect call in a try/catch block. If any error occurs during emission or collection, it will be caught, and the Flow is immediately cancelled.
 
 ```kotlin
-fun simple(): Flow<Int> = flow {
-    for (i in 1..3) {
-        println("Emitting $i")
-        emit(i) // emit next value
-    }
+val flow = flow {
+    emit("A")
+    emit("B")
+    emit("Error") // Giả sử giá trị này gây lỗi
+    emit("C")
 }
 
-fun main() = runBlocking<Unit> {
-    try {
-        simple().collect { value ->         
-            println(value)
-            check(value <= 1) { "Collected $value" }
-        }
-    } catch (e: Throwable) {
-        println("Caught $e")
-    } 
-}            
+try {
+    flow.collect { value ->
+        println("Collecting $value")
+        if (value == "Error") throw IllegalStateException("Unexpected value: $value")
+    }
+} catch (e: Throwable) {
+    println("Caught error: ${e.message}")
+}
 ```
-Output
+Output:
 ```bash
-Emitting 1
-1
-Emitting 2
-2
-Caught java.lang.IllegalStateException: Collected 2
+Collecting A
+Collecting B
+Collecting Error
+Caught error: Unexpected value: Error
 ```
+
 ### Exception transparency
+Flows must be transparent to exceptions. Don't emit values from `try/catch` blocks in flow builders.
 
-Flows must be transparent to exceptions and it is a violation of the exception transparency to emit values in the `flow { ... }` builder from inside of a `try/catch` block. 
-
-This guarantees that a collector throwing an exception can always catch it using `try/catch` as in the previous example.
-
-The emitter can use a `catch` operator that preserves this exception transparency and allows encapsulation of its exception handling
-The body of the `catch` operator can analyze an exception and react to it in different ways depending on which exception was caught:
-
-- Exceptions can be rethrown using `throw`.
-- Exceptions can be turned into emission of values using `emit` from the body of `catch`.
-- Exceptions can be ignored, logged, or processed by some other code.
+Use the `catch` operator to preserve exception transparency (continue to emit the others value instead of cancel):
 
 ```kotlin
 simple()
@@ -390,8 +649,36 @@ simple()
     .collect { value -> println(value) }
 ```
 
+> [!CAUTION] 
+> The `catch` operator only catches upstream exceptions (from operators above it). Exceptions from `collect` or operators below `catch` will still escape.
 
-> [!CAUTION]
-> The `catch` intermediate operator, honoring exception transparency, catches only upstream exceptions (that is an exception from all the operators above catch, but not below it). 
-> If the block in `collect { ... }` (placed below catch) throws an exception then it escapes.
 
+### onCompletion operator
+
+Use `.onCompletion { }` to run logic when the flow completes—successfully or with an exception. 
+You can check if the cause is not null to distinguish exceptional completion.
+
+## Launching Flow
+
+### launchIn
+
+operator starts collecting the Flow in a new coroutine, without blocking the current one
+
+```kotlin
+fun main() = runBlocking {
+    val eventsFlow = flow {
+        repeat(3) {
+            emit("Event #$it")
+            delay(500)
+        }
+    }
+
+    eventsFlow
+        .onEach { println(it) }
+        .launchIn(this) // collect at current coroutine, non-blocking
+
+    println("Done!")
+
+    delay(2000) // wait for event
+}
+```
