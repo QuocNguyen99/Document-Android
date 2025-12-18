@@ -6,6 +6,11 @@ O lớn là ký hiệu mô tả độ phức tạp của một thuật toán, ha
 
 O lớn đại diện cho trường hợp xấu nhất có thể sảy ra. Cùng với O lớn, còn có các ký hiệu Ω(omega) và Θ(teta) đại diện cho trường hợp tốt nhất và trường hợp trung bình.
 
+> [!NOTE]
+> Time Complexity is NOT a measure of Time in seconds / minutes / hours. 
+> It is the number of operations an Algorithm will perform to achieve its desired output given a data of size n .
+
+
 ## Criteria for evaluating an algorithm
 
 Trong ngành khoa học máy tính hai khái niệm này thường được gọi là "độ phức tạp thời gian" và "độ phức tạp không gian".
