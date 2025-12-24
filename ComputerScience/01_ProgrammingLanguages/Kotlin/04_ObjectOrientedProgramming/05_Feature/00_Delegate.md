@@ -48,6 +48,13 @@ println(delegatingObj.msg)
 
 Essentially, in the constructor of this class, we require something that implements the interface `MyInterface` marked by a colon `:`, and then, using the keyword `by`, we tell the derived class that whenever it is asked to perform anything "promised" by the `MyInterface` interface, it will use the provided object to do so.
 
+## Advantages of using class delegation
+
+- **It simplifies code**: class delegation avoids code duplication by delegating the implementation of an interface or functionality to another class.
+- **It improves composition and modularity**: instead of using inheritance, you can combine different objects to create new functionality.
+- **It prevents multiple inheritance problems**: unlike inheritance, delegation does not lead to problems related to multiple inheritance, such as the "diamond problem".
+- **It provides flexibility to change the behavior of objects**: you can easily replace a delegate to change the behavior of an object without changing the source code.
+
 ### Solving complications by overriding
 
 Sometimes, however, when a class implements many interfaces, we might encounter a situation when it inherits multiple implementations of the same method or property. This leads to conflicts.
