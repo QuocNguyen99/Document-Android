@@ -2,3 +2,7 @@
 .DS_Store
 .AppleDouble
 .LSOverride
+
+# Local viewer artifacts
+viewer/node_modules/
+viewer/dist/

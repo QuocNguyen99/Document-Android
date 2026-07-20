@@ -1,0 +1,40 @@
+# Cái nút
+
+`Buttons` kế thừa từ TextView và sử dụng nhiều thuộc tính quen thuộc: `textColor`, `textSize`, v.v. Sự khác biệt chính là hình thức bên ngoài: một nút thông thường có các góc tròn và có bóng
+
+Nó có một biểu tượng ở bên trái và văn bản ở bên phải, điều này đạt được bằng cách sử dụng thuộc tính `drawableLeft` được kế thừa từ `TextView`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
