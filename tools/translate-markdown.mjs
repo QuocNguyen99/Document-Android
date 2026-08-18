@@ -10,7 +10,14 @@ const force = process.argv.includes("--force");
 const concurrency = 16;
 
 const glossary = [
-  "access token", "adapter pattern", "Android Runtime", "Android SDK",
+  "pull request", "main thread", "background thread", "worker thread", "UI thread",
+  "network request", "network response", "client", "clients", "server", "servers",
+  "protocol", "protocols", "request", "requests", "response", "responses",
+  "endpoint", "endpoints", "payload", "payloads", "cache", "caching",
+  "repository", "repositories", "dependency", "dependencies", "frameworks",
+  "thread", "threads", "process", "processes", "callback", "callbacks",
+  "listener", "listeners", "handler", "handlers", "runtime", "compiler", "compilers",
+  "access token", "refresh token", "adapter pattern", "Android Runtime", "Android SDK",
   "Application Binary Interface", "Application Programming Interface",
   "architectural pattern", "asynchronous programming", "attack surface",
   "authorization server", "back stack", "background service", "behavioral pattern",

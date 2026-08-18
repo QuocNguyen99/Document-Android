@@ -105,6 +105,12 @@ Công cụ chỉ tạo những bản dịch còn thiếu. Để tạo lại toà
 node tools/translate-markdown.mjs --force
 ```
 
+Chuẩn hóa lại các thuật ngữ English-first trong bản dịch hiện có:
+
+```bash
+node tools/normalize-vietnamese-terminology.mjs
+```
+
 Công cụ tự động bảo vệ:
 
 - Fenced code block và inline code
@@ -127,4 +133,3 @@ npm run build
 - Giữ nguyên các thuật ngữ kỹ thuật khi bản dịch tiếng Việt có thể gây mất nghĩa.
 - Mỗi file tiếng Việt phải có cùng đường dẫn với file English tương ứng.
 - Kiểm tra link và ảnh sau khi thêm hoặc cập nhật tài liệu.
-
