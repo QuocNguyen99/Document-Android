@@ -15,15 +15,15 @@ Những lợi ích chính của lớp ViewModel về cơ bản là hai:
 
 ### Kiên trì
 
-ViewModel cho phép tồn tại thông qua cả trạng thái mà ViewModel nắm giữ và các hoạt động mà ViewModel kích hoạt. Bộ nhớ đệm này có nghĩa là bạn không phải tìm nạp lại dữ liệu thông qua các thay đổi cấu hình phổ biến, chẳng hạn như xoay màn hình.
+ViewModel cho phép tồn tại thông qua cả trạng thái mà ViewModel nắm giữ và các hoạt động mà ViewModel kích hoạt. Cache này có nghĩa là bạn không phải tìm nạp lại dữ liệu thông qua các thay đổi cấu hình phổ biến, chẳng hạn như xoay màn hình.
 
 ####Phạm vi
 
-Khi khởi tạo ViewModel, bạn chuyển cho nó một đối tượng triển khai giao diện [`ViewModelStoreOwner`](https://developer.android.com/reference/kotlin/androidx/lifecycle/ViewModelStoreOwner).
+Khi khởi tạo ViewModel, bạn chuyển cho nó một đối tượng triển khai interface [`ViewModelStoreOwner`](https://developer.android.com/reference/kotlin/androidx/lifecycle/ViewModelStoreOwner).
 
-Một loạt lớp là lớp con trực tiếp hoặc gián tiếp của giao diện `ViewModelStoreOwner`. Các lớp con trực tiếp là [`ComponentActivity`](https://developer.android.com/reference/androidx/activity/ComponentActivity), [`Fragment`](https://developer.android.com/reference/androidx/fragment/app/Fragment) và [`NavBackStackEntry`](https://developer.android.com/reference/androidx/navigation/NavBackStackEntry). Để biết danh sách đầy đủ các lớp con gián tiếp, hãy xem phần [`ViewModelStoreOwner` tài liệu tham khảo](https://developer.android.com/reference/kotlin/androidx/lifecycle/ViewModelStoreOwner).
+Một loạt lớp là lớp con trực tiếp hoặc gián tiếp của interface `ViewModelStoreOwner`. Các lớp con trực tiếp là [`ComponentActivity`](https://developer.android.com/reference/androidx/activity/ComponentActivity), [`Fragment`](https://developer.android.com/reference/androidx/fragment/app/Fragment) và [`NavBackStackEntry`](https://developer.android.com/reference/androidx/navigation/NavBackStackEntry). Để biết danh sách đầy đủ các lớp con gián tiếp, hãy xem phần [`ViewModelStoreOwner` tài liệu tham khảo](https://developer.android.com/reference/kotlin/androidx/lifecycle/ViewModelStoreOwner).
 
-Đây có thể là đích Navigation, Navigation graph, hoạt động, đoạn hoặc bất kỳ loại nào khác triển khai giao diện. Khi đó, ViewModel của bạn sẽ nằm trong phạm vi [Lifecycle](https://developer.android.com/reference/androidx/lifecycle/Lifecycle) của `ViewModelStoreOwner`. **Nó vẫn còn trong bộ nhớ cho đến khi `ViewModelStoreOwner` biến mất vĩnh viễn.**
+Đây có thể là đích Navigation, Navigation graph, hoạt động, đoạn hoặc bất kỳ loại nào khác triển khai interface. Khi đó, ViewModel của bạn sẽ nằm trong phạm vi [Lifecycle](https://developer.android.com/reference/androidx/lifecycle/Lifecycle) của `ViewModelStoreOwner`. **Nó vẫn còn trong bộ nhớ cho đến khi `ViewModelStoreOwner` biến mất vĩnh viễn.**
 
     Khi một Activity hoặc Fragment bị hủy bỏ, ViewModel của chúng sẽ vẫn chạy và các coroutine đang chạy trong ViewModel cũng vẫn tiếp tục chạy. Tuy nhiên, nếu coroutine này thực thi một hoạt động liên quan đến View như cập nhật UI, thì công việc đó sẽ gây ra lỗi sau khi View đã được kích hoạt.
 
@@ -56,13 +56,13 @@ lifecycle của [`ViewModel`](https://developer.android.com/reference/androidx/
 
 Điều này làm cho ViewModels trở thành giải pháp tuyệt vời để lưu trữ dữ liệu sau những thay đổi về cấu hình.
 
-## Xóa phần phụ thuộc ViewModel
+## Xóa ViewModel dependency
 
-ViewModel gọi phương thức [`onCleared`](https://developer.android.com/reference/androidx/lifecycle/ViewModel#onCleared()) khi `ViewModelStoreOwner` hủy phương thức này trong quá trình lifecycle của nó. Điều này cho phép bạn dọn sạch mọi công việc hoặc phần phụ thuộc tuân theo lifecycle của ViewModel.
+ViewModel gọi phương thức [`onCleared`](https://developer.android.com/reference/androidx/lifecycle/ViewModel#onCleared()) khi `ViewModelStoreOwner` hủy phương thức này trong quá trình lifecycle của nó. Điều này cho phép bạn dọn sạch mọi công việc hoặc dependency tuân theo lifecycle của ViewModel.
 
 
 
-Ví dụ sau đây cho thấy một giải pháp thay thế cho `viewModelScope`.`viewModelScope` là một giải pháp thay thế [`CoroutineScope`](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/) tự động tuân theo lifecycle của ViewModel. ViewModel sử dụng nó để kích hoạt các hoạt động liên quan đến kinh doanh. Nếu bạn muốn sử dụng phạm vi tùy chỉnh thay vì `viewModelScope` để kiểm tra dễ dàng hơn, ViewModel có thể nhận `CoroutineScope` làm phần phụ thuộc trong hàm khởi tạo của nó. Khi `ViewModelStoreOwner` xóa ViewModel ở cuối lifecycle, ViewModel cũng hủy `CoroutineScope`.
+Ví dụ sau đây cho thấy một giải pháp thay thế cho `viewModelScope`.`viewModelScope` là một giải pháp thay thế [`CoroutineScope`](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/) tự động tuân theo lifecycle của ViewModel. ViewModel sử dụng nó để kích hoạt các hoạt động liên quan đến kinh doanh. Nếu bạn muốn sử dụng phạm vi tùy chỉnh thay vì `viewModelScope` để kiểm tra dễ dàng hơn, ViewModel có thể nhận `CoroutineScope` làm dependency trong hàm khởi tạo của nó. Khi `ViewModelStoreOwner` xóa ViewModel ở cuối lifecycle, ViewModel cũng hủy `CoroutineScope`.
 
 
 

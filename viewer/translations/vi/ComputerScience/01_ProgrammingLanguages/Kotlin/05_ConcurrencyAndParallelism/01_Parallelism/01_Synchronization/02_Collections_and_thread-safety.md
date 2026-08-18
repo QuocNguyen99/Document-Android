@@ -1,17 +1,17 @@
-# Bộ sưu tập và sự an toàn thread
+# Collection và sự an toàn thread
 
-## Bộ sưu tập cổ điển và multithreading
+## Collection cổ điển và multithreading
 
 
-một số luồng có thể truy cập đồng thời vào cùng một dữ liệu, điều này thường dẫn đến các vấn đề khác nhau trừ khi chúng tôi sử dụng một loại synchronization nào đó.
+một số thread có thể truy cập đồng thời vào cùng một dữ liệu, điều này thường dẫn đến các vấn đề khác nhau trừ khi chúng tôi sử dụng một loại synchronization nào đó.
 
-Các sự cố tương tự xảy ra khi nhiều luồng truy cập collection:
+Các sự cố tương tự xảy ra khi nhiều thread truy cập collection:
 
-- Hầu hết các bộ sưu tập cổ điển như `Array`, `List`, `Map` và `Set` đều không được đồng bộ hóa và do đó không cung cấp thread safety.
-- Có một bộ sưu tập như `Hashtable`, `Vector` hoặc `Stack` (sẽ được thảo luận trong các chủ đề sau) hoàn toàn được đồng bộ hóa và thread-safe, **nhưng hiệu suất của chúng thấp**.
+- Hầu hết các collection cổ điển như `Array`, `List`, `Map` và `Set` đều không được đồng bộ hóa và do đó không cung cấp thread safety.
+- Có một collection như `Hashtable`, `Vector` hoặc `Stack` (sẽ được thảo luận trong các chủ đề sau) hoàn toàn được đồng bộ hóa và thread-safe, **nhưng hiệu suất của chúng thấp**.
 - Khi một thread đang lặp qua một collection được đồng bộ hóa hoàn toàn theo tiêu chuẩn và một thread khác cố gắng thêm một phần tử mới vào nó, thì chúng tôi nhận được một ngoại lệ runtime có tên là `ConcurrentModificationException`.
 
-Chương trình sau đây minh họa race condition, xuất hiện khi hai luồng thêm các phần tử vào cùng một collection.
+Chương trình sau đây minh họa race condition, xuất hiện khi hai thread thêm các phần tử vào cùng một collection.
 
 
 ```kotlin
@@ -47,13 +47,13 @@ Chúng tôi bắt đầu chương trình ba lần và nhận được kết qu�
 143736
 ```
 
-Vì vậy, sẽ là một ý tưởng tồi khi sử dụng các bộ sưu tập tiêu chuẩn trong môi trường đa luồng mà không có synchronization rõ ràng. Tuy nhiên, một lần nữa, synchronization như vậy có thể dẫn đến hiệu suất kém và khó tìm ra lỗi trong các chương trình lớn.
+Vì vậy, sẽ là một ý tưởng tồi khi sử dụng các collection tiêu chuẩn trong môi trường đa luồng mà không có synchronization rõ ràng. Tuy nhiên, một lần nữa, synchronization như vậy có thể dẫn đến hiệu suất kém và khó tìm ra lỗi trong các chương trình lớn.
 
-## Bộ sưu tập đồng thời
+## Collection đồng thời
 
-Để tránh tất cả các vấn đề liên quan đến synchronization tùy chỉnh, Thư viện lớp Java cung cấp các triển khai collection thay thế được điều chỉnh cho các ứng dụng đa luồng và hoàn toàn an toàn với thread. Bạn có thể tìm thấy chúng trong gói `java.util.concurrent`, bao gồm các bộ sưu tập như `ConcurrentMap`, `ConcurrentLinkedQueue` và `CopyOnWriteArrayList`. Chúng giúp việc phát triển các ứng dụng Java hiện đại trở nên dễ dàng hơn.
+Để tránh tất cả các vấn đề liên quan đến synchronization tùy chỉnh, Thư viện lớp Java cung cấp các triển khai collection thay thế được điều chỉnh cho các ứng dụng đa luồng và hoàn toàn an toàn với thread. Bạn có thể tìm thấy chúng trong gói `java.util.concurrent`, bao gồm các collection như `ConcurrentMap`, `ConcurrentLinkedQueue` và `CopyOnWriteArrayList`. Chúng giúp việc phát triển các ứng dụng Java hiện đại trở nên dễ dàng hơn.
 
-Các bộ sưu tập đồng thời này cho phép bạn tránh được synchronization tùy chỉnh trong nhiều trường hợp và có hiệu suất cao – gần giống với các bộ sưu tập cổ điển
+Các collection đồng thời này cho phép bạn tránh được synchronization tùy chỉnh trong nhiều trường hợp và có hiệu suất cao – gần giống với các collection cổ điển
 
-Các bộ sưu tập đồng thời không sử dụng chú thích `@Synchronized` mà dựa vào các nguyên hàm synchronization phức tạp hơn và thuật toán không khóa, cho phép chúng vừa an toàn vừa có hiệu suất cao với thread. **Tuy nhiên, nếu bạn không thực sự cần multithreading, hãy sử dụng các bộ sưu tập cổ điển vì chúng vẫn hiệu quả hơn các bộ sưu tập đồng thời.**
+Các collection đồng thời không sử dụng chú thích `@Synchronized` mà dựa vào các nguyên hàm synchronization phức tạp hơn và thuật toán không khóa, cho phép chúng vừa an toàn vừa có hiệu suất cao với thread. **Tuy nhiên, nếu bạn không thực sự cần multithreading, hãy sử dụng các collection cổ điển vì chúng vẫn hiệu quả hơn các bộ sưu tập đồng thời.**
 

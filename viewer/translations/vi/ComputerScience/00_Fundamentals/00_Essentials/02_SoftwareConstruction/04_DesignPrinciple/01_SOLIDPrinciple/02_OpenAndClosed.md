@@ -8,7 +8,7 @@ Chúng ta có thể thêm chức năng mới mà không cần chạm vào mã hi
 Điều này là do bất cứ khi nào chúng tôi sửa đổi mã hiện có, chúng tôi đều có nguy cơ tạo ra các lỗi tiềm ẩn. Vì vậy, chúng ta nên tránh chạm vào mã sản xuất (hầu hết) đã được kiểm tra và đáng tin cậy nếu có thể.
 
 
-Nhưng bạn có thể hỏi làm cách nào để thêm chức năng mới mà không cần chạm vào lớp. Nó thường được thực hiện với sự trợ giúp của **giao diện và các lớp trừu tượng**.
+Nhưng bạn có thể hỏi làm cách nào để thêm chức năng mới mà không cần chạm vào lớp. Nó thường được thực hiện với sự trợ giúp của **interface và các lớp trừu tượng**.
 
 ## Ví dụ:
 
@@ -81,7 +81,7 @@ public class PersistenceManager {
 }
 ```
 
-Bây giờ chúng ta có thể chuyển bất kỳ lớp nào triển khai giao diện `InvoicePersistence` sang lớp này với sự trợ giúp của polymorphism. Đây là tính linh hoạt mà giao diện cung cấp.
+Bây giờ chúng ta có thể chuyển bất kỳ lớp nào triển khai interface `InvoicePersistence` sang lớp này với sự trợ giúp của polymorphism. Đây là tính linh hoạt mà interface cung cấp.
 
 ## Tham khảo
 - https://www.freecodecamp.org/news/solid-principles-explained-in-plain-english/

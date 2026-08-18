@@ -5,12 +5,12 @@ Authentication là điểm kiểm tra xác minh danh tính, đảm bảo rằng 
 ##Vai trò của xác thực trong an ninh mạng
 
 đó là khía cạnh cơ bản về cách chúng ta tương tác với các hệ thống kỹ thuật số. 
-Việc xác minh này không chỉ cần thiết đối với người dùng mà còn để đảm bảo rằng máy chủ, phần mềm và API là hợp pháp và an toàn.
+Việc xác minh này không chỉ cần thiết đối với người dùng mà còn để đảm bảo rằng server, phần mềm và API là hợp pháp và an toàn.
 
 Trong lĩnh vực an ninh mạng, vai trò của xác thực mở rộng trên nhiều lĩnh vực khác nhau. 
 Ví dụ
-- Bảo mật lớp vận chuyển (TLS), một giao thức bảo mật thông tin liên lạc qua internet, chủ yếu dựa vào xác thực để xác nhận danh tính của máy chủ web.
-- Bảo mật email là một lĩnh vực khác mà xác thực đóng vai trò quan trọng. Các công nghệ như DomainKey Thư nhận dạng (DKIM) xác thực email bằng cách xác minh rằng chúng có nguồn gốc từ các máy chủ được phép, từ đó giảm rủi ro thư rác và lừa đảo.
+- Bảo mật lớp vận chuyển (TLS), một protocol bảo mật thông tin liên lạc qua internet, chủ yếu dựa vào xác thực để xác nhận danh tính của web server.
+- Bảo mật email là một lĩnh vực khác mà xác thực đóng vai trò quan trọng. Các công nghệ như DomainKey Thư nhận dạng (DKIM) xác thực email bằng cách xác minh rằng chúng có nguồn gốc từ các server được phép, từ đó giảm rủi ro thư rác và lừa đảo.
 
 ## Cách xác thực hoạt động
 
@@ -23,7 +23,7 @@ Hệ thống Authentication sử dụng tiêu chí cụ thể được gọi là
 Ngoài các yếu tố chính này, địa điểm và thời gian cũng có thể được sử dụng làm tiêu chí xác thực bổ sung.
 Hơn nữa, chứng chỉ kỹ thuật số đóng một vai trò quan trọng trong việc xác thực.
 
-Chúng là các tệp kỹ thuật số chứa thông tin xác minh danh tính, tương tự như thẻ ID ngoài đời thực. Các chứng chỉ này, thường được ký điện tử bởi cơ quan đáng tin cậy, chứa khóa chung được liên kết với khóa riêng do chủ sở hữu chứng chỉ nắm giữ. Cơ chế này được sử dụng rộng rãi trong việc bảo mật thông tin liên lạc trên web, đặc biệt là trong giao thức HTTPS.
+Chúng là các tệp kỹ thuật số chứa thông tin xác minh danh tính, tương tự như thẻ ID ngoài đời thực. Các chứng chỉ này, thường được ký điện tử bởi cơ quan đáng tin cậy, chứa khóa chung được liên kết với khóa riêng do chủ sở hữu chứng chỉ nắm giữ. Cơ chế này được sử dụng rộng rãi trong việc bảo mật thông tin liên lạc trên web, đặc biệt là trong HTTPS protocol.
 
 ## Đa yếu tố và hai yếu tố Authentication
 

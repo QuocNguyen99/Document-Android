@@ -12,7 +12,7 @@ Có ba loại đích chung: được lưu trữ, hộp thoại và hoạt độn
 | Hộp thoại | Trình bày các thành phần UI lớp phủ. UI này không bị ràng buộc với vị trí của máy chủ điều hướng hoặc kích thước của nó. Các điểm đến trước đó được hiển thị bên dưới điểm đến. | Cảnh báo, lựa chọn, biểu mẫu.                                                                                 |
 | Activity| Thể hiện các màn hình hoặc tính năng độc đáo trong ứng dụng. |  Đóng vai trò là điểm thoát tới navigation graph, khởi động một hoạt động Android mới được quản lý riêng biệt với thành phần Navigation. |     
 
-## Khung
+## Framework
 
 Mặc dù quy trình làm việc chung giống nhau được áp dụng trong mọi trường hợp, **cách bạn tạo máy chủ điều hướng và graph chính xác như thế nào phụ thuộc vào UI framework mà bạn sử dụng.**
 

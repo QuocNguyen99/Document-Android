@@ -151,7 +151,7 @@ val a: String by lazy(LazyThreadSafetyMode.PUBLICATION) {
      }
 ```
 
-- `LazyThreadSafetyMode.NONE` nghĩa là không có synchronization nào cả, vì vậy nếu chúng ta gọi biến từ các luồng khác nhau thì giá trị của nó không thể được xác định duy nhất. Bạn không nên sử dụng tùy chọn này nếu chương trình của bạn cho phép một đối tượng lười biếng được gọi lần đầu tiên từ nhiều hơn một thread:
+- `LazyThreadSafetyMode.NONE` nghĩa là không có synchronization nào cả, vì vậy nếu chúng ta gọi biến từ các thread khác nhau thì giá trị của nó không thể được xác định duy nhất. Bạn không nên sử dụng tùy chọn này nếu chương trình của bạn cho phép một đối tượng lười biếng được gọi lần đầu tiên từ nhiều hơn một thread:
 
 ```kotlin
 val a: String by lazy(LazyThreadSafetyMode.None) {

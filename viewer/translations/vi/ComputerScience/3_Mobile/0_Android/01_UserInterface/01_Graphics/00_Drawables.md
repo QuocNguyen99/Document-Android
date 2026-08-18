@@ -191,7 +191,7 @@ Dưới đây, bạn có thể xem kết xuất cho `GradientTextDrawable(42f * 
 
 ####Tối ưu hóa bản vẽ
 
-`shader` được phân bổ lại vô điều kiện trên mọi `draw()`, nhưng quá trình vẽ phải diễn ra nhanh chóng, vì vậy chúng tôi khuyên bạn nên lưu vào bộ nhớ đệm mọi thứ có thể. 
+`shader` được phân bổ lại vô điều kiện trên mọi `draw()`, nhưng quá trình vẽ phải diễn ra nhanh chóng, vì vậy chúng tôi khuyên bạn nên lưu vào cache mọi thứ có thể.
 
 chúng tôi sẽ tạo `shader` cho trường hợp `bounds.left` là `0` và dịch `canvas`, tạm thời thay đổi gốc tọa độ. Mô hình trông như thế này:
 

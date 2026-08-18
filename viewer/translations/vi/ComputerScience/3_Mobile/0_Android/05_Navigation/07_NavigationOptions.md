@@ -35,7 +35,7 @@ Khi navigation graph tăng cao, các hành động này sẽ được phân tíc
 
 
 #### XML
-Các phần tử được chia sẻ được cung cấp theo chương trình thay vì thông qua tệp XML điều hướng của bạn. Mỗi đích `Activity` và `Fragment` đều có một lớp con của giao diện `Navigator.Extras` chấp nhận các tùy chọn bổ sung để điều hướng, **bao gồm các thành phần được chia sẻ**. Bạn có thể chuyển những `Extras` này khi gọi `navigate()`.
+Các phần tử được chia sẻ được cung cấp theo chương trình thay vì thông qua tệp XML điều hướng của bạn. Mỗi đích `Activity` và `Fragment` đều có một lớp con của interface `Navigator.Extras` chấp nhận các tùy chọn bổ sung để điều hướng, **bao gồm các thành phần được chia sẻ**. Bạn có thể chuyển những `Extras` này khi gọi `navigate()`.
 Ví dụ. 
 - Phần tử được chia sẻ chuyển tiếp tới đích phân đoạn:
 

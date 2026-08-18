@@ -1,7 +1,7 @@
-# Bản đồ Mutable và Mutable Đặt làm giao diện
+# Bản đồ Mutable và Mutable Đặt làm interface
 
-Trong Kotlin, `MutableMap` và `MutableSet` là các giao diện mở rộng các đối tác immutable, `Map` và `Set`. 
-Họ cung cấp các chức năng bổ sung để sửa đổi các bộ sưu tập.
+Trong Kotlin, `MutableMap` và `MutableSet` là các interface mở rộng các đối tác immutable, `Map` và `Set`.
+Họ cung cấp các chức năng bổ sung để sửa đổi các collection.
 
 `MutableMap` là collection gồm các cặp khóa-giá trị, trong đó mỗi khóa là **duy nhất**. 
 Nó cho phép bạn thêm, xóa hoặc cập nhật các mục. Đây là một ví dụ:
@@ -23,13 +23,13 @@ mutableSet.remove(1) // Remove an element
 
 
 `MutableMap` và `MutableSet` cung cấp tính linh hoạt cao hơn so với các phiên bản immutable nhưng phải trả thêm phí bộ nhớ. 
-Sử dụng chúng khi bạn cần sửa đổi các bộ sưu tập sau khi tạo.
+Sử dụng chúng khi bạn cần sửa đổi các collection sau khi tạo.
 
 ## Tìm hiểu bản đồ Mutable trong Kotlin
 
-Giao diện `MutableMap` trong Kotlin là một phần của Bộ sưu tập Kotlin Framework.
+Interface `MutableMap` trong Kotlin là một phần của Collection Kotlin Framework.
 
-Nó kế thừa từ giao diện `Map` và cho phép sửa đổi các mục bản đồ, không giống như immutable `Map`.
+Nó kế thừa từ interface `Map` và cho phép sửa đổi các mục bản đồ, không giống như immutable `Map`.
 
 
 ## Thuộc tính và phương thức của MutableMap
@@ -43,7 +43,7 @@ println(mutableMap.keys) // prints: [one, two]
 println(mutableMap.values) // prints: [1, 2]  
 ```
 
-Giao diện `MutableMap` cung cấp một số phương pháp để sửa đổi bản đồ, chẳng hạn như `put()`, `putAll()`, `remove()` và `clear()`.
+Interface `MutableMap` cung cấp một số phương pháp để sửa đổi bản đồ, chẳng hạn như `put()`, `putAll()`, `remove()` và `clear()`.
 
 ## Khi nào và tại sao nên sử dụng MutableMap
 
@@ -56,11 +56,11 @@ Nếu bản đồ của bạn không cần thay đổi sau khi được tạo, h
 ## Khi nào và tại sao nên sử dụng MutableSet
 
 Hãy nhớ rằng, mặc dù `MutableSet` mang đến sự linh hoạt nhưng nó lại hy sinh sự an toàn của thread. 
-Nếu nhiều luồng truy cập và sửa đổi `MutableSet` cùng một lúc, bạn phải đồng bộ hóa nó với bên ngoài.
+Nếu nhiều thread truy cập và sửa đổi `MutableSet` cùng một lúc, bạn phải đồng bộ hóa nó với bên ngoài.
 
 ## Ứng dụng thực tế của Bản đồ Mutable và Bộ Mutable trong Kotlin
 
-- **Bộ nhớ đệm dữ liệu**: Sử dụng `MutableMap` để lưu trữ dữ liệu vào bộ nhớ đệm. Nó lưu trữ các cặp khóa-giá trị trong đó mỗi khóa là duy nhất. **Phương pháp này tăng tốc độ truy xuất dữ liệu**.
+- **Cache dữ liệu**: Sử dụng `MutableMap` để lưu trữ dữ liệu vào cache. Nó lưu trữ các cặp khóa-giá trị trong đó mỗi khóa là duy nhất. **Phương pháp này tăng tốc độ truy xuất dữ liệu**.
 
 ```kotlin
 val cache: MutableMap<String, Any> = mutableMapOf()

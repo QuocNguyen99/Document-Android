@@ -1,4 +1,4 @@
-#Giao diện Composition
+#Interface Composition
 
 ## Hãy bắt đầu với việc giải quyết xung đột
 
@@ -24,10 +24,10 @@ class SecondClass : FirstInterface, SecondInterface {
     override fun f() { print("Class")}  
 }
 ```
-Không có vấn đề như vậy trong trường hợp `FirstClass`: nó chỉ thực hiện một giao diện.
+Không có vấn đề như vậy trong trường hợp `FirstClass`: nó chỉ thực hiện một interface.
 
 
-Tuy nhiên, `SecondClass` triển khai cả hai giao diện; do đó, compiler không thể chọn giữa hai chữ ký hàm được cung cấp. Được rồi, hãy sửa nó:
+Tuy nhiên, `SecondClass` triển khai cả hai interface; do đó, compiler không thể chọn giữa hai chữ ký hàm được cung cấp. Được rồi, hãy sửa nó:
 
 ```kotlin
 class SecondClass : FirstInterface, SecondInterface {  
@@ -38,8 +38,8 @@ class SecondClass : FirstInterface, SecondInterface {
 }
 ```
 
-Điều này sẽ hiệu quả vì chỉ có một giao diện thực sự cung cấp cách triển khai mặc định – đó là `SecondInterface`. 
-Nhưng nếu giao diện của chúng ta trông như sau thì sao?
+Điều này sẽ hiệu quả vì chỉ có một interface thực sự cung cấp cách triển khai mặc định – đó là `SecondInterface`.
+Nhưng nếu interface của chúng ta trông như sau thì sao?
 
 ```kotlin
 interface FirstInterface {  
@@ -53,7 +53,7 @@ interface SecondInterface {
 }
 ```
 
-Sau đó, chúng tôi sẽ gặp lỗi vì compiler không biết nên sử dụng chức năng nào - chức năng trong giao diện thứ nhất hoặc giao diện thứ hai. 
+Sau đó, chúng tôi sẽ gặp lỗi vì compiler không biết nên sử dụng chức năng nào - chức năng trong interface thứ nhất hoặc giao diện thứ hai.
 Điều này có thể được giải quyết bằng cú pháp sau:
 
 ```kotlin
@@ -68,7 +68,7 @@ class ThirdClass : FirstInterface, SecondInterface {
     }  
 }
 ```
-Ở đây, bằng cách sử dụng dấu ngoặc nhọn, chúng tôi hiển thị giao diện nào mà chúng tôi gọi là hàm.
+Ở đây, bằng cách sử dụng dấu ngoặc nhọn, chúng tôi hiển thị interface nào mà chúng tôi gọi là hàm.
 
 ## Ý tưởng của composition
 
@@ -119,7 +119,7 @@ Còn chúng ta thử sử dụng lại các tham số tương tự để tối �
 
 Mô hình để triển khai nó theo cách hiệu quả hơn được gọi là composition.
 
-Thay vì triển khai nhiều giao diện và phải ghi đè tất cả các phương thức và trường của chúng,
+Thay vì triển khai nhiều interface và phải ghi đè tất cả các phương thức và trường của chúng,
 chúng ta có thể tạo trước các triển khai của chúng và lưu trữ chúng dưới dạng các thực thể riêng biệt (các đối tượng trong ví dụ bên dưới).
 Sau đó, chúng ta có thể chỉ cần soạn một đối tượng cần thiết từ những "khối xây dựng" này.
 

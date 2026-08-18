@@ -8,7 +8,7 @@
 | **Trường hợp sử dụng tốt nhất** | Ứng dụng đơn giản | Ứng dụng cỡ trung bình | Ứng dụng quy mô lớn | Ứng dụng có quản lý trạng thái phức tạp |
 | **UI Thay đổi linh hoạt** | Thấp | Trung bình | Cao | Rất cao |
 | **Quản lý nhà nước** | Yếu | Trung bình | Trung bình | Mạnh (Trạng thái Immutable) |
-| **Phụ thuộc vào Khung** | Cao | Trung bình | Trung bình | Thấp |
+| **Phụ thuộc vào Framework** | Cao | Trung bình | Trung bình | Thấp |
 
 
 > [!IMPORTANT]

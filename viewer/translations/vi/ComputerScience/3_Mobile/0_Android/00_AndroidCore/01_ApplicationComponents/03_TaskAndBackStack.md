@@ -184,7 +184,7 @@ Cờ Intent có thể giúp chúng ta giải quyết những vấn đề như th
 
 - `FLAG_ACTIVITY_SINGLE_TOP` Nếu hoạt động đang được khởi chạy đã ở trên cùng của ngăn xếp tác vụ hiện tại, hệ thống sẽ không tạo phiên bản mới mà thay vào đó sẽ cung cấp ý định mới cho hoạt động hiện có thông qua phương pháp `onNewIntent()`. Hành vi này tương tự như chế độ khởi chạy `singleTop`
 
-- `FLAG_ACTIVITY_NEW_TASK` Cờ này yêu cầu hệ thống khởi chạy hoạt động trong một nhiệm vụ mới. Nếu một tác vụ đã tồn tại cho hoạt động đã khởi chạy thì tác vụ đó sẽ được đưa lên nền trước và hoạt động đó sẽ nhận được mục đích mới trong `onNewIntent()`. Hành vi này tương tự như chế độ khởi chạy `singleTask`.
+- `FLAG_ACTIVITY_NEW_TASK` Cờ này request hệ thống khởi chạy hoạt động trong một nhiệm vụ mới. Nếu một tác vụ đã tồn tại cho hoạt động đã khởi chạy thì tác vụ đó sẽ được đưa lên nền trước và hoạt động đó sẽ nhận được mục đích mới trong `onNewIntent()`. Hành vi này tương tự như chế độ khởi chạy `singleTask`.
 
 - `FLAG_ACTIVITY_CLEAR_TOP` xem liệu hoạt động đã tồn tại trong ngăn xếp hay chưa. Nếu đúng như vậy, nó sẽ phá hủy mọi hoạt động ở trên, dẫn đến hoạt động đó nằm ở đầu ngăn xếp. Nếu nó chưa tồn tại, nó sẽ tạo hoạt động theo cách thông thường.
 Việc sử dụng cờ này với `FLAG_ACTIVITY_NEW_TASK` sẽ dẫn đến hoạt động tương tự như chế độ khởi chạy `singleTask` nhưng hoạt động sẽ được khởi động lại.

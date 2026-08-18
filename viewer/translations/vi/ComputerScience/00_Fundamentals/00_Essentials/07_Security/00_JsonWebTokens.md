@@ -14,16 +14,16 @@ Một số trường hợp sử dụng phổ biến bao gồm:
 
 1. **Authentication**: Mã thông báo JWT được sử dụng rộng rãi để xác thực người dùng.
 Sau khi người dùng đăng nhập bằng thông tin xác thực của họ, JWT token sẽ được tạo và gửi lại cho người dùng.
-Sau đó, ứng dụng khách (trình duyệt hoặc ứng dụng) của người dùng sẽ gửi token này cùng với mỗi yêu cầu tiếp theo để truy cập các tài nguyên được bảo vệ, cho phép máy chủ xác thực người dùng mà không yêu cầu người dùng gửi lại thông tin xác thực của họ.
+Sau đó, client (trình duyệt hoặc ứng dụng) của người dùng sẽ gửi token này cùng với mỗi request tiếp theo để truy cập các tài nguyên được bảo vệ, cho phép server xác thực người dùng mà không yêu cầu người dùng gửi lại thông tin xác thực của họ.
 
 2. **Authorization**: Mã thông báo JWT cũng có thể được sử dụng để cấp quyền truy cập vào các tài nguyên hoặc hành động cụ thể trong một ứng dụng.
-Bằng cách bao gồm các xác nhận quyền sở hữu cụ thể trong token, chẳng hạn như vai trò hoặc quyền, máy chủ có thể xác minh quyền truy cập của người dùng dựa trên thông tin có trong JWT token.
+Bằng cách bao gồm các xác nhận quyền sở hữu cụ thể trong token, chẳng hạn như vai trò hoặc quyền, server có thể xác minh quyền truy cập của người dùng dựa trên thông tin có trong JWT token.
 
 3. **Đăng nhập một lần (SSO)**: Mã thông báo JWT cho phép đăng nhập một lần trên nhiều hệ thống hoặc ứng dụng. Sau khi người dùng được xác thực trong một hệ thống, JWT token sẽ được tạo, sau đó có thể được sử dụng để xác thực người dùng trên các hệ thống khác mà không yêu cầu người dùng đăng nhập lại. Điều này tạo ra trải nghiệm liền mạch cho người dùng khi điều hướng giữa các ứng dụng hoặc dịch vụ khác nhau.
 
 4. **API Authentication không trạng thái**: Mã thông báo JWT có thể được sử dụng để xác thực API RESTful hoặc vi dịch vụ.
-Vì mã thông báo JWT độc lập và không yêu cầu phiên phía máy chủ nên chúng cho phép cơ chế xác thực không trạng thái và có thể mở rộng.
-Máy khách API có thể gửi mã thông báo JWT với mỗi yêu cầu, cho phép máy chủ xác thực ứng dụng khách và process yêu cầu tương ứng.
+Vì mã thông báo JWT độc lập và không yêu cầu phiên phía server nên chúng cho phép cơ chế xác thực không trạng thái và có thể mở rộng.
+API client có thể gửi mã thông báo JWT với mỗi request, cho phép server xác thực client và process request tương ứng.
 
 5. **Ủy quyền truy cập vào các ứng dụng của bên thứ ba**: Mã thông báo JWT có thể được sử dụng để cấp quyền truy cập hạn chế vào tài nguyên hoặc dữ liệu của người dùng cho các ứng dụng của bên thứ ba mà không làm lộ thông tin xác thực của người dùng. Ví dụ: OAuth 2.0, một ủy quyền phổ biến framework, sử dụng mã thông báo JWT (được gọi là mã thông báo truy cập) để thay mặt người dùng cung cấp quyền truy cập tạm thời và có phạm vi vào các tài nguyên.
 
@@ -47,12 +47,12 @@ Hãy cùng tìm hiểu sâu hơn về cấu trúc của mã thông báo JWT và 
   - "typ": Thuộc tính này biểu thị loại token, thường là "JWT" cho Mã thông báo Web JSON.
 
 
-- **tải trọng** là cốt lõi của JWT và chứa các xác nhận quyền sở hữu truyền tải thông tin về chủ đề (thường là người dùng), cùng với mọi dữ liệu bổ sung mà ứng dụng yêu cầu. Xác nhận quyền sở hữu là cặp khóa-giá trị và có thể được chia thành ba loại:
+- **payload** là cốt lõi của JWT và chứa các xác nhận quyền sở hữu truyền tải thông tin về chủ đề (thường là người dùng), cùng với mọi dữ liệu bổ sung mà ứng dụng yêu cầu. Xác nhận quyền sở hữu là cặp khóa-giá trị và có thể được chia thành ba loại:
     - Khiếu nại đã đăng ký: Đây là các khiếu nại được xác định trước được chỉ định bởi tiêu chuẩn JWT ([RFC7519](https://www.rfc-editor.org/rfc/rfc7519#section-4.1))
     - Khiếu nại công khai: Đây là các khiếu nại tùy chỉnh được các bên liên quan đến sàn giao dịch token đồng ý. Các xác nhận quyền sở hữu công khai phải được đăng ký với **IANA JSON Web Token Đăng ký** để tránh xung đột.
     - Tuyên bố riêng tư: Đây là những tuyên bố tùy chỉnh được sử dụng trong một tổ chức hoặc giữa các bên có sự hiểu biết lẫn nhau về ý nghĩa của chúng. Chúng không được đăng ký với bất kỳ cơ quan đăng ký nào và yêu cầu lựa chọn cẩn thận để ngăn ngừa xung đột đặt tên.
 
-- **chữ ký** là phần cuối cùng của JWT và rất quan trọng để đảm bảo tính toàn vẹn và xác thực của token. Để tạo chữ ký, bạn nối tiêu đề và tải trọng được mã hóa, sau đó ký chúng bằng khóa bí mật (đối với thuật toán đối xứng) hoặc khóa riêng (đối với thuật toán bất đối xứng), sử dụng thuật toán đã chỉ định.
+- **chữ ký** là phần cuối cùng của JWT và rất quan trọng để đảm bảo tính toàn vẹn và xác thực của token. Để tạo chữ ký, bạn nối tiêu đề và payload được mã hóa, sau đó ký chúng bằng khóa bí mật (đối với thuật toán đối xứng) hoặc khóa riêng (đối với thuật toán bất đối xứng), sử dụng thuật toán đã chỉ định.
 
 Ví dụ: sử dụng thuật toán HMAC SHA256:
 
@@ -85,7 +85,7 @@ Họ cung cấp framework để bảo mật mã thông báo JWT thông qua encry
 
 - **JWS** là tiêu chuẩn cho phép tạo và xác thực chữ ký số cho mã thông báo JWT. Trong phần trước, chúng ta đã thảo luận chi tiết về cấu trúc của tiêu chuẩn này. Bằng cách ký điện tử JWT, bạn có thể đảm bảo tính toàn vẹn và xác thực của token, xác minh rằng nó không bị giả mạo và nó có nguồn gốc từ một nguồn đáng tin cậy.
 
-- **JWE** là tiêu chuẩn cho phép encryption của mã thông báo JWT bảo vệ nội dung của chúng. Bằng cách mã hóa JWT, bạn có thể đảm bảo rằng chỉ những bên được ủy quyền mới có thể xem tải trọng của token. JWE đặc biệt hữu ích khi bạn cần truyền thông tin nhạy cảm trong JWT token, chẳng hạn như thông tin nhận dạng cá nhân (PII) hoặc dữ liệu bí mật khác.
+- **JWE** là tiêu chuẩn cho phép encryption của mã thông báo JWT bảo vệ nội dung của chúng. Bằng cách mã hóa JWT, bạn có thể đảm bảo rằng chỉ những bên được ủy quyền mới có thể xem payload của token. JWE đặc biệt hữu ích khi bạn cần truyền thông tin nhạy cảm trong JWT token, chẳng hạn như thông tin nhận dạng cá nhân (PII) hoặc dữ liệu bí mật khác.
 
 
 

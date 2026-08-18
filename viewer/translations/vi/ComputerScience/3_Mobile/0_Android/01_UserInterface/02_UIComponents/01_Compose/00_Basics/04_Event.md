@@ -4,7 +4,7 @@ Sự kiện là bất kỳ thông tin đầu vào nào được gõ trên màn h
 
 Chúng ta có thể phân tách các sự kiện bằng cách
 - **Sự kiện của người dùng** được tạo bởi các hành động như chạm vào màn hình hoặc nhấn nút.
-- **Sự kiện hệ thống** là những thay đổi về phản hồi của mạng, mức pin, hướng màn hình hoặc thay đổi cấu hình.
+- **Sự kiện hệ thống** là những thay đổi về network response, mức pin, hướng màn hình hoặc thay đổi cấu hình.
 
 ## Sự kiện của người dùng
 

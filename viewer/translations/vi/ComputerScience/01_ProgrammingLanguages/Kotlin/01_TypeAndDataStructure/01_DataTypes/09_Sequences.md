@@ -5,13 +5,13 @@
 Điều đó có nghĩa là gì? Những đối tượng đó không được xử lý cho đến khi sử dụng chúng: nghĩa là, các chuỗi được thực thi một cách lười biếng. Chúng tôi sẽ không nhận được kết quả trung gian ở cuối mỗi bước.
 
 `Sequences` cung cấp các chức năng tương tự như `Iterable`: chúng tôi có thể lọc, ánh xạ hoặc sắp xếp các mục, nhưng dưới mui xe,
-chúng hoạt động khác nhau và có tiềm năng lớn cho các bộ sưu tập có số lượng lớn các mục hoặc những mục yêu cầu nhiều thao tác nối
+chúng hoạt động khác nhau và có tiềm năng lớn cho các collection có số lượng lớn các mục hoặc những mục yêu cầu nhiều thao tác nối
 
 
 Điều đó mang lại cho chúng ta hai lợi thế:
 
 - **Chuỗi có thể là vô hạn**: chúng ta có thể xác định một chuỗi bằng một giá trị ban đầu và một phép toán (ví dụ), và chuỗi đó sẽ có các giá trị vô hạn.
-- **Chúng cho phép bạn tránh các bước trung gian**: không giống như các bộ sưu tập khác, khi một chuỗi thực hiện một số thao tác (lọc, chuyển đổi, v.v.), 
+- **Chúng cho phép bạn tránh các bước trung gian**: không giống như các collection khác, khi một chuỗi thực hiện một số thao tác (lọc, chuyển đổi, v.v.),
 những thứ này được áp dụng theo chuỗi cho từng đối tượng mà không cần tạo collection mới ở mỗi bước.
 
 
@@ -111,10 +111,10 @@ Tức là chúng ta làm việc theo chiều dọc hoặc lười biếng.
 > [!NOTE]
 > Chúng tôi thực hiện từng thao tác sau khi thao tác đầu cuối được gọi. 
 > Toàn bộ chuỗi thao tác trên từng phần tử đều được xử lý. 
-Không có bộ sưu tập trung gian nào liên quan.
+Không có collection trung gian nào liên quan.
 
 > [!TIP]
-> Điều đó phù hợp với các bộ sưu tập có nhiều phần tử hoặc nơi chúng tôi thực hiện nhiều thao tác xâu chuỗi.
+> Điều đó phù hợp với các collection có nhiều phần tử hoặc nơi chúng tôi thực hiện nhiều thao tác xâu chuỗi.
 
 ```kotlin
 val withSequence = (1..10).asSequence()

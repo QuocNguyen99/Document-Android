@@ -1,19 +1,19 @@
 #ArrayDeque
 
-chúng ta sẽ học cách làm việc với các bộ sưu tập như Ngăn xếp và Hàng đợi với sự trợ giúp của `ArrayDeque`.
+chúng ta sẽ học cách làm việc với các collection như Ngăn xếp và Hàng đợi với sự trợ giúp của `ArrayDeque`.
 
 > [!NOTE]
 > Trong JVM, lớp Stack mô hình hóa và triển khai Stack data structure bằng chiến lược LIFO
-> Đây là Lớp Java; nó không thuộc về bộ sưu tập Kotlin thuần túy, vì vậy bạn phải nhập nó để có thể sử dụng nó (nhập java.
+> Đây là Lớp Java; nó không thuộc về collection Kotlin thuần túy, vì vậy bạn phải nhập nó để có thể sử dụng nó (nhập java.
 > util.stack).  Nếu bạn muốn một giải pháp thay thế, collection dựa trên Kotlin, bạn có thể sử dụng ArrayDeque.
 
-nếu bạn cần hành vi FIFO và LIFO, dù là cả hai hay chỉ một trong số chúng, thì tốt hơn nên sử dụng `ArrayDeque` vì nó hiệu quả hơn nhiều so với Java `Stack` hoặc `List` và nó thuần túy 100% Kotlin collection. Java Stack kế thừa từ lớp `Vector`. `Vector` triển khai một loạt đối tượng có thể phát triển; nó rất giống với `ArrayList`, nhưng `Vector` **được đồng bộ hóa**, có nghĩa là trong môi trường multithreading, nó giữ các luồng khác ở trạng thái có thể chạy hoặc không thể chạy cho đến khi thread hiện tại giải phóng khóa của đối tượng để thực hiện một thao tác. Mặt khác, lớp `Vector` và một số phương thức của nó hiện đã lỗi thời và đã được thay thế bằng `ArrayDeque`, phù hợp hơn với các chiến lược FIFO/LIFO và **được tối ưu hóa hơn cho môi trường đồng thời và đa luồng**.
+nếu bạn cần hành vi FIFO và LIFO, dù là cả hai hay chỉ một trong số chúng, thì tốt hơn nên sử dụng `ArrayDeque` vì nó hiệu quả hơn nhiều so với Java `Stack` hoặc `List` và nó thuần túy 100% Kotlin collection. Java Stack kế thừa từ lớp `Vector`. `Vector` triển khai một loạt đối tượng có thể phát triển; nó rất giống với `ArrayList`, nhưng `Vector` **được đồng bộ hóa**, có nghĩa là trong môi trường multithreading, nó giữ các thread khác ở trạng thái có thể chạy hoặc không thể chạy cho đến khi thread hiện tại giải phóng khóa của đối tượng để thực hiện một thao tác. Mặt khác, lớp `Vector` và một số phương thức của nó hiện đã lỗi thời và đã được thay thế bằng `ArrayDeque`, phù hợp hơn với các chiến lược FIFO/LIFO và **được tối ưu hóa hơn cho môi trường đồng thời và đa luồng**.
 
 ## Xếp chồng và xếp hàng
 
 `ArrayDeque` là collection triển khai cả nguyên tắc `Queue` (Vào trước ra trước) và `Deque` (hàng đợi hai đầu, Vào trước ra trước, Vào sau cùng ra trước); Nó cho phép bạn thêm và xóa các phần tử ở cả hai bên hoặc hai đầu của collection.
 
-Nó cũng triển khai giao diện `MutableList` và hỗ trợ các hoạt động lấy/đặt hiệu quả theo chỉ mục. Vì vậy, với nó, bạn cũng có thể sử dụng tất cả các phương pháp `MutableList` quen thuộc.
+Nó cũng triển khai interface `MutableList` và hỗ trợ các hoạt động lấy/đặt hiệu quả theo chỉ mục. Vì vậy, với nó, bạn cũng có thể sử dụng tất cả các phương pháp `MutableList` quen thuộc.
 
 Bây giờ, tại sao chúng ta cần `ArrayDeque` nếu chúng ta có thể thực hiện các tác vụ tương tự bằng `MutableList`? Bạn nên sử dụng `ArrayDeque` **bất cứ khi nào bạn cần chức năng của “hàng đợi hai đầu”, hàng đợi hoặc ngăn xếp**: các phương thức của nó đã được điều chỉnh về mặt ngữ nghĩa để tuân thủ về mặt chức năng với các tác vụ đó.
 

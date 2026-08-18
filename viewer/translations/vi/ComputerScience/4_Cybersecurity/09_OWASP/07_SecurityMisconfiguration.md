@@ -23,9 +23,9 @@ Những lỗi này có thể tạo điều kiện cho **quyền truy cập trái
 - **Bảo mật cấu hình mặc định**: xem xét và củng cố tất cả các cài đặt mặc định trước khi phát hành; xóa các cờ không an toàn và các phím tắt dành cho nhà phát triển.
 - **Thông tin xác thực mặc định**: không bao giờ gửi tên người dùng/mật khẩu mặc định được mã hóa cứng hoặc không thay đổi.
 - **Quyền không an toàn**: tránh bộ nhớ có thể đọc được/có thể ghi trên thế giới và các chế độ tệp quá dễ dãi.
-- **Nguyên tắc Least privilege**: chỉ yêu cầu các quyền được yêu cầu nghiêm ngặt đối với các tính năng.
+- **Nguyên tắc Least privilege**: chỉ request các quyền được yêu cầu nghiêm ngặt đối với các tính năng.
 - **Cấu hình mạng an toàn**: không cho phép lưu lượng văn bản rõ ràng; sử dụng TLS mạnh và xem xét việc ghim chứng chỉ khi thích hợp.
-- **Tắt gỡ lỗi**: đảm bảo các bản phát hành không thể gỡ lỗi được; giảm ghi nhật ký nhạy cảm và xóa điểm cuối gỡ lỗi.
+- **Tắt gỡ lỗi**: đảm bảo các bản phát hành không thể gỡ lỗi được; giảm ghi nhật ký nhạy cảm và xóa endpoint gỡ lỗi.
 - **Tắt chế độ sao lưu (Android)**: loại trừ dữ liệu ứng dụng nhạy cảm khỏi bản sao lưu thiết bị nếu có.
 - **Giới hạn ứng dụng attack surface**: chỉ xuất Activities/Dịch vụ/Nhà cung cấp phải xuất; khóa các bộ lọc ý định và đường dẫn FileProvider.
 - **Đánh giá và kiểm tra thường xuyên**: chạy đánh giá cấu hình, quét tự động và kiểm tra bảo mật để sớm phát hiện các cấu hình sai.

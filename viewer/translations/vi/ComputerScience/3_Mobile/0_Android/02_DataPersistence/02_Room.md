@@ -4,7 +4,7 @@ Bạn đã biết cách làm việc với **SQLite** trong Android bằng cách 
 
 Để giải quyết những loại vấn đề này, Google cung cấp một bộ thư viện Jetpack đặc biệt. Chúng được thiết kế để giúp cuộc sống trở nên dễ dàng hơn bằng cách giúp các nhà phát triển thực hiện theo các phương pháp hay nhất, tránh các lỗi khác nhau và đạt được kết quả mong muốn với ít dòng mã hơn.
 
-**Room** là một phần của framework này. Đó là giao diện cấp cao dành cho các liên kết cấp thấp với SQLite.
+**Room** là một phần của framework này. Đó là interface cấp cao dành cho các liên kết cấp thấp với SQLite.
 
 ## Những lợi ích
 
@@ -79,7 +79,7 @@ class SomeApplication : Application() {
 ```
 
 > [!CAUTION]
-> Điều quan trọng cần biết là Room không cho phép bạn thực hiện các thao tác trong thread chính! Cố gắng thực hiện việc này sẽ dẫn đến lỗi sau: java.lang.IllegalStateException: Không thể truy cập cơ sở dữ liệu trên thread chính vì nó có thể khóa UI trong một thời gian dài.
+> Điều quan trọng cần biết là Room không cho phép bạn thực hiện các thao tác trong main thread! Cố gắng thực hiện việc này sẽ dẫn đến lỗi sau: java.lang.IllegalStateException: Không thể truy cập cơ sở dữ liệu trên main thread vì nó có thể khóa UI trong một thời gian dài.
 
 đối với tình huống thử nghiệm, bạn có thể sử dụng `.allowMainThreadQueries()` mà không cần cảnh báo ở trên.
 Ví dụ:
@@ -96,7 +96,7 @@ Room sẽ tạo mã cần thiết cho chúng tôi nếu chúng tôi làm theo c�
 
 ##DAO
 
-**DAO** (đối tượng truy cập dữ liệu) chịu trách nhiệm xác định các phương thức cho phép bạn tương tác với cơ sở dữ liệu. Đây là một giao diện và chúng tôi gắn nhãn nó là `@Dao`.
+**DAO** (đối tượng truy cập dữ liệu) chịu trách nhiệm xác định các phương thức cho phép bạn tương tác với cơ sở dữ liệu. Đây là một interface và chúng tôi gắn nhãn nó là `@Dao`.
 
 Bên trong, chúng tôi xác định các chức năng khác nhau (CRUD và hơn thế nữa).
 Chúng tôi đánh dấu chúng bằng các chú thích tương ứng và Room thực hiện phần còn lại.
@@ -141,7 +141,7 @@ interface PersonDao {
 ```kotlin
 data class StringIntPair(val first: String, var second: Int)
 ```
-Với giao diện đã được xác định, tất cả những gì chúng tôi phải làm bây giờ là đưa phiên bản cơ sở dữ liệu của chúng tôi vào Activity của bạn.
+Với interface đã được xác định, tất cả những gì chúng tôi phải làm bây giờ là đưa phiên bản cơ sở dữ liệu của chúng tôi vào Activity của bạn.
 
 
 

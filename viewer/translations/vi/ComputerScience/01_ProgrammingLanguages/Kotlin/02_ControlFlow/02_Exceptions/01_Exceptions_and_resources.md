@@ -44,7 +44,7 @@ Phương thức này nhận một biểu thức hàm, thực thi nó và bằng 
 
 ### Có thể đóng so với AutoCloseable
 
-Giao diện `Closeable` và `AutoCloseable` giới thiệu các đối tượng có thể chứa tài nguyên (chẳng hạn như các thẻ điều khiển tệp hoặc ổ cắm) cho đến khi tài nguyên bị đóng. Hàm `use()` được xác định trong cả hai giao diện và sau khi chúng tôi gọi nó, `close()` được gọi tự động khi thoát khỏi khối try-with-resources. `Closeable` là giao diện cũ hơn nhưng vẫn mở rộng `AutoCloseable` nhằm mục đích tương thích ngược.
+Interface `Closeable` và `AutoCloseable` giới thiệu các đối tượng có thể chứa tài nguyên (chẳng hạn như các thẻ điều khiển tệp hoặc ổ cắm) cho đến khi tài nguyên bị đóng. Hàm `use()` được xác định trong cả hai interface và sau khi chúng tôi gọi nó, `close()` được gọi tự động khi thoát khỏi khối try-with-resources. `Closeable` là interface cũ hơn nhưng vẫn mở rộng `AutoCloseable` nhằm mục đích tương thích ngược.
 
 Sự khác biệt chính giữa `Closeable` và `AutoCloseable` là `AutoCloseable` có loại ngoại lệ hạn chế – **nó chỉ có thể ném** `IOException` **và những người thừa kế của nó**. Trong khi đó, trong `AutoCloseable`, phạm vi ngoại lệ đã được mở rộng thành `Exception`.
 

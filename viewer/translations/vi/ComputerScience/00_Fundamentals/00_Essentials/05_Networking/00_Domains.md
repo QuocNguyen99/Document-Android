@@ -33,7 +33,7 @@ Bạn có thể bỏ qua tên miền gốc vì nó không cản trở việc tru
 
 - Nhóm đầu tiên xác định khu vực của địa điểm và vị trí địa lý của nó: `.us` dành cho Hoa Kỳ và `.eu` dành cho Liên minh Châu Âu.
 
-- Nhóm thứ hai không phản ánh đặc điểm địa lý của tài nguyên mà phản ánh sự liên kết của nó với một lĩnh vực cụ thể. Ví dụ: một trang web thông tin sẽ có điểm cuối `.info`, một trang web thương mại sẽ có `.com` và một trang web phi lợi nhuận sẽ có `.org`.
+- Nhóm thứ hai không phản ánh đặc điểm địa lý của tài nguyên mà phản ánh sự liên kết của nó với một lĩnh vực cụ thể. Ví dụ: một trang web thông tin sẽ có endpoint `.info`, một trang web thương mại sẽ có `.com` và một trang web phi lợi nhuận sẽ có `.org`.
 
 - Có một số tên miền cụ thể hơn. Miền `.net` (từ mạng) ban đầu được dành cho các tổ chức công nghệ mạng. Ví dụ: các nhà cung cấp dịch vụ Internet. Miền `.edu` được sử dụng bởi các tổ chức giáo dục đại học liên kết với US-.
 

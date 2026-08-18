@@ -4,7 +4,7 @@ build tool là chương trình tự động hóa process trong việc tạo các
 
 ## Công cụ xây dựng có thể làm được những gì?
 
-1. **Tải xuống và thêm phần phụ thuộc**. Điều này đặc biệt thuận tiện khi dự án của bạn phụ thuộc vào một số lượng lớn thư viện.
+1. **Tải xuống và thêm dependency**. Điều này đặc biệt thuận tiện khi dự án của bạn phụ thuộc vào một số lượng lớn thư viện.
 
 2. **Biên dịch source code thành mã byte**. Các công cụ xây dựng sẽ gọi compiler cho tất cả các tệp trong dự án của bạn.
 
@@ -17,13 +17,13 @@ build tool là chương trình tự động hóa process trong việc tạo các
 ## Xây dựng công cụ cho các dự án dựa trên Java
 Có ba công cụ xây dựng chính cho các dự án dựa trên Java: Apache Ant, Apache Maven và Gradle.
 
-- **Apache Ant** được phát hành vào năm 2000. Đây là công cụ xây dựng lâu đời nhất trong ba công cụ xây dựng này. Các lập trình viên hiếm khi sử dụng Ant trong các dự án mới nhưng nó vẫn xảy ra trong thực tế. Bạn có thể sử dụng công cụ này cùng với Apache Ivy để quản lý các phần phụ thuộc.
+- **Apache Ant** được phát hành vào năm 2000. Đây là công cụ xây dựng lâu đời nhất trong ba công cụ xây dựng này. Các lập trình viên hiếm khi sử dụng Ant trong các dự án mới nhưng nó vẫn xảy ra trong thực tế. Bạn có thể sử dụng công cụ này cùng với Apache Ivy để quản lý các dependency.
 
-- **Apache Maven** được phát hành vào năm 2004 và hiện nay nó là một trong những lựa chọn phổ biến nhất dành cho các nhà phát triển Java (đặc biệt là phát triển phía máy chủ). Nhiều dự án, cả cũ và mới, sử dụng Maven làm build tool vì khả năng quản lý phụ thuộc mạnh mẽ của nó.
+- **Apache Maven** được phát hành vào năm 2004 và hiện nay nó là một trong những lựa chọn phổ biến nhất dành cho các nhà phát triển Java (đặc biệt là phát triển phía server). Nhiều dự án, cả cũ và mới, sử dụng Maven làm build tool vì khả năng quản lý phụ thuộc mạnh mẽ của nó.
 
 - **Maven** tuân theo khái niệm Quy ước về cấu hình, nghĩa là nhà phát triển chỉ cần chỉ định các khía cạnh độc đáo của ứng dụng và tất cả các khía cạnh tiêu chuẩn đều hoạt động theo mặc định.
 
-- **Gradle** là một công cụ mới so với Ant và Maven. Nó được phát hành vào năm 2007 và hiện là tiêu chuẩn cho các ứng dụng Android. Ngoài ra, các nhà phát triển sử dụng nó để phát triển máy chủ và máy tính để bàn. Gradle nhằm mục đích “kết hợp sức mạnh và tính linh hoạt của Ant với khả năng quản lý phụ thuộc và các quy ước của Maven để xây dựng một cách hiệu quả hơn”.
+- **Gradle** là một công cụ mới so với Ant và Maven. Nó được phát hành vào năm 2007 và hiện là tiêu chuẩn cho các ứng dụng Android. Ngoài ra, các nhà phát triển sử dụng nó để phát triển server và máy tính để bàn. Gradle nhằm mục đích “kết hợp sức mạnh và tính linh hoạt của Ant với khả năng quản lý phụ thuộc và các quy ước của Maven để xây dựng một cách hiệu quả hơn”.
 
 ##Gradle 
 
@@ -44,7 +44,7 @@ Một trong những điều tuyệt vời nhất về Gradle là ngôn ngữ dà
 
 - **Xây dựng theo quy ước**. Một lập trình viên không cần chỉ định từng bước xây dựng cần thực hiện. Thay vào đó, Gradle sử dụng cài đặt và hành vi mặc định. Mặc dù vậy, mọi bước của bản dựng mặc định process đều có thể được tùy chỉnh nếu cần.
 
-- **Quản lý phụ thuộc**. Gradle tự động tải xuống các thư viện bên ngoài được chỉ định và giải quyết các trường hợp xung đột với các phần phụ thuộc. Bạn có thể khai báo bao nhiêu phần phụ thuộc mà bạn cần cho một dự án.
+- **Quản lý phụ thuộc**. Gradle tự động tải xuống các thư viện bên ngoài được chỉ định và giải quyết các trường hợp xung đột với các dependency. Bạn có thể khai báo bao nhiêu dependency mà bạn cần cho một dự án.
 
 - **Xây dựng**. Gradle cho phép lập trình viên thiết kế các bản dựng dễ hiểu có cấu trúc tốt và dễ bảo trì. Nó cũng hỗ trợ các trường hợp phức tạp như xây dựng nhiều dự án hoặc một phần.
 
@@ -107,11 +107,11 @@ plugins {
 > [!NOTE]
 > Gradle không giới hạn số lượng plugin tối đa được sử dụng trong một dự án.
 
-#### Kho lưu trữ và phần phụ thuộc
+#### Repository và dependency
 
 Thông thường, bạn không cần phải viết chương trình của mình từ đầu – bạn sử dụng các đoạn mã đã được viết sẵn của bạn hoặc của nhà phát triển khác. Đây là nơi hệ thống phụ thuộc có ích.
 
-Phần kho lưu trữ khai báo các vị trí mà từ đó các phần phụ thuộc sẽ được tải xuống và thêm vào dự án.
+Phần repository khai báo các vị trí mà từ đó các dependency sẽ được tải xuống và thêm vào dự án.
 
 ```groovy
 repositories {
@@ -129,9 +129,9 @@ repositories {
 }
 ```
 
-Có rất nhiều kho lưu trữ công cộng: `JCenter`, `Maven Central`, `Google` và các kho lưu trữ khác. Thông thường, mô tả về phần phụ thuộc sẽ cho biết kho lưu trữ nào chứa nó.
+Có rất nhiều repository công cộng: `JCenter`, `Maven Central`, `Google` và các repository khác. Thông thường, mô tả về dependency sẽ cho biết kho lưu trữ nào chứa nó.
 
-Phần `dependencies` được sử dụng để thêm các thư viện bên ngoài vào dự án. Gradle sẽ tự động tải chúng xuống từ kho lưu trữ và đưa chúng vào kho lưu trữ cùng với ứng dụng. Phần `dependencies` của bạn phải chứa ít nhất một thư viện thử nghiệm như `JUnit` hoặc thư viện nào khác, tùy thuộc vào lựa chọn của bạn về thời điểm khởi tạo dự án.
+Phần `dependencies` được sử dụng để thêm các thư viện bên ngoài vào dự án. Gradle sẽ tự động tải chúng xuống từ repository và đưa chúng vào kho lưu trữ cùng với ứng dụng. Phần `dependencies` của bạn phải chứa ít nhất một thư viện thử nghiệm như `JUnit` hoặc thư viện nào khác, tùy thuộc vào lựa chọn của bạn về thời điểm khởi tạo dự án.
 
 ```groovy
 dependencies {

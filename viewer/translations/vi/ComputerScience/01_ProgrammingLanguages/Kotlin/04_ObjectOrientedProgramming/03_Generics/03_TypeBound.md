@@ -29,7 +29,7 @@ val storage3 = Storage<Stone>() // compile-time error
 Theo mặc định, tất cả các tham số loại bị ràng buộc bởi loại `Any?`. `SomeGeneric<T>` giống với `SomeGeneric<T : Any?>`.
 
 > [!CAUTION]
-> Là các ràng buộc, chúng ta có thể thiết lập không chỉ các lớp mà cả các giao diện. Đừng cố gắng mở rộng một lớp chung này từ một lớp chung khác - nó sẽ dẫn đến lỗi.
+> Là các ràng buộc, chúng ta có thể thiết lập không chỉ các lớp mà cả các interface. Đừng cố gắng mở rộng một lớp chung này từ một lớp chung khác - nó sẽ dẫn đến lỗi.
 
 ## Cách sử dụng với hàm
 
@@ -50,18 +50,18 @@ fun <T> sortByDate(list: List<T>)
 ```
 
 > [!NOTE]
-> Khi bạn sử dụng nhiều giới hạn, loại đầu tiên phải là lớp hoặc giao diện. Các loại sau đây phải là giao diện.
+> Khi bạn sử dụng nhiều giới hạn, loại đầu tiên phải là lớp hoặc interface. Các loại sau đây phải là interface.
 
 
 ## Các loại chắc chắn không thể rỗng
 
 
-Ngoài các giới hạn kiểu mà chúng ta đã đề cập, còn có một khái niệm khác cần phải hiểu khi làm việc với các generic, đặc biệt là trong ngữ cảnh interoperability với Java—khái niệm về **có tính không rỗng xác định**. Điều này đặc biệt hữu ích khi xử lý các lớp và giao diện Java chung.
+Ngoài các giới hạn kiểu mà chúng ta đã đề cập, còn có một khái niệm khác cần phải hiểu khi làm việc với các generic, đặc biệt là trong ngữ cảnh interoperability với Java—khái niệm về **có tính không rỗng xác định**. Điều này đặc biệt hữu ích khi xử lý các lớp và interface Java chung.
 
 
 Kể từ Kotlin 1.7.0, chúng ta có thể khai báo tham số loại chung là chắc chắn không thể rỗng. Điều này đạt được bằng cách khai báo loại có cú pháp `T & Any` (loại giao nhau của `T` và `Any`).
 
-Giả sử chúng ta có giao diện Java `Game<T>` sau:
+Giả sử chúng ta có interface Java `Game<T>` sau:
 
 ```kotlin
 import org.jetbrains.annotations.*;

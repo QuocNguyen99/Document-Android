@@ -20,7 +20,7 @@ Trong quá trình triển khai, bạn phải ghi đè một số phương thức
 
 ### onStartCommand()
 
-        Hệ thống gọi phương thức này bằng cách gọi `startService()` khi một thành phần khác (chẳng hạn như một hoạt động) yêu cầu khởi động dịch vụ. Khi phương thức này thực thi, dịch vụ sẽ được khởi động và có thể chạy ở chế độ nền vô thời hạn. Nếu bạn triển khai điều này, bạn có trách nhiệm dừng dịch vụ khi công việc của nó hoàn tất bằng cách gọi `stopSelf()` hoặc `stopService()`. Nếu bạn chỉ muốn cung cấp ràng buộc, bạn DON'T NEED để triển khai phương pháp này.
+        Hệ thống gọi phương thức này bằng cách gọi `startService()` khi một thành phần khác (chẳng hạn như một hoạt động) request khởi động dịch vụ. Khi phương thức này thực thi, dịch vụ sẽ được khởi động và có thể chạy ở chế độ nền vô thời hạn. Nếu bạn triển khai điều này, bạn có trách nhiệm dừng dịch vụ khi công việc của nó hoàn tất bằng cách gọi `stopSelf()` hoặc `stopService()`. Nếu bạn chỉ muốn cung cấp ràng buộc, bạn DON'T NEED để triển khai phương pháp này.
 
 Lưu ý rằng phương thức `onStartCommand()` phải trả về một số nguyên. Số nguyên là một giá trị mô tả cách hệ thống sẽ tiếp tục dịch vụ trong trường hợp hệ thống tắt nó. Giá trị trả về từ `onStartCommand()` phải là một trong các hằng số sau:
 
@@ -40,7 +40,7 @@ Lưu ý rằng phương thức `onStartCommand()` phải trả về một số
 
 ### onBind()
 
-         Hệ thống gọi phương thức này bằng cách gọi `bindService()`. Khi một thành phần khác muốn liên kết với dịch vụ (chẳng hạn như để thực hiện RPC). Khi triển khai phương thức này, bạn phải cung cấp giao diện mà máy khách sử dụng để giao tiếp với dịch vụ bằng cách trả về IBinder. Bạn MUST ALWAYS triển khai phương pháp này; tuy nhiên, nếu bạn không muốn cho phép liên kết, bạn nên trả về giá trị rỗng.
+         Hệ thống gọi phương thức này bằng cách gọi `bindService()`. Khi một thành phần khác muốn liên kết với dịch vụ (chẳng hạn như để thực hiện RPC). Khi triển khai phương thức này, bạn phải cung cấp interface mà client sử dụng để giao tiếp với dịch vụ bằng cách trả về IBinder. Bạn MUST ALWAYS triển khai phương pháp này; tuy nhiên, nếu bạn không muốn cho phép liên kết, bạn nên trả về giá trị rỗng.
 
 ### onCreate()
 
@@ -48,7 +48,7 @@ Lưu ý rằng phương thức `onStartCommand()` phải trả về một số
 
 ### onDestroy()
 
-        Hệ thống gọi phương thức này khi dịch vụ không còn được sử dụng và đang bị hủy. Dịch vụ của bạn nên triển khai điều này để dọn sạch mọi tài nguyên như luồng, trình nghe đã đăng ký hoặc trình nhận. Đây là cuộc gọi cuối cùng mà dịch vụ nhận được.
+        Hệ thống gọi phương thức này khi dịch vụ không còn được sử dụng và đang bị hủy. Dịch vụ của bạn nên triển khai điều này để dọn sạch mọi tài nguyên như thread, listener đã đăng ký hoặc trình nhận. Đây là cuộc gọi cuối cùng mà dịch vụ nhận được.
 
 
 
@@ -91,10 +91,10 @@ Một thành phần ứng dụng, chẳng hạn như một hoạt động, có t
 Ví dụ: giả sử một hoạt động cần lưu một số dữ liệu vào cơ sở dữ liệu trực tuyến. Hoạt động này có thể bắt đầu một dịch vụ đồng hành và cung cấp dữ liệu để lưu bằng cách chuyển ý định tới `startService()`. Dịch vụ nhận được ý định trong `onStartCommand()`, kết nối với Internet và thực hiện giao dịch cơ sở dữ liệu. Khi giao dịch hoàn tất, dịch vụ sẽ tự dừng và bị hủy.
 
 > [!CAUTION]
-> Một dịch vụ chạy trong cùng process với ứng dụng được khai báo và trong thread chính của ứng dụng đó theo mặc định. Nếu dịch vụ của bạn thực hiện các thao tác chuyên sâu hoặc chặn trong khi người dùng tương tác với một hoạt động từ cùng một ứng dụng thì dịch vụ sẽ làm chậm hiệu suất hoạt động. Để tránh ảnh hưởng đến hiệu suất ứng dụng, hãy khởi động thread mới hoặc sử dụng coroutine bên trong dịch vụ.
+> Một dịch vụ chạy trong cùng process với ứng dụng được khai báo và trong main thread của ứng dụng đó theo mặc định. Nếu dịch vụ của bạn thực hiện các thao tác chuyên sâu hoặc chặn trong khi người dùng tương tác với một hoạt động từ cùng một ứng dụng thì dịch vụ sẽ làm chậm hiệu suất hoạt động. Để tránh ảnh hưởng đến hiệu suất ứng dụng, hãy khởi động thread mới hoặc sử dụng coroutine bên trong dịch vụ.
 
 
-Android framework cũng cung cấp lớp con `IntentService` của `Service` sử dụng một worker thread để xử lý tất cả các yêu cầu bắt đầu, mỗi lần một yêu cầu. Bạn không nên sử dụng lớp này cho các ứng dụng mới vì nó sẽ không hoạt động tốt khi bắt đầu với Android 8 Oreo do giới thiệu [Giới hạn thực thi trong nền](https://developer.android.com/about/versions/oreo/background#services). Hơn nữa, nó không được dùng nữa kể từ Android 11. Bạn có thể sử dụng `JobIntentService` để thay thế cho IntentService tương thích với các phiên bản Android mới hơn. Nhưng `JobIntentService` cũng không được dùng nữa. Bởi vì Android Jetpack cung cấp thư viện `WorkManager`, giúp dễ dàng lên lịch các tác vụ không đồng bộ, có thể trì hoãn dự kiến ​​sẽ chạy ngay cả khi ứng dụng thoát hoặc thiết bị khởi động lại.
+Android framework cũng cung cấp lớp con `IntentService` của `Service` sử dụng một worker thread để xử lý tất cả các request bắt đầu, mỗi lần một yêu cầu. Bạn không nên sử dụng lớp này cho các ứng dụng mới vì nó sẽ không hoạt động tốt khi bắt đầu với Android 8 Oreo do giới thiệu [Giới hạn thực thi trong nền](https://developer.android.com/about/versions/oreo/background#services). Hơn nữa, nó không được dùng nữa kể từ Android 11. Bạn có thể sử dụng `JobIntentService` để thay thế cho IntentService tương thích với các phiên bản Android mới hơn. Nhưng `JobIntentService` cũng không được dùng nữa. Bởi vì Android Jetpack cung cấp thư viện `WorkManager`, giúp dễ dàng lên lịch các tác vụ không đồng bộ, có thể trì hoãn dự kiến ​​sẽ chạy ngay cả khi ứng dụng thoát hoặc thiết bị khởi động lại.
 
 **Các phần sau đây mô tả cách bạn có thể triển khai dịch vụ tùy chỉnh của riêng mình**, tuy nhiên, bạn nên cân nhắc sử dụng `WorkManager` thay thế cho hầu hết các trường hợp sử dụng. Hãy tham khảo [hướng dẫn xử lý nền trên Android](https://developer.android.com/guide/background) để xem có giải pháp nào phù hợp với nhu cầu của bạn hay không.
 
@@ -190,11 +190,11 @@ Dịch vụ lifecycle—từ khi được tạo cho đến khi bị hủy—có 
  - Một dịch vụ bắt đầu
 Dịch vụ được tạo khi một thành phần khác gọi `startService()`. Dịch vụ sau đó chạy vô thời hạn và phải tự dừng bằng cách gọi `stopSelf()`. Một thành phần khác cũng có thể dừng dịch vụ bằng cách gọi `stopService()`. Khi dịch vụ bị dừng, hệ thống sẽ hủy dịch vụ đó.
  - Một dịch vụ ràng buộc
-Dịch vụ được tạo khi một thành phần khác (máy khách) gọi `bindService()`. Sau đó, khách hàng sẽ liên lạc với dịch vụ thông qua giao diện `IBinder`. Máy khách có thể đóng kết nối bằng cách gọi `unbindService()`. Nhiều máy khách có thể liên kết với cùng một dịch vụ và **khi tất cả chúng hủy liên kết, hệ thống sẽ hủy dịch vụ. Dịch vụ không cần phải tự dừng.**
+Dịch vụ được tạo khi một thành phần khác (client) gọi `bindService()`. Sau đó, client sẽ liên lạc với dịch vụ thông qua interface `IBinder`. Client có thể đóng kết nối bằng cách gọi `unbindService()`. Nhiều client có thể liên kết với cùng một dịch vụ và **khi tất cả chúng hủy liên kết, hệ thống sẽ hủy dịch vụ. Dịch vụ không cần phải tự dừng.**
 
-    Hai con đường này không hoàn toàn tách biệt. Bạn có thể liên kết với một dịch vụ đã được bắt đầu bằng `startService()`. Ví dụ: bạn có thể bắt đầu dịch vụ nhạc nền bằng cách gọi `startService()` bằng `Intent` xác định nhạc sẽ phát. Sau này, có thể khi người dùng muốn thực hiện một số quyền kiểm soát đối với trình phát hoặc lấy thông tin về bài hát hiện tại, một hoạt động có thể liên kết với dịch vụ bằng cách gọi đến `bindService()`. Trong những trường hợp như vậy, `stopService()` hoặc `stopSelf()` không thực sự dừng dịch vụ cho đến khi tất cả khách hàng hủy liên kết.
+    Hai con đường này không hoàn toàn tách biệt. Bạn có thể liên kết với một dịch vụ đã được bắt đầu bằng `startService()`. Ví dụ: bạn có thể bắt đầu dịch vụ nhạc nền bằng cách gọi `startService()` bằng `Intent` xác định nhạc sẽ phát. Sau này, có thể khi người dùng muốn thực hiện một số quyền kiểm soát đối với trình phát hoặc lấy thông tin về bài hát hiện tại, một hoạt động có thể liên kết với dịch vụ bằng cách gọi đến `bindService()`. Trong những trường hợp như vậy, `stopService()` hoặc `stopSelf()` không thực sự dừng dịch vụ cho đến khi tất cả client hủy liên kết.
 
-### Triển khai lệnh gọi lại lifecycle
+### Triển khai callback lifecycle
 
 ```kotlin
 class ExampleService : Service() {

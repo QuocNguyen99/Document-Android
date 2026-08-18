@@ -18,7 +18,7 @@ Phần quan trọng là bạn không cần phải gọi tất cả các bước.
 
 ## Kết cấu
 
-- **Giao diện Builder**:
+- **Interface Builder**:
 tuyên bố các bước xây dựng sản phẩm chung cho tất cả các loại nhà xây dựng.
 
 - **Thợ xây dựng bê tông**
@@ -27,8 +27,8 @@ cung cấp các cách thực hiện khác nhau của các bước xây dựng.
 - **Giám đốc** (Tùy chọn):
 xác định thứ tự gọi các bước xây dựng để bạn có thể tạo và sử dụng lại các cấu hình cụ thể của sản phẩm.
 
-- **Khách hàng**:
-gán một đối tượng `Builder` cho `Director`, thường thông qua hàm tạo. Giám đốc sau đó sử dụng công cụ xây dựng này cho tất cả các nhiệm vụ xây dựng. Ngoài ra, khách hàng có thể chuyển một trình tạo khác sang phương thức sản xuất, cho phép linh hoạt chuyển đổi trình tạo cho từng sản phẩm.
+- **Client**:
+gán một đối tượng `Builder` cho `Director`, thường thông qua hàm tạo. Giám đốc sau đó sử dụng công cụ xây dựng này cho tất cả các nhiệm vụ xây dựng. Ngoài ra, client có thể chuyển một trình tạo khác sang phương thức sản xuất, cho phép linh hoạt chuyển đổi trình tạo cho từng sản phẩm.
 
 ![văn bản thay thế](/resources/builder_design_pattern.png)
 
@@ -39,7 +39,7 @@ trong khi trình xây dựng cung cấp việc triển khai cho các bước đ�
 
 Việc có một lớp đạo diễn trong chương trình của bạn là không thực sự cần thiết.
 
-Bạn luôn có thể gọi các bước xây dựng theo thứ tự cụ thể trực tiếp từ mã máy khách.
+Bạn luôn có thể gọi các bước xây dựng theo thứ tự cụ thể trực tiếp từ mã client.
 Tuy nhiên, lớp giám đốc có thể là nơi thích hợp để đặt các quy trình xây dựng khác nhau để bạn có thể sử dụng lại chúng trong chương trình của mình.
 
 ## Mã giả

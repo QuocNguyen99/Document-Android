@@ -38,7 +38,7 @@ những phương pháp nào đang sử dụng nó và bao nhiêu, mất bao lâu
 
 
 Để bắt đầu lập hồ sơ CPU, hãy nhấp vào CPU graph.
-Bạn sẽ thấy danh sách tất cả các luồng được ứng dụng của bạn sử dụng. Khi có bất kỳ hoạt động nào trong ứng dụng, dòng thời gian của các chủ đề sẽ được đánh dấu bằng một màu nhất định.
+Bạn sẽ thấy danh sách tất cả các thread được ứng dụng của bạn sử dụng. Khi có bất kỳ hoạt động nào trong ứng dụng, dòng thời gian của các chủ đề sẽ được đánh dấu bằng một màu nhất định.
 Mỗi màu tương ứng với một trạng thái cụ thể của thread đó.
 
 ![văn bản thay thế](/resources/cpu_profiling.png)
@@ -59,7 +59,7 @@ Tùy thuộc vào loại thông tin bạn muốn thu thập, bạn có thể ch�
 ### 1. System Trace (Theo dõi cuộc gọi hệ thống hoặc Systrace)
 
 Cấu hình này ghi lại thông tin chi tiết mà bạn có thể xem cách ứng dụng tương tác với tài nguyên hệ thống.
-Ngoài ra, các bản ghi còn chứa thời gian và khoảng thời gian chính xác về trạng thái của các luồng của ứng dụng.
+Ngoài ra, các bản ghi còn chứa thời gian và khoảng thời gian chính xác về trạng thái của các thread của ứng dụng.
 
 Không giống như các công cụ khác, Systrace cung cấp dữ liệu mục tiêu như mức sử dụng CPU trên tất cả các lõi hoặc thông tin quan trọng khác mà Systrace tự động thu thập, chẳng hạn như khung lifecycle.
 
@@ -97,7 +97,7 @@ Lưu ý rằng vấn đề chính với phương pháp này là các phương ph
 ## Kiểm tra dấu vết
 
 Nếu bạn mở bản ghi được yêu cầu, ở trên cùng, bạn sẽ thấy cách sử dụng CPU graph quen thuộc và ngay bên dưới hành động của người dùng,
-lifecycle của hoạt động cũng như danh sách các luồng được ứng dụng sử dụng.
+lifecycle của hoạt động cũng như danh sách các thread được ứng dụng sử dụng.
 Mỗi thread có Biểu đồ cuộc gọi riêng — trình bày trực quan về các phương thức và dấu vết chức năng của ứng dụng, thời điểm cuộc gọi của chúng,
 thời gian thực hiện, bao gồm cả các phần tử con của chúng. Để mở Biểu đồ cuộc gọi, hãy nhấp vào hình tam giác bên cạnh tên của thread.
 

@@ -17,7 +17,7 @@ Ghi nhật ký đề cập đến hành động ghi lại trong quá trình th�
 
 - **Thông tin** được sử dụng để ghi lại thông tin quan trọng về một ứng dụng. Nó được sử dụng để ghi nhật ký bắt đầu dịch vụ, dừng dịch vụ, cấu hình, giả định. 
 
-- Nhật ký **Cảnh báo** được coi là cấp độ lỗi đầu tiên của ứng dụng. Chúng thường được áp dụng để ghi lại các lần thử truy cập tài nguyên lặp đi lặp lại, thiếu dữ liệu thứ cấp hoặc chuyển từ máy chủ chính sang máy chủ dự phòng. 
+- Nhật ký **Cảnh báo** được coi là cấp độ lỗi đầu tiên của ứng dụng. Chúng thường được áp dụng để ghi lại các lần thử truy cập tài nguyên lặp đi lặp lại, thiếu dữ liệu thứ cấp hoặc chuyển từ server chính sang server dự phòng.
 
 - **Lỗi** cấp độ nhật ký được sử dụng cho các vấn đề nghiêm trọng hơn. Những loại vấn đề này thường ảnh hưởng đến kết quả của hoạt động nhưng không chấm dứt chương trình. Lỗi được coi là cấp độ thứ hai của lỗi ứng dụng. 
 
@@ -45,11 +45,11 @@ Có bảy cấp độ nhật ký trong gói ghi nhật ký của Java. Danh sác
 | FINER | 400 |
 | FINEST | 300 |
 
-### Trình xử lý và trình định dạng
+### Handler và trình định dạng
 
-**trình xử lý** (`Handler` trong `java.util.logging package`) chịu trách nhiệm gửi nhật ký thực tế ra thế giới bên ngoài. Nó được mở rộng bởi năm lớp cụ thể. Hai lớp quan trọng nhất trong số đó là `ConsoleHandler` và `FileHandler`. `ConsoleHandler` ghi thông điệp tường trình vào `System.err`, trong khi `FileHandler` ghi thông điệp tường trình vào một tệp.
+**handler** (`Handler` trong `java.util.logging package`) chịu trách nhiệm gửi nhật ký thực tế ra thế giới bên ngoài. Nó được mở rộng bởi năm lớp cụ thể. Hai lớp quan trọng nhất trong số đó là `ConsoleHandler` và `FileHandler`. `ConsoleHandler` ghi thông điệp tường trình vào `System.err`, trong khi `FileHandler` ghi thông điệp tường trình vào một tệp.
 
-trình xử lý sử dụng **formatter** để định dạng thông điệp tường trình. Có hai loại trình định dạng trong gói ghi nhật ký. Đó là `SimpleFormatter` và `XMLFormatter`. Tất nhiên, cả hai đều mở rộng lớp trừu tượng `Formatter` trong gói ghi nhật ký.
+handler sử dụng **formatter** để định dạng thông điệp tường trình. Có hai loại trình định dạng trong gói ghi nhật ký. Đó là `SimpleFormatter` và `XMLFormatter`. Tất nhiên, cả hai đều mở rộng lớp trừu tượng `Formatter` trong gói ghi nhật ký.
 
 Ví dụ:
 
@@ -97,7 +97,7 @@ tập tin đầu ra:
 
 Khi chúng tôi đang phát triển một ứng dụng phần mềm, chúng tôi viết càng nhiều thông điệp tường trình càng tốt. Nhưng chúng tôi không muốn tất cả các thông điệp tường trình được thực thi mỗi khi ứng dụng chạy: nó sẽ lãng phí tài nguyên và có thể tạo ra các tệp nhật ký dài không cần thiết. Đó là lý do tại sao chúng tôi sử dụng bộ lọc. 
 
-Để làm được điều đó, trước tiên, bạn phải tạo một lớp **bộ lọc tùy chỉnh** bằng cách triển khai giao diện `Filter` trong gói ghi nhật ký.
+Để làm được điều đó, trước tiên, bạn phải tạo một lớp **bộ lọc tùy chỉnh** bằng cách triển khai interface `Filter` trong gói ghi nhật ký.
 
 ```kotlin
 class FilterExample : Filter {
@@ -125,7 +125,7 @@ dependencies {
 }
 ```
 
-Thư viện này sẽ kéo theo hai phần phụ thuộc khác là `slf4j-api` và `logback-core`.
+Thư viện này sẽ kéo theo hai dependency khác là `slf4j-api` và `logback-core`.
 
 **SLF4J** (Ghi nhật ký đơn giản Facade cho Java) là một mặt tiền hoặc bản tóm tắt cho các thư viện ghi nhật ký khác nhau, bao gồm cả Logback. Nó cung cấp tính năng ghi nhật ký đơn giản API và Logback triển khai tính năng này một cách tự nhiên. Bạn có thể gọi trình ghi nhật ký SLF4J với Logback làm phương thức triển khai cơ bản mà không cần bất kỳ chi phí nào.
 
@@ -193,7 +193,7 @@ fun main() {
 </configuration>
 ```
 
-Mỗi logger sẽ chỉ xuất ra các thông báo có mức yêu cầu nhật ký cao hơn hoặc bằng mức của logger.
+Mỗi logger sẽ chỉ xuất ra các thông báo có log request level cao hơn hoặc bằng mức của logger.
 
 ```bash
 16:19:28.528 [main] INFO Example - INFO Level message

@@ -155,13 +155,13 @@ kotlinOptions {
 
 ### khối phụ thuộc
 
-Khối cuối cùng là nơi chúng ta xác định các phần phụ thuộc của dự án. Từ khóa `implementation` cho phép chúng ta truy cập các phần phụ thuộc từ xa, sẽ được tải từ kho lưu trữ từ xa:
+Khối cuối cùng là nơi chúng ta xác định các dependency của dự án. Từ khóa `implementation` cho phép chúng ta truy cập các dependency từ xa, sẽ được tải từ repository từ xa:
 
 ```kotlin
 implementation 'androidx.core:core-ktx:1.3.2'
 ```
 
-`testImplementation` và `androidTestImplementation` lần lượt thêm các phần phụ thuộc cho cấu hình thử nghiệm và androidTest:
+`testImplementation` và `androidTestImplementation` lần lượt thêm các dependency cho cấu hình thử nghiệm và androidTest:
 
 ```kotlin
 testImplementation 'junit:junit:4.+'
@@ -187,12 +187,12 @@ Các ứng dụng có thể có một số mô-đun, vì vậy nó mô tả cấ
 
 Khi chúng tôi bắt đầu một dự án mới, các plugin này được xác định trong phương thức plugin và cần thiết cho dự án Android. 
 
-Tất cả các plugin được đặt bên trong phương thức này sẽ được tìm kiếm theo kho lưu trữ được đặt trong `settings.gradle`.
+Tất cả các plugin được đặt bên trong phương thức này sẽ được tìm kiếm theo repository được đặt trong `settings.gradle`.
 
 `com.android.application` là thành phần thiết yếu trong Gradle để sử dụng trong dự án ứng dụng Android.
 Nó xử lý việc đóng gói tài nguyên, nội dung và mã ứng dụng thành tệp APK để sẵn sàng cài đặt và thực thi trên thiết bị Android.
 
-`com.android.library` rất cần thiết cho dự án Android, nó được sử dụng để tạo thư viện hoặc phần phụ thuộc Android có thể được sử dụng làm phần phụ thuộc trong các dự án Android khác. Nó cung cấp các tác vụ, cấu hình và quy ước cần thiết để xây dựng và đóng gói tài nguyên, nội dung và mã của mô-đun vào tệp Lưu trữ Android (AAR). Tệp AAR chứa mã được biên dịch, tài nguyên và bảng kê khai của thư viện, giúp dễ dàng chia sẻ và sử dụng lại trên các dự án Android khác nhau.
+`com.android.library` rất cần thiết cho dự án Android, nó được sử dụng để tạo thư viện hoặc dependency Android có thể được sử dụng làm dependency trong các dự án Android khác. Nó cung cấp các tác vụ, cấu hình và quy ước cần thiết để xây dựng và đóng gói tài nguyên, nội dung và mã của mô-đun vào tệp Lưu trữ Android (AAR). Tệp AAR chứa mã được biên dịch, tài nguyên và bảng kê khai của thư viện, giúp dễ dàng chia sẻ và sử dụng lại trên các dự án Android khác nhau.
 
 `org.jetbrains.kotlin.android` được sử dụng cho các dự án Android Kotlin. Nó được sử dụng để kích hoạt hỗ trợ ngôn ngữ Kotlin trong các mô-đun Android, đặt cấu hình cần thiết để biên dịch mã Kotlin và tích hợp liền mạch với bản dựng Android process. Plugin này đảm bảo rằng các tệp Kotlin được biên dịch thành mã byte Java, giúp chúng tương thích với Android Runtime (ART) trên thiết bị Android.
 
@@ -221,7 +221,7 @@ android.useAndroidX=true
 android.enableJetifier=true
 kotlin.code.style=official
 ```
-3. Và cuối cùng, `settings.gradle` nó nằm trong thư mục gốc của dự án và xác định **cấp dự án** **cài đặt kho lưu trữ** và thông báo cho Gradle những mô-đun nào nên bao gồm khi xây dựng ứng dụng của bạn. **Các dự án nhiều mô-đun cần chỉ định từng mô-đun sẽ được đưa vào bản dựng cuối cùng**.
+3. Và cuối cùng, `settings.gradle` nó nằm trong thư mục gốc của dự án và xác định **cấp dự án** **cài đặt repository** và thông báo cho Gradle những mô-đun nào nên bao gồm khi xây dựng ứng dụng của bạn. **Các dự án nhiều mô-đun cần chỉ định từng mô-đun sẽ được đưa vào bản dựng cuối cùng**.
 
 ```kotlin
 pluginManagement {
@@ -242,14 +242,14 @@ rootProject.name = "testapplication"
 include ':app'
 ```
 
-- Khối **pluginManagement** được sử dụng để xác định các kho lưu trữ trong đó Gradle sẽ tìm kiếm các plugin. nó chỉ định ba kho lưu trữ:
-  - `google()`: Kho lưu trữ Maven của Google, được sử dụng để giải quyết các plugin và phụ thuộc liên quan đến Android.
-  - `mavenCentral()`: Maven Central repo, là kho lưu trữ phổ biến cho các thư viện Java và Android.
-  - `gradlePluginPortal()`: Cổng thông tin plugin Gradle, là kho lưu trữ chính thức cho các plugin Gradle.
+- Khối **pluginManagement** được sử dụng để xác định các repository trong đó Gradle sẽ tìm kiếm các plugin. nó chỉ định ba repository:
+  - `google()`: Repository Maven của Google, được sử dụng để giải quyết các plugin và phụ thuộc liên quan đến Android.
+  - `mavenCentral()`: Maven Central repo, là repository phổ biến cho các thư viện Java và Android.
+  - `gradlePluginPortal()`: Cổng thông tin plugin Gradle, là repository chính thức cho các plugin Gradle.
 
-- Khối kho lưu trữ **dependencyResolutionManagement** là nơi bạn định cấu hình các kho lưu trữ và phần phụ thuộc được sử dụng bởi tất cả các mô-đun trong dự án của bạn, chẳng hạn như các thư viện mà bạn đang sử dụng để tạo ứng dụng của mình. 
+- Khối repository **dependencyResolutionManagement** là nơi bạn định cấu hình các repository và dependency được sử dụng bởi tất cả các mô-đun trong dự án của bạn, chẳng hạn như các thư viện mà bạn đang sử dụng để tạo ứng dụng của mình.
 
-Tuy nhiên, bạn nên định cấu hình các phần phụ thuộc dành riêng cho từng mô-đun trong từng tệp build.gradle ở cấp độ mô-đun. Đối với các dự án mới, Android Studio bao gồm kho lưu trữ Maven của Google và Maven Central Repository theo mặc định, nhưng nó không định cấu hình bất kỳ phần phụ thuộc nào (trừ khi bạn chọn một mẫu yêu cầu một số phần phụ thuộc).
+Tuy nhiên, bạn nên định cấu hình các dependency dành riêng cho từng mô-đun trong từng tệp build.gradle ở cấp độ mô-đun. Đối với các dự án mới, Android Studio bao gồm repository Maven của Google và Maven Central Repository theo mặc định, nhưng nó không định cấu hình bất kỳ dependency nào (trừ khi bạn chọn một mẫu yêu cầu một số phần phụ thuộc).
 
 - `rootProject.name = "testapplication"`: Dòng này đặt tên của dự án gốc thành "testapplication." Dự án gốc đại diện cho dự án cấp cao nhất trong bản dựng nhiều mô-đun.
 

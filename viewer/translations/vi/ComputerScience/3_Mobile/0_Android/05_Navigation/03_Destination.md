@@ -117,7 +117,7 @@ fragment<MyFragment, MyRoute> {
 
 Việc tạo đích đến cho hoạt động cũng tương tự như tạo đích đến cho mảnh. **Tuy nhiên, bản chất của điểm đến hoạt động khá khác nhau.**
 
-Theo mặc định, thư viện Navigation gắn `NavController` vào bố cục `Activity` và navigation graph đang hoạt động nằm trong phạm vi `Activity` đang hoạt động. Nếu người dùng điều hướng đến một `Activity` khác thì navigation graph hiện tại không còn nằm trong phạm vi nữa. Điều này có nghĩa là đích `Activity` phải được coi là điểm cuối trong navigation graph.
+Theo mặc định, thư viện Navigation gắn `NavController` vào bố cục `Activity` và navigation graph đang hoạt động nằm trong phạm vi `Activity` đang hoạt động. Nếu người dùng điều hướng đến một `Activity` khác thì navigation graph hiện tại không còn nằm trong phạm vi nữa. Điều này có nghĩa là đích `Activity` phải được coi là endpoint trong navigation graph.
 
 
 ```xml

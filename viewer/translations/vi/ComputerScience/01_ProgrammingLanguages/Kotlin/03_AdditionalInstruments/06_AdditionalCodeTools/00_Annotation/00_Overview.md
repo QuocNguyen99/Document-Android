@@ -3,10 +3,10 @@
 Chú thích cung cấp cách cung cấp hướng dẫn và siêu dữ liệu (dữ liệu về dữ liệu) cho compiler, IDE hoặc framework để xử lý một số tác vụ phức tạp và giúp cuộc sống của bạn dễ dàng hơn.
 
 > [!NOTE]
-> Siêu dữ liệu là thông tin về dữ liệu làm cho dữ liệu này có ý nghĩa hơn, vì vậy trong trường hợp của chúng tôi, compiler hoặc các khung sẽ có thông tin hữu ích về mã của chúng tôi để thực hiện các tác vụ phức tạp.
+> Siêu dữ liệu là thông tin về dữ liệu làm cho dữ liệu này có ý nghĩa hơn, vì vậy trong trường hợp của chúng tôi, compiler hoặc các framework sẽ có thông tin hữu ích về mã của chúng tôi để thực hiện các tác vụ phức tạp.
 
-Trường hợp phổ biến nhất là sử dụng các thư viện như **Room** hoặc **Retrofit** khi bạn phát triển các ứng dụng hoặc khung Android như **Spring** hoặc **Spring Boot**. 
-Các khung này đi kèm với nhiều chú thích tích hợp và thông qua chúng, các khung sẽ biết bạn muốn làm gì và sẽ làm điều đó cho bạn mà không cho bạn thấy cách triển khai phức tạp. 
+Trường hợp phổ biến nhất là sử dụng các thư viện như **Room** hoặc **Retrofit** khi bạn phát triển các ứng dụng hoặc framework Android như **Spring** hoặc **Spring Boot**.
+Các framework này đi kèm với nhiều chú thích tích hợp và thông qua chúng, các framework sẽ biết bạn muốn làm gì và sẽ làm điều đó cho bạn mà không cho bạn thấy cách triển khai phức tạp.
 
 Bạn có thể coi chú thích là một điều kỳ diệu - một từ có thể làm được rất nhiều việc ở chế độ nền.
 Bạn có thể thêm bao nhiêu chú thích tùy thích vào một mục tiêu

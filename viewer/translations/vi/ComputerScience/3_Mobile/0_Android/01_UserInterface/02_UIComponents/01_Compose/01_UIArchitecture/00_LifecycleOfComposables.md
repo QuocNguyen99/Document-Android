@@ -154,7 +154,7 @@ Có một số điểm chính quan trọng về hoạt động của các hàm c
 1. **Các hàm Composable có thể được thực thi theo bất kỳ thứ tự nào.**
 Jetpack Compose có thể ưu tiên một số thành phần kết hợp quan trọng hơn những thành phần khác và hiển thị chúng trước.
 2. **Các thành phần kết hợp có thể chạy song song.**
-Compose có thể chạy các thành phần kết hợp có mức độ ưu tiên thấp hơn trên nền thread để tối ưu hóa và cải thiện hiệu suất.
+Compose có thể chạy các thành phần kết hợp có mức độ ưu tiên thấp hơn trên background thread để tối ưu hóa và cải thiện hiệu suất.
 3. **Recomposition có thể bị hủy.**
 Đây là một khía cạnh quan trọng khác do dữ liệu có thể thay đổi quá nhanh.
 Khi dữ liệu thay đổi trước khi recomposition hoàn thành, nó có thể bị hủy vì đã lỗi thời. Nhờ đó, bạn có thể bắt đầu recomposition tiếp theo với dữ liệu mới nhất ngay bây giờ mà không cần đợi hoàn thành.

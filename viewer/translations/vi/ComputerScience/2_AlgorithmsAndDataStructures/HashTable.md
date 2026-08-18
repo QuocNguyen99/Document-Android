@@ -3,7 +3,7 @@ HashTable là một lớp cung cấp sự phát triển của Bản đồ giao d
 
 Bất kỳ đối tượng nào cũng không có giá trị rỗng cũng có thể được sử dụng làm khóa hoặc giá trị. Để lưu trữ và truy xuất các đối tượng thành công từ một bảng băm, các đối tượng được sử dụng làm khóa phải phát triển phương thức hashCode và phương thức bằng cách sử dụng.
 
-Tuy nhiên, lớp Hashtable đã bị lỗi và việc sử dụng nó thường xuyên không được khuyến khích. Điều này là do nó được thiết kế trước khi giới thiệu Collection framework và không triển khai, điều này tạo ra khó khăn khi sử dụng cùng với các phần khác của framework. Ngoài ra, lớp Hashtable đã được đồng bộ hóa, điều này có thể dẫn đến hiệu suất chậm hơn so với việc triển khai giao diện Map khác.
+Tuy nhiên, lớp Hashtable đã bị lỗi và việc sử dụng nó thường xuyên không được khuyến khích. Điều này là do nó được thiết kế trước khi giới thiệu Collection framework và không triển khai, điều này tạo ra khó khăn khi sử dụng cùng với các phần khác của framework. Ngoài ra, lớp Hashtable đã được đồng bộ hóa, điều này có thể dẫn đến hiệu suất chậm hơn so với việc triển khai interface Map khác.
 
 
 ##Hash function
@@ -60,7 +60,7 @@ Từ điển là một đối tượng dữ liệu cấu trúc trong nhiều tr�
 
 # Bản đồ
 
-Bản đồ là một giao diện trong Java và một dữ liệu cấu trúc trong nhiều ngôn ngữ khác. Nó mô tả một tập hợp các cặp khóa-giá trị, trong đó mỗi khóa là duy nhất và không thay đổi. Map cung cấp các phương thức để thêm, xóa, xuất và xử lý các cặp khóa-giá trị. **HashMap và HashTable là hai lớp cụ thể trong giao diện Bản đồ triển khai Java.**
+Bản đồ là một interface trong Java và một dữ liệu cấu trúc trong nhiều ngôn ngữ khác. Nó mô tả một tập hợp các cặp khóa-giá trị, trong đó mỗi khóa là duy nhất và không thay đổi. Map cung cấp các phương thức để thêm, xóa, xuất và xử lý các cặp khóa-giá trị. **HashMap và HashTable là hai lớp cụ thể trong giao diện Bản đồ triển khai Java.**
 
 #HashMap
 

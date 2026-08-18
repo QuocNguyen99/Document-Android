@@ -11,11 +11,11 @@ Tuy nhiên, các phương thức này cũng có một số tình trạng quá t�
 - `notifyItemChanged(position: Int, payload: Any?)`
 - `notifyItemRangeChanged(positionStart: Int, itemCount: Int, payload: Any?)`
 
-**tải trọng thay đổi** đóng vai trò như một thông báo mô tả những gì đã thay đổi bên trong một mục. Khi `payload == null`, bản cập nhật đầy đủ sẽ diễn ra. Vì vậy, ViewHolder cũ được kết hợp với một cái mới, được liên kết mới (giả sử trình hoạt hình mục mặc định đang được sử dụng).
+**payload thay đổi** đóng vai trò như một thông báo mô tả những gì đã thay đổi bên trong một mục. Khi `payload == null`, bản cập nhật đầy đủ sẽ diễn ra. Vì vậy, ViewHolder cũ được kết hợp với một cái mới, được liên kết mới (giả sử trình hoạt hình mục mặc định đang được sử dụng).
 
 Khi `payload == null`, bản cập nhật đầy đủ sẽ diễn ra. Vì vậy, `ViewHolder` cũ được kết hợp với một cái mới, được ràng buộc mới (giả sử trình hoạt hình mục mặc định đang được sử dụng).
 
-Tuy nhiên, nếu `payload != null`, nó sẽ được chuyển sang phương thức `onBindViewHolder(…, …, payloads: List<Any>)` và trình hoạt ảnh mục mặc định sẽ không thực hiện bất kỳ thao tác nào. Điều này có nghĩa là chúng ta có thể chuyển bất cứ thứ gì ngoại trừ null dưới dạng tải trọng để bỏ qua hoàn toàn **thay đổi hoạt ảnh**.
+Tuy nhiên, nếu `payload != null`, nó sẽ được chuyển sang phương thức `onBindViewHolder(…, …, payloads: List<Any>)` và trình hoạt ảnh mục mặc định sẽ không thực hiện bất kỳ thao tác nào. Điều này có nghĩa là chúng ta có thể chuyển bất cứ thứ gì ngoại trừ null dưới dạng payload để bỏ qua hoàn toàn **thay đổi hoạt ảnh**.
 Và nếu chúng ta áp dụng cách tiếp cận này, các mục sẽ được cập nhật ngay lập tức mà không bị nhấp nháy do hoạt ảnh mờ dần gây ra.
 
 
@@ -40,8 +40,8 @@ object : DiffUtil.ItemCallback<Transaction>() {
 }
 ```
 
-Tuy nhiên, mục đích chính của việc thay đổi tải trọng là cung cấp một số thông tin hữu ích cho `onBindViewHolder`.
-Phương thức này có hai tình trạng quá tải, vì vậy để tận dụng tải trọng, chúng ta cần ghi đè tải trọng liên quan:
+Tuy nhiên, mục đích chính của việc thay đổi payload là cung cấp một số thông tin hữu ích cho `onBindViewHolder`.
+Phương thức này có hai overload, vì vậy để tận dụng payload, chúng ta cần override overload tương ứng:
 
 ```kotlin
 override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
@@ -55,9 +55,9 @@ override fun onBindViewHolder(
 }
 ```
 
-Điều đó cho chúng ta một danh sách các tải trọng. Nó sẽ trống trong trường hợp cập nhật đầy đủ; nếu không, nó sẽ chứa tất cả các giá trị được truyền cho phương thức `notify` kể từ lần liên kết cuối cùng.
+Điều đó cho chúng ta một danh sách các payload. Nó sẽ trống trong trường hợp cập nhật đầy đủ; nếu không, nó sẽ chứa tất cả các giá trị được truyền cho phương thức `notify` kể từ lần liên kết cuối cùng.
 
-Không giống như `notifyItemChanged`, `getChangePayload` chỉ có thể cung cấp cho bạn một đối tượng tải trọng duy nhất. Nếu bạn trả về collection, danh sách `payloads` sẽ chứa collection này chứ không phải các mục của nó. Hãy xem xét hướng này khi xử lý tải trọng.
+Không giống như `notifyItemChanged`, `getChangePayload` chỉ có thể cung cấp cho bạn một đối tượng payload duy nhất. Nếu bạn trả về collection, danh sách `payloads` sẽ chứa collection này chứ không phải các mục của nó. Hãy xem xét hướng này khi xử lý payload.
 
 
 ## Ví dụ đầy đủ
@@ -155,9 +155,9 @@ Khi đã xong, chúng ta có thể sử dụng mã hiển thị bên dưới đ�
 ```
 
 
-**Mục đích chính của máy tải trọng là áp dụng các thay đổi nhanh hơn.**
+**Mục đích chính của máy payload là áp dụng các thay đổi nhanh hơn.**
 Điều này rất quan trọng khi xử lý dữ liệu dễ biến động như giá cổ phiếu theo thời gian thực, vốn thay đổi nhiều lần trong một giây.
-Tuy nhiên, trong các trường hợp đơn giản hơn, việc chuyển một tải trọng giả (như Đơn vị) là một cách đơn giản để áp dụng các bản cập nhật nhỏ mà không thay đổi hoạt ảnh (như đã giải thích trước đó trong phần này).
+Tuy nhiên, trong các trường hợp đơn giản hơn, việc chuyển một payload giả (như Đơn vị) là một cách đơn giản để áp dụng các bản cập nhật nhỏ mà không thay đổi hoạt ảnh (như đã giải thích trước đó trong phần này).
 
 ## Các loại bộ điều hợp và chế độ xem không đồng nhất
 

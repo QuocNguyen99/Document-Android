@@ -1,6 +1,6 @@
 # Tuyên bố thử bắt
 
-Kotlin có cơ chế exception handling. Sau khi một dòng mã đưa ra một ngoại lệ, Kotlin sẽ cố gắng tìm một trình xử lý phù hợp cho nó. Ngay sau khi tìm thấy và thực thi một trình xử lý phù hợp, ngoại lệ được coi là đã được xử lý và chương trình sẽ chạy bình thường.
+Kotlin có cơ chế exception handling. Sau khi một dòng mã đưa ra một ngoại lệ, Kotlin sẽ cố gắng tìm một handler phù hợp cho nó. Ngay sau khi tìm thấy và thực thi một handler phù hợp, ngoại lệ được coi là đã được xử lý và chương trình sẽ chạy bình thường.
 
 ```kotlin
 try {
@@ -9,7 +9,7 @@ try {
     // code for handling the exception
 }
 ```
-Khối `try` được sử dụng để bọc mã có thể đưa ra ngoại lệ. Khối này có thể bao gồm tất cả các dòng mã, kể cả các lệnh gọi phương thức. Khối `catch` là trình xử lý cho loại ngoại lệ được chỉ định và tất cả các kiểu con của nó. 
+Khối `try` được sử dụng để bọc mã có thể đưa ra ngoại lệ. Khối này có thể bao gồm tất cả các dòng mã, kể cả các lệnh gọi phương thức. Khối `catch` là handler cho loại ngoại lệ được chỉ định và tất cả các kiểu con của nó.
 
 Hãy chú ý! Các biến được công bố trong khối `try` sẽ chỉ khả dụng bên trong khối: bạn không thể làm việc với chúng ở bên ngoài hoặc trong khối `catch`.
 
@@ -127,7 +127,7 @@ public inline fun <T : Closeable?, R> T.use(block: (T) -> R): R {
 }
 ```
 
-Hàm này được định nghĩa là phần mở rộng chung trên các loại all` Closeable?`. `Closeable` là giao diện của Java sử dụng tài nguyên dùng thử.
+Hàm này được định nghĩa là phần mở rộng chung trên các loại all` Closeable?`. `Closeable` là interface của Java sử dụng tài nguyên dùng thử.
 
 Nếu Kotlin không triển khai các chức năng mở rộng sử dụng, chúng ta sẽ cần viết thêm mã, hãy xem:
 

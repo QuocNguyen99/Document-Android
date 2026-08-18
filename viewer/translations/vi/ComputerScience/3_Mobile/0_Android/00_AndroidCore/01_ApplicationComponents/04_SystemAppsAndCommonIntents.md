@@ -41,7 +41,7 @@ Nếu có Activity có thể xử lý một liên kết như vậy, nó sẽ kh�
 
 - https://upload.wikimedia.org/wikipedia/commons/1/16/En-uk-to_study.ogg
 
-Tất cả đều sử dụng cùng một giao thức, HTTPS. Tất cả đều có thể được mở trong trình duyệt. Nhưng PDF cũng có thể được mở trong ứng dụng đọc sách và .ogg có thể được mở trong trình phát âm thanh. Vì vậy, sự khác biệt là ở loại phương tiện truyền thông.
+Tất cả đều sử dụng cùng một protocol, HTTPS. Tất cả đều có thể được mở trong trình duyệt. Nhưng PDF cũng có thể được mở trong ứng dụng đọc sách và .ogg có thể được mở trong trình phát âm thanh. Vì vậy, sự khác biệt là ở loại phương tiện truyền thông.
 
 - văn bản/html
 
@@ -70,7 +70,7 @@ startActivity(
 ```
 
 > [!NOTE]
-> Phần mở rộng tập tin không phải là thứ trên Internet, nó có thể sai hoặc không có. Các trình duyệt biết loại tài liệu từ tiêu đề HTTP Loại nội dung nhưng để nhận được nó, phải bắt đầu kết nối với máy chủ.
+> Phần mở rộng tập tin không phải là thứ trên Internet, nó có thể sai hoặc không có. Các trình duyệt biết loại tài liệu từ tiêu đề HTTP Loại nội dung nhưng để nhận được nó, phải bắt đầu kết nối với server.
 > Việc này không nhanh và không đảm bảo thành công, đó là lý do tại sao bạn nên biết trước loại phương tiện, ít nhất là phần rộng hơn, như âm thanh/*, video/*, hình ảnh/*.
 
 

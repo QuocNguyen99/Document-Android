@@ -27,7 +27,7 @@ class BankAccount(private var balance: Double) {
 
 Tính trừu tượng liên quan đến việc ẩn các chi tiết triển khai phức tạp và chỉ hiển thị các tính năng thiết yếu của đối tượng. Điều này giúp đơn giản hóa việc quản lý mã và tăng cường khả năng đọc. 
 
-Trong Kotlin, tính trừu tượng có thể đạt được bằng cách sử dụng các lớp và giao diện trừu tượng:
+Trong Kotlin, tính trừu tượng có thể đạt được bằng cách sử dụng các lớp và interface trừu tượng:
 
 ```kotlin
 abstract class Animal {
@@ -66,7 +66,7 @@ class Car(brand: String, val model: String) : Vehicle(brand) {
 
 ### 4. **Polymorphism**
 
-Polymorphism cho phép các đối tượng thuộc các lớp khác nhau phản hồi cùng một lệnh gọi phương thức theo những cách khác nhau, cho phép một giao diện duy nhất kiểm soát quyền truy cập vào nhiều loại dữ liệu khác nhau. Điều này tăng cường tính linh hoạt và tích hợp. 
+Polymorphism cho phép các đối tượng thuộc các lớp khác nhau phản hồi cùng một lệnh gọi phương thức theo những cách khác nhau, cho phép một interface duy nhất kiểm soát quyền truy cập vào nhiều loại dữ liệu khác nhau. Điều này tăng cường tính linh hoạt và tích hợp.
 
 Một ví dụ trong Kotlin:
 

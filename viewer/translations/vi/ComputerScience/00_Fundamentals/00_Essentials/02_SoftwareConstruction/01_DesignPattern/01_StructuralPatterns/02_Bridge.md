@@ -18,14 +18,14 @@ Bằng cách này, việc thêm hình dạng hoặc màu sắc mới trở nên 
 cung cấp logic điều khiển cấp cao. Nó dựa vào đối tượng triển khai để thực hiện công việc cấp thấp thực tế.
 
 - **Việc thực hiện**:
-khai báo giao diện chung cho tất cả các triển khai cụ thể.
+khai báo interface chung cho tất cả các triển khai cụ thể.
 Một sự trừu tượng chỉ có thể giao tiếp với một đối tượng triển khai thông qua các phương thức được khai báo ở đây.
 
 - **Triển khai cụ thể**: chứa mã dành riêng cho nền tảng.
 
-- **Trừu tượng tinh tế**(Tùy chọn): cung cấp các biến thể của logic điều khiển. Giống như cha mẹ, chúng làm việc với các cách triển khai khác nhau thông qua giao diện triển khai chung.
+- **Trừu tượng tinh tế**(Tùy chọn): cung cấp các biến thể của logic điều khiển. Giống như cha mẹ, chúng làm việc với các cách triển khai khác nhau thông qua interface triển khai chung.
 
-- Thông thường, **Client** chỉ quan tâm đến việc làm việc với phần trừu tượng. Tuy nhiên, công việc của khách hàng là liên kết đối tượng trừu tượng với một trong các đối tượng triển khai.
+- Thông thường, **Client** chỉ quan tâm đến việc làm việc với phần trừu tượng. Tuy nhiên, công việc của client là liên kết đối tượng trừu tượng với một trong các đối tượng triển khai.
 
 
 ![văn bản thay thế](/resources/bridge_design_pattern.png)
@@ -43,7 +43,7 @@ Bạn có thể tập trung vào logic cấp cao trong phần trừu tượng h�
 - **Nguyên tắc đóng/mở**.
 Bạn có thể giới thiệu các phần trừu tượng và triển khai mới một cách độc lập với nhau.
 - Bạn có thể tạo các lớp và ứng dụng độc lập với nền tảng.
-- Mã máy khách hoạt động với sự trừu tượng hóa cấp cao.
+- Mã client hoạt động với sự trừu tượng hóa cấp cao.
 Nó không được tiếp xúc với các chi tiết nền tảng.
 
 ## Hậu quả

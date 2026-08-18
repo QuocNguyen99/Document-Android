@@ -2,7 +2,7 @@
 
 ## Bối cảnh
 
-Giao diện `CoroutineScope` chỉ có một thuộc tính – `coroutineContext`, chứa tất cả thông tin mà coroutine cần để thực thi.
+Interface `CoroutineScope` chỉ có một thuộc tính – `coroutineContext`, chứa tất cả thông tin mà coroutine cần để thực thi.
 
 Nó tương tự như **bản đồ hoặc từ điển** — tất cả các giá trị được lưu trữ ở đó cùng với khóa của chúng. Nếu lấy ví dụ trước với phạm vi được giám sát, chúng ta có thể thấy những gì bên trong ngữ cảnh.
 
@@ -18,9 +18,9 @@ fun main() {
 
 Nó sẽ in một cái gì đó như `CoroutineScope(coroutineContext=SupervisorJobImpl{Active}@4534b60d)`
 
-Trong trường hợp của chúng tôi, ngữ cảnh chỉ chứa một giá trị - công việc mà chúng tôi có thể truy cập bằng cách sử dụng Khóa đồng hành của giao diện `Job` như thế:
+Trong trường hợp của chúng tôi, ngữ cảnh chỉ chứa một giá trị - công việc mà chúng tôi có thể truy cập bằng cách sử dụng Khóa đồng hành của interface `Job` như thế:
 
-`supervisedScope.coroutineContext[Job]`. Chúng ta có thể thêm nhiều thứ hơn vào ngữ cảnh - ví dụ: trình xử lý lỗi:
+`supervisedScope.coroutineContext[Job]`. Chúng ta có thể thêm nhiều thứ hơn vào ngữ cảnh - ví dụ: handler lỗi:
 
 ```kotlin
 val handler = CoroutineExceptionHandler { _, exception ->
@@ -37,7 +37,7 @@ fun main() {
 Đầu ra sẽ trông như thế này: `CoroutineScope(coroutineContext=[SupervisorJobImpl{Active}@7e32c033, MainKt$special$inlined$CoroutineExceptionHandler$1@7ab2bfe1])`. Bây giờ chúng ta có hai yếu tố trong ngữ cảnh.
 
 
-Nhưng trình xử lý là gì và chúng ta có thể đặt gì khác vào đó?
+Nhưng handler là gì và chúng ta có thể đặt gì khác vào đó?
 
 ## Việc làm, ExceptionHandlers, Người điều phối
 
@@ -47,32 +47,32 @@ Nhưng trình xử lý là gì và chúng ta có thể đặt gì khác vào đ�
 
 - **ExceptionHandler** xử lý các trường hợp ngoại lệ chưa được phát hiện trong một coroutine hoặc các coroutine con của nó. **Nó có thể rất hữu ích cho việc ghi nhật ký, nhưng lưu ý rằng nó không cung cấp cách bắt ngoại lệ**, vì vậy nó không thể được sử dụng để khôi phục sau lỗi – chúng tôi có `try/catch` cho việc đó. Ngoài ra, nó chỉ phải được cài đặt trên coroutine gốc vì các phần tử con sẽ tự động truyền các lỗi chưa được phát hiện đến phần gốc cho đến tận phần gốc.
 
-- **Dispatcher** xác định thread hoặc luồng nào sẽ được sử dụng để chạy mã coroutine.
+- **Dispatcher** xác định thread hoặc thread nào sẽ được sử dụng để chạy mã coroutine.
 
 ### Quan trọng
 
-- Điều quan trọng cần lưu ý là mặc dù chúng ta có thể thêm nhiều công việc, trình xử lý hoặc trình điều phối vào coroutine builder, **một coroutine chỉ có thể có một phần tử của mỗi loại, vì vậy phần tử cuối cùng luôn ghi đè tất cả các phần tử trước đó**. Ví dụ: `CoroutineScope(SupervisorJob() + handler1 + handler2)` sẽ sử dụng `handler2`.
+- Điều quan trọng cần lưu ý là mặc dù chúng ta có thể thêm nhiều công việc, handler hoặc trình điều phối vào coroutine builder, **một coroutine chỉ có thể có một phần tử của mỗi loại, vì vậy phần tử cuối cùng luôn ghi đè tất cả các phần tử trước đó**. Ví dụ: `CoroutineScope(SupervisorJob() + handler1 + handler2)` sẽ sử dụng `handler2`.
 
-- **Một thực tế quan trọng khác là nếu chúng tôi không cung cấp phần tử của từng loại thì phần tử mặc định sẽ được sử dụng.** Có một trình xử lý lỗi mặc định và một trình điều phối mặc định cho mỗi nền tảng. còn công việc nếu không được cung cấp thì sẽ tạo công việc mới cho chúng ta. Không thể có một công việc mặc định duy nhất vì mỗi công việc đại diện cho một coroutine riêng.
+- **Một thực tế quan trọng khác là nếu chúng tôi không cung cấp phần tử của từng loại thì phần tử mặc định sẽ được sử dụng.** Có một handler lỗi mặc định và một trình điều phối mặc định cho mỗi nền tảng. còn công việc nếu không được cung cấp thì sẽ tạo công việc mới cho chúng ta. Không thể có một công việc mặc định duy nhất vì mỗi công việc đại diện cho một coroutine riêng.
 
 ## Thông tin thêm về Người điều phối
 
-Dispatcher chỉ là một giao diện và chúng ta có thể tự triển khai nếu cần.
+Dispatcher chỉ là một interface và chúng ta có thể tự triển khai nếu cần.
 
 Trên thực tế, hầu hết các nền tảng (như JS, JVM/Android, Native), đều có bộ điều phối cụ thể của riêng chúng ngoài ba bộ điều phối tiêu chuẩn có sẵn ở mọi nơi.
 
-- `Dispatchers.Default` – đúng như tên gọi, bộ điều phối này sẽ được sử dụng nếu không có bộ điều phối nào được chỉ định rõ ràng. **Nó lên lịch thực thi coroutine trong nền thread từ thread pool được chia sẻ**. Đó là một lựa chọn tốt cho tất cả các loại tính toán sử dụng CPU.
-- `Dispatchers.IO` – nó sử dụng một thread pool được chia sẻ khác và được thiết kế để xử lý tải I/O với nhiều thao tác có thể chặn việc chờ dữ liệu. Sử dụng nó để đọc/ghi đĩa và yêu cầu mạng.
+- `Dispatchers.Default` – đúng như tên gọi, bộ điều phối này sẽ được sử dụng nếu không có bộ điều phối nào được chỉ định rõ ràng. **Nó lên lịch thực thi coroutine trong background thread từ thread pool được chia sẻ**. Đó là một lựa chọn tốt cho tất cả các loại tính toán sử dụng CPU.
+- `Dispatchers.IO` – nó sử dụng một thread pool được chia sẻ khác và được thiết kế để xử lý tải I/O với nhiều thao tác có thể chặn việc chờ dữ liệu. Sử dụng nó để đọc/ghi đĩa và network request.
 - `Dispatchers.Unconfined` — nó bắt đầu thực thi một coroutine trong thread hiện tại và chạy cho đến lần tạm ngưng đầu tiên; sau đó, nó sẽ tiếp tục ở thread phù hợp khác. Thông thường, bộ điều phối này **không nên được sử dụng**.
 
 
-Trong trường hợp chúng ta cần sử dụng nhóm một hoặc nhiều luồng của riêng mình, thì có các hàm trợ giúp `newSingleThreadContext()` và `newFixedThreadPoolContext()`, đảm nhiệm việc tạo thread pool và bộ điều phối sử dụng nó để thực thi.
+Trong trường hợp chúng ta cần sử dụng nhóm một hoặc nhiều thread của riêng mình, thì có các hàm trợ giúp `newSingleThreadContext()` và `newFixedThreadPoolContext()`, đảm nhiệm việc tạo thread pool và bộ điều phối sử dụng nó để thực thi.
 **Chúng có thể hữu ích nếu chúng ta cần chạy một số lượng công việc nền chạy dài cố định.**
 
-Tuy nhiên, để chỉ giới hạn số lượng luồng song song được phép thực thi, **coroutines v1.6** cung cấp tùy chọn tốt hơn — `limitedParallelism()`. 
+Tuy nhiên, để chỉ giới hạn số lượng thread song song được phép thực thi, **coroutines v1.6** cung cấp tùy chọn tốt hơn — `limitedParallelism()`.
 Chức năng này có thể được áp dụng cho bất kỳ bộ điều phối đa luồng nào để đảm bảo rằng không quá N coroutine sẽ chạy song song.
 
-Chẳng hạn, `Dispatchers.IO.limitedParallelism(2)` sử dụng cùng một nhóm IO được chia sẻ nhưng chỉ cho phép sử dụng hai luồng.
+Chẳng hạn, `Dispatchers.IO.limitedParallelism(2)` sử dụng cùng một nhóm IO được chia sẻ nhưng chỉ cho phép sử dụng hai thread.
 Ví dụ: sẽ hữu ích nếu chúng tôi chỉ được phép mở một số lượng kết nối DB có giới hạn. Bất kỳ số lượng lượt xem parallelism giới hạn nào cũng có thể được tạo trên đầu bộ điều phối.
 
 ## Bối cảnh inheritance
@@ -131,7 +131,7 @@ first->default->IO: [MainKt$special$$inlined$CoroutineExceptionHandler$1@73a8dfc
 Ví dụ trên cho thấy cách chạy nhiều công việc đồng thời trong các bối cảnh khác nhau, nhưng trong cuộc sống thực, chúng ta thường cần một thứ đơn giản hơn nhiều.
 
 
-Ví dụ: hãy xem xét một ứng dụng UI cần tải một số dữ liệu từ đĩa để hiển thị, việc này có thể mất một chút thời gian và do đó không thể được thực thi trong thread chính mà không đóng băng UI.
+Ví dụ: hãy xem xét một ứng dụng UI cần tải một số dữ liệu từ đĩa để hiển thị, việc này có thể mất một chút thời gian và do đó không thể được thực thi trong main thread mà không đóng băng UI.
 
 Kotlin đưa ra giải pháp cho vấn đề đó. Nó được gọi là `withContext`. Đúng như tên gọi, nó thực thi một khối mã với ngữ cảnh mới.
 Như được hiển thị trước đó, nó kế thừa bối cảnh và nếu bộ điều phối được chỉ định, sẽ chuyển việc thực thi sang thread mới. **Nhưng bây giờ thứ tự thực hiện là tuần tự.**

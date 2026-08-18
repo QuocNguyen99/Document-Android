@@ -63,7 +63,7 @@ Bây giờ lược đồ đã được xác định, đã đến lúc lưu trữ
 Để khởi tạo Trình trợ giúp của chúng tôi, chúng tôi gọi getWritableDatabase để lấy phiên bản SQLiteDatabase và chúng tôi đã sẵn sàng bắt đầu: `val db = DbHelper(context).writableDatabase`
 
 Việc gọi `getWritableDatabase()` lần đầu tiên sẽ kích hoạt Trình trợ giúp thực hiện quá trình định cấu hình và tạo hoặc nâng cấp lifecycle.
-Quá trình này có thể mất nhiều thời gian, vì vậy tốt nhất bạn nên thực hiện cuộc gọi từ nền thread.
+Quá trình này có thể mất nhiều thời gian, vì vậy tốt nhất bạn nên thực hiện cuộc gọi từ background thread.
 
 Để đóng gói tất cả logic cơ sở dữ liệu, hãy tạo `PersonStore`:
 
@@ -78,7 +78,7 @@ class PersonStore(private val db: SQLiteDatabase) : Closeable {
 }
 ```
 
-Việc triển khai tín hiệu giao diện `Closeable` cho người dùng thuộc lớp này rằng các phiên bản của nó phải được xử lý sau khi sử dụng. 
+Việc triển khai tín hiệu interface `Closeable` cho người dùng thuộc lớp này rằng các phiên bản của nó phải được xử lý sau khi sử dụng.
 Đó là bởi vì chúng ta sẽ yêu cầu `SQLiteDatabase` xây dựng một số đối tượng `Closeable` và đóng chúng trong phương thức `close()` của riêng chúng ta.
 `SQLite` được viết bằng `C` nên chúng ta cần quản lý bộ nhớ theo cách thủ công.
 
@@ -214,7 +214,7 @@ public Cursor query(String table, String[] columns, String selection,
 
 - `db.query("people", null, …)` thực chất có nghĩa là `SELECT *`. Tập hợp cột sẽ không được xác định tại thời điểm này, nhưng bạn vẫn có thể sử dụng `cursor.getLong(cursor.getColumnIndexOrThrow("_id"))`, v.v.
 
-Tại thời điểm này, chúng tôi có thể chèn bản ghi `Person` và chọn nó. Nhưng trong hầu hết các trường hợp, chúng ta cần danh sách các thực thể, vì vậy hãy tạo một `Cursor` của tất cả các bản ghi `Person` trong cơ sở dữ liệu và gói nó trong `List`. Danh sách loại này yêu cầu `Cursor` trực tiếp để hoạt động bình thường và chúng tôi phải đóng nó sau khi sử dụng, vì vậy chúng tôi cần một loại bổ sung: giao diện `List<E>`, `RandomAccess`, `Closeable`:
+Tại thời điểm này, chúng tôi có thể chèn bản ghi `Person` và chọn nó. Nhưng trong hầu hết các trường hợp, chúng ta cần danh sách các thực thể, vì vậy hãy tạo một `Cursor` của tất cả các bản ghi `Person` trong cơ sở dữ liệu và gói nó trong `List`. Danh sách loại này yêu cầu `Cursor` trực tiếp để hoạt động bình thường và chúng tôi phải đóng nó sau khi sử dụng, vì vậy chúng tôi cần một loại bổ sung: interface `List<E>`, `RandomAccess`, `Closeable`:
 
 ```kotlin
 fun all(): CloseableList<Person> {

@@ -29,7 +29,7 @@ Thư viện tiêu chuẩn Kotlin đi kèm với một bộ đại biểu tiêu c
 ### 1. **Thuộc tính lười biếng**: 
 
 Hàm lười biếng lấy một lambda và trả về một phiên bản `Lazy<T>`, đóng vai trò là đại biểu để triển khai thuộc tính lười biếng. 
-Lệnh gọi đầu tiên tới `get()` thực thi lambda được chuyển tới `lazy()` và ghi nhớ kết quả. Các cuộc gọi tiếp theo tới `get()` chỉ cần trả về kết quả đã ghi nhớ (được lưu trong bộ nhớ đệm).
+Lệnh gọi đầu tiên tới `get()` thực thi lambda được chuyển tới `lazy()` và ghi nhớ kết quả. Các cuộc gọi tiếp theo tới `get()` chỉ cần trả về kết quả đã ghi nhớ (được lưu trong cache).
 
 ```kotlin
 val lazyValue: String by lazy {

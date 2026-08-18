@@ -132,7 +132,7 @@ Bitmap có thể được sử dụng làm bộ đệm vẽ. Điều này rất 
 
 Bitmap trong Android có thể là mutable hoặc immutable. 
 
-Để **rút vào**, chúng ta cần một chiếc mutable. Chúng tôi có thể phân bổ Bitmap trống, yêu cầu `BitmapFactory` trả về mutable `Bitmap` hoặc tạo bản sao mutable của `Bitmap` hiện có.
+Để **rút vào**, chúng ta cần một chiếc mutable. Chúng tôi có thể phân bổ Bitmap trống, request `BitmapFactory` trả về mutable `Bitmap` hoặc tạo bản sao mutable của `Bitmap` hiện có.
 
 Trong ví dụ của chúng tôi, chúng tôi sẽ sử dụng cấu hình `ARGB_8888`. Điều này có nghĩa là một byte cho mỗi kênh và bốn byte cho mỗi pixel, có độ trong suốt. Nó mang lại độ sâu màu tối ưu trong hầu hết các trường hợp:
 

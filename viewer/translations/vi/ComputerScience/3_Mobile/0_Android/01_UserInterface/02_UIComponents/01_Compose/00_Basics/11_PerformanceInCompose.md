@@ -121,7 +121,7 @@ private fun UserDetails(wrapper: ImmutableUserWrapper) {
 }
 ```
 
-6. Bộ sưu tập không ổn định. Danh sách Kotlin ở dạng chỉ đọc chứ không phải immutable, vì vậy chúng ta có thể sử dụng:
+6. Collection không ổn định. Danh sách Kotlin ở dạng chỉ đọc chứ không phải immutable, vì vậy chúng ta có thể sử dụng:
 
 Tạo trình bao bọc cho danh sách, giống như chúng tôi đã làm khi xử lý các thực thể từ các mô-đun khác và sử dụng nó trên lớp UI:
 
@@ -141,7 +141,7 @@ private fun WrappedLazyColumnApproach1(wrapper: ImmutableListWrapper) {
 }
 ```
 
-Sử dụng bộ sưu tập immutable `from kotlinx.collections.immutable`. 
+Sử dụng collection immutable `from kotlinx.collections.immutable`.
 Nó có sẵn dưới dạng phụ thuộc.
 
 ```kotlin

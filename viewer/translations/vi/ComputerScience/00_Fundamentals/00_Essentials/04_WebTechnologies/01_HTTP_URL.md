@@ -10,7 +10,7 @@ Bây giờ chúng ta hãy xem mẫu này chi tiết hơn:
 
 - `<scheme>` là một cách trao đổi dữ liệu với tài nguyên. Có lẽ bạn quen thuộc nhất với các lược đồ http và https URL, nhưng vẫn có những lược đồ khác;
 
-- `<login>` và `<password>` là tiền tố truyền dữ liệu xác thực cho một số giao thức, nếu cần;
+- `<login>` và `<password>` là tiền tố truyền dữ liệu xác thực cho một số protocol, nếu cần;
 
 - `<host>` là tên miền hoặc địa chỉ IP nơi đặt trang web. Tên miền là tên của trang web, IP là địa chỉ của nó trong mạng;
 
@@ -18,7 +18,7 @@ Bây giờ chúng ta hãy xem mẫu này chi tiết hơn:
 
 - `<path>` cho biết địa chỉ chính xác của một tệp hoặc trang cụ thể trong một miền;
 
-- `<request parameters>` là các thông số được truyền về máy chủ. Tùy thuộc vào thông số yêu cầu, trang web có thể thay đổi hiển thị một chút. Ví dụ: có thể sắp xếp các mục của danh sách theo thứ tự khác;
+- `<request parameters>` là các thông số được truyền về server. Tùy thuộc vào thông số request, trang web có thể thay đổi hiển thị một chút. Ví dụ: có thể sắp xếp các mục của danh sách theo thứ tự khác;
 
 - `<anchor>` cho phép bạn kết nối với một phần cụ thể của trang web hoặc tài liệu.
 

@@ -1,17 +1,17 @@
 # Lớp học kín
 
-Bạn có nhớ các enum, vùng chứa các hằng số collection không? Chúng ta sẽ nói về một loại vùng chứa khác - loại dành cho các lớp con cố định: sealed class hoặc giao diện kín.
+Bạn có nhớ các enum, vùng chứa các hằng số collection không? Chúng ta sẽ nói về một loại vùng chứa khác - loại dành cho các lớp con cố định: sealed class hoặc interface kín.
 
 ## Cú pháp cơ bản
 
-Để khai báo sealed class hoặc giao diện, chúng ta chỉ cần đặt công cụ sửa đổi `sealed` trước lớp hoặc giao diện:
+Để khai báo sealed class hoặc interface, chúng ta chỉ cần đặt công cụ sửa đổi `sealed` trước lớp hoặc interface:
 
 ```kotlin
 sealed class CustomError 
 sealed interface CustomErrors
 ```
 
-Vì các lớp được niêm phong và các giao diện được niêm phong là tương tự nhau (sự khác biệt duy nhất là giữa lớp và giao diện), chúng tôi sẽ chỉ tiếp tục với các ví dụ sealed class.
+Vì các lớp được niêm phong và các interface được niêm phong là tương tự nhau (sự khác biệt duy nhất là giữa lớp và interface), chúng tôi sẽ chỉ tiếp tục với các ví dụ sealed class.
 
 - sealed class là trừu tượng nên không thể khởi tạo được. 
 

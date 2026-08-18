@@ -17,7 +17,7 @@ Khóa API, tên người dùng/mật khẩu được nhúng trong mã hoặc c�
 ## Cách phòng ngừa (hành động quan trọng nhất)
 
 - **Không bao giờ mã hóa thông tin xác thực** trong ứng dụng.
-- **Truyền an toàn**: luôn sử dụng các kênh được mã hóa (ví dụ: TLS/HTTPS) và tránh tiết lộ bí mật trong yêu cầu/nhật ký.
+- **Truyền an toàn**: luôn sử dụng các kênh được mã hóa (ví dụ: TLS/HTTPS) và tránh tiết lộ bí mật trong request/nhật ký.
 - **Tránh lưu trữ mật khẩu người dùng** trên thiết bị; thích các mã thông báo truy cập an toàn, có thể hủy bỏ.
 - **Sử dụng các tiêu chuẩn xác thực mạnh** và tránh logic xác thực "cây nhà lá vườn".
 - **Xoay và cập nhật** khóa/mã thông báo API thường xuyên để giảm thiệt hại nếu có thứ gì đó bị rò rỉ.

@@ -23,7 +23,7 @@ Do đó, những kẻ tấn công có thể **giải mã dữ liệu nhạy cả
 - **Sử dụng thuật toán Encryption mạnh**: dựa vào mật mã hiện đại, được chấp nhận rộng rãi (ví dụ: AES, RSA/ECC) và tránh các tùy chọn không được dùng nữa.
 - **Đảm bảo đủ độ dài khóa**: tuân theo hướng dẫn hiện hành của ngành về kích thước khóa cho mỗi thuật toán.
 - **Tuân theo các phương pháp quản lý khóa an toàn**: bảo vệ khóa bằng khả năng kiểm soát truy cập mạnh mẽ; sử dụng bộ nhớ an toàn (HSM/kho khóa nếu có).
-- **Triển khai Encryption đúng cách**: sử dụng các thư viện/khuôn khổ được đánh giá tốt; tránh việc triển khai tiền điện tử tùy chỉnh.
+- **Triển khai Encryption đúng cách**: sử dụng các thư viện/framework được đánh giá tốt; tránh việc triển khai tiền điện tử tùy chỉnh.
 - **Lưu trữ an toàn khóa Encryption**: lưu trữ khóa trong OS- được cung cấp bộ lưu trữ an toàn (iOS Chuỗi khóa, Kho khóa Android), không bao giờ là văn bản thuần túy.
 - **Sử dụng Lớp truyền tải an toàn**: sử dụng HTTPS/TLS với xác thực chứng chỉ phù hợp và cấu hình mật mã mạnh.
 - **Xác thực và Xác thực**: sử dụng chữ ký/xác thực chứng chỉ để đảm bảo tính toàn vẹn và xác thực khi cần thiết.

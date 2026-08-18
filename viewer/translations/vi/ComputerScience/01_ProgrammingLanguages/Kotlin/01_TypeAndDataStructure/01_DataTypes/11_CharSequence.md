@@ -1,6 +1,6 @@
 #CharSequence
 
-CharSequence trong Kotlin là giao diện đại diện cho một chuỗi ký tự. Nó được thiết kế để có tên **immutable**. điều đó có nghĩa là nội dung của nó không thể thay đổi sau khi nó được tạo.
+CharSequence trong Kotlin là interface đại diện cho một chuỗi ký tự. Nó được thiết kế để có tên **immutable**. điều đó có nghĩa là nội dung của nó không thể thay đổi sau khi nó được tạo.
 
 
 một số phương pháp có sẵn cho `CharSequence`:
@@ -13,9 +13,9 @@ một số phương pháp có sẵn cho `CharSequence`:
 
 ## CharSequence so với Chuỗi (sự khác biệt)
 
-Sự khác biệt đáng kể nhất giữa `CharSequence` và `String` là `CharSequence` là một giao diện, trong khi `String` là một lớp cụ thể trong Kotlin.
+Sự khác biệt đáng kể nhất giữa `CharSequence` và `String` là `CharSequence` là một interface, trong khi `String` là một lớp cụ thể trong Kotlin.
 
-`CharSequence` có thể được coi là một giao diện tổng quát hơn mà String triển khai. Bất kỳ `String` nào cũng là `CharSequence`, nhưng không phải mọi `CharSequence` đều là một Chuỗi.
+`CharSequence` có thể được coi là một interface tổng quát hơn mà String triển khai. Bất kỳ `String` nào cũng là `CharSequence`, nhưng không phải mọi `CharSequence` đều là một Chuỗi.
 
 Một điểm khác biệt giữa `CharSequence` và `String` là phân biệt chữ hoa chữ thường. `CharSequence` phân biệt chữ hoa chữ thường, trong khi `String` không phân biệt chữ hoa chữ thường
 
@@ -30,7 +30,7 @@ fun main() {
 }
 ```
 
-Tóm lại, `String` là một lớp cụ thể triển khai giao diện `CharSequence` và cung cấp chức năng bổ sung, trong khi `CharSequence` là một giao diện xác định một chuỗi ký tự có thể được các lớp khác nhau triển khai.
+Tóm lại, `String` là một lớp cụ thể triển khai interface `CharSequence` và cung cấp chức năng bổ sung, trong khi `CharSequence` là một interface xác định một chuỗi ký tự có thể được các lớp khác nhau triển khai.
 
 ## Cách sử dụng CharSequence (khi nào nên sử dụng, cách chuyển sang String)
 
@@ -40,4 +40,4 @@ Ví dụ: nếu chúng ta muốn đọc một tệp lớn vào bộ nhớ, chún
 
 Để chuyển đổi `CharSequence` thành Chuỗi, chúng ta chỉ cần sử dụng phương thức `toString()`.
 
-Lưu ý rằng bất kỳ đối tượng `String` nào cũng có thể được sử dụng làm đối tượng `CharSequence`, vì `String` triển khai giao diện `CharSequence`.
+Lưu ý rằng bất kỳ đối tượng `String` nào cũng có thể được sử dụng làm đối tượng `CharSequence`, vì `String` triển khai interface `CharSequence`.

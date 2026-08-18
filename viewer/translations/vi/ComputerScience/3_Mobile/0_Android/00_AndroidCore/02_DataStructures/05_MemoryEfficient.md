@@ -22,7 +22,7 @@ Thao tác tìm kiếm sử dụng **tìm kiếm nhị phân** để tìm hàm b�
 > [!CAUTION]
 > Tránh các nhóm có khoảng trống và tham chiếu đến các nút, ArrayMap cung cấp cho chúng tôi bố cục bộ nhớ nhỏ gọn hơn, hy sinh tốc độ tra cứu và chèn.
 
-`ArrayMap` triển khai giao diện `(Mutable)Map` tương tự như `HashMap` và có thể được coi là một sự thay thế dễ dàng.
+`ArrayMap` triển khai interface `(Mutable)Map` tương tự như `HashMap` và có thể được coi là một sự thay thế dễ dàng.
 
 ```kotlin
 val cats = ArrayMap<String, Cat>()
@@ -93,21 +93,21 @@ Bên cạnh phương pháp `get(key)` tương tự như `Map`, còn có `get(key
 ## Tại sao cấu trúc dữ liệu Android SDK không có trong Thư viện Java tiêu chuẩn
 
 ### 1. Tối ưu hóa cho môi trường Android
-   - Các cấu trúc dữ liệu này được thiết kế riêng cho Android, nơi bộ nhớ bị hạn chế hơn so với các ứng dụng Java SE/EE tiêu chuẩn chạy trên máy tính để bàn hoặc máy chủ.
+   - Các cấu trúc dữ liệu này được thiết kế riêng cho Android, nơi bộ nhớ bị hạn chế hơn so với các ứng dụng Java SE/EE tiêu chuẩn chạy trên máy tính để bàn hoặc server.
    - Ngược lại, các thư viện chuẩn Java ưu tiên tính linh hoạt cho mục đích chung và hiệu suất tổng thể hơn là chỉ tiết kiệm bộ nhớ.
 ### 2. Hiệu suất không phải lúc nào cũng tốt hơn
    - `ArrayMap` sử dụng một mảng thay vì hash table, dẫn đến thời gian tra cứu trong trường hợp xấu nhất của `O(N)`, so với `O(1)` cho HashMap.
    - `SparseArray` hoạt động tốt đối với các tập dữ liệu nhỏ, nhưng `HashMap` có thể nhanh hơn đối với các tập dữ liệu lớn hơn.
-   - Vì vậy, trong các ứng dụng Java không có ràng buộc nghiêm ngặt về bộ nhớ, các bộ sưu tập Java tiêu chuẩn thường tối ưu hơn.
-### 3. Không tương thích với Bộ sưu tập Java Framework
+   - Vì vậy, trong các ứng dụng Java không có ràng buộc nghiêm ngặt về bộ nhớ, các collection Java tiêu chuẩn thường tối ưu hơn.
+### 3. Không tương thích với Collection Java Framework
    - Thư viện Java tiêu chuẩn (java.util.*) tuân theo API (Collection, Map, Set, List) thống nhất, giúp các thư viện khác nhau dễ dàng làm việc cùng nhau.
-    Cấu trúc dữ liệu dành riêng cho Android không tuân thủ các giao diện này, khiến việc tích hợp với các thư viện Java tiêu chuẩn trở nên khó khăn hơn.
+    Cấu trúc dữ liệu dành riêng cho Android không tuân thủ các interface này, khiến việc tích hợp với các thư viện Java tiêu chuẩn trở nên khó khăn hơn.
 ### 4. Hỗ trợ Generics hạn chế
    - `SparseArray` sử dụng `int` làm khóa thay vì `Integer`, nhưng nó không hỗ trợ đầy đủ các thuốc generic như `HashMap<Integer, V>`, làm giảm tính linh hoạt trong các trường hợp sử dụng thông thường.
 
 ## Phần kết luận
 
-Sử dụng `ArrayMap` và `ArraySet` thay vì `HashMap` và `HashSet` để **tiết kiệm một số bộ nhớ nếu bạn sẵn sàng hy sinh tốc độ chèn trên các bộ sưu tập khổng lồ**.
+Sử dụng `ArrayMap` và `ArraySet` thay vì `HashMap` và `HashSet` để **tiết kiệm một số bộ nhớ nếu bạn sẵn sàng hy sinh tốc độ chèn trên các collection khổng lồ**.
 Chọn `SparseArrays` trong số tất cả các tùy chọn có thể nếu **bạn cần khóa số nguyên.**
 
 Hãy nhớ nguyên tắc vàng: bằng cách hy sinh bộ nhớ, chúng ta sẽ tăng hiệu suất và ngược lại.

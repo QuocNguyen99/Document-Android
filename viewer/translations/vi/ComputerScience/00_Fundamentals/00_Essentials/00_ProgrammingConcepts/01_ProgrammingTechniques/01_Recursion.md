@@ -42,7 +42,7 @@ fun tailFactorialRecursive(n: Int, cur: Int = 1): Int {
 }
 ```
 > [!NOTE]
-> Tại sao đuôi recursion lại nổi bật như một loại riêng biệt? Bởi vì các trình biên dịch hiện đại có thể làm việc với nó hiệu quả hơn. Để tính toán một lệnh gọi khác của hàm recursion, compiler thường đẩy khung ngăn xếp lên ngăn xếp các thao tác sẽ được thực hiện, do đó, tạo ra một tập hợp các biến cục bộ mới, gây tốn thời gian và không gian. Trong trường hợp đuôi recursion, compiler chỉ có thể quay lại phần đầu của hàm để tiếp tục làm việc với các biến tương tự mà nó đã có trong khung ngăn xếp hiện tại.
+> Tại sao đuôi recursion lại nổi bật như một loại riêng biệt? Bởi vì các compiler hiện đại có thể làm việc với nó hiệu quả hơn. Để tính toán một lệnh gọi khác của hàm recursion, compiler thường đẩy khung ngăn xếp lên ngăn xếp các thao tác sẽ được thực hiện, do đó, tạo ra một tập hợp các biến cục bộ mới, gây tốn thời gian và không gian. Trong trường hợp đuôi recursion, compiler chỉ có thể quay lại phần đầu của hàm để tiếp tục làm việc với các biến tương tự mà nó đã có trong khung ngăn xếp hiện tại.
 
 4. **Nhiều recursion**
 

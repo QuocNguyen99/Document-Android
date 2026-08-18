@@ -213,7 +213,7 @@ Khi phát triển các thành phần kết hợp có thể sử dụng lại, b�
 State hoisting trong Compose là một dạng chuyển trạng thái sang phương thức gọi của thành phần kết hợp để biến thành thành phần kết hợp thành không có trạng thái. Mẫu chung cho state hoisting trong Jetpack Compose là thay thế biến trạng thái bằng hai tham số:
 
 - `value T`: giá trị hiện tại cần hiển thị
-- `onValueChange: (T) -> Unit`: sự kiện yêu cầu thay đổi giá trị, trong đó T là giá trị mới được đề xuất
+- `onValueChange: (T) -> Unit`: sự kiện request thay đổi giá trị, trong đó T là giá trị mới được đề xuất
 
 Tuy nhiên, bạn không bị giới hạn ở `onValueChange`. Nếu các sự kiện cụ thể hơn phù hợp với thành phần kết hợp, bạn nên xác định chúng bằng lambda.
 
@@ -311,9 +311,9 @@ state hoisting đơn giản có thể được quản lý trong chính các hàm
 
 Nói chung, `remember` lấy tham số lambda tính toán. Khi `remember` được chạy lần đầu tiên, nó gọi phép tính lambda và lưu trữ kết quả của nó. Trong recomposition, `remember` trả về giá trị được lưu trữ lần cuối.
 
-Ngoài trạng thái bộ nhớ đệm, bạn cũng có thể sử dụng `remember` để lưu trữ bất kỳ đối tượng hoặc kết quả của một thao tác nào trong Composition vốn tốn kém khi khởi tạo hoặc tính toán. Bạn có thể không muốn lặp lại phép tính này trong mọi recomposition. 
+Ngoài trạng thái cache, bạn cũng có thể sử dụng `remember` để lưu trữ bất kỳ đối tượng hoặc kết quả của một thao tác nào trong Composition vốn tốn kém khi khởi tạo hoặc tính toán. Bạn có thể không muốn lặp lại phép tính này trong mọi recomposition.
 
-`remember` lưu trữ giá trị cho đến khi nó rời khỏi Composition. Tuy nhiên, **có một cách để vô hiệu hóa giá trị được lưu trong bộ nhớ đệm**. `remember` API cũng có tham số `key` hoặc `keys`. Nếu bất kỳ phím nào trong số này thay đổi, lần tiếp theo khi hàm kết hợp lại, **`remember` sẽ vô hiệu hóa bộ nhớ đệm và thực hiện lại khối lambda tính toán. Cơ chế này cho phép bạn kiểm soát vòng đời của một đối tượng trong Composition**. Phép tính vẫn có hiệu lực cho đến khi đầu vào thay đổi, thay vì cho đến khi giá trị được ghi nhớ rời khỏi Composition.
+`remember` lưu trữ giá trị cho đến khi nó rời khỏi Composition. Tuy nhiên, **có một cách để vô hiệu hóa giá trị được lưu trong cache**. `remember` API cũng có tham số `key` hoặc `keys`. Nếu bất kỳ phím nào trong số này thay đổi, lần tiếp theo khi hàm kết hợp lại, **`remember` sẽ vô hiệu hóa cache và thực hiện lại khối lambda tính toán. Cơ chế này cho phép bạn kiểm soát vòng đời của một đối tượng trong Composition**. Phép tính vẫn có hiệu lực cho đến khi đầu vào thay đổi, thay vì cho đến khi giá trị được ghi nhớ rời khỏi Composition.
 
 Ví dụ:
 

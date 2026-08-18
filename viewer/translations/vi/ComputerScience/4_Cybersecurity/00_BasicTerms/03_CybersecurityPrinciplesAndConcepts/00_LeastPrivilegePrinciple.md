@@ -16,7 +16,7 @@ Một trong những cách tự nhiên nhất để triển khai POLP là sử d�
 
 ## Hệ thống quản lý danh tính
 
-Hệ thống Quản lý danh tính (IDM) là các công cụ và khung giúp các tổ chức quản lý và kiểm soát danh tính người dùng, quyền truy cập và quy trình xác thực trong hệ thống kỹ thuật số của họ.
+Hệ thống Quản lý danh tính (IDM) là các công cụ và framework giúp các tổ chức quản lý và kiểm soát danh tính người dùng, quyền truy cập và quy trình xác thực trong hệ thống kỹ thuật số của họ.
 
 Theo nguyên tắc **tách biệt mối quan tâm**, mỗi thành phần (hoặc hệ thống con) xử lý một chức năng logic duy nhất và phụ thuộc vào các thành phần khác để thực hiện các hoạt động nằm ngoài phạm vi của thành phần đó. 
 Hệ thống quản lý danh tính phải bao gồm các thành phần logic cho các dịch vụ sau

@@ -11,11 +11,11 @@ thread là một chuỗi hướng dẫn mà chương trình có thể thực thi
 
 Lớp `Thread` có một phương thức tĩnh có tên `currentThread` để lấy tham chiếu đến đối tượng thread hiện đang thực thi
 
-## Thông tin trên thread chính
+## Thông tin trên main thread
 
 Lớp `Thread` lưu trữ thông tin cơ bản về thread: tên, mã định danh (`long`), mức độ ưu tiên và một số đặc điểm khác có thể có được thông qua các chức năng của nó. 
 
-Ví dụ dưới đây trình bày cách lấy các đặc tính của thread chính bằng cách tạo các tham chiếu đến nó thông qua một đối tượng của lớp `Thread`.
+Ví dụ dưới đây trình bày cách lấy các đặc tính của main thread bằng cách tạo các tham chiếu đến nó thông qua một đối tượng của lớp `Thread`.
 
 ```kotlin
 fun main() {
@@ -41,6 +41,6 @@ fun main() {
 - `t.isDaemon` kiểm tra xem thread có phải là **daemon** hay không. 
 
 > [!NOTE]
-> Daemon thread (xuất phát từ thuật ngữ UNIX) là thread có mức độ ưu tiên thấp chạy trong nền để thực hiện các tác vụ như rác collection, v.v. JVM không đợi các luồng daemon dừng trước khi thoát, trong khi nó làm như vậy đối với các luồng không phải daemon.
+> Daemon thread (xuất phát từ thuật ngữ UNIX) là thread có mức độ ưu tiên thấp chạy trong nền để thực hiện các tác vụ như rác collection, v.v. JVM không đợi các thread daemon dừng trước khi thoát, trong khi nó làm như vậy đối với các thread không phải daemon.
 
 Mỗi đặc tính có thể được thay đổi bằng cách đặt một giá trị mới

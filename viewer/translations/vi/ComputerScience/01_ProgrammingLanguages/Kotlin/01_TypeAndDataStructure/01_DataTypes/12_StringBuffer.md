@@ -25,7 +25,7 @@ val buffer = StringBuffer(10)
 
 ##Thread Safety
 
-Tất cả các phương pháp `StringBuffer` đều được đồng bộ hóa, giúp thread an toàn. Tuy nhiên, synchronization chỉ áp dụng cho các phương thức của nó chứ không áp dụng cho chính đối tượng. Đảm bảo tài nguyên được chia sẻ được đồng bộ hóa bên ngoài khi được sử dụng trên các luồng.
+Tất cả các phương pháp `StringBuffer` đều được đồng bộ hóa, giúp thread an toàn. Tuy nhiên, synchronization chỉ áp dụng cho các phương thức của nó chứ không áp dụng cho chính đối tượng. Đảm bảo tài nguyên được chia sẻ được đồng bộ hóa bên ngoài khi được sử dụng trên các thread.
 
 ### Ví dụ:
 ```kotlin
@@ -65,7 +65,7 @@ fun main() {
 
 ### Sử dụng `StringBuffer` Khi:
 1. Hoạt động đa luồng yêu cầu thao tác chuỗi an toàn thread.
-2. Tạo văn bản đồng thời hoặc lưu các chuỗi được chia sẻ vào bộ nhớ đệm trên các luồng.
+2. Tạo văn bản đồng thời hoặc lưu các chuỗi được chia sẻ vào cache trên các thread.
 
 ## Đánh đổi hiệu suất
 

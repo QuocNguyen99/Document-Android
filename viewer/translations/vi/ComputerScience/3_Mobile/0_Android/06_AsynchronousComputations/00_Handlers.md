@@ -1,11 +1,11 @@
-# Trình xử lý
+# Handler
 
 `Handler` là một lớp của Android SDK, được sử dụng để lên lịch các tác vụ tùy ý trên thread cụ thể.
 
-**Trình xử lý** hoạt động với một hàng tin nhắn.
+**Handler** hoạt động với một hàng tin nhắn.
 Nó cho phép chúng ta **lên lịch thực thi mã** tại một thời điểm nhất định trong tương lai, có hoặc không có **độ trễ** được chỉ định.
 
-Trình xử lý cũng cho phép chúng tôi thực thi mã **bên ngoài thread** của chúng tôi.
+Handler cũng cho phép chúng tôi thực thi mã **bên ngoài thread** của chúng tôi.
 
 1. xếp tác phẩm vào hàng đợi
 2. thực hiện nó
@@ -16,11 +16,11 @@ Trình xử lý cũng cho phép chúng tôi thực thi mã **bên ngoài thread*
 
 - `post()` - khiến `Runnable` được thêm vào hàng đợi tin nhắn với một khoảng thời gian cụ thể
 
-- `Runnable` - giao diện để sử dụng cho bất kỳ lớp nào có phiên bản sẽ được thực thi bởi thread
+- `Runnable` - interface để sử dụng cho bất kỳ lớp nào có phiên bản sẽ được thực thi bởi thread
 
 ## Thực thi có thể chạy được
 
-Để xem cách sử dụng Trình xử lý, chúng tôi sẽ tạo một thao tác được thực hiện với độ trễ nhất định. Cụ thể, chúng ta sẽ tạo một hàm thay đổi màu sắc của một hoạt động.
+Để xem cách sử dụng Handler, chúng tôi sẽ tạo một thao tác được thực hiện với độ trễ nhất định. Cụ thể, chúng ta sẽ tạo một hàm thay đổi màu sắc của một hoạt động.
 
 Hãy bắt đầu bằng cách xác định mảng màu mà chúng ta muốn lặp qua:
 
@@ -29,7 +29,7 @@ private val colors = arrayOf(Color.RED, Color.GREEN, Color.BLUE)
 private var color = colors[0]
 ```
 
-Tiếp theo, chúng ta cần một Trình xử lý cho event loop bên trong thread chính:
+Tiếp theo, chúng ta cần một Handler cho event loop bên trong main thread:
 
 ```kotlin
 private val handler = Handler(Looper.getMainLooper())

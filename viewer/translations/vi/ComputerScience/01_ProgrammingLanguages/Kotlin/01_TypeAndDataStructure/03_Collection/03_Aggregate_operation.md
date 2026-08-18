@@ -1,11 +1,11 @@
 
-# Hoạt động tổng hợp trên các bộ sưu tập
+# Hoạt động tổng hợp trên các collection
  
 Đã đến lúc tìm hiểu cách lấy các giá trị dựa trên nội dung của collection, ví dụ: giá trị tối đa, giá trị trung bình, một đối tượng có giá trị tối đa của thuộc tính, v.v.
  
 ## Hàm tổng hợp cơ bản
  
-Khi làm việc với các bộ sưu tập, chúng tôi có một loạt phương pháp để thu được các giá trị dựa trên nội dung collection và nhận thông tin bổ sung về nội dung đó. Các phương pháp này được gọi là "phương pháp tổng hợp":
+Khi làm việc với các collection, chúng tôi có một loạt phương pháp để thu được các giá trị dựa trên nội dung collection và nhận thông tin bổ sung về nội dung đó. Các phương pháp này được gọi là "phương pháp tổng hợp":
  
 - `minOrNull()` trả về phần tử nhỏ nhất của collection hoặc null trên collection trống.
  
@@ -36,7 +36,7 @@ Khi làm việc với các bộ sưu tập, chúng tôi có một loạt phươn
  
 - `sumOf()` với chức năng chọn, trả về tổng ứng dụng của nó cho tất cả các phần tử collection.
  
-Ngoài ra, chúng tôi cũng có thể sử dụng `minBy()`/`maxBy()` và `maxOf()`/`minOf()` để thực hiện các tác vụ tương tự, nhưng chúng ném `NoSuchElementException` vào các bộ sưu tập trống.
+Ngoài ra, chúng tôi cũng có thể sử dụng `minBy()`/`maxBy()` và `maxOf()`/`minOf()` để thực hiện các tác vụ tương tự, nhưng chúng ném `NoSuchElementException` vào các collection trống.
 
 > [!TIP]
 > Ngoài ra, bạn có thể sử dụng các vị từ để tìm các phần tử max hoặc min.
@@ -105,11 +105,11 @@ Chúng ta có thể thực hiện tác vụ tương tự như trên bằng cách
  
 - `count()` trả về số lượng mục theo bộ so sánh.
  
-Các phương thức này trả về `null` trên các bộ sưu tập trống. Tuy nhiên, chúng tôi cũng có `maxOfWith()` và `minOfWith()` để thực hiện nhiệm vụ tương tự và họ ném `NoSuchElementException` vào các bộ sưu tập trống.
+Các phương thức này trả về `null` trên các collection trống. Tuy nhiên, chúng tôi cũng có `maxOfWith()` và `minOfWith()` để thực hiện nhiệm vụ tương tự và họ ném `NoSuchElementException` vào các collection trống.
 
 ## Đếm phần tử
 
-Một trong những nhiệm vụ chính khi làm việc với các bộ sưu tập là đếm các phần tử. Rõ ràng, chúng ta có thể sử dụng `size`. nhưng một sự thật thú vị là chúng ta cũng có thể sử dụng **vị ngữ** để đếm số phần tử collection phù hợp.
+Một trong những nhiệm vụ chính khi làm việc với các collection là đếm các phần tử. Rõ ràng, chúng ta có thể sử dụng `size`. nhưng một sự thật thú vị là chúng ta cũng có thể sử dụng **vị ngữ** để đếm số phần tử collection phù hợp.
 
 Để thực hiện hành động này, chúng ta có thể áp dụng phương pháp `count()`.
 

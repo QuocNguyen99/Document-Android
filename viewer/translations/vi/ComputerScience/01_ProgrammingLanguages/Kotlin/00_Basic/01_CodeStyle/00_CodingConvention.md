@@ -7,8 +7,8 @@ Có một thực tế là các lập trình viên có thể dành nhiều thời
 **Sử dụng kiểu chữ hoa lạc đà với chữ cái đầu tiên viết hoa** (còn được gọi là kiểu Pascal), ví dụ: `ProcessDeclarations.kt`.
 
 > [!TIP]
-> Nếu tệp Kotlin chứa một lớp hoặc giao diện duy nhất (có thể có các khai báo cấp cao nhất có liên quan), tên của nó phải giống với tên của lớp, có thêm phần mở rộng .kt. 
-> Nó áp dụng cho tất cả các loại lớp và giao diện. Nếu một tệp chứa nhiều lớp hoặc chỉ các khai báo cấp cao nhất, hãy chọn một tên mô tả nội dung tệp chứa và đặt tên tệp tương ứng. 
+> Nếu tệp Kotlin chứa một lớp hoặc interface duy nhất (có thể có các khai báo cấp cao nhất có liên quan), tên của nó phải giống với tên của lớp, có thêm phần mở rộng .kt.
+> Nó áp dụng cho tất cả các loại lớp và interface. Nếu một tệp chứa nhiều lớp hoặc chỉ các khai báo cấp cao nhất, hãy chọn một tên mô tả nội dung tệp chứa và đặt tên tệp tương ứng.
 
 **Tên của tệp phải mô tả chức năng của mã trong tệp. Vì vậy, bạn nên tránh sử dụng những từ vô nghĩa như `Util` trong tên tệp.**
 
@@ -27,9 +27,9 @@ Nội dung của một lớp nên theo thứ tự sau:
 > [!TIP]
 > Đặt các lớp lồng nhau bên cạnh mã sử dụng các lớp đó. Nếu các lớp được dự định sử dụng bên ngoài và không được tham chiếu bên trong lớp, hãy đặt chúng ở cuối, sau companion object.
 
-## Bố cục triển khai giao diện
+## Bố cục triển khai interface
 
-Khi triển khai một giao diện, hãy giữ các thành viên triển khai theo thứ tự giống như các thành viên của giao diện (nếu cần, xen kẽ với các phương thức riêng tư bổ sung được sử dụng để triển khai).
+Khi triển khai một interface, hãy giữ các thành viên triển khai theo thứ tự giống như các thành viên của interface (nếu cần, xen kẽ với các phương thức riêng tư bổ sung được sử dụng để triển khai).
 
 ## Quy tắc đặt tên
 
@@ -168,7 +168,7 @@ Các lớp có một vài tham số hàm tạo chính có thể được viết 
 class Person(id: Int, name: String)
 ```
 
-Các lớp có tiêu đề dài hơn phải được định dạng sao cho mỗi tham số của hàm tạo chính nằm trên một dòng riêng biệt có thụt lề. Ngoài ra, dấu ngoặc đơn đóng phải nằm trên một dòng mới. Nếu bạn sử dụng inheritance, lệnh gọi hàm tạo siêu lớp hoặc danh sách các giao diện đã triển khai phải nằm trên cùng dòng với dấu ngoặc đơn:
+Các lớp có tiêu đề dài hơn phải được định dạng sao cho mỗi tham số của hàm tạo chính nằm trên một dòng riêng biệt có thụt lề. Ngoài ra, dấu ngoặc đơn đóng phải nằm trên một dòng mới. Nếu bạn sử dụng inheritance, lệnh gọi hàm tạo siêu lớp hoặc danh sách các interface đã triển khai phải nằm trên cùng dòng với dấu ngoặc đơn:
 
 ```kotlin
 class Person(
@@ -178,7 +178,7 @@ class Person(
 ) : Human(id, name) { /*...*/ }
 ```
 
-Đối với nhiều giao diện, lệnh gọi hàm tạo siêu lớp phải được đặt trước và sau đó mỗi giao diện phải được đặt ở một dòng khác nhau:
+Đối với nhiều interface, lệnh gọi hàm tạo siêu lớp phải được đặt trước và sau đó mỗi interface phải được đặt ở một dòng khác nhau:
 
 ```kotlin
 class Person(

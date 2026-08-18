@@ -14,7 +14,7 @@ class HelloThread : Thread() {
 }
 ```
 
-- triển khai giao diện `Runnable` và chuyển việc triển khai cho hàm tạo của lớp `Thread`.
+- triển khai interface `Runnable` và chuyển việc triển khai cho hàm tạo của lớp `Thread`.
 
 ```kotlin
 class HelloRunnable : Runnable {

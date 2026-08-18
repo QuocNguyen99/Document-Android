@@ -82,7 +82,7 @@ Trong nội bộ, bộ xử lý truy vấn ánh xạ các tham chiếu bảng v�
 
 Hãy tưởng tượng rằng bạn chịu trách nhiệm về cơ sở dữ liệu cửa hàng sách. 
 Có rất nhiều hàng trong mỗi lựa chọn và bạn cần lọc chúng theo các tiêu chí nhất định, 
-ví dụ: theo tác giả, ngôn ngữ, một số thuộc tính hoặc thậm chí biểu thức được khách hàng yêu cầu.
+ví dụ: theo tác giả, ngôn ngữ, một số thuộc tính hoặc thậm chí biểu thức được client yêu cầu.
 Việc chọn một tập hợp con các hàng từ một bảng được gọi là **lọc**.
 
 ### Lọc theo tiêu chí
@@ -101,7 +101,7 @@ WHERE conditions
 Trong trường `conditions`, chúng tôi có thể chèn bất kỳ tham số nào mà chúng tôi muốn dữ liệu được trích xuất của mình nhất quán.
 Tuy nhiên, để xác định các điều kiện lựa chọn cụ thể đó, chúng ta cần áp dụng chúng cho các biểu thức.
 
-Hãy tưởng tượng rằng khách hàng đầu tiên của bạn muốn mua một cuốn sách của `Charles Dickens`.
+Hãy tưởng tượng rằng client đầu tiên của bạn muốn mua một cuốn sách của `Charles Dickens`.
 Hãy viết một truy vấn để chọn những cuốn sách đáp ứng tiêu chí:
 
 ```sql
@@ -155,5 +155,5 @@ WHERE (status="Middle" OR status="Senior") AND skills="SQL"
 > [!WARNING]
 > Vui lòng lưu ý các dấu ngoặc đơn mà chúng tôi sử dụng với toán hạng `OR`.
 > Đây là một công cụ quan trọng để ưu tiên điều kiện `OR` so với `AND`.
-> Nếu chúng tôi không sử dụng nó, `SQL` trước tiên sẽ process toán hạng `AND` và chỉ sau đó là `OR`, khiến yêu cầu truy vấn không liên quan.
+> Nếu chúng tôi không sử dụng nó, `SQL` trước tiên sẽ process toán hạng `AND` và chỉ sau đó là `OR`, khiến query request không liên quan.
 

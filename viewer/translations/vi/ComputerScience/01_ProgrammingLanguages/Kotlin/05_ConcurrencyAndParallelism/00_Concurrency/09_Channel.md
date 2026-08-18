@@ -1,5 +1,5 @@
 #Channel
-Vì coroutine có thể chạy trên nhiều luồng khác nhau và hoạt động độc lập, 
+Vì coroutine có thể chạy trên nhiều thread khác nhau và hoạt động độc lập,
 việc thiết lập các kênh liên lạc đáng tin cậy giữa chúng đòi hỏi một cách tiếp cận chu đáo.
 
 ## Giải pháp: Kênh

@@ -86,7 +86,7 @@ Nó tăng cường khả năng tách biệt và mở rộng mã nhưng có thể
 
 - **Mô-đun hóa theo lớp** thường phù hợp hơn với các ứng dụng phân tách rõ ràng các loại tác vụ khác nhau,
 chẳng hạn như kết xuất UI, xử lý logic nghiệp vụ và quản lý dữ liệu. Nó có thể thúc đẩy khả năng sử dụng lại nhưng có thể dẫn đến sự liên kết chặt chẽ hơn giữa các lớp.
-Chúng ta có thể tạo các mô-đun riêng cho lớp trình bày, domain layer và data layer. Mỗi lớp có thể xác định các API và phần phụ thuộc của riêng mình.
+Chúng ta có thể tạo các mô-đun riêng cho lớp trình bày, domain layer và data layer. Mỗi lớp có thể xác định các API và dependency của riêng mình.
 
  
 Việc lựa chọn giữa các phương pháp này phụ thuộc vào nhu cầu và kiến ​​trúc cụ thể của dự án.

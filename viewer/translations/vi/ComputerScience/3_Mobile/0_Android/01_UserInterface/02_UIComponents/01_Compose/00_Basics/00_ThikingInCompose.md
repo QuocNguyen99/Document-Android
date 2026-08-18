@@ -151,9 +151,9 @@ Các lệnh gọi tới StartScreen, MiddleScreen và EndScreen có thể diễn
 
 Compose có thể tối ưu hóa recomposition bằng cách chạy song song các hàm có thể kết hợp. Điều này cho phép Compose tận dụng nhiều lõi và chạy các chức năng có thể kết hợp không có trên màn hình ở mức độ ưu tiên thấp hơn.
 
-Sự tối ưu hóa này có nghĩa là composable function có thể thực thi trong một nhóm các luồng nền.**Nếu composable function gọi một hàm trên ViewModel thì Compose có thể gọi hàm đó từ nhiều luồng cùng một lúc.**
+Sự tối ưu hóa này có nghĩa là composable function có thể thực thi trong một nhóm các background thread.**Nếu composable function gọi một hàm trên ViewModel thì Compose có thể gọi hàm đó từ nhiều thread cùng một lúc.**
 
-Để đảm bảo ứng dụng của bạn hoạt động chính xác, tất cả các hàm có khả năng kết hợp sẽ không có tác dụng phụ. Thay vào đó, hãy kích hoạt các tác dụng phụ từ các lệnh gọi lại, chẳng hạn như onClick luôn thực thi trên UI thread.
+Để đảm bảo ứng dụng của bạn hoạt động chính xác, tất cả các hàm có khả năng kết hợp sẽ không có tác dụng phụ. Thay vào đó, hãy kích hoạt các tác dụng phụ từ các callback, chẳng hạn như onClick luôn thực thi trên UI thread.
 
 Khi composable function được gọi, lệnh gọi có thể xảy ra trên thread khác với người gọi. Điều đó có nghĩa là bạn nên tránh sử dụng mã sửa đổi các biến trong lambda có thể kết hợp – vì mã đó không an toàn cho thread và vì đó là một tác dụng phụ không được chấp nhận của lambda có thể kết hợp.
 
@@ -200,7 +200,7 @@ fun ListWithBug(myList: List<String>) {
 }
 ```
 
-Trong ví dụ này, các mục được sửa đổi với mọi recomposition. Đó có thể là mọi khung hình của hoạt ảnh hoặc khi danh sách cập nhật. Dù bằng cách nào, UI sẽ hiển thị số lượng sai. Do đó, việc viết như thế này không được hỗ trợ trong Compose; bằng cách cấm những thao tác ghi đó, chúng tôi cho phép framework thay đổi các luồng để thực thi các lambda có thể tổng hợp.
+Trong ví dụ này, các mục được sửa đổi với mọi recomposition. Đó có thể là mọi khung hình của hoạt ảnh hoặc khi danh sách cập nhật. Dù bằng cách nào, UI sẽ hiển thị số lượng sai. Do đó, việc viết như thế này không được hỗ trợ trong Compose; bằng cách cấm những thao tác ghi đó, chúng tôi cho phép framework thay đổi các thread để thực thi các lambda có thể tổng hợp.
 
   </p>
 </details>

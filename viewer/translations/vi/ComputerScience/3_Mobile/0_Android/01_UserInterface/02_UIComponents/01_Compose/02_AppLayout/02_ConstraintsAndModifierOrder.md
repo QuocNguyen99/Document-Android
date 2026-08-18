@@ -199,7 +199,7 @@ Box(
 ![](/resources/size-modifier-3.png)
 
 
-Lưu ý rằng việc xâu chuỗi các công cụ sửa đổi nhiều kích thước không hoạt động. Công cụ sửa đổi kích thước đầu tiên đặt cả giới hạn tối thiểu và tối đa thành một giá trị cố định. Ngay cả khi công cụ sửa đổi kích thước thứ hai yêu cầu kích thước nhỏ hơn hoặc lớn hơn, nó vẫn cần tuân thủ các giới hạn chính xác được truyền vào để không ghi đè các giá trị đó:
+Lưu ý rằng việc xâu chuỗi các công cụ sửa đổi nhiều kích thước không hoạt động. Công cụ sửa đổi kích thước đầu tiên đặt cả giới hạn tối thiểu và tối đa thành một giá trị cố định. Ngay cả khi công cụ sửa đổi kích thước thứ hai request kích thước nhỏ hơn hoặc lớn hơn, nó vẫn cần tuân thủ các giới hạn chính xác được truyền vào để không ghi đè các giá trị đó:
 
 <div style="display: flex; align-items: center;">
   <img src="/resources/size-modifier-4.png" alt="Image" style="margin-right: 10px; width:50%"/>

@@ -14,13 +14,13 @@ Ví dụ
 
 Có nhiều mô hình để quản lý luồng khách hàng. Cách tiếp cận đơn giản nhất là một cửa hàng với một người bán.
 
-Họ phục vụ từng khách hàng riêng biệt, nghĩa là chỉ bắt đầu phục vụ khách hàng tiếp theo sau khi kết thúc với khách hàng hiện tại. Chúng tôi đặt tên loại hành động này là **đồng bộ**.
+Họ phục vụ từng client riêng biệt, nghĩa là chỉ bắt đầu phục vụ client tiếp theo sau khi kết thúc với khách hàng hiện tại. Chúng tôi đặt tên loại hành động này là **đồng bộ**.
 
 ## Quy trình làm việc không đồng bộ
 
 Hãy tưởng tượng cửa hàng cũ của chúng ta trở nên sang trọng hơn, Sau khi khách hàng đầu tiên đặt mua pizza, họ cần đợi bánh chín. Tại thời điểm này, người bán để khách hàng đầu tiên yên một lúc và bây giờ khách hàng thứ hai có thể đặt hàng, sau đó là khách hàng thứ ba, v.v.
 
-Khi bánh pizza của khách hàng đầu tiên đã sẵn sàng, người bán sẽ quay lại với họ để hoàn tất việc bán hàng. Đó là cách câu chuyện này sẽ lặp đi lặp lại.
+Khi bánh pizza của client đầu tiên đã sẵn sàng, người bán sẽ quay lại với họ để hoàn tất việc bán hàng. Đó là cách câu chuyện này sẽ lặp đi lặp lại.
 
 Người bạn cũ của chúng tôi có thể phục vụ nhiều khách hàng cùng lúc trong những khoảng thời gian chồng chéo. Chúng tôi gọi đó là **hành vi không đồng bộ**.
 

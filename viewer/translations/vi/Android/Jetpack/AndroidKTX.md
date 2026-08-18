@@ -11,7 +11,7 @@
 
 ## Lõi KTX
 
-    Mô-đun Core KTX cung cấp các tiện ích mở rộng cho các thư viện phổ biến là một phần của Android framework. Các thư viện này không có phần phụ thuộc dựa trên Java mà bạn cần thêm vào `build.gradle`.
+    Mô-đun Core KTX cung cấp các tiện ích mở rộng cho các thư viện phổ biến là một phần của Android framework. Các thư viện này không có dependency dựa trên Java mà bạn cần thêm vào `build.gradle`.
 
 ## Collection KTX
 
@@ -220,7 +220,7 @@ val user: LiveData<User> = liveData {
 }
 ```
 
-Bạn cũng có thể phát ra nhiều giá trị từ khối. Mỗi lệnh gọi `emit()` sẽ tạm dừng quá trình thực thi khối cho đến khi giá trị `LiveData` được đặt trên thread chính.
+Bạn cũng có thể phát ra nhiều giá trị từ khối. Mỗi lệnh gọi `emit()` sẽ tạm dừng quá trình thực thi khối cho đến khi giá trị `LiveData` được đặt trên main thread.
 
 ```kotlin
 val user: LiveData<Result> = liveData {

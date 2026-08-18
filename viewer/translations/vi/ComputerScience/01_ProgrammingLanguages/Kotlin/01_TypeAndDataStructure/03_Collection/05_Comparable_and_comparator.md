@@ -1,10 +1,10 @@
 # Có thể so sánh và so sánh
 
-Trong Kotlin, Comparable và Comparator là hai giao diện cho phép các nhà phát triển so sánh các đối tượng cùng lớp hoặc khác lớp. **Cả hai giao diện thường được sử dụng để sắp xếp và sắp xếp các bộ sưu tập đối tượng dựa trên một hoặc nhiều thuộc tính**
+Trong Kotlin, Comparable và Comparator là hai interface cho phép các nhà phát triển so sánh các đối tượng cùng lớp hoặc khác lớp. **Cả hai interface thường được sử dụng để sắp xếp và sắp xếp các collection đối tượng dựa trên một hoặc nhiều thuộc tính**
 
-## Kotlin Giao diện có thể so sánh
+## Kotlin Interface có thể so sánh
 
-Giao diện `Comparable` được sử dụng để xác định thứ tự tự nhiên của các đối tượng. Khi một lớp triển khai `Comparable`, nó phải ghi đè phương thức `compareTo()`:
+Interface `Comparable` được sử dụng để xác định thứ tự tự nhiên của các đối tượng. Khi một lớp triển khai `Comparable`, nó phải ghi đè phương thức `compareTo()`:
 
 ```kotlin
 public operator fun compareTo(other: T): Int
@@ -25,7 +25,7 @@ val people = listOf(Person("Alice", 25), Person("Bob", 30), Person("Charlie", 20
 val sortedPeople = people.sorted() //[Person(name=Charlie, age=20), Person(name=Alice, age=25), Person(name=Bob, age=30)]
 ```
 
-Lớp triển khai giao diện `Comparable` hỗ trợ các chức năng mở rộng hữu ích, trong số đó có các chức năng sau:
+Lớp triển khai interface `Comparable` hỗ trợ các chức năng mở rộng hữu ích, trong số đó có các chức năng sau:
 
 - `coerceAtLeast()` – chức năng này kiểm tra xem đối tượng gọi có lớn hơn một đối tượng tối thiểu nhất định hay không. Nó trả về đối tượng hiện tại nếu nó lớn hơn; mặt khác, nó trả về đối tượng tối thiểu
 
@@ -82,9 +82,9 @@ fun main() {
 }
 ```
 
-## Giao diện so sánh Kotlin
+## Interface so sánh Kotlin
 
-**Giao diện Comparator được sử dụng để xác định thứ tự tùy chỉnh của các đối tượng.** Khi một lớp triển khai `Comparator`, nó phải ghi đè phương thức `compare()`, phương thức này lấy hai đối tượng cùng loại làm đối số và trả về một giá trị số nguyên. Nó trả về 0 nếu các đối số bằng nhau, số âm nếu đối số thứ nhất nhỏ hơn đối số thứ hai hoặc số dương nếu đối số thứ nhất lớn hơn đối số thứ hai. Đây là cách nó hoạt động:
+**Interface Comparator được sử dụng để xác định thứ tự tùy chỉnh của các đối tượng.** Khi một lớp triển khai `Comparator`, nó phải ghi đè phương thức `compare()`, phương thức này lấy hai đối tượng cùng loại làm đối số và trả về một giá trị số nguyên. Nó trả về 0 nếu các đối số bằng nhau, số âm nếu đối số thứ nhất nhỏ hơn đối số thứ hai hoặc số dương nếu đối số thứ nhất lớn hơn đối số thứ hai. Đây là cách nó hoạt động:
 
 ```kotlin
 data class Person(val name: String, val age: Int)
@@ -108,7 +108,7 @@ fun main() {
 }
 ```
 
-Giao diện `Comparator` có các phương thức thú vị, trong số đó có các phương thức sau:
+Interface `Comparator` có các phương thức thú vị, trong số đó có các phương thức sau:
 
 - `reversed()` – hàm này lấy bộ so sánh làm đối số và trả về một bộ so sánh có thứ tự đảo ngược của bộ so sánh đã truyền
 

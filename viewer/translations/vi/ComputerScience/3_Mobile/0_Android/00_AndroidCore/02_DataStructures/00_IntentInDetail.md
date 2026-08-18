@@ -122,7 +122,7 @@ button.setOnClickListner {
 ```
 
 > [!NOTE]
-> Để gửi các phiên bản của một lớp dưới dạng phần bổ sung, bạn sẽ phải triển khai giao diện `Parcelable` hoặc `Serializable`. Sau đó, bạn có thể sử dụng phương thức `getParcelableExtra<NameOfClass>()` hoặc `getSerializableExtra()` để truy xuất dữ liệu của mình.
+> Để gửi các phiên bản của một lớp dưới dạng phần bổ sung, bạn sẽ phải triển khai interface `Parcelable` hoặc `Serializable`. Sau đó, bạn có thể sử dụng phương thức `getParcelableExtra<NameOfClass>()` hoặc `getSerializableExtra()` để truy xuất dữ liệu của mình.
 >Khi sử dụng các tính năng bổ sung có mục đích, hãy giới hạn ở mức vài kilobyte. Việc truyền kích thước dữ liệu lớn có thể khiến ứng dụng của bạn gặp sự cố.
 
 ## Bộ lọc Intent

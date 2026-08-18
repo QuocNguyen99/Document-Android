@@ -15,7 +15,7 @@ Không giống như chúng ta, máy tính có thể dễ dàng hiểu được �
 
 **Database Management System (DBMS) là một loại phần mềm cho phép người dùng xác định, tạo và kiểm soát dữ liệu.**
 
-DBMS có thể tối ưu hóa các truy vấn và truy xuất dữ liệu từ cơ sở dữ liệu một cách tối ưu. Nó là trung gian hòa giải giữa người dùng và cơ sở dữ liệu, có nghĩa là người dùng có thể làm việc với nó thông qua giao diện của DBMS. Ngoài ra, nó cũng có thể giúp tách biệt dữ liệu khỏi người dùng.
+DBMS có thể tối ưu hóa các truy vấn và truy xuất dữ liệu từ cơ sở dữ liệu một cách tối ưu. Nó là trung gian hòa giải giữa người dùng và cơ sở dữ liệu, có nghĩa là người dùng có thể làm việc với nó thông qua interface của DBMS. Ngoài ra, nó cũng có thể giúp tách biệt dữ liệu khỏi người dùng.
 
 **Mục tiêu khác của phần mềm này là giúp mọi người làm việc với các loại cơ sở dữ liệu khác nhau mà không làm lộ ra sự khác biệt thực tế của chúng.**
 

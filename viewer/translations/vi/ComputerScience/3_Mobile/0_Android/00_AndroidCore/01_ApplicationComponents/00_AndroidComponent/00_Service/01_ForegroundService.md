@@ -67,13 +67,13 @@ Nếu bạn cố gắng tạo foreground service và loại của nó không đ�
 `MissingForegroundServiceTypeException` khi gọi `startForeground()`.
 Ngay cả khi không bắt buộc, best practice vẫn dùng để khai báo tất cả các dịch vụ trên nền trước của bạn và cung cấp các loại dịch vụ của chúng.
 
-#### Yêu cầu quyền foreground service
+#### Request quyền foreground service
 
-Các ứng dụng nhắm mục tiêu Android 9 (API cấp 28) trở lên và sử dụng các dịch vụ trên nền trước cần yêu cầu `FOREGROUND_SERVICE` trong tệp kê khai ứng dụng, như minh họa trong đoạn mã sau. **Đây là quyền thông thường nên hệ thống sẽ tự động cấp quyền cho ứng dụng yêu cầu.**
+Các ứng dụng nhắm mục tiêu Android 9 (API cấp 28) trở lên và sử dụng các dịch vụ trên nền trước cần request `FOREGROUND_SERVICE` trong tệp kê khai ứng dụng, như minh họa trong đoạn mã sau. **Đây là quyền thông thường nên hệ thống sẽ tự động cấp quyền cho ứng dụng yêu cầu.**
 
-Ngoài ra, nếu ứng dụng nhắm mục tiêu API cấp 34 trở lên, **ứng dụng phải yêu cầu loại quyền thích hợp cho loại công việc mà foreground service sẽ thực hiện**. Mỗi loại foreground service có một loại quyền tương ứng. 
+Ngoài ra, nếu ứng dụng nhắm mục tiêu API cấp 34 trở lên, **ứng dụng phải request loại quyền thích hợp cho loại công việc mà foreground service sẽ thực hiện**. Mỗi loại foreground service có một loại quyền tương ứng.
 
-Ví dụ: nếu một ứng dụng khởi chạy foreground service sử dụng máy ảnh, bạn phải yêu cầu cả quyền `FOREGROUND_SERVICE` và `FOREGROUND_SERVICE_CAMERA`. Đây đều là các quyền thông thường nên hệ thống sẽ tự động cấp chúng nếu chúng được liệt kê trong tệp kê khai.
+Ví dụ: nếu một ứng dụng khởi chạy foreground service sử dụng máy ảnh, bạn phải request cả quyền `FOREGROUND_SERVICE` và `FOREGROUND_SERVICE_CAMERA`. Đây đều là các quyền thông thường nên hệ thống sẽ tự động cấp chúng nếu chúng được liệt kê trong tệp kê khai.
 
 ```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" ...>
@@ -88,20 +88,20 @@ Ví dụ: nếu một ứng dụng khởi chạy foreground service sử dụng 
 ```
 
 #### Điều kiện tiên quyết của Foreground service
-Nếu một ứng dụng nhắm mục tiêu API cấp 28 trở lên cố gắng tạo foreground service mà không yêu cầu quyền `FOREGROUND_SERVICE` thì hệ thống sẽ gửi `SecurityException`. Tương tự, nếu một ứng dụng nhắm mục tiêu API cấp 34 trở lên và không yêu cầu quyền cụ thể phù hợp thì hệ thống sẽ loại bỏ `SecurityException`.
+Nếu một ứng dụng nhắm mục tiêu API cấp 28 trở lên cố gắng tạo foreground service mà không request quyền `FOREGROUND_SERVICE` thì hệ thống sẽ gửi `SecurityException`. Tương tự, nếu một ứng dụng nhắm mục tiêu API cấp 34 trở lên và không yêu cầu quyền cụ thể phù hợp thì hệ thống sẽ loại bỏ `SecurityException`.
 
 Vì lý do này, bạn phải xác nhận rằng các điều kiện tiên quyết bắt buộc được đáp ứng trước khi bạn khởi động foreground service. Tài liệu loại foreground service liệt kê các điều kiện tiên quyết cần thiết cho từng loại foreground service.
 
 #### Bắt đầu foreground service
 
-Trước khi bạn yêu cầu hệ thống chạy một dịch vụ dưới dạng foreground service, hãy tự khởi động dịch vụ đó:
+Trước khi bạn request hệ thống chạy một dịch vụ dưới dạng foreground service, hãy tự khởi động dịch vụ đó:
 
 ```kotlin
 val foregroundServiceIntent = Intent(context, PlaybackService::class.java)
 context.startForegroundService(foregroundServiceIntent)
 ```
 
-Bên trong dịch vụ, thường là trong `onStartCommand()`, bạn có thể yêu cầu dịch vụ của mình chạy ở nền trước. Để làm như vậy, hãy gọi `ServiceCompat.startForeground(service, notification, foregroundServiceType)` (có sẵn trong androidx-core 1.12 trở lên). Phương thức này có các tham số sau:
+Bên trong dịch vụ, thường là trong `onStartCommand()`, bạn có thể request dịch vụ của mình chạy ở nền trước. Để làm như vậy, hãy gọi `ServiceCompat.startForeground(service, notification, foregroundServiceType)` (có sẵn trong androidx-core 1.12 trở lên). Phương thức này có các tham số sau:
 
 - Dịch vụ
 - Một số nguyên dương xác định duy nhất thông báo trên thanh trạng thái
@@ -229,7 +229,7 @@ ngoại trừ một số trường hợp đặc biệt:
 - Ứng dụng của bạn có thể bắt đầu một hoạt động từ nền, ngoại trừ trường hợp ứng dụng có hoạt động trong back stack của tác vụ hiện có.
 - Ứng dụng của bạn nhận được tin nhắn có mức độ ưu tiên cao bằng cách sử dụng Nhắn tin qua đám mây của Firebase.
 - Người dùng thực hiện hành động trên phần tử UI liên quan đến ứng dụng của bạn. Ví dụ: họ có thể tương tác với [bong bóng](https://developer.android.com/guide/topics/ui/bubbles), [thông báo](https://developer.android.com/develop/ui/views/notifications), [widget](https://developer.android.com/guide/topics/appwidgets/overview) hoặc hoạt động.
-- Ứng dụng của bạn gọi [báo động chính xác](https://developer.android.com/training/scheduling/alarms#exact) để hoàn thành hành động mà người dùng yêu cầu.
+- Ứng dụng của bạn gọi [báo động chính xác](https://developer.android.com/training/scheduling/alarms#exact) để hoàn thành hành động mà người dùng request.
 - Ứng dụng của bạn là [phương thức nhập hiện tại của thiết bị](https://developer.android.com/guide/topics/text/creating-input-method).
 - Ứng dụng của bạn nhận được một sự kiện liên quan đến chuyển đổi tính năng định vị địa lý hoặc nhận dạng hoạt động.
 - Sau khi thiết bị khởi động lại và nhận được hành động có ý định `ACTION_BOOT_COMPLETED`, `ACTION_LOCKED_BOOT_COMPLETED` hoặc `ACTION_MY_PACKAGE_REPLACED` trong broadcast receiver.

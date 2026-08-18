@@ -142,7 +142,7 @@ fun ResponsiveLayoutExample() {
 ```
 ### Bố cục dựa trên vị trí
 
-Compose cung cấp nhiều thành phần kết hợp dựa trên Material Design với phần phụ thuộc `androidx.compose.material:material` (được bao gồm khi tạo dự án Compose trong Android Studio) để giúp việc xây dựng UI trở nên dễ dàng. Các phần tử như `Drawer`, `FloatingActionButton` và `TopAppBar` đều được cung cấp.
+Compose cung cấp nhiều thành phần kết hợp dựa trên Material Design với dependency `androidx.compose.material:material` (được bao gồm khi tạo dự án Compose trong Android Studio) để giúp việc xây dựng UI trở nên dễ dàng. Các phần tử như `Drawer`, `FloatingActionButton` và `TopAppBar` đều được cung cấp.
 
 Các thành phần Material sử dụng nhiều API vị trí, một mẫu mà Compose giới thiệu để mang đến một lớp tùy chỉnh bên trên các thành phần kết hợp. Cách tiếp cận này làm cho các thành phần trở nên linh hoạt hơn, vì chúng chấp nhận một phần tử con có thể tự cấu hình thay vì phải hiển thị mọi tham số cấu hình của phần tử con. Các vị trí để lại một khoảng trống trong UI để nhà phát triển điền vào theo ý muốn. Ví dụ: đây là các vị trí mà bạn có thể tùy chỉnh trong `TopAppBar`:
 

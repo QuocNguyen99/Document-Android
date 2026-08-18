@@ -20,9 +20,9 @@ Trái ngược với cơ sở dữ liệu thông thường chạy dưới dạng
 
 ## Cách sử dụng cơ bản
 
-Để cài đặt và sử dụng SQLite, bạn cần thêm phần phụ thuộc của nó vào trình quản lý gói hoặc hệ thống xây dựng mà bạn chọn (Gradle, pip, npm). Sau đó, bạn sẽ có thể sử dụng các thư viện SQL thông thường để truy cập cơ sở dữ liệu.
+Để cài đặt và sử dụng SQLite, bạn cần thêm dependency của nó vào trình quản lý gói hoặc hệ thống xây dựng mà bạn chọn (Gradle, pip, npm). Sau đó, bạn sẽ có thể sử dụng các thư viện SQL thông thường để truy cập cơ sở dữ liệu.
 
-Chúng tôi sẽ không gắn bó với bất kỳ programming language cụ thể nào và sẽ khám phá SQLite bằng giao diện dòng lệnh của nó: `sqlite3`. Gọi nó bằng tên tệp cơ sở dữ liệu làm tham số sẽ bắt đầu phiên tương tác với cơ sở dữ liệu đó. Nếu tệp cơ sở dữ liệu không tồn tại, nó sẽ được tạo. Hãy tạo cơ sở dữ liệu `edu.db` mới và điền vào cơ sở dữ liệu đó:
+Chúng tôi sẽ không gắn bó với bất kỳ programming language cụ thể nào và sẽ khám phá SQLite bằng interface dòng lệnh của nó: `sqlite3`. Gọi nó bằng tên tệp cơ sở dữ liệu làm tham số sẽ bắt đầu phiên tương tác với cơ sở dữ liệu đó. Nếu tệp cơ sở dữ liệu không tồn tại, nó sẽ được tạo. Hãy tạo cơ sở dữ liệu `edu.db` mới và điền vào cơ sở dữ liệu đó:
 
 ```bash
 hs@laptop:~/sqlite$ ls

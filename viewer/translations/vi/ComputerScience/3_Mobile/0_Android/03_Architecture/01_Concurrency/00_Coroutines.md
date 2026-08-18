@@ -1,7 +1,7 @@
 # Coroutine trong Android
 
-Theo mặc định, tất cả các thành phần ứng dụng Android đều sử dụng thread chính để thực thi.
-Chúng ta nên tải các phép tính tốn kém xuống các luồng nền để tránh chặn UI
+Theo mặc định, tất cả các thành phần ứng dụng Android đều sử dụng main thread để thực thi.
+Chúng ta nên tải các phép tính tốn kém xuống các background thread để tránh chặn UI
 
 Ngoài tính toán không đồng bộ, Kotlin **coroutines** còn cung cấp khả năng xác định phạm vi và truyền bá cancellation, 
 giúp việc dừng tất cả các tác vụ cần thiết của `Activity`, `Fragment` hoặc `ViewModel` đang bị phá hủy trở nên dễ dàng hơn.
@@ -9,7 +9,7 @@ giúp việc dừng tất cả các tác vụ cần thiết của `Activity`, `F
 ## Người điều phối
 
 
-với sự trợ giúp của **người điều phối**, chúng tôi có thể xác định loại luồng mà phép tính sẽ được thực hiện trên đó.
+với sự trợ giúp của **người điều phối**, chúng tôi có thể xác định loại thread mà phép tính sẽ được thực hiện trên đó.
 
 
 Chúng ta hãy xem lại các bộ điều phối coroutine được tích hợp sẵn:
@@ -24,7 +24,7 @@ Chúng ta hãy xem lại các bộ điều phối coroutine được tích hợp
 
 Với sự tích hợp của coroutines trong Android đã xuất hiện một bộ điều phối khác: `Dispatchers.Main`
 
-Nó được thiết kế để chạy coroutine trên thread chính (UI) của một ứng dụng Android. Các coroutine được khởi chạy bằng `Dispatchers.Main` có thể cập nhật thông tin đầu vào của người dùng user interface, process hoặc thực hiện các tác vụ khác liên quan đến UI-
+Nó được thiết kế để chạy coroutine trên main (UI) thread của một ứng dụng Android. Các coroutine được khởi chạy bằng `Dispatchers.Main` có thể cập nhật thông tin đầu vào của người dùng user interface, process hoặc thực hiện các tác vụ khác liên quan đến UI-
 
 > [!NOTE]
 > Về cơ bản, Dispatchers.Main được triển khai bằng máy móc Android Looper và Handler.

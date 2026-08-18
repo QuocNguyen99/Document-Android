@@ -12,7 +12,7 @@
 ## Đang thiết lập Espresso
 
 Espresso phải được định cấu hình theo mặc định khi bạn tạo dự án Android Studio.
-Để xác nhận, hãy kiểm tra sự hiện diện của các phần phụ thuộc này trong tệp `build.gradle` của ứng dụng của bạn:
+Để xác nhận, hãy kiểm tra sự hiện diện của các dependency này trong tệp `build.gradle` của ứng dụng của bạn:
 
 
 ```gradle
@@ -24,9 +24,9 @@ dependencies {
 ```
 Bạn có thể kiểm tra [phiên bản mới nhất của thư viện espresso-core](https://mvnrepository.com/artifact/androidx.test.espresso/espresso-core) và [thư viện tiện ích mở rộng Android phiên bản mới nhất dành cho JUnit](https://mvnrepository.com/artifact/androidx.test.ext/junit). Đây là lý do tại sao chúng ta cần những sự phụ thuộc đó:
 
-- Phần phụ thuộc `androidx.test.espresso:espresso-core` cung cấp API cốt lõi để viết các bài kiểm tra UI bằng cách sử dụng Espresso trong các ứng dụng Android.
+- Dependency `androidx.test.espresso:espresso-core` cung cấp API cốt lõi để viết các bài kiểm tra UI bằng cách sử dụng Espresso trong các ứng dụng Android.
 
-- Phần phụ thuộc `androidx.test.ext:junit` cung cấp các tiện ích mở rộng để sử dụng JUnit trong thử nghiệm ứng dụng Android. Điều này là bắt buộc vì Espresso dựa vào framework thử nghiệm JUnit để thực hiện các trường hợp thử nghiệm của nó.
+- Dependency `androidx.test.ext:junit` cung cấp các tiện ích mở rộng để sử dụng JUnit trong thử nghiệm ứng dụng Android. Điều này là bắt buộc vì Espresso dựa vào framework thử nghiệm JUnit để thực hiện các trường hợp thử nghiệm của nó.
 
 Tiếp theo, hãy xác minh xem trình chạy thiết bị có được đặt trong cùng một tệp `build.gradle` hay không:
 

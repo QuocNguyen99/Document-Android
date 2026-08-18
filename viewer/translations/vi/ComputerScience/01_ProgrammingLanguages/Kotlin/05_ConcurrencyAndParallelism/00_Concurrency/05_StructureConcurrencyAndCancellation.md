@@ -68,9 +68,9 @@ suspend fun loadScreenInOwnScope(): Unit = coroutineScope {
 ```
 Không có cancellation rõ ràng hơn nhưng thao tác tải thứ hai không thành công.
 
-Mã này cũng sẽ không in gì vì lệnh mẹ sẽ hủy tải hình ảnh 1 và hình ảnh 3 vào bộ nhớ đệm ngay lập tức.
+Mã này cũng sẽ không in gì vì lệnh mẹ sẽ hủy tải hình ảnh 1 và hình ảnh 3 vào cache ngay lập tức.
 
-Đó là những gì chúng tôi muốn, ngoại trừ việc chúng tôi không muốn hủy mọi thứ khi bộ nhớ đệm trước không thành công, vì đây là một thao tác tùy chọn. Làm thế nào chúng ta có thể yêu cầu phạm vi xử lý nó theo cách khác?
+Đó là những gì chúng tôi muốn, ngoại trừ việc chúng tôi không muốn hủy mọi thứ khi cache trước không thành công, vì đây là một thao tác tùy chọn. Làm thế nào chúng ta có thể yêu cầu phạm vi xử lý nó theo cách khác?
 
 ## Công việc được giám sát
 
@@ -96,7 +96,7 @@ suspend fun loadScreenInSupervisedScope() = supervisorScope {
 
 ## Trạng thái thực thi
 
-Giao diện công việc có rất nhiều thuộc tính tiện dụng để **kiểm tra** trạng thái thực thi hiện tại, **bắt đầu** nó nếu nó chưa chạy hoặc **hủy** nó khi không cần thiết nữa.
+Interface công việc có rất nhiều thuộc tính tiện dụng để **kiểm tra** trạng thái thực thi hiện tại, **bắt đầu** nó nếu nó chưa chạy hoặc **hủy** nó khi không cần thiết nữa.
 Nó cũng cho phép **chờ** công việc kết thúc: `job1.join()` sẽ tạm dừng cho đến khi `job1` hoàn thành.
 
 Vì vậy chúng ta có thể chờ đợi các nhiệm vụ như sau:

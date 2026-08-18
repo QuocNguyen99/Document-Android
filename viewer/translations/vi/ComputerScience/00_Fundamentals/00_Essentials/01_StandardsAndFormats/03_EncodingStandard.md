@@ -12,12 +12,12 @@ Trong Base64, chúng tôi sử dụng 64 ký hiệu ASCII để thể hiện t�
 ![văn bản thay thế](/resources/base64_with_ascii.png)
 
 Khi nào bạn cần sơ đồ mã hóa này? 
-Chủ yếu khi bạn muốn truyền dữ liệu nhị phân 8 bit bằng các giao thức được thiết kế để mang dữ liệu văn bản.
+Chủ yếu khi bạn muốn truyền dữ liệu nhị phân 8 bit bằng các protocol được thiết kế để mang dữ liệu văn bản.
 Các ứng dụng chính là:
 
 - truyền dữ liệu nhị phân, như tệp đính kèm trong email;
 - chèn dữ liệu nhị phân như hình ảnh vào các tệp văn bản như HTML, CSS, XML hoặc tập lệnh;
-- một phần của chương trình encryption theo giao thức OpenPGP;
+- một phần của chương trình encryption theo OpenPGP protocol;
 - chuyển đổi dữ liệu nhị phân để đưa nó vào URL.
 
 ## Nó hoạt động như thế nào?

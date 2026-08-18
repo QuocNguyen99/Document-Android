@@ -1,12 +1,12 @@
 # Phương thức trừu tượng đơn (SAM)
 
-Giao diện chỉ có một hàm thành viên trừu tượng được gọi là giao diện chức năng hoặc giao diện **Phương thức trừu tượng đơn (SAM).**
+Interface chỉ có một hàm thành viên trừu tượng được gọi là interface chức năng hoặc interface **Phương thức trừu tượng đơn (SAM).**
 
-Giao diện chức năng có thể có một số hàm thành viên không trừu tượng nhưng chỉ có một hàm thành viên trừu tượng.
+Interface chức năng có thể có một số hàm thành viên không trừu tượng nhưng chỉ có một hàm thành viên trừu tượng.
 
 bạn có thể sử dụng chuyển đổi SAM để giúp mã của bạn ngắn gọn và dễ đọc hơn bằng cách sử dụng biểu thức lambda.
 
-Ví dụ: hãy xem xét giao diện chức năng Kotlin sau:
+Ví dụ: hãy xem xét interface chức năng Kotlin sau:
 
 ```kotlin
 fun interface IntPredicate {

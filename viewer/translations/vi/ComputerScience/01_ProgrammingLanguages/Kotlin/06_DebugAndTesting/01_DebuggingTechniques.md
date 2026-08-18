@@ -7,7 +7,7 @@ những cách phổ biến nhất mà các lập trình viên sử dụng để 
 
 ## Gỡ lỗi ứng dụng multithreading
 
-Trước khi đi sâu vào sự phức tạp của việc gỡ lỗi các ứng dụng đa luồng, điều quan trọng là phải hiểu các nguyên hàm concurrency của Kotlin. Kotlin hoạt động trên JVM và do đó cung cấp quyền truy cập vào các luồng Java, một đơn vị cơ bản của concurrency. Đây là cách bạn có thể bắt đầu một thread đơn giản trong Kotlin:
+Trước khi đi sâu vào sự phức tạp của việc gỡ lỗi các ứng dụng đa thread, điều quan trọng là phải hiểu các nguyên hàm concurrency của Kotlin. Kotlin hoạt động trên JVM và do đó cung cấp quyền truy cập vào các luồng Java, một đơn vị cơ bản của concurrency. Đây là cách bạn có thể bắt đầu một thread đơn giản trong Kotlin:
 
 ```kotlin
 val thread = Thread {
@@ -17,7 +17,7 @@ val thread = Thread {
 thread.start()
 ```
 
-Ngoài ra, Kotlin còn cung cấp một cách xử lý concurrency mạnh mẽ và linh hoạt hơn bằng coroutine - các luồng nhẹ được quản lý bởi Kotlin runtime thay vì hệ điều hành. Sau đây là cách khởi chạy một coroutine:
+Ngoài ra, Kotlin còn cung cấp một cách xử lý concurrency mạnh mẽ và linh hoạt hơn bằng coroutine - các thread nhẹ được quản lý bởi Kotlin runtime thay vì hệ điều hành. Sau đây là cách khởi chạy một coroutine:
 
 ```kotlin
 import kotlinx.coroutines.*
@@ -52,7 +52,7 @@ if (Thread.currentThread().name == "MyThread") {
 }
 ```
 
-2. **Kiểm tra trạng thái Thread**: IntelliJ IDEA cho phép bạn xem tất cả các luồng đang chạy và trạng thái của chúng trong cửa sổ Gỡ lỗi. Bằng cách chuyển đổi giữa các luồng, bạn có thể xem call stack và xác định xem thread có bị chặn hay đang chờ một điều kiện hay không.
+2. **Kiểm tra trạng thái Thread**: IntelliJ IDEA cho phép bạn xem tất cả các thread đang chạy và trạng thái của chúng trong cửa sổ Gỡ lỗi. Bằng cách chuyển đổi giữa các thread, bạn có thể xem call stack và xác định xem thread có bị chặn hay đang chờ một điều kiện hay không.
 
 3. **Trình gỡ lỗi Kotlin Coroutine**: Các coroutine của Kotlin đơn giản hóa asynchronous programming, nhưng việc hiểu trạng thái và cách thực thi gỡ lỗi của chúng đòi hỏi một cách tiếp cận chi tiết hơn. IntelliJ IDEA cung cấp trình gỡ lỗi coroutine giúp trực quan hóa và theo dõi quá trình thực thi coroutine. Để sử dụng nó, bạn cần kích hoạt tác nhân coroutine cho trình gỡ lỗi.
 
@@ -66,13 +66,13 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 
 ```
 
-Sau khi bật, bạn có thể xem các coroutine đang hoạt động trong tab *Coroutines* trong phiên gỡ lỗi, kiểm tra dấu vết ngăn xếp quá trình tạo coroutine và hiểu mối quan hệ giữa coroutine và luồng.
+Sau khi bật, bạn có thể xem các coroutine đang hoạt động trong tab *Coroutines* trong phiên gỡ lỗi, kiểm tra dấu vết ngăn xếp quá trình tạo coroutine và hiểu mối quan hệ giữa coroutine và thread.
 
 ### Xác định các sự cố Multithreading phổ biến
 
 Các ứng dụng đa luồng Kotlin có thể gặp phải một số sự cố concurrency, có thể khó gỡ lỗi. Dưới đây là một số vấn đề phổ biến và các kỹ thuật phát hiện dành riêng cho Kotlin:
 
-- **Bế tắc**, Bế tắc xảy ra khi hai hoặc nhiều luồng đang chờ nhau giải phóng tài nguyên. Chúng có thể được phát hiện bằng cách kiểm tra các bãi chứa thread để biết các điều kiện chờ vòng tròn. Trong Kotlin, bạn có thể tạo kết xuất thread bằng cách gửi tín hiệu SIGQUIT tới JVM hoặc sử dụng JConsole.
+- **Bế tắc**, Bế tắc xảy ra khi hai hoặc nhiều thread đang chờ nhau giải phóng tài nguyên. Chúng có thể được phát hiện bằng cách kiểm tra các bãi chứa thread để biết các điều kiện chờ vòng tròn. Trong Kotlin, bạn có thể tạo kết xuất thread bằng cách gửi tín hiệu SIGQUIT tới JVM hoặc sử dụng JConsole.
 
 ```kotlin
     // Example of a simple deadlock
@@ -90,16 +90,16 @@ Các ứng dụng đa luồng Kotlin có thể gặp phải một số sự cố
         synchronized (resource1) { println("Thread 2: Locked resource 1") } } }.start()
 ```
 
-- **Điều kiện cuộc đua** Điều kiện cuộc đua xảy ra khi nhiều luồng truy cập vào dữ liệu được chia sẻ và ít nhất một thread sửa đổi dữ liệu đó. Để phát hiện các điều kiện tương tranh, hãy sử dụng các công cụ như `ThreadSanitizer` có thể được tích hợp với Kotlin/Trình biên dịch gốc process.
+- **Điều kiện cuộc đua** Điều kiện cuộc đua xảy ra khi nhiều thread truy cập vào dữ liệu được chia sẻ và ít nhất một thread sửa đổi dữ liệu đó. Để phát hiện các điều kiện tương tranh, hãy sử dụng các công cụ như `ThreadSanitizer` có thể được tích hợp với Kotlin/Trình biên dịch gốc process.
 
-- **Thread Chết đói** Thread chết đói xảy ra khi thread liên tục bị từ chối quyền truy cập vào tài nguyên hoặc thời gian CPU vì các luồng khác đang độc quyền chúng. Điều này có thể được phát hiện bằng cách lập hồ sơ ứng dụng và kiểm tra các luồng có thời gian chờ cao. Các coroutine Kotlin cung cấp structured concurrency có thể giúp quản lý việc sử dụng thread hiệu quả hơn.
+- **Thread Chết đói** Thread chết đói xảy ra khi thread liên tục bị từ chối quyền truy cập vào tài nguyên hoặc thời gian CPU vì các thread khác đang độc quyền chúng. Điều này có thể được phát hiện bằng cách lập hồ sơ ứng dụng và kiểm tra các thread có thời gian chờ cao. Các coroutine Kotlin cung cấp structured concurrency có thể giúp quản lý việc sử dụng thread hiệu quả hơn.
 
 ### Áp dụng các phương pháp hay nhất để gỡ lỗi đa luồng
 
 Việc gỡ lỗi các ứng dụng đa luồng có thể gặp khó khăn do tính chất thực thi đồng thời. Dưới đây là các chiến lược để tách biệt và giải quyết các vấn đề concurrency trong Kotlin:
 
 1. **Viết Mã an toàn Thread**:
-Đảm bảo rằng mã của bạn an toàn để gọi từ nhiều luồng. Bảo vệ các phần quan trọng bằng các khối được đồng bộ hóa hoặc ReentrantLock.
+Đảm bảo rằng mã của bạn an toàn để gọi từ nhiều thread. Bảo vệ các phần quan trọng bằng các khối được đồng bộ hóa hoặc ReentrantLock.
 
 ```kotlin
 val lock = ReentrantLock()
@@ -115,8 +115,8 @@ fun threadSafeFunction() {
 
 2. **Tránh trạng thái Mutable được chia sẻ**
 
-Giảm thiểu trạng thái được chia sẻ giữa các luồng hoặc đặt thành immutable. 
-Trong Kotlin, bạn có thể sử dụng `val` cho các biến immutable và `ImmutableList` cho các bộ sưu tập không thể sửa đổi sau khi tạo.
+Giảm thiểu trạng thái được chia sẻ giữa các thread hoặc đặt thành immutable.
+Trong Kotlin, bạn có thể sử dụng `val` cho các biến immutable và `ImmutableList` cho các collection không thể sửa đổi sau khi tạo.
 
 ```kotlin
 val immutableList = listOf(1, 2, 3) // ImmutableList
@@ -125,7 +125,7 @@ val immutableList = listOf(1, 2, 3) // ImmutableList
 3. Sử dụng Công cụ Concurrency của Kotlin:
 
 Kotlin có hỗ trợ tích hợp cho concurrency, chẳng hạn như Coroutines.
-Chúng đơn giản hóa việc viết mã không đồng bộ và quản lý các luồng.
+Chúng đơn giản hóa việc viết mã không đồng bộ và quản lý các thread.
 
 ```kotlin 
 GlobalScope.launch {
@@ -166,7 +166,7 @@ fun main() {
 }
 ```
 
-Mặc dù đoạn mã trên rất đơn giản nhưng trong quá trình lập hồ sơ, bạn sẽ tìm kiếm các luồng có vẻ bị kẹt hoặc đang tiêu tốn quá nhiều tài nguyên.
+Mặc dù đoạn mã trên rất đơn giản nhưng trong quá trình lập hồ sơ, bạn sẽ tìm kiếm các thread có vẻ bị kẹt hoặc đang tiêu tốn quá nhiều tài nguyên.
 
 2. **Máy phân tích kết xuất Thread**
 
@@ -187,8 +187,8 @@ threadInfos.forEach { println(it) }
 Về cốt lõi, kiến ​​trúc trình gỡ lỗi dựa trên Java Virtual Machine (JVM) để thực thi mã Kotlin vì Kotlin là ngôn ngữ được nhắm mục tiêu JVM-.
 
 
-Khi ứng dụng Kotlin chạy ở chế độ gỡ lỗi, JVM sử dụng Giao thức dây gỡ lỗi Java (JDWP) để liên lạc với trình gỡ lỗi. 
-Giao thức này cho phép truyền thông tin gỡ lỗi giữa JVM và giao diện trình gỡ lỗi.
+Khi ứng dụng Kotlin chạy ở chế độ gỡ lỗi, JVM sử dụng Protocol dây gỡ lỗi Java (JDWP) để liên lạc với trình gỡ lỗi.
+Protocol này cho phép truyền thông tin gỡ lỗi giữa JVM và interface trình gỡ lỗi.
 
 Đây là một cái nhìn đơn giản về sự tương tác:
 
@@ -204,7 +204,7 @@ Sau đó, trình gỡ lỗi có thể **kiểm tra các biến**, **đánh giá 
 
 
 JVM đóng một vai trò quan trọng trong process này bằng cách cung cấp các hook và API cần thiết cho trình gỡ lỗi để kiểm soát luồng ứng dụng.
-Ví dụ: JVM (Giao diện công cụ) của JVM cung cấp các tính năng như đặt điểm dừng, duyệt qua mã và truy cập call stack.
+Ví dụ: JVM (Interface công cụ) của JVM cung cấp các tính năng như đặt điểm dừng, duyệt qua mã và truy cập call stack.
 
 Nhìn chung, kiến ​​trúc trình gỡ lỗi Kotlin được xây dựng dựa trên khả năng gỡ lỗi của JVM. Nó sử dụng JDWP để giao tiếp với Kotlin runtime
 

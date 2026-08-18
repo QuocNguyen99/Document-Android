@@ -4,16 +4,16 @@
 Khi người dùng mở một trang như vậy, mã độc sẽ được thực thi trên máy tính của họ và thiết lập kết nối với web server của kẻ tấn công.
 
 Kịch bản chéo trang chủ yếu được sử dụng để đánh cắp cookie của người dùng. 
-Các bên thứ ba có thể truy cập phiên của người dùng, thực hiện các yêu cầu HTTP từ người dùng, lấy thông tin xác thực của người dùng và gây khó khăn khi tương tác với trang web.
+Các bên thứ ba có thể truy cập phiên của người dùng, thực hiện các request HTTP từ người dùng, lấy thông tin xác thực của người dùng và gây khó khăn khi tương tác với trang web.
 Họ thậm chí có thể tạo các chuyển hướng thường xuyên đến các trang web độc hại.
 
 
 ## Các kiểu tấn công XSS
 
 Thường có hai loại trong số họ:
-- **Phản ánh XSS**, trong đó tập lệnh độc hại xuất phát từ yêu cầu HTTP hiện tại. Các cuộc tấn công xảy ra khi người dùng nhấp vào liên kết được chuẩn bị đặc biệt. 
+- **Phản ánh XSS**, trong đó tập lệnh độc hại xuất phát từ request HTTP hiện tại. Các cuộc tấn công xảy ra khi người dùng nhấp vào liên kết được chuẩn bị đặc biệt.
 
-- **XSS được lưu trữ** có thể xảy ra khi kẻ tấn công tìm cách tiêm mã độc vào máy chủ, mã này được thực thi trong trình duyệt mỗi khi trang gốc được truy cập.
+- **XSS được lưu trữ** có thể xảy ra khi kẻ tấn công tìm cách tiêm mã độc vào server, mã này được thực thi trong trình duyệt mỗi khi trang gốc được truy cập.
 
 
 ## Cách tìm lỗ hổng XSS
@@ -36,9 +36,9 @@ May mắn thay, có những dịch vụ đặc biệt cho mục đích này, ch�
 Ngoài ra còn có một số khuyến nghị dành cho nhà phát triển trang web và ứng dụng để ngăn chặn các cuộc tấn công XSS:
 - Nếu trang web của bạn có thông tin đầu vào của người dùng, điều quan trọng là phải mã hóa dữ liệu.
 - Trong trường hợp mã hóa không phù hợp, hãy thay thế bằng xác thực.
-- Việc xử lý dữ liệu an toàn phải được thực hiện bằng mã không chỉ ở phía máy chủ của bạn mà còn ở phía máy khách.
+- Việc xử lý dữ liệu an toàn phải được thực hiện bằng mã không chỉ ở phía server của bạn mà còn ở phía client.
 - Sử dụng cờ cookie `HTTPOnly` cho Set-Cookie tiêu đề HTTP. Nó cấm đọc và ghi cookie thông qua JavaScript.
-- Tốt nhất là không cho phép liên kết đến các trang web nếu chúng không bắt đầu bằng giao thức danh sách trắng, chẳng hạn như `http://`, `https://`.
+- Tốt nhất là không cho phép liên kết đến các trang web nếu chúng không bắt đầu bằng protocol danh sách trắng, chẳng hạn như `http://`, `https://`.
 - Sử dụng Chính sách bảo mật nội dung.
 
 

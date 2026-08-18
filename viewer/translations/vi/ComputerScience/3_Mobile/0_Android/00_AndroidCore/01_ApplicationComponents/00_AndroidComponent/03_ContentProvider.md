@@ -6,7 +6,7 @@
 
 Nhà cung cấp nội dung chủ yếu được sử dụng để:
 - Chia sẻ dữ liệu giữa các ứng dụng khác nhau.
-- Truy cập và quản lý dữ liệu riêng tư của ứng dụng bằng giao diện chuẩn.
+- Truy cập và quản lý dữ liệu riêng tư của ứng dụng bằng interface chuẩn.
 
 ## Trường hợp sử dụng
 
@@ -27,7 +27,7 @@ Nhà cung cấp nội dung chủ yếu được sử dụng để:
 
 ### 2. `ContentResolver`
 
-Được sử dụng bởi các ứng dụng khách để truy cập dữ liệu từ content provider. Nó hoạt động như một cầu nối giữa nhà cung cấp và ứng dụng tiêu dùng.
+Được sử dụng bởi các client để truy cập dữ liệu từ content provider. Nó hoạt động như một cầu nối giữa nhà cung cấp và ứng dụng tiêu dùng.
 
 ### 3. `Uri`
 

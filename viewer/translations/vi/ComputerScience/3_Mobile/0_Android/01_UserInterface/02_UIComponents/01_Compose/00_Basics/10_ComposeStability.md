@@ -7,9 +7,9 @@ Bạn đã bao giờ đo lường hiệu suất của thành phần kết hợp 
 - Compose xác định tính ổn định của từng tham số trong các thành phần kết hợp của bạn để tìm hiểu xem có thể bỏ qua tham số đó hay không trong recomposition.
 - Nếu bạn nhận thấy thành phần kết hợp của mình không bị bỏ qua và điều này gây ra vấn đề về hiệu suất, thì trước tiên, bạn nên kiểm tra các nguyên nhân rõ ràng gây ra sự mất ổn định như thông số `var`.
 - Chúng tôi có thể sử dụng báo cáo compiler để xác định mức độ ổn định đang được suy ra về các lớp của bạn và chúng tôi có thể sử dụng [chỉ số Composable](https://chrisbanes.me/posts/composable-metrics/) hoặc thư viện của bên thứ ba như [Mendable](https://github.com/jayasuryat/mendable)
-- Các lớp Collection như `List`, `Set` và `Map` luôn được xác định là không ổn định vì không đảm bảo chúng là immutable. Thay vào đó, bạn có thể sử dụng [bộ sưu tập Kotlinx immutable](https://github.com/Kotlin/kotlinx.collections.immutable) hoặc chú thích các lớp của mình dưới dạng `@Immutable` hoặc `@Stable`.
+- Các lớp Collection như `List`, `Set` và `Map` luôn được xác định là không ổn định vì không đảm bảo chúng là immutable. Thay vào đó, bạn có thể sử dụng [collection Kotlinx immutable](https://github.com/Kotlin/kotlinx.collections.immutable) hoặc chú thích các lớp của mình dưới dạng `@Immutable` hoặc `@Stable`.
 
-- Các lớp từ các mô-đun trong đó Compose compiler không chạy luôn được xác định là không ổn định. Thêm phần phụ thuộc vào việc soạn runtime và đánh dấu chúng là ổn định trong mô-đun của bạn hoặc gói các lớp trong các lớp mô hình UI nếu cần.
+- Các lớp từ các mô-đun trong đó Compose compiler không chạy luôn được xác định là không ổn định. Thêm dependency vào việc soạn runtime và đánh dấu chúng là ổn định trong mô-đun của bạn hoặc gói các lớp trong các lớp mô hình UI nếu cần.
 - Mọi Composable có nên bỏ qua không? **KHÔNG.**
 
 ##Recomposition
@@ -253,9 +253,9 @@ Biến không đổi, kiểu khai báo của nó không phải là mutable nhưn
 - Nếu điều này là không thể thì bạn sẽ phải sử dụng trạng thái Compose cho bất kỳ thuộc tính mutable nào. Điều này có nghĩa là trong thực tế, mọi thuộc tính mutable phải được hỗ trợ bởi trạng thái Compose, ví dụ: `mutableStateOf(…)`.
 
 
-## Bộ sưu tập Kotlinx Immutable
+## Collection Kotlinx Immutable
 
-Phiên bản 1.2 của Compose compiler bao gồm hỗ trợ cho Bộ sưu tập Kotlinx Immutable. Các bộ sưu tập này được đảm bảo là immutable và sẽ được compiler suy ra như vậy.
+Phiên bản 1.2 của Compose compiler bao gồm hỗ trợ cho Collection Kotlinx Immutable. Các collection này được đảm bảo là immutable và sẽ được compiler suy ra như vậy.
 
 Việc chuyển khai báo thẻ sang như sau sẽ làm cho lớp `Snack` ổn định.
 
@@ -353,7 +353,7 @@ restartable skippable scheme(“[androidx.compose.ui.UiComposable]”) fun Highl
 
 Một vấn đề phổ biến khác mà bạn có thể gặp phải liên quan đến kiến ​​trúc đa mô-đun. Compose compiler sẽ chỉ có thể suy ra liệu một lớp có ổn định hay không nếu tất cả các loại không nguyên thủy mà nó tham chiếu được đánh dấu rõ ràng là ổn định hoặc trong một mô-đun cũng được xây dựng bằng Compose compiler. Nếu data layer của bạn nằm trong một mô-đun riêng biệt với lớp UI, [đây là phương pháp được đề xuất](https://developer.android.com/topic/architecture), đây có thể là sự cố bạn sẽ gặp phải. Để giải quyết vấn đề này, bạn có thể:
 - Kích hoạt Compose compiler trên mô-đun data layer của bạn hoặc gắn thẻ các lớp của bạn với `@Stable` hoặc `@Immutable` nếu thích hợp.
-- Điều này sẽ liên quan đến việc thêm phần phụ thuộc Compose vào data layer của bạn, **tuy nhiên, nó sẽ chỉ là phần phụ thuộc để soạn runtime chứ không phải cho Compose-UI.**
+- Điều này sẽ liên quan đến việc thêm dependency Compose vào data layer của bạn, **tuy nhiên, nó sẽ chỉ là dependency để soạn runtime chứ không phải cho Compose-UI.**
 - Gói các lớp data layer của bạn trong các lớp trình bao bọc cụ thể UI bên trong mô-đun UI của bạn.
 
 ## Có nên bỏ qua mọi Composable không?

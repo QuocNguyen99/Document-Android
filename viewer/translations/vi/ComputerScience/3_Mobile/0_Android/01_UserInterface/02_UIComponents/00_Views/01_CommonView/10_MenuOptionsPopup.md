@@ -145,7 +145,7 @@ Và đây là kết quả:
 
 ## Cửa sổ bật lên
 
-**Cửa sổ bật lên** hoặc **thả xuống** tương tự có thể được tạo mà không cần `Toolbar` và được neo vào chế độ xem tùy ý. Chỉ cần tạo `PopupMenu`, mở rộng menu, đặt trình nghe để xử lý các nhấp chuột và hiển thị nó.
+**Cửa sổ bật lên** hoặc **thả xuống** tương tự có thể được tạo mà không cần `Toolbar` và được neo vào chế độ xem tùy ý. Chỉ cần tạo `PopupMenu`, mở rộng menu, đặt listener để xử lý các nhấp chuột và hiển thị nó.
 
 ```kotlin
 anyView.setOnClickListener { anyView ->

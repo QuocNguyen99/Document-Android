@@ -3,8 +3,8 @@
 data layer của ứng dụng chứa logic nghiệp vụ.
 Logic nghiệp vụ là thứ mang lại giá trị cho ứng dụng của bạn—nó được tạo thành từ các quy tắc xác định cách ứng dụng của bạn tạo, lưu trữ và thay đổi dữ liệu.
 
-data layer được tạo từ các kho lưu trữ mà mỗi kho có thể chứa từ 0 đến nhiều nguồn dữ liệu. 
-Bạn nên tạo một lớp kho lưu trữ cho từng loại dữ liệu khác nhau mà bạn xử lý trong ứng dụng của mình.
+data layer được tạo từ các repository mà mỗi kho có thể chứa từ 0 đến nhiều nguồn dữ liệu.
+Bạn nên tạo một lớp repository cho từng loại dữ liệu khác nhau mà bạn xử lý trong ứng dụng của mình.
 Ví dụ: bạn có thể tạo lớp MoviesRepository cho dữ liệu liên quan đến phim hoặc lớp PaymentsRepository cho dữ liệu liên quan đến thanh toán.
 
 ![văn bản thay thế](/resources/app_architecture_data_layer.png)
@@ -64,7 +64,7 @@ interface ExampleApi {
 ```
 
 > [!TIP]
-> Việc dựa vào các giao diện giúp việc triển khai API có thể hoán đổi được trong ứng dụng của bạn.
+> Việc dựa vào các interface giúp việc triển khai API có thể hoán đổi được trong ứng dụng của bạn.
 
 ## Quy ước đặt tên trong hướng dẫn này
 
@@ -77,26 +77,26 @@ Các lớp nguồn dữ liệu được đặt tên theo dữ liệu mà chúng 
 `type of data + type of source + DataSource`
 
 > [!TIP]
-> Không đặt tên nguồn dữ liệu dựa trên chi tiết triển khai. ví dụ: UserSharedPreferencesDataSource—vì các kho lưu trữ sử dụng nguồn dữ liệu đó sẽ không biết cách lưu dữ liệu.
+> Không đặt tên nguồn dữ liệu dựa trên chi tiết triển khai. ví dụ: UserSharedPreferencesDataSource—vì các repository sử dụng nguồn dữ liệu đó sẽ không biết cách lưu dữ liệu.
 > Nếu tuân theo quy tắc này, bạn có thể thay đổi cách triển khai nguồn dữ liệu (ví dụ: di chuyển từ SharedPreferences sang DataStore) mà không ảnh hưởng đến lớp gọi nguồn đó.
 
-## Nhiều cấp độ kho lưu trữ
+## Nhiều cấp độ repository
 
 
-Trong một số trường hợp liên quan đến các yêu cầu kinh doanh phức tạp hơn, một kho lưu trữ có thể cần phải phụ thuộc vào các kho lưu trữ khác.
-Điều này có thể là do dữ liệu liên quan là sự tổng hợp từ nhiều nguồn dữ liệu hoặc do trách nhiệm cần được gói gọn trong một lớp kho lưu trữ khác.
+Trong một số trường hợp liên quan đến các yêu cầu kinh doanh phức tạp hơn, một repository có thể cần phải phụ thuộc vào các repository khác.
+Điều này có thể là do dữ liệu liên quan là sự tổng hợp từ nhiều nguồn dữ liệu hoặc do trách nhiệm cần được gói gọn trong một lớp repository khác.
 
-Ví dụ: kho lưu trữ xử lý dữ liệu xác thực người dùng, `UserRepository`, có thể phụ thuộc vào các kho lưu trữ khác như `LoginRepository` và `RegistrationRepository` để đáp ứng các yêu cầu của nó.
+Ví dụ: repository xử lý dữ liệu xác thực người dùng, `UserRepository`, có thể phụ thuộc vào các repository khác như `LoginRepository` và `RegistrationRepository` để đáp ứng các yêu cầu của nó.
 
 ![văn bản thay thế](/resources/data_layer_multiple_level_of_respositories.png)
 
 ## Nguồn sự thật
 
-Trên thực tế, dữ liệu được hiển thị từ kho lưu trữ phải luôn là dữ liệu đến trực tiếp từ nguồn sự thật.
+Trên thực tế, dữ liệu được hiển thị từ repository phải luôn là dữ liệu đến trực tiếp từ nguồn sự thật.
 
 ## Luồng
 
-Việc gọi các nguồn dữ liệu và kho lưu trữ phải an toàn khi gọi từ thread chính
+Việc gọi các nguồn dữ liệu và repository phải an toàn khi gọi từ main thread
 
 ##Lifecycle
 
@@ -130,7 +130,7 @@ data class ArticleApiModel(
 )
 ```
 
-Đó là một cách thực hành tốt để tách các lớp mô hình và yêu cầu kho lưu trữ của bạn chỉ hiển thị dữ liệu mà các lớp khác trong hệ thống phân cấp yêu cầu
+Đó là một cách thực hành tốt để tách các lớp mô hình và yêu cầu repository của bạn chỉ hiển thị dữ liệu mà các lớp khác trong hệ thống phân cấp yêu cầu
 
 đây là cách bạn có thể cắt bớt `ArticleApiModel` khỏi mạng để hiển thị lớp mô hình `Article` cho miền và các lớp UI:
 
@@ -168,7 +168,7 @@ Ví dụ: lifecycle của `ViewModel`.
 
 Các hoạt động hướng đến ứng dụng có liên quan miễn là ứng dụng được mở.
 Nếu ứng dụng bị đóng hoặc process bị tắt, các hoạt động này sẽ bị hủy.
-Một ví dụ là lưu trữ kết quả của một yêu cầu mạng để có thể sử dụng sau này nếu cần.
+Một ví dụ là lưu trữ kết quả của một network request để có thể sử dụng sau này nếu cần.
 
 ###Hoạt động theo định hướng kinh doanh
 
@@ -179,15 +179,15 @@ Khuyến nghị cho các hoạt động định hướng kinh doanh là sử d�
 
 ## Phơi bày lỗi
 
-Tương tác với kho lưu trữ và nguồn dữ liệu có thể thành công hoặc tạo ra ngoại lệ khi xảy ra lỗi.
+Tương tác với repository và nguồn dữ liệu có thể thành công hoặc tạo ra ngoại lệ khi xảy ra lỗi.
 Đối với coroutine, bạn nên sử dụng [cơ chế xử lý lỗi tích hợp của Kotlin](https://kotlinlang.org/docs/exception-handling.html); trong Flow, hãy sử dụng toán tử `catch`.
 
 Đối với các lỗi có thể được kích hoạt bởi các chức năng tạm dừng, hãy sử dụng khối `try/catch` khi thích hợp
 
 ## Nhiệm vụ chung
 
-1. **Thực hiện yêu cầu mạng**
-2. **Triển khai bộ nhớ đệm dữ liệu trong bộ nhớ**
+1. **Thực hiện network request**
+2. **Triển khai cache dữ liệu trong bộ nhớ**
 3. **Lưu và truy xuất dữ liệu từ đĩa**, Nếu dữ liệu bạn đang làm việc cần tồn tại sau khi process chết, thì bạn cần lưu trữ dữ liệu đó trên đĩa theo một trong các cách sau:
    1. Đối với các tập dữ liệu lớn cần được truy vấn, cần tính toàn vẹn tham chiếu hoặc cần cập nhật một phần, hãy lưu dữ liệu trong cơ sở dữ liệu Room.
    2. Đối với các tập dữ liệu nhỏ chỉ cần truy xuất và đặt (không phải truy vấn hoặc cập nhật một phần), hãy sử dụng `DataStore`.

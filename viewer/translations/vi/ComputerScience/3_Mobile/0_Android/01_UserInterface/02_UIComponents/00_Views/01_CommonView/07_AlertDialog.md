@@ -36,7 +36,7 @@ alertDialogButton.setOnClickListener {
 
 Các hàm `set**Button` chấp nhận văn bản nút và phiên bản `DialogInterface.OnClickListener` với một phương thức onClick trừu tượng duy nhất. Nó nhận các tham số sau: **dialog** (hộp thoại đã nhận được lượt nhấp chuột) và ** which (nút được nhấp vào hoặc vị trí của mục được nhấp vào)**. Điều này giúp tìm ra nút nào trong hộp thoại nào được nhấp vào nếu cùng một callback được sử dụng nhiều lần.
 
-Khi người dùng nhấp vào bất kỳ nút nào, hộp thoại sẽ tự động bị loại bỏ. Do đó, nếu không cần thực hiện thêm hành động nào, người nghe có thể là `null`.
+Khi người dùng nhấp vào bất kỳ nút nào, hộp thoại sẽ tự động bị loại bỏ. Do đó, nếu không cần thực hiện thêm hành động nào, listener có thể là `null`.
 
 Chúng ta có thể tạo một hộp thoại bằng phương thức `create()` của Builder, lưu nó vào một biến và chỉ sau đó hiển thị nó:
 
@@ -172,7 +172,7 @@ Cùng với setTitle() và setMessage(), chúng ta có thể sử dụng phươn
 
 ![văn bản thay thế](/resources/alert_dialog_icon.png)
 
-Chúng ta cũng có thể đặt trình xử lý cho tình huống khi cửa sổ bị đóng do nhấn nút bên trong cửa sổ hoặc nút quay lại:
+Chúng ta cũng có thể đặt handler cho tình huống khi cửa sổ bị đóng do nhấn nút bên trong cửa sổ hoặc nút quay lại:
 
 ```kotlin
 .setOnDismissListener {

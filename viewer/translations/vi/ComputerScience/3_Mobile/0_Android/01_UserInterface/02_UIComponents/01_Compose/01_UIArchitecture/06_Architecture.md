@@ -10,7 +10,7 @@ Trong Compose, UI là immutable—không có cách nào để cập nhật nó s
   </summary>
   
   <p>
- TextField chấp nhận một giá trị và hiển thị callback onValueChange yêu cầu trình xử lý callback thay đổi giá trị.
+ TextField chấp nhận một giá trị và hiển thị callback onValueChange request handler callback thay đổi giá trị.
 
  ```kotlin
  var name by remember { mutableStateOf("") }
@@ -43,7 +43,7 @@ Vì các thành phần kết hợp chấp nhận trạng thái và hiển thị 
   </summary>
   
   <p>
- TextField chỉ được cập nhật khi tham số giá trị của nó được cập nhật và nó hiển thị onValueChange callback—một sự kiện yêu cầu thay đổi giá trị thành giá trị mới.
+ TextField chỉ được cập nhật khi tham số giá trị của nó được cập nhật và nó hiển thị onValueChange callback—một sự kiện request thay đổi giá trị thành giá trị mới.
   </p>
 </details>
 
@@ -89,7 +89,7 @@ fun Header(news: News) {
 
 Mọi thông tin đầu vào vào ứng dụng của bạn phải được thể hiện dưới dạng một sự kiện: lần nhấn, thay đổi văn bản và thậm chí cả bộ hẹn giờ hoặc các cập nhật khác. Vì những sự kiện này thay đổi trạng thái UI của bạn, **`ViewModel` sẽ là người xử lý chúng và cập nhật trạng thái UI.**
 
-Lớp UI không bao giờ được thay đổi trạng thái bên ngoài trình xử lý sự kiện vì điều này có thể gây ra sự không nhất quán và lỗi trong ứng dụng của bạn.
+Lớp UI không bao giờ được thay đổi trạng thái bên ngoài handler sự kiện vì điều này có thể gây ra sự không nhất quán và lỗi trong ứng dụng của bạn.
 
 
 Ưu tiên chuyển các giá trị immutable cho các lambda xử lý trạng thái và sự kiện. Cách tiếp cận này có những lợi ích sau:
@@ -180,7 +180,7 @@ class MyViewModel : ViewModel() {
 </details>
 
 
-Ngoài mutableStateOf API, Compose còn cung cấp các tiện ích mở rộng cho LiveData, Flow và Có thể quan sát để đăng ký làm trình nghe và thể hiện giá trị dưới dạng trạng thái.
+Ngoài mutableStateOf API, Compose còn cung cấp các tiện ích mở rộng cho LiveData, Flow và Có thể quan sát để đăng ký làm listener và thể hiện giá trị dưới dạng trạng thái.
 
 ```kotlin
 class MyViewModel : ViewModel() {

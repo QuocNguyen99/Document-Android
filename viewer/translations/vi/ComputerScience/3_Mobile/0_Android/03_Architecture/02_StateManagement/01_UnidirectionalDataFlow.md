@@ -6,7 +6,7 @@ Vòng lặp cập nhật UI cho một ứng dụng sử dụng unidirectional da
 
 - **Sự kiện**: Một phần của UI tạo ra một sự kiện và chuyển nó lên trên, chẳng hạn như một lần bấm nút được chuyển đến ViewModel để xử lý; hoặc một sự kiện được truyền từ các lớp khác trong ứng dụng của bạn, chẳng hạn như cho biết rằng phiên người dùng đã hết hạn.
 
-- **Cập nhật trạng thái**: Trình xử lý sự kiện có thể thay đổi trạng thái.
+- **Cập nhật trạng thái**: Handler sự kiện có thể thay đổi trạng thái.
 - **Trạng thái hiển thị**: state holder chuyển trạng thái xuống và UI hiển thị trạng thái đó.
 
 ![](/resources/state_hosting.avif)

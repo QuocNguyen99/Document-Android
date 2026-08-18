@@ -55,7 +55,7 @@ Bây giờ, hãy chạy các thử nghiệm này để đảm bảo rằng việ
 
 ## Cài đặt
 
-Trước tiên, hãy thêm phần phụ thuộc sau vào dự án của chúng ta để JUnit có thể hoạt động với các thử nghiệm được tham số hóa.
+Trước tiên, hãy thêm dependency sau vào dự án của chúng ta để JUnit có thể hoạt động với các thử nghiệm được tham số hóa.
 
 ```kotlin
 dependencies {

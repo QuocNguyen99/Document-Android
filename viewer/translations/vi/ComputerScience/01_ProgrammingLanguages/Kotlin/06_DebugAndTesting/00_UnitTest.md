@@ -167,9 +167,9 @@ Nó cung cấp một cách đơn giản và trực quan để tạo và quản l
 
 ### Kiểm tra đơn vị và MockK
 
-Một trong những thách thức trong thử nghiệm đơn vị là xử lý các phần phụ thuộc, chẳng hạn như các dịch vụ bên ngoài hoặc quyền truy cập cơ sở dữ liệu.
-Mocking là một kỹ thuật được sử dụng để mô phỏng các phần phụ thuộc này và tạo ra các thử nghiệm riêng biệt.
-Bằng cách sử dụng các đối tượng mô phỏng thay vì các phần phụ thuộc thực, nhà phát triển có thể kiểm soát hành vi của các phần phụ thuộc này và làm cho các thử nghiệm của họ dễ dự đoán hơn.
+Một trong những thách thức trong thử nghiệm đơn vị là xử lý các dependency, chẳng hạn như các dịch vụ bên ngoài hoặc quyền truy cập cơ sở dữ liệu.
+Mocking là một kỹ thuật được sử dụng để mô phỏng các dependency này và tạo ra các thử nghiệm riêng biệt.
+Bằng cách sử dụng các đối tượng mô phỏng thay vì các dependency thực, nhà phát triển có thể kiểm soát hành vi của các dependency này và làm cho các thử nghiệm của họ dễ dự đoán hơn.
 Điều này cho phép họ tập trung vào việc kiểm tra các phần cụ thể trong mã của mình mà không phải lo lắng về các yếu tố bên ngoài có thể ảnh hưởng đến kết quả kiểm tra.
 
 ## Kiểm tra chú thích lifecycle

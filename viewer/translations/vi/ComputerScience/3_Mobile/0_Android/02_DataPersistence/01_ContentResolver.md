@@ -11,7 +11,7 @@ Hoặc bạn có thể mở một ổ cắm tới một số cổng đã biết
 (ví dụ: 5432 cho PostgreSQL hoặc 27015 cho Counter-Strike).
 
 Tình hình ở Android lại khác: các quy trình nói chung có thời gian tồn tại ngắn và thời gian bắt đầu khá rẻ,
-và các tiến trình nền có thể dễ dàng bị loại bỏ để giải phóng một số bộ nhớ cho ứng dụng hiển thị.
+và các process nền có thể dễ dàng bị loại bỏ để giải phóng một số bộ nhớ cho ứng dụng hiển thị.
 Điều đó có nghĩa là việc liên tục chờ đợi kết nối, việc tạo kênh và liên kết cổng trở nên khá phi thực tế. 
 Mặt khác, Android có khái niệm về một ứng dụng có thể được xác định bằng tên gói và có sẵn để liên lạc với thế giới bên ngoài thông qua các thành phần được hiển thị trong tệp kê khai.
 Điều này cho phép chúng tôi khởi động một ứng dụng nếu nó không chạy process, yêu cầu một số dữ liệu, truy xuất câu trả lời và rời khỏi phiên giao tiếp để cho phép Android OS tiêu diệt process nếu không cần thiết nữa.
@@ -120,7 +120,7 @@ contentResolver.query(
 ```
 
 Có sẵn đầy đủ các hoạt động CRUD, vì vậy bạn có thể sử dụng các chức năng chèn, cập nhật, xóa giống như SQLiteDatabase,
-nếu chúng được hỗ trợ bởi ContentProvider cụ thể được sử dụng để phục vụ yêu cầu của bạn.
+nếu chúng được hỗ trợ bởi ContentProvider cụ thể được sử dụng để phục vụ request của bạn.
 
 ## Sửa đổi dữ liệu
 
@@ -224,7 +224,7 @@ chỉ là những Uris bình thường có thể được xử lý theo cách t�
 ## Gọi phương thức từ xa
 
 Ngoài việc yêu cầu Con trỏ, chèn ContentValues hoặc trao đổi tệp,
-Máy phân giải content provider hỗ trợ giao diện gọi phương thức từ xa đơn giản.
+Máy phân giải content provider hỗ trợ interface gọi phương thức từ xa đơn giản.
 Có `call(uri: Uri, method: String, arg: String?, extras: Bundle?)`:
 Bundle? phương thức cho phép ContentProviders triển khai các phương thức tùy chỉnh,
 và để ContentResolvers gọi chúng và nhận kết quả.

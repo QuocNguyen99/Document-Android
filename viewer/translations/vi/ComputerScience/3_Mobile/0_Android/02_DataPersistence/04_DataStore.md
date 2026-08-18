@@ -1,9 +1,9 @@
 #DataStore
 
-Jetpack `DataStore` là giải pháp lưu trữ dữ liệu cho phép bạn **lưu trữ các cặp khóa-giá trị hoặc đối tượng được nhập** bằng bộ đệm giao thức. 
+Jetpack `DataStore` là giải pháp lưu trữ dữ liệu cho phép bạn **lưu trữ các cặp khóa-giá trị hoặc đối tượng được nhập** bằng bộ đệm protocol.
 
 > [!NOTE]
-> Bộ đệm giao thức là cơ chế trung lập về ngôn ngữ (độc lập với ngôn ngữ), cơ chế mở rộng trung lập về nền tảng để tuần tự hóa dữ liệu có cấu trúc
+> Bộ đệm protocol là cơ chế trung lập về ngôn ngữ (độc lập với ngôn ngữ), cơ chế mở rộng trung lập về nền tảng để tuần tự hóa dữ liệu có cấu trúc
 
 `DataStore` sử dụng coroutine Kotlin và `Flow` để lưu trữ dữ liệu một cách không đồng bộ, nhất quán và mang tính giao dịch.
 
@@ -21,13 +21,13 @@ Jetpack `DataStore` là giải pháp lưu trữ dữ liệu cho phép bạn **l�
 Việc triển khai này không yêu cầu lược đồ được xác định trước và nó không cung cấp sự an toàn về kiểu.
 
 - **Proto DataStore** lưu trữ dữ liệu dưới dạng phiên bản của loại dữ liệu tùy chỉnh. 
-Việc triển khai này yêu cầu bạn xác định một lược đồ bằng cách sử dụng bộ đệm giao thức, nhưng nó cung cấp sự an toàn về kiểu.
+Việc triển khai này yêu cầu bạn xác định một lược đồ bằng cách sử dụng bộ đệm protocol, nhưng nó cung cấp sự an toàn về kiểu.
 
 ## Sử dụng DataStore trong mã đồng bộ
 
 > [!CAUTION]
-> Tránh chặn các luồng trên quá trình đọc dữ liệu `DataStore` bất cứ khi nào có thể. 
-> Chặn UI thread có thể gây ra ANR hoặc UI bị giật và việc chặn các luồng khác có thể dẫn đến bế tắc.
+> Tránh chặn các thread trên quá trình đọc dữ liệu `DataStore` bất cứ khi nào có thể.
+> Chặn UI thread có thể gây ra ANR hoặc UI bị giật và việc chặn các thread khác có thể dẫn đến bế tắc.
 
 
 

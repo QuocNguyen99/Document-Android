@@ -1,8 +1,8 @@
-# Giao diện trong Kotlin
+# Interface trong Kotlin
 
-Chúng ta không thể tạo một thể hiện của một giao diện, nhưng chúng ta có thể tạo một thể hiện của lớp triển khai giao diện đó.
+Chúng ta không thể tạo một thể hiện của một interface, nhưng chúng ta có thể tạo một thể hiện của lớp triển khai interface đó.
 
-Giao diện được triển khai tương tự như kế thừa từ một lớp khác:
+Interface được triển khai tương tự như kế thừa từ một lớp khác:
 
 ```kotlin
 interface Animal {
@@ -16,11 +16,11 @@ class MyAnimalClass : Animal {
 }
 ```
 
-Khi đó, mỗi **trường** hoặc **phương thức** được khai báo trong giao diện, cần được khai báo trong lớp với từ khóa `override`.
+Khi đó, mỗi **trường** hoặc **phương thức** được khai báo trong interface, cần được khai báo trong lớp với từ khóa `override`.
 
 ## Thêm triển khai mặc định
 
-Vì giao diện không thể duy trì trạng thái nên chúng tôi không thể sử dụng công cụ khởi tạo thuộc tính để xác định giá trị mặc định:
+Vì interface không thể duy trì trạng thái nên chúng tôi không thể sử dụng công cụ khởi tạo thuộc tính để xác định giá trị mặc định:
 
 ```kotlin
 interface Animal {
@@ -52,11 +52,11 @@ interface Animal {
 > [!NOTE]
 > Việc triển khai mặc định cho phép bạn bỏ qua việc ghi đè các thuộc tính hoặc phương thức nhất định trong lớp dẫn xuất, ngoại trừ các trường hợp khi chức năng mặc định không đủ.
 
-## Giao diện inheritance
+## Interface inheritance
 
-Các lớp trong Kotlin không thể mở rộng nhiều hơn một lớp cơ sở, nhưng chúng có thể triển khai một số giao diện (các lớp có thể mở rộng lớp cơ sở, mở rộng một lớp khác, nhưng điều đó không hoàn toàn giống với ý tưởng chung của nhiều inheritance).
+Các lớp trong Kotlin không thể mở rộng nhiều hơn một lớp cơ sở, nhưng chúng có thể triển khai một số interface (các lớp có thể mở rộng lớp cơ sở, mở rộng một lớp khác, nhưng điều đó không hoàn toàn giống với ý tưởng chung của nhiều inheritance).
 
-Cú pháp cho lớp và giao diện inheritance giống nhau: tên của giao diện mới đặt trước dấu hai chấm `:` và sau từ khóa `interface`; sau dấu hai chấm là tên của giao diện cơ sở - giao diện có thuộc tính mà giao diện mới kế thừa:
+Cú pháp cho lớp và interface inheritance giống nhau: tên của interface mới đặt trước dấu hai chấm `:` và sau từ khóa `interface`; sau dấu hai chấm là tên của interface cơ sở - interface có thuộc tính mà giao diện mới kế thừa:
 
 ```kotlin
 interface Animal {
@@ -71,8 +71,8 @@ interface Bird : Animal {
     fun buildNest()
 }
 ```
-### Triển khai giao diện dẫn xuất
-Nguyên tắc chính của việc triển khai các giao diện dẫn xuất là lớp phải triển khai các phương thức và thuộc tính từ cả giao diện cơ sở và giao diện dẫn xuất:
+### Triển khai interface dẫn xuất
+Nguyên tắc chính của việc triển khai các interface dẫn xuất là lớp phải triển khai các phương thức và thuộc tính từ cả interface cơ sở và giao diện dẫn xuất:
 
 ```kotlin
 class Parrot : Bird // : Animal
@@ -104,7 +104,7 @@ class Parrot : Bird // : Animal
 
 ### Nhiều Inheritance
 
-Chúng tôi cũng có thể sử dụng nhiều inheritance: một lớp thực hiện một số giao diện khác nhau.
+Chúng tôi cũng có thể sử dụng nhiều inheritance: một lớp thực hiện một số interface khác nhau.
 
 ```kotlin
 interface Bird : Animal {
@@ -141,9 +141,9 @@ class Owl : Bird, Flying {
 }
 ```
 
-### Inheritance từ nhiều giao diện
+### Inheritance từ nhiều interface
 
-Giống như các lớp có thể triển khai một số giao diện, một giao diện có thể được bắt nguồn từ một số giao diện khác.
+Giống như các lớp có thể triển khai một số interface, một interface có thể được bắt nguồn từ một số giao diện khác.
 
 ```kotlin
 interface FlyingBird : Bird, Flying  

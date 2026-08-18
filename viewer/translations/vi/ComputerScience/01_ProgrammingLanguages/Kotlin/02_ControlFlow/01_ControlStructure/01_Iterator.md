@@ -1,6 +1,6 @@
 # Bộ tương tác
 
-## Bộ sưu tập Iterator và immutable
+## Collection Iterator và immutable
 Một trình vòng lặp cung cấp quyền truy cập vào các phần tử collection một cách tuần tự, bất kể loại của chúng. Nó có thể được xem như một con trỏ di động tới một phần tử của collection.
 `iterator()` trả về một đối tượng đặc biệt có thể lặp qua collection.
 
@@ -33,10 +33,10 @@ iterator.forEach { (key, value) ->
 */
 ```
 
-## Bộ sưu tập Iterator và mutable
+## Collection Iterator và mutable
 
 Một biến thể lặp đặc biệt khác là `MutableIterator`.
-Nó khác với phiên bản trước ở chỗ nó hoạt động với các bộ sưu tập mutable, tức là với những bộ sưu tập có thể được thay đổi sau khi tạo.
+Nó khác với phiên bản trước ở chỗ nó hoạt động với các collection mutable, tức là với những bộ sưu tập có thể được thay đổi sau khi tạo.
 
 `MutableIterator` mở rộng `Iterator` và cung cấp hàm `remove()`, **loại bỏ phần tử collection cuối cùng được trình vòng lặp trả về.**
 

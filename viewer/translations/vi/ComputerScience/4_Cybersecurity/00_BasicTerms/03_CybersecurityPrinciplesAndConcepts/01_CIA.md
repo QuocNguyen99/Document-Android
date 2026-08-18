@@ -53,12 +53,12 @@
 
 ## Bộ ba CIA trong thực tế
 
-Hãy tưởng tượng bạn đang hoàn tất hợp đồng với một công ty thương mại điện tử. Khách hàng muốn thiết lập một hệ thống dựa trên cấu trúc microservice. Hãy phân tích những gì chúng ta nên tập trung vào trong quá trình phân tích đề án kinh doanh thông qua lăng kính bộ ba CIA.
+Hãy tưởng tượng bạn đang hoàn tất hợp đồng với một công ty thương mại điện tử. Client muốn thiết lập một hệ thống dựa trên cấu trúc microservice. Hãy phân tích những gì chúng ta nên tập trung vào trong quá trình phân tích đề án kinh doanh thông qua lăng kính bộ ba CIA.
 
 **Bảo mật**
 Để bảo vệ tính bảo mật trong ứng dụng thương mại điện tử, các tổ chức có thể triển khai:
 
-- **Dữ liệu Encryption**: Triển khai giao thức HTTPS mã hóa trao đổi dữ liệu giữa máy khách và máy chủ, giúp ngăn chặn việc chặn dữ liệu của bên thứ ba.
+- **Dữ liệu Encryption**: Triển khai HTTPS protocol mã hóa trao đổi dữ liệu giữa client và server, giúp ngăn chặn việc chặn dữ liệu của bên thứ ba.
 
 - **Bảo mật cấp ứng dụng**: Bằng cách giới thiệu Hệ thống quản lý danh tính để kiểm soát quyền truy cập vào các phần nhạy cảm của ứng dụng, như bảng quản trị.
 
@@ -82,7 +82,7 @@ Các chiến lược để đảm bảo tính khả dụng trong ứng dụng th
 
 - **Tự động điều chỉnh quy mô**: Triển khai cơ chế tự động điều chỉnh quy mô để điều chỉnh tài nguyên một cách linh hoạt khi lưu lượng truy cập tăng đột biến, đảm bảo phân phối tải đồng đều.
 
-- **Cân bằng tải**: Kết hợp bộ cân bằng tải để phân phối lưu lượng mạng giữa các máy chủ khác nhau nhằm ngăn chặn tình trạng quá tải.
+- **Cân bằng tải**: Kết hợp bộ cân bằng tải để phân phối lưu lượng mạng giữa các server khác nhau nhằm ngăn chặn tình trạng quá tải.
 
 - **Kế hoạch khắc phục thảm họa**: Phát triển các kế hoạch khắc phục thảm họa kỹ lưỡng trong đó trình bày chi tiết các quy trình xử lý các tình huống khẩn cấp khác nhau.
 

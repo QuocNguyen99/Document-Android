@@ -23,10 +23,10 @@ Cách bạn sắp xếp các mô-đun chủ yếu phụ thuộc vào **cấu tr�
 
 ### Mô-đun dữ liệu
 
-Mô-đun dữ liệu thường chứa kho lưu trữ, nguồn dữ liệu và các lớp mô hình. Ba trách nhiệm chính của mô-đun dữ liệu là:
+Mô-đun dữ liệu thường chứa repository, nguồn dữ liệu và các lớp mô hình. Ba trách nhiệm chính của mô-đun dữ liệu là:
 
 1. **Đóng gói tất cả dữ liệu và logic nghiệp vụ của một miền nhất định**: Mỗi mô-đun dữ liệu phải chịu trách nhiệm xử lý dữ liệu đại diện cho một miền nhất định. Nó có thể xử lý nhiều loại dữ liệu miễn là chúng có liên quan với nhau.
-2. **Hiển thị kho lưu trữ dưới dạng API bên ngoài**: API công khai của mô-đun dữ liệu phải là kho lưu trữ vì chúng chịu trách nhiệm hiển thị dữ liệu cho phần còn lại của ứng dụng.
+2. **Hiển thị repository dưới dạng API bên ngoài**: API công khai của mô-đun dữ liệu phải là repository vì chúng chịu trách nhiệm hiển thị dữ liệu cho phần còn lại của ứng dụng.
 3. **Ẩn tất cả các chi tiết triển khai và nguồn dữ liệu từ bên ngoài**: Chỉ các kho dữ liệu từ cùng một mô-đun mới có thể truy cập được các nguồn dữ liệu. Họ vẫn ẩn náu bên ngoài. Bạn có thể thực thi điều này bằng cách sử dụng từ khóa hiển thị riêng tư hoặc nội bộ của Kotlin.
 
 
@@ -52,7 +52,7 @@ Một mô-đun ứng dụng có thể được biên dịch thành nhiều tệp
 ![văn bản thay thế](/resources/app_modules_modularization_patterns.png)
 
 Nếu ứng dụng của bạn nhắm mục tiêu nhiều loại thiết bị, chẳng hạn như Android Auto, Wear hoặc TV, hãy xác định mô-đun ứng dụng cho từng loại. 
-Điều này giúp tách biệt các phần phụ thuộc dành riêng cho nền tảng.
+Điều này giúp tách biệt các dependency dành riêng cho nền tảng.
 
 ### Các mô-đun chung
 
@@ -61,23 +61,23 @@ Chúng làm giảm sự dư thừa và không đại diện cho bất kỳ lớp
 
 - **Mô-đun UI**: Nếu bạn sử dụng các thành phần UI tùy chỉnh hoặc xây dựng thương hiệu phức tạp trong ứng dụng của mình, bạn nên cân nhắc việc đóng gói tiện ích collection của mình vào một mô-đun để tất cả các tính năng có thể sử dụng lại. Điều này có thể giúp làm cho UI của bạn nhất quán trên các tính năng khác nhau. Ví dụ: nếu chủ đề của bạn được tập trung, bạn có thể tránh được việc tái cấu trúc đau đớn khi xảy ra quá trình đổi thương hiệu.
 - **Mô-đun phân tích**: Việc theo dõi thường được quyết định bởi các yêu cầu kinh doanh mà ít quan tâm đến software architecture. Trình theo dõi phân tích thường được sử dụng trong nhiều thành phần không liên quan. Nếu đó là trường hợp của bạn, bạn nên có một mô-đun phân tích chuyên dụng.
-- **Mô-đun mạng**: Khi nhiều mô-đun yêu cầu kết nối mạng, bạn có thể cân nhắc việc có một mô-đun dành riêng để cung cấp http client. Nó đặc biệt hữu ích khi khách hàng của bạn yêu cầu cấu hình tùy chỉnh.
+- **Mô-đun mạng**: Khi nhiều mô-đun yêu cầu kết nối mạng, bạn có thể cân nhắc việc có một mô-đun dành riêng để cung cấp http client. Nó đặc biệt hữu ích khi client của bạn yêu cầu cấu hình tùy chỉnh.
 - **Mô-đun tiện ích**: Tiện ích, còn được gọi là trình trợ giúp, thường là các đoạn mã nhỏ được sử dụng lại trong ứng dụng. Ví dụ về các tiện ích bao gồm trình trợ giúp kiểm tra, chức năng định dạng tiền tệ, trình xác thực email hoặc toán tử tùy chỉnh.
 
 ### Mô-đun thử nghiệm
 
 Mô-đun thử nghiệm là các mô-đun Android chỉ được sử dụng cho mục đích thử nghiệm.
-Các mô-đun chứa mã kiểm tra, tài nguyên kiểm tra và các phần phụ thuộc kiểm tra chỉ cần thiết để chạy kiểm tra và không cần thiết trong runtime của ứng dụng.
+Các mô-đun chứa mã kiểm tra, tài nguyên kiểm tra và các dependency kiểm tra chỉ cần thiết để chạy kiểm tra và không cần thiết trong runtime của ứng dụng.
 Các mô-đun thử nghiệm được tạo để tách mã dành riêng cho thử nghiệm khỏi ứng dụng chính, giúp mã mô-đun dễ quản lý và bảo trì hơn.
 
 
 #### Các trường hợp sử dụng cho mô-đun thử nghiệm
 
-- **Mã kiểm tra được chia sẻ**: Nếu bạn có nhiều mô-đun trong dự án của mình và một số mã kiểm tra có thể áp dụng cho nhiều mô-đun, bạn có thể tạo một mô-đun kiểm tra để chia sẻ mã. Điều này có thể giúp giảm sự trùng lặp và làm cho mã kiểm tra của bạn dễ bảo trì hơn. Mã kiểm tra được chia sẻ có thể bao gồm các lớp hoặc hàm tiện ích, chẳng hạn như xác nhận hoặc đối sánh tùy chỉnh, cũng như dữ liệu kiểm tra, chẳng hạn như phản hồi JSON mô phỏng.
+- **Mã kiểm tra được chia sẻ**: Nếu bạn có nhiều mô-đun trong dự án của mình và một số mã kiểm tra có thể áp dụng cho nhiều mô-đun, bạn có thể tạo một mô-đun kiểm tra để chia sẻ mã. Điều này có thể giúp giảm sự trùng lặp và làm cho mã kiểm tra của bạn dễ bảo trì hơn. Mã kiểm tra được chia sẻ có thể bao gồm các lớp hoặc hàm tiện ích, chẳng hạn như xác nhận hoặc đối sánh tùy chỉnh, cũng như dữ liệu kiểm tra, chẳng hạn như JSON response mô phỏng.
 
 - **Cấu hình bản dựng sạch hơn**: Mô-đun thử nghiệm cho phép bạn có cấu hình bản dựng rõ ràng hơn vì chúng có thể có tệp `build.gradle` riêng. Bạn không cần phải làm lộn xộn tệp `build.gradle` của mô-đun ứng dụng với các cấu hình chỉ liên quan đến thử nghiệm.
 
-- **Thử nghiệm tích hợp**: Mô-đun thử nghiệm có thể được sử dụng để lưu trữ các thử nghiệm tích hợp dùng để kiểm tra sự tương tác giữa các phần khác nhau trong ứng dụng của bạn, bao gồm user interface, logic nghiệp vụ, yêu cầu mạng và truy vấn cơ sở dữ liệu.
+- **Thử nghiệm tích hợp**: Mô-đun thử nghiệm có thể được sử dụng để lưu trữ các thử nghiệm tích hợp dùng để kiểm tra sự tương tác giữa các phần khác nhau trong ứng dụng của bạn, bao gồm user interface, logic nghiệp vụ, network request và truy vấn cơ sở dữ liệu.
 
 - **Ứng dụng quy mô lớn**: Mô-đun thử nghiệm đặc biệt hữu ích cho các ứng dụng quy mô lớn có cơ sở mã phức tạp và nhiều mô-đun. Trong những trường hợp như vậy, các mô-đun kiểm tra có thể giúp cải thiện khả năng tổ chức và bảo trì mã.
 
@@ -109,7 +109,7 @@ Trong ví dụ này, chúng tôi sử dụng điều hướng để truyền d�
 
 Dependency inversion là khi bạn sắp xếp mã của mình sao cho phần trừu tượng tách biệt với việc triển khai cụ thể.
 
-- **Tính trừu tượng**: Một hợp đồng xác định cách các thành phần hoặc mô-đun trong ứng dụng của bạn tương tác với nhau. Các mô-đun trừu tượng xác định API trong hệ thống của bạn và chứa các giao diện và mô hình.
+- **Tính trừu tượng**: Một hợp đồng xác định cách các thành phần hoặc mô-đun trong ứng dụng của bạn tương tác với nhau. Các mô-đun trừu tượng xác định API trong hệ thống của bạn và chứa các interface và mô hình.
 
 - **Triển khai cụ thể**: Các mô-đun phụ thuộc vào mô-đun trừu tượng và triển khai hành vi trừu tượng.
 

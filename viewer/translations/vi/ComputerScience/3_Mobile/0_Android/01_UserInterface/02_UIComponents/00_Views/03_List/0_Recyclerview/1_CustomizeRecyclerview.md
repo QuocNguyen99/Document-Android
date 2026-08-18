@@ -38,7 +38,7 @@ Bạn có thể thấy nó được sử dụng dưới đây:
 
 ![văn bản thay thế](/resources/customize_recycler_view_before.png)
 
-Cho đến nay, rất tốt. Nhưng điều gì sẽ xảy ra nếu chúng ta cần thay thế các mục nội dung khi không biết chính xác những gì đã thay đổi? Điều này thường xảy ra khi bạn yêu cầu dữ liệu từ mạng và máy chủ cung cấp dữ liệu mới mà không có bất kỳ thông tin chi tiết nào về sự khác biệt của dữ liệu đó với tập dữ liệu cũ. Trong những trường hợp này, chúng tôi cần DiffUtil — một công cụ để tìm ra những khác biệt này. Cách dễ nhất để sử dụng nó là kế thừa từ androidx.recyclerview.widget.ListAdapter, tính năng này tính toán sự khác biệt không đồng bộ cho chúng ta. Để xem nó hoạt động như thế nào, hãy di chuyển siêu lớp bộ chuyển đổi bằng cách:
+Cho đến nay, rất tốt. Nhưng điều gì sẽ xảy ra nếu chúng ta cần thay thế các mục nội dung khi không biết chính xác những gì đã thay đổi? Điều này thường xảy ra khi bạn request dữ liệu từ mạng và server cung cấp dữ liệu mới mà không có bất kỳ thông tin chi tiết nào về sự khác biệt của dữ liệu đó với tập dữ liệu cũ. Trong những trường hợp này, chúng tôi cần DiffUtil — một công cụ để tìm ra những khác biệt này. Cách dễ nhất để sử dụng nó là kế thừa từ androidx.recyclerview.widget.ListAdapter, tính năng này tính toán sự khác biệt không đồng bộ cho chúng ta. Để xem nó hoạt động như thế nào, hãy di chuyển siêu lớp bộ chuyển đổi bằng cách:
 
 - Xóa thuộc tính danh sách giao dịch của chúng tôi (ListAdapter quản lý danh sách riêng của mình)
 

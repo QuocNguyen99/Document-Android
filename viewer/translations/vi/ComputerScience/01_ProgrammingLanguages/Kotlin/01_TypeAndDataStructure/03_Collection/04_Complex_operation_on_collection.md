@@ -170,9 +170,9 @@ fun main() {
 }
 ```
 
-## Làm việc với các bộ sưu tập có thể rỗng
+## Làm việc với các collection có thể rỗng
 
-**Tất cả các thao tác rút gọn mà chúng tôi đã trình bày đều tạo ra một ngoại lệ đối với các bộ sưu tập trống**. Nếu muốn nhận giá trị rỗng, chúng ta phải sử dụng các phương pháp tương tự nhưng kết thúc bằng `*OrNull()`: `reduceOrNull()`, `reduceRightOrNull()`, `reduceIndexedOrNull()` và `reduceRightIndexedOrNull()`.
+**Tất cả các thao tác rút gọn mà chúng tôi đã trình bày đều tạo ra một ngoại lệ đối với các collection trống**. Nếu muốn nhận giá trị rỗng, chúng ta phải sử dụng các phương pháp tương tự nhưng kết thúc bằng `*OrNull()`: `reduceOrNull()`, `reduceRightOrNull()`, `reduceIndexedOrNull()` và `reduceRightIndexedOrNull()`.
 
 ```kotlin
 fun main() {
@@ -208,14 +208,14 @@ fun main() {
 
 ## Mã zip
 
-Nén là một thao tác cho phép chúng ta lấy một cặp dựa trên hai phần tử chiếm cùng một vị trí trong hai bộ sưu tập khác nhau. Bằng cách này, bạn có thể nhận được các cặp collection sau khi áp dụng `zip()`.
+Nén là một thao tác cho phép chúng ta lấy một cặp dựa trên hai phần tử chiếm cùng một vị trí trong hai collection khác nhau. Bằng cách này, bạn có thể nhận được các cặp collection sau khi áp dụng `zip()`.
 
 > [!NOTE]
-> Nếu bộ sưu tập gốc không có cùng kích thước, kết quả sẽ là danh sách các cặp được giới hạn ở kích thước của collection nhỏ hơn, bỏ qua các phần tử còn lại của bộ sưu tập lớn hơn.
+> Nếu collection gốc không có cùng kích thước, kết quả sẽ là danh sách các cặp được giới hạn ở kích thước của collection nhỏ hơn, bỏ qua các phần tử còn lại của bộ sưu tập lớn hơn.
 
 ## Giải nén
 
-Giải nén giúp chúng ta thực hiện phép biến đổi ngược lại. Với một cặp collection, bạn có thể chuyển đổi nó thành hai bộ sưu tập với `unzip()`. Cái đầu tiên sẽ có các phần tử đầu tiên của cặp, cái thứ hai – phần tử thứ hai.
+Giải nén giúp chúng ta thực hiện phép biến đổi ngược lại. Với một cặp collection, bạn có thể chuyển đổi nó thành hai collection với `unzip()`. Cái đầu tiên sẽ có các phần tử đầu tiên của cặp, cái thứ hai – phần tử thứ hai.
 
 
 ### Ví dụ nén và giải nén

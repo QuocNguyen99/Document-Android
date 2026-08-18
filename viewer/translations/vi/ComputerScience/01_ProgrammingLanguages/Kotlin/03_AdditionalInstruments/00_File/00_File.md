@@ -361,7 +361,7 @@ cho phép các nhà phát triển trích xuất các tập tin và thư mục m�
 ### Mở và truy cập ZipFile trong Java
 
 Lớp The` java.util.zip.ZipFile` được sử dụng để đọc các mục từ tệp ZIP. 
-Dưới đây là cách bạn có thể mở tệp ZIP và duyệt qua các mục của nó bằng giao diện `Enumeration`.
+Dưới đây là cách bạn có thể mở tệp ZIP và duyệt qua các mục của nó bằng interface `Enumeration`.
 
 
 ```kotlin 

@@ -1,6 +1,6 @@
 # Kỹ thuật & vấn đề của Asynchronous programming
 
-## Cuộc gọi lại
+## Callback
 
 
 Một giải pháp là để một hàm gọi lại hàm khác khi hoàn thành. Chúng ta chuyển hàm tiếp tục cho hàm đầu tiên làm đối số. Đối số này được gọi là callback.
@@ -51,7 +51,7 @@ Promise được sử dụng để gán một giá trị sẽ có trong tương 
 
 Lời hứa thường được nhà sản xuất sử dụng để hoàn thành hoặc từ chối một nhiệm vụ và tương lai được người tiêu dùng sử dụng để theo dõi và xử lý kết quả khi nó sẵn sàng. 
 
-Chúng giúp viết mã không đồng bộ rõ ràng hơn và tránh các lệnh gọi lại lồng nhau sâu.
+Chúng giúp viết mã không đồng bộ rõ ràng hơn và tránh các callback lồng nhau sâu.
 
 Một mã lời hứa điển hình sẽ trông như thế này:
 
@@ -81,7 +81,7 @@ một tập hợp phong phú các hàm trợ giúp (được gọi là toán t�
 
 Đây là nơi coroutine phát huy tác dụng.
 **Một coroutine** có thể được coi là một thread nhẹ thực hiện các phép tính **có thể treo**.
-Điều đó có nghĩa là hàm có thể tạm dừng việc thực thi một số thao tác chặn và tiếp tục lại sau khi thao tác đó hoàn tất, giống như với lệnh gọi lại.
+Điều đó có nghĩa là hàm có thể tạm dừng việc thực thi một số thao tác chặn và tiếp tục lại sau khi thao tác đó hoàn tất, giống như với callback.
 
 ```kotlin
 suspend fun sendData() {

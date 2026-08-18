@@ -31,7 +31,7 @@ Phương sai áp dụng khi bạn có mối quan hệ kiểu giữa hai loại v
 
 - **Hiệp phương sai**: một lớp chung được gọi là hiệp biến trên tham số loại khi có các điều kiện sau: `Class<A>` là kiểu con của `Class<B>` nếu `A` là kiểu con của `B` (quan hệ kiểu con được giữ nguyên).
     - Mối quan hệ được duy trì theo cùng một hướng khi các lớp được sử dụng làm tham số chung. Nếu `Dog` là kiểu con của `Animal` thì `Box<Dog>` là kiểu con của `Box<Animal>`.**Điều này thường được phép khi tham số chung chỉ được sử dụng ở các vị trí "đầu ra" (như giá trị trả về), nhưng không được phép ở các vị trí "đầu vào" (như tham số phương thức).**
-    - Ví dụ: giao diện `List` của Kotlin đại diện cho **chỉ đọc** collection, có nghĩa là nếu `Dog` là kiểu con của `Animal`, thì `List<Dog>` là kiểu con của `List<Animal>`. `List` được xác định bằng công cụ sửa đổi `out`. Công cụ sửa đổi phương sai `out` được sử dụng để khai báo một lớp là hiệp biến trên một tham số loại nhất định.
+    - Ví dụ: interface `List` của Kotlin đại diện cho **chỉ đọc** collection, có nghĩa là nếu `Dog` là kiểu con của `Animal`, thì `List<Dog>` là kiểu con của `List<Animal>`. `List` được xác định bằng công cụ sửa đổi `out`. Công cụ sửa đổi phương sai `out` được sử dụng để khai báo một lớp là hiệp biến trên một tham số loại nhất định.
     - Ví dụ: 
 
     ```kotlin
@@ -51,7 +51,7 @@ Phương sai áp dụng khi bạn có mối quan hệ kiểu giữa hai loại v
 - **Contravariance**: một lớp generic được gọi là contravariant trên tham số loại khi có các điều kiện sau: `Dog` là kiểu con của `Animal`, `Box<Animal>` là kiểu con của `Box<Dog>`
     - Điều này thường được cho phép khi tham số chung chỉ được sử dụng ở các vị trí “đầu vào” chứ không được sử dụng ở các vị trí “đầu ra”, ví dụ như trong tham số của các phương thức.
     - Lưu ý rằng khi bạn định nghĩa một lớp có contravariance bằng từ khóa `in`, nó sẽ hạn chế việc sử dụng loại `T` bên trong lớp đó. Chúng tôi khai báo lớp `Box` với công cụ sửa đổi `in` trên tham số loại `T`. Điều này cho phép chúng ta gán `Box<Animal>` cho các biến loại `Box<Dog>` và `Box<Cat>`, vì `Animal` là siêu lớp của cả `Dog` và `Cat`. 
-    - Từ khóa `in` cho compiler biết rằng lớp chung (hoặc giao diện) tiêu thụ các giá trị thuộc loại `T` và không bao giờ tạo ra chúng
+    - Từ khóa `in` cho compiler biết rằng lớp chung (hoặc interface) tiêu thụ các giá trị thuộc loại `T` và không bao giờ tạo ra chúng
 
     ```kotlin
         interface Comparator<in T> {
@@ -81,7 +81,7 @@ Phương sai áp dụng khi bạn có mối quan hệ kiểu giữa hai loại v
     ```
 ## Loại phép chiếu: phương sai tại địa điểm sử dụng
 
-Phương sai tại nơi sử dụng đề cập đến khả năng chỉ định các công cụ sửa đổi phương sai tại thời điểm sử dụng, thay vì trong định nghĩa lớp hoặc giao diện.
+Phương sai tại nơi sử dụng đề cập đến khả năng chỉ định các công cụ sửa đổi phương sai tại thời điểm sử dụng, thay vì trong định nghĩa lớp hoặc interface.
 Ví dụ:
 ```kotlin
 open class Animal

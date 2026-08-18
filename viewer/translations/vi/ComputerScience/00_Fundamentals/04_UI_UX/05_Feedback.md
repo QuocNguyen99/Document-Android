@@ -30,7 +30,7 @@ Thay vì sử dụng một tác vụ riêng biệt để xác minh xem mọi th�
 
 ## Máy xúc
 
-Máy chủ cần thời gian khi chuyển đổi giữa các cửa sổ khác nhau và xử lý dữ liệu.
+Server cần thời gian khi chuyển đổi giữa các cửa sổ khác nhau và xử lý dữ liệu.
 - Vì vậy, nếu có bất kỳ sự tạm dừng đáng kể nào, người dùng phải thấy rõ rằng ứng dụng không bị treo và mọi thứ đang tiến triển như bình thường.
 - Điều này có thể đạt được bằng cách thêm các phần tử đặc biệt gọi là **loaders** — biểu tượng động hoặc thanh tiến trình thể hiện ứng dụng đang ở chế độ xử lý dữ liệu.
 - Cũng có thể triển khai chúng dưới dạng thông báo "vui lòng đợi" đơn giản.

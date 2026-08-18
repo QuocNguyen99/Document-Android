@@ -1,7 +1,7 @@
-#Giới thiệu về bộ sưu tập
+#Giới thiệu về collection
 
-   Bộ sưu tập là **vùng chứa** hỗ trợ nhiều cách khác nhau để lưu trữ và sắp xếp các đối tượng khác nhau, đồng thời giúp chúng dễ dàng truy cập. collection thường chứa một số đối tượng (con số này có thể bằng 0) cùng loại. Các đối tượng trong collection được gọi là **phần tử** hoặc **mục**. 
-Bộ sưu tập là việc triển khai các cấu trúc dữ liệu trừu tượng có thể hỗ trợ các hoạt động sau:
+   Collection là **vùng chứa** hỗ trợ nhiều cách khác nhau để lưu trữ và sắp xếp các đối tượng khác nhau, đồng thời giúp chúng dễ dàng truy cập. collection thường chứa một số đối tượng (con số này có thể bằng 0) cùng loại. Các đối tượng trong collection được gọi là **phần tử** hoặc **mục**.
+Collection là việc triển khai các cấu trúc dữ liệu trừu tượng có thể hỗ trợ các hoạt động sau:
 
 - lấy một phần tử;
 
@@ -12,17 +12,17 @@ Bộ sưu tập là việc triển khai các cấu trúc dữ liệu trừu tư�
 - thêm một yếu tố mới.
 
 
-Tuy nhiên, điều quan trọng cần lưu ý là các thao tác như thêm, xóa và thay đổi các phần tử chỉ áp dụng cho các bộ sưu tập **mutable**.
+Tuy nhiên, điều quan trọng cần lưu ý là các thao tác như thêm, xóa và thay đổi các phần tử chỉ áp dụng cho các collection **mutable**.
 
 
 ## Khả năng thay đổi
 
-Bộ sưu tập có thể là **mutable** hoặc **immutable**.
+Collection có thể là **mutable** hoặc **immutable**.
 
-Không thể thay đổi bộ sưu tập Immutable. Tức là họ chỉ cho phép những thao tác không làm thay đổi các phần tử.
+Không thể thay đổi collection Immutable. Tức là họ chỉ cho phép những thao tác không làm thay đổi các phần tử.
 Tính bất biến có thể hữu ích khi bạn muốn lưu trữ các mục cùng nhau mà không cho phép chúng được sửa đổi trong tương lai.
 
-Thư viện chuẩn Kotlin cung cấp cách triển khai cho các loại bộ sưu tập cơ bản: **list**, **set** và **map**. 
+Thư viện chuẩn Kotlin cung cấp cách triển khai cho các loại collection cơ bản: **list**, **set** và **map**.
 Cả ba đều tồn tại ở dạng mutable và immutable.
 
 
@@ -114,7 +114,7 @@ val numbers = mutableListOf(3, 5, 6, 4, 1, 8, 2, 7)
     println(words) // [racecar, mom, dad, abracadabra, MANDRAKE]
     println(wordsReversed) // [MANDRAKE, abracadabra, dad, mom, racecar]
 ```
-- Phương thức `asReversed()` trả về tham chiếu đến collection ban đầu theo thứ tự chỉ mục ngược. Nó nhẹ hơn vì nó không tạo ra bản sao mới, nhưng nếu collection ban đầu thay đổi, những thay đổi đó sẽ được phản ánh trong danh sách đảo ngược. **Vì vậy, chúng ta phải cẩn thận nếu làm việc với các bộ sưu tập mutable.**
+- Phương thức `asReversed()` trả về tham chiếu đến collection ban đầu theo thứ tự chỉ mục ngược. Nó nhẹ hơn vì nó không tạo ra bản sao mới, nhưng nếu collection ban đầu thay đổi, những thay đổi đó sẽ được phản ánh trong danh sách đảo ngược. **Vì vậy, chúng ta phải cẩn thận nếu làm việc với các collection mutable.**
 
 Bán tại:
 ```kotlin
@@ -166,7 +166,7 @@ Họ lấy lambda làm hàm chọn, ánh xạ phần tử hoặc một số thu�
 
 ### Xác định thứ tự mới
 
-bạn có thể triển khai thứ tự tùy chỉnh cho các phần tử hoặc thuộc tính không thể so sánh được. Chúng ta có thể xác định cách sắp xếp tùy chỉnh bằng giao diện `Comparator`. Các giao diện `Comparator` giúp chúng ta xác định phương thức `compare()`, trả về kết quả số nguyên của phép so sánh giữa hai giá trị
+bạn có thể triển khai thứ tự tùy chỉnh cho các phần tử hoặc thuộc tính không thể so sánh được. Chúng ta có thể xác định cách sắp xếp tùy chỉnh bằng interface `Comparator`. Các interface `Comparator` giúp chúng ta xác định phương thức `compare()`, trả về kết quả số nguyên của phép so sánh giữa hai giá trị
 
 ```kotlin
   val words = listOf("peter", "anne", "michael", "caroline")
@@ -216,22 +216,22 @@ Chúng ta có thể sử dụng hàm `random()`. Tuy nhiên, hãy nhớ rằng h
 bạn có thể sử dụng phương thức `contains()` - phương thức này trả về true nếu phần tử được tìm thấy trong collection.
 Để kiểm tra xem collection có chứa nhiều phần tử hay không, bạn có thể sử dụng phương thức `containsAll()`.
 
-## Bộ sưu tập làm giao diện
+## Collection làm interface
 
 ![văn bản thay thế](/resources/collection_as_interface.png)
 
-`Collection<T>` là gốc cho hệ thống phân cấp của các bộ sưu tập immutable — `List` và `Set`. Nó cung cấp các phương thức như `size`, `get()`, `find()`, `filter()`, `count()`, v.v.
+`Collection<T>` là gốc cho hệ thống phân cấp của các collection immutable — `List` và `Set`. Nó cung cấp các phương thức như `size`, `get()`, `find()`, `filter()`, `count()`, v.v.
 
 `MutableCollections<T>` là root cho `MutableList` và `MutableSet`, đồng thời nó hỗ trợ thêm và xóa các phần tử với sự trợ giúp của các phương pháp sau: `add()`, `addAll()`, `remove()`, `removeAll()`, `retainAll()` và `drop()`.
 
-`Collection` và `MutableCollection` kế thừa từ `Iterable` và `MutableIterable`. Vì vậy, các giao diện này hỗ trợ tất cả các phương thức có sẵn cho cha mẹ chúng.
+`Collection` và `MutableCollection` kế thừa từ `Iterable` và `MutableIterable`. Vì vậy, các interface này hỗ trợ tất cả các phương thức có sẵn cho cha mẹ chúng.
 
-Tuy nhiên, bản đồ không đại diện cho giao diện `Collection` hoặc `Iterable`, mặc dù chúng tôi cũng gọi chúng là bộ sưu tập. Điều đó có nghĩa là họ có các phương pháp khác với các bộ sưu tập khác. Và điều này hợp lý vì chúng chứa các cặp khóa-giá trị — trái ngược với các phần tử đơn lẻ trong `Set` hoặc `List`, vì vậy chúng ta cần tách các phương thức cho chúng. Thật không may, chúng tôi không thể sử dụng `Map` với giao diện `Collection`.
+Tuy nhiên, bản đồ không đại diện cho interface `Collection` hoặc `Iterable`, mặc dù chúng tôi cũng gọi chúng là collection. Điều đó có nghĩa là họ có các phương pháp khác với các collection khác. Và điều này hợp lý vì chúng chứa các cặp khóa-giá trị — trái ngược với các phần tử đơn lẻ trong `Set` hoặc `List`, vì vậy chúng ta cần tách các phương thức cho chúng. Thật không may, chúng tôi không thể sử dụng `Map` với interface `Collection`.
 
 
 ### Có thể lặp lại
 
-có hai giao diện phổ biến trong Kotlin: `Iterable` và `MutableIterable`. Chúng cung cấp các phương pháp để làm việc với chuỗi các phần tử.
+có hai interface phổ biến trong Kotlin: `Iterable` và `MutableIterable`. Chúng cung cấp các phương pháp để làm việc với chuỗi các phần tử.
 
 Các lớp kế thừa từ `Iterable` có một tập hợp các phương thức phổ biến: `iterator()`, `forEach()`, `contains()`, `count()`, `drop()`, `filter()`, v.v.
 
@@ -242,7 +242,7 @@ Các lớp kế thừa từ `Iterable` có một tập hợp các phương thứ
 
 ### Collection
 
-Có một số phương pháp chung cho tất cả các bộ sưu tập.
+Có một số phương pháp chung cho tất cả các collection.
 
 - `count()` trả về số phần tử thỏa mãn điều kiện.
 
@@ -302,9 +302,9 @@ chuyển đổi các khóa bằng `mapKeys()` hoặc chuyển đổi các giá t
 
 ### Làm phẳng (làm phẳng/flatMap)
 
-Hàm `flatten()` trả về một danh sách tất cả các phần tử từ tất cả các bộ sưu tập trong collection đã cho. Sẽ rất hữu ích nếu chúng tôi có một số bộ sưu tập và chúng tôi muốn có một collection duy nhất kết hợp chúng.
+Hàm `flatten()` trả về một danh sách tất cả các phần tử từ tất cả các collection trong collection đã cho. Sẽ rất hữu ích nếu chúng tôi có một số collection và chúng tôi muốn có một collection duy nhất kết hợp chúng.
 
-Tuy nhiên, chức năng này không hợp lệ cho tất cả các loại bộ sưu tập. Hãy nhớ rằng, `flatten` trả về `List` hoặc `Sequence`.
+Tuy nhiên, chức năng này không hợp lệ cho tất cả các loại collection. Hãy nhớ rằng, `flatten` trả về `List` hoặc `Sequence`.
 
 Ví dụ:
 
@@ -363,7 +363,7 @@ fun main() {
 }
 ```
 
-Đôi khi khi làm việc với các bộ sưu tập, chúng ta muốn áp dụng một thao tác cho tất cả các nhóm cùng một lúc.
+Đôi khi khi làm việc với các collection, chúng ta muốn áp dụng một thao tác cho tất cả các nhóm cùng một lúc.
 Chúng tôi có thể thực hiện tác vụ này bằng `groupingBy()`.
 Nó trả về một thể hiện nhóm, cho phép bạn áp dụng các thao tác cho tất cả các nhóm một cách lười biếng: 
 nghĩa là các nhóm được xây dựng trước khi thực hiện thao tác

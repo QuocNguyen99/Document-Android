@@ -27,7 +27,7 @@ Sau khi khởi chạy ứng dụng, người dùng bắt đầu tải xuống �
 
 Vấn đề là, nếu chúng ta cập nhật các phương thức âm lượng, nó có thể ảnh hưởng đến các phương thức thời gian. Vì vậy, để giữ mọi thứ ngăn nắp và tránh nhầm lẫn, chúng tôi quyết định chia lớp thành các phần nhỏ hơn, mỗi phần chỉ chịu trách nhiệm về một nhiệm vụ và phân công trách nhiệm tương ứng.
 
-Bạn có thể hỏi, lúc đó `AlarmClock` sẽ làm gì? Câu trả lời rất đơn giản: **nó sẽ gọi các lớp khác và sắp xếp công việc của chúng tùy theo yêu cầu của người dùng.** Vì vậy, chúng tôi cũng có thể sử dụng lại các lớp `Tune` và `Volume` cho `Reminder`.
+Bạn có thể hỏi, lúc đó `AlarmClock` sẽ làm gì? Câu trả lời rất đơn giản: **nó sẽ gọi các lớp khác và sắp xếp công việc của chúng tùy theo request của người dùng.** Vì vậy, chúng tôi cũng có thể sử dụng lại các lớp `Tune` và `Volume` cho `Reminder`.
 
 ![văn bản thay thế](/resources/SingleResponsibilityBoundaries.png)
 

@@ -15,13 +15,13 @@ Coroutines là giải pháp chúng tôi đề xuất cho asynchronous programmin
 
 
 
-## Thực thi ở chế độ nền thread
+## Thực thi ở background thread
 
-Việc thực hiện yêu cầu mạng trên thread chính khiến nó phải chờ hoặc _block_ cho đến khi nhận được phản hồi. Vì thread bị chặn nên OS không thể gọi `onDraw()`, điều này khiến ứng dụng của bạn bị treo và có khả năng dẫn đến hộp thoại Ứng dụng không phản hồi (ANR). Để có trải nghiệm người dùng tốt hơn, hãy chạy thao tác này trên nền thread.
+Việc thực hiện network request trên main thread khiến nó phải chờ hoặc _block_ cho đến khi nhận được response. Vì thread bị chặn nên OS không thể gọi `onDraw()`, điều này khiến ứng dụng của bạn bị treo và có khả năng dẫn đến hộp thoại Ứng dụng không phản hồi (ANR). Để có trải nghiệm người dùng tốt hơn, hãy chạy thao tác này trên background thread.
 
 ### Vấn đề
 
-Trước tiên, chúng ta hãy xem lớp `Repository` của chúng tôi và xem cách nó thực hiện yêu cầu mạng:
+Trước tiên, chúng ta hãy xem lớp `Repository` của chúng tôi và xem cách nó thực hiện network request:
 
 ```kotlin
 sealed class Result<out R> {
@@ -50,9 +50,9 @@ class LoginRepository(private val responseParser: LoginResponseParser) {
 }
 ```
 
-`makeLoginRequest` đồng bộ và chặn cuộc gọi thread. Để mô hình hóa phản hồi của yêu cầu mạng, chúng tôi có lớp `Result` của riêng mình.
+`makeLoginRequest` đồng bộ và chặn cuộc gọi thread. Để mô hình hóa response của network request, chúng tôi có lớp `Result` của riêng mình.
 
-`ViewModel` kích hoạt yêu cầu mạng khi người dùng nhấp vào, ví dụ: vào nút:
+`ViewModel` kích hoạt network request khi người dùng nhấp vào, ví dụ: vào nút:
 
 ```kotlin
 class LoginViewModel(
@@ -66,11 +66,11 @@ class LoginViewModel(
 }
 ```
 
-**Với mã trước đó, `LoginViewModel` đang chặn UI thread khi thực hiện yêu cầu mạng.**
+**Với mã trước đó, `LoginViewModel` đang chặn UI thread khi thực hiện network request.**
 
 ### Giải pháp
 
-Giải pháp đơn giản nhất để loại bỏ việc thực thi khỏi thread chính là tạo một coroutine mới và thực thi yêu cầu mạng trên I/O thread:
+Giải pháp đơn giản nhất để loại bỏ việc thực thi khỏi main thread là tạo một coroutine mới và thực thi network request trên I/O thread:
 
 ```kotlin
 class LoginViewModel(
@@ -95,9 +95,9 @@ Hãy cùng mổ xẻ mã coroutines trong hàm `login`:
 
 Hàm `login` được thực thi như sau:
 
-* Ứng dụng gọi hàm `login` từ lớp `View` trên thread chính.
-* `launch` tạo một coroutine mới và yêu cầu mạng được thực hiện độc lập trên thread dành riêng cho các hoạt động I/O.
-* Trong khi coroutine đang chạy, hàm `login` tiếp tục thực thi và trả về, có thể trước khi yêu cầu mạng kết thúc. Lưu ý rằng để đơn giản, hiện tại phản hồi của mạng bị bỏ qua.
+* Ứng dụng gọi hàm `login` từ lớp `View` trên main thread.
+* `launch` tạo một coroutine mới và network request được thực hiện độc lập trên thread dành riêng cho các hoạt động I/O.
+* Trong khi coroutine đang chạy, hàm `login` tiếp tục thực thi và trả về, có thể trước khi network request kết thúc. Lưu ý rằng để đơn giản, hiện tại network response bị bỏ qua.
 
 Vì coroutine này được bắt đầu bằng `viewModelScope` nên nó được thực thi trong phạm vi `ViewModel`. Nếu `ViewModel` bị hủy do người dùng đang điều hướng khỏi màn hình thì `viewModelScope` sẽ tự động bị hủy và tất cả các coroutine đang chạy cũng bị hủy.
 
@@ -107,7 +107,7 @@ Vì coroutine này được bắt đầu bằng `viewModelScope` nên nó đư�
 
 ### Vấn đề và giải pháp
 
-Chúng tôi xem xét chức năng _main-safe_ khi nó không chặn các bản cập nhật UI trên thread chính. Chức năng `makeLoginRequest` không an toàn cho mạng chính vì việc gọi `makeLoginRequest` từ thread chính sẽ chặn UI. Sử dụng hàm `withContext()` từ thư viện coroutine để di chuyển quá trình thực thi coroutine sang một thread khác:
+Chúng tôi xem xét chức năng _main-safe_ khi nó không chặn các bản cập nhật UI trên main thread. Chức năng `makeLoginRequest` không an toàn cho mạng chính vì việc gọi `makeLoginRequest` từ main thread sẽ chặn UI. Sử dụng hàm `withContext()` từ thư viện coroutine để di chuyển quá trình thực thi coroutine sang một thread khác:
 
 ```kotlin
 class LoginRepository(...) {
@@ -130,7 +130,7 @@ class LoginRepository(...) {
 
 
 
-Trong ví dụ sau, coroutine được tạo trong `LoginViewModel`. Khi `makeLoginRequest` chuyển việc thực thi khỏi thread chính, coroutine trong hàm `login` hiện có thể được thực thi trong thread chính:
+Trong ví dụ sau, coroutine được tạo trong `LoginViewModel`. Khi `makeLoginRequest` chuyển việc thực thi khỏi main thread, coroutine trong hàm `login` hiện có thể được thực thi trong main thread:
 
 ```kotlin
 class LoginViewModel(
@@ -160,26 +160,26 @@ Lưu ý rằng ở đây vẫn cần coroutine vì `makeLoginRequest` là một 
 
 Mã này khác với ví dụ `login` trước đó ở một số điểm:
 
-* **`launch` không lấy tham số `Dispatchers.IO`. Khi bạn không chuyển `Dispatcher` sang `launch`, mọi coroutine được khởi chạy từ `viewModelScope` sẽ chạy trong thread chính.**
-* Kết quả của yêu cầu mạng hiện được xử lý để hiển thị thành công hay thất bại UI.
+* **`launch` không lấy tham số `Dispatchers.IO`. Khi bạn không chuyển `Dispatcher` sang `launch`, mọi coroutine được khởi chạy từ `viewModelScope` sẽ chạy trong main thread.**
+* Kết quả của network request hiện được xử lý để hiển thị thành công hay thất bại UI.
 
 Chức năng đăng nhập bây giờ thực hiện như sau:
 
-* Ứng dụng gọi hàm `login()` từ lớp `View` trên thread chính.
-* `launch` tạo một coroutine mới trên thread chính và coroutine bắt đầu thực thi.
+* Ứng dụng gọi hàm `login()` từ lớp `View` trên main thread.
+* `launch` tạo một coroutine mới trên main thread và coroutine bắt đầu thực thi.
 * Trong coroutine, lệnh gọi tới `loginRepository.makeLoginRequest()` hiện _tạm dừng_ việc thực thi coroutine tiếp theo cho đến khi khối `withContext` trong `makeLoginRequest()` chạy xong.
-* Sau khi khối `withContext` kết thúc, coroutine trong `login()` sẽ tiếp tục thực thi _trên luồng chính_ với kết quả của yêu cầu mạng.
+* Sau khi khối `withContext` kết thúc, coroutine trong `login()` sẽ tiếp tục thực thi _trên luồng chính_ với kết quả của network request.
 
 # Định nghĩa phần main-safe
 
-Các coroutine Kotlin sử dụng _dispatchers_ để xác định luồng nào được dùng để thực thi coroutine. Để chạy mã bên ngoài thread chính, bạn có thể yêu cầu các coroutine Kotlin thực hiện công việc trên bộ điều phối _Default_ hoặc _IO_. Trong Kotlin, tất cả các coroutine phải chạy trong bộ điều phối, ngay cả khi chúng đang chạy trên thread chính. Các coroutine có thể tự tạm dừng và người điều phối có trách nhiệm tiếp tục lại chúng.
+Các coroutine Kotlin sử dụng _dispatchers_ để xác định thread nào được dùng để thực thi coroutine. Để chạy mã bên ngoài main thread, bạn có thể yêu cầu các coroutine Kotlin thực hiện công việc trên bộ điều phối _Default_ hoặc _IO_. Trong Kotlin, tất cả các coroutine phải chạy trong bộ điều phối, ngay cả khi chúng đang chạy trên main thread. Các coroutine có thể tự tạm dừng và người điều phối có trách nhiệm tiếp tục lại chúng.
 
 Để chỉ định nơi coroutine sẽ chạy, Kotlin cung cấp ba trình điều phối mà bạn có thể sử dụng:
 
-* **Dispatchers.Main** - Sử dụng bộ điều phối này để chạy coroutine trên Android thread chính. Điều này chỉ nên được sử dụng để tương tác với UI và thực hiện công việc nhanh chóng. Các ví dụ bao gồm gọi các hàm `suspend`, chạy các hoạt động Android UI framework và cập nhật các đối tượng [`LiveData`](https://developer.android.com/topic/libraries/architecture/livedata).
-* **Dispatchers.IO** - Bộ điều phối này được tối ưu hóa để thực hiện I/O đĩa hoặc mạng bên ngoài thread chính. Các ví dụ bao gồm việc sử dụng [thành phần Room](https://developer.android.com/topic/libraries/architecture/room), đọc từ hoặc ghi vào tệp và chạy bất kỳ hoạt động mạng nào.
-* **Dispatchers.Default** - Trình điều phối này được tối ưu hóa để thực hiện công việc chuyên sâu CPU- bên ngoài thread chính. Các trường hợp sử dụng ví dụ bao gồm sắp xếp danh sách và phân tích cú pháp JSON.
-* **Dispatchers.Unconfined** - nó thực thi coroutine ngay lập tức trên thread hiện tại và sau đó tiếp tục nó trong bất kỳ thread nào được gọi là sơ yếu lý lịch. Nó thường phù hợp cho những việc như chặn API không tạm ngưng thông thường hoặc gọi mã liên quan đến coroutine để chặn các lệnh gọi lại thế giới.
+* **Dispatchers.Main** - Sử dụng bộ điều phối này để chạy coroutine trên Android main thread. Điều này chỉ nên được sử dụng để tương tác với UI và thực hiện công việc nhanh chóng. Các ví dụ bao gồm gọi các hàm `suspend`, chạy các hoạt động Android UI framework và cập nhật các đối tượng [`LiveData`](https://developer.android.com/topic/libraries/architecture/livedata).
+* **Dispatchers.IO** - Bộ điều phối này được tối ưu hóa để thực hiện I/O đĩa hoặc mạng bên ngoài main thread. Các ví dụ bao gồm việc sử dụng [thành phần Room](https://developer.android.com/topic/libraries/architecture/room), đọc từ hoặc ghi vào tệp và chạy bất kỳ hoạt động mạng nào.
+* **Dispatchers.Default** - Trình điều phối này được tối ưu hóa để thực hiện công việc chuyên sâu CPU- bên ngoài main thread. Các trường hợp sử dụng ví dụ bao gồm sắp xếp danh sách và phân tích cú pháp JSON.
+* **Dispatchers.Unconfined** - nó thực thi coroutine ngay lập tức trên thread hiện tại và sau đó tiếp tục nó trong bất kỳ thread nào được gọi là sơ yếu lý lịch. Nó thường phù hợp cho những việc như chặn API không tạm ngưng thông thường hoặc gọi mã liên quan đến coroutine để chặn các callback thế giới.
 
 
 
@@ -205,7 +205,7 @@ suspend fun fetchDocs() {                             // Dispatchers.Main
 suspend fun get(url: String) = withContext(Dispatchers.IO) { /* ... */ }
 ```
 
-Trong ví dụ này, `get()` vẫn chạy trên thread chính nhưng nó tạm dừng coroutine trước khi bắt đầu yêu cầu mạng. Khi yêu cầu mạng hoàn tất, `get` sẽ tiếp tục coroutine bị treo thay vì sử dụng callback để thông báo cho thread chính.
+Trong ví dụ này, `get()` vẫn chạy trên main thread nhưng nó tạm dừng coroutine trước khi bắt đầu network request. Khi network request hoàn tất, `get` sẽ tiếp tục coroutine bị treo thay vì sử dụng callback để thông báo cho main thread.
 
 > [!NOTE]
 > Kotlin sử dụng _stack frame_ để quản lý hàm nào đang chạy cùng với bất kỳ biến cục bộ nào. Khi tạm dừng một coroutine, khung ngăn xếp hiện tại sẽ được sao chép và lưu lại để sử dụng sau. Khi tiếp tục, khung ngăn xếp sẽ được sao chép trở lại từ nơi đã lưu và hàm sẽ bắt đầu chạy lại.
@@ -305,7 +305,7 @@ Mặt khác, coroutine được thiết kế để chỉ tính toán một nhi�
 
 Ngoài ra, trong nội bộ, coroutine và WorkManager hoạt động khác nhau.  
 
-`WorkManager` phụ thuộc rất nhiều vào các thành phần hệ thống Android như Dịch vụ, Trình quản lý cảnh báo, v.v. để lên lịch công việc trong khi coroutine lên lịch công việc trên Luồng công nhân và cũng là một tính năng ngôn ngữ không giống như `WorkManager` (API).
+`WorkManager` phụ thuộc rất nhiều vào các thành phần hệ thống Android như Dịch vụ, Trình quản lý cảnh báo, v.v. để lên lịch công việc trong khi coroutine lên lịch công việc trên Worker thread và cũng là một tính năng ngôn ngữ không giống như `WorkManager` (API).
 Vì vậy, có thể nói rằng coroutine không vượt quá ứng dụng của bạn.
 
 

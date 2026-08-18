@@ -16,16 +16,16 @@ một lớp công cụ có khả năng tạo ra khóa riêng và
 khóa công khai liên quan sử dụng thuật toán mà nó được khởi tạo.
 
 ### SecretKey 
-một khóa bí mật (đối xứng). Mục đích của giao diện này là nhóm (và cung cấp loại an toàn cho)
-tất cả các giao diện khóa bí mật (ví dụ: SecretKeySpec).
+một khóa bí mật (đối xứng). Mục đích của interface này là nhóm (và cung cấp loại an toàn cho)
+tất cả các interface khóa bí mật (ví dụ: SecretKeySpec).
 
 ### PrivateKey 
-một khóa riêng (không đối xứng). Mục đích của giao diện này là nhóm
-(và cung cấp loại an toàn cho) tất cả các giao diện khóa riêng (ví dụ: RSAPrivateKey).
+một khóa riêng (không đối xứng). Mục đích của interface này là nhóm
+(và cung cấp loại an toàn cho) tất cả các interface khóa riêng (ví dụ: RSAPrivateKey).
 
 ### PublicKey 
-một khóa công khai. Giao diện này không chứa phương thức hoặc hằng số.
-Nó chỉ phục vụ cho việc nhóm (và cung cấp loại an toàn cho) tất cả các giao diện khóa công khai (ví dụ: RSAPublicKey).
+một khóa công khai. Interface này không chứa phương thức hoặc hằng số.
+Nó chỉ phục vụ cho việc nhóm (và cung cấp loại an toàn cho) tất cả các interface khóa công khai (ví dụ: RSAPublicKey).
 
 ### KeyPair
 lớp này là nơi chứa đơn giản cho một cặp khóa (khóa chung và khóa riêng).
@@ -216,7 +216,7 @@ private fun initGeneratorWithKeyPairGeneratorSpec(generator: KeyPairGenerator, a
 Trong Android Key Store, mỗi khóa phải có một mã định danh - bí danh. Nếu bạn đang cố lưu khóa vào kho khóa, với bí danh đã tồn tại, nó sẽ bị ghi đè bằng khóa mới. Sử dụng phương thức trình tạo setAlias() để cung cấp bí danh.
 
 
-Khóa bất đối xứng **phải** được ký bằng chứng chỉ. Nó chủ yếu được sử dụng trong liên lạc client-server, trong đó máy khách (hoặc máy chủ) đang xác minh chứng chỉ, để chắc chắn rằng máy chủ thực sự là người mà anh ta tuyên bố (và không phải là người ở giữa). Bạn sẽ không thể lưu khóa bất đối xứng nếu không có chứng chỉ.
+Khóa bất đối xứng **phải** được ký bằng chứng chỉ. Nó chủ yếu được sử dụng trong liên lạc client-server, trong đó client (hoặc server) đang xác minh chứng chỉ, để chắc chắn rằng server thực sự là người mà anh ta tuyên bố (và không phải là người ở giữa). Bạn sẽ không thể lưu khóa bất đối xứng nếu không có chứng chỉ.
 
 
 **Nếu muốn sử dụng cả khóa chung và khóa riêng trong một ứng dụng thì bạn chỉ cần tạo chứng chỉ giả, tự ký.**

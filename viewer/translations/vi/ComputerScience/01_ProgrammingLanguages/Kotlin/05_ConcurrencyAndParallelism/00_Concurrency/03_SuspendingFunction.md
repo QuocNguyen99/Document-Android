@@ -5,9 +5,9 @@ Coroutine là một phần của chương trình có thể bị tạm dừng và
 
 Tuy nhiên, Kotlin không tạm dừng coroutine tại một điểm tùy ý; nó chỉ có thể làm điều đó khi **suspending function** đặc biệt được gọi.
 
-Nó theo dõi các chức năng tạm dừng và có thể chạy một chức năng khác đang chờ thực thi, sau đó tiếp tục chức năng ban đầu khi có thể, ngay cả khi không chuyển đổi luồng ở cấp độ OS.
+Nó theo dõi các chức năng tạm dừng và có thể chạy một chức năng khác đang chờ thực thi, sau đó tiếp tục chức năng ban đầu khi có thể, ngay cả khi không chuyển đổi thread ở cấp độ OS.
 
-**Cơ chế này có khả năng cho phép chúng tôi chạy nhiều coroutine hơn giới hạn của các luồng hiện có.**
+**Cơ chế này có khả năng cho phép chúng tôi chạy nhiều coroutine hơn giới hạn của các thread hiện có.**
 
 
 ## Tạm dừng chức năng
@@ -26,7 +26,7 @@ Trong trường hợp này, bạn có thể tạm dừng việc thực thi một
 ## Ví dụ về ca sử dụng
 
 Hãy tưởng tượng chúng ta cần chạy rất nhiều thao tác "nặng" như tính tổng kiểm tra cho hàng trăm 
-các tệp chúng tôi nhận được từ Internet để đảm bảo chúng không bị hỏng (đó là điều mà các nhà quản lý gói hoặc ứng dụng khách torrent luôn làm).
+các tệp chúng tôi nhận được từ Internet để đảm bảo chúng không bị hỏng (đó là điều mà các nhà quản lý gói hoặc client torrent luôn làm).
 
 
 ```kotlin
@@ -62,9 +62,9 @@ fun main() {
 ```
 
 Tuy nhiên, nó sẽ không cải thiện hiệu suất nếu chúng ta có nhiều tệp hơn lõi CPU vì mỗi lõi chỉ có thể process một thread tại một thời điểm.
-Hơn nữa, nếu chúng ta có quá nhiều luồng, chúng ta sẽ sớm hết bộ nhớ vì mỗi thread yêu cầu thêm RAM chỉ để bắt đầu.
+Hơn nữa, nếu chúng ta có quá nhiều thread, chúng ta sẽ sớm hết bộ nhớ vì mỗi thread yêu cầu thêm RAM chỉ để bắt đầu.
 
-Để khắc phục sự cố, cần có các nhóm và lệnh gọi lại thread phức tạp hơn.
+Để khắc phục sự cố, cần có các nhóm và callback thread phức tạp hơn.
 Ngược lại, với coroutine, chúng ta có thể chạy hàng trăm nghìn thao tác song song và giữ cho mã của mình luôn đơn giản.
 Kotlin sẽ đảm nhiệm việc tạm dừng (tạm dừng) những chức năng hiện không hoạt động.
 

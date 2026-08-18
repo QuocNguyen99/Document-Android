@@ -1,15 +1,15 @@
 # Thread synchronization
 
-Việc sử dụng đồng thời dữ liệu được chia sẻ bởi nhiều luồng có thể gây ra hành vi không mong muốn hoặc sai sót. May mắn thay, Kotlin cho phép chúng tôi kiểm soát quyền truy cập của nhiều luồng vào tài nguyên được chia sẻ thuộc bất kỳ loại nào.
+Việc sử dụng đồng thời dữ liệu được chia sẻ bởi nhiều thread có thể gây ra hành vi không mong muốn hoặc sai sót. May mắn thay, Kotlin cho phép chúng tôi kiểm soát quyền truy cập của nhiều thread vào tài nguyên được chia sẻ thuộc bất kỳ loại nào.
 
 ## Các thuật ngữ và khái niệm quan trọng
 
-1. **Thread synchronization** là một cơ chế đảm bảo rằng hai hoặc nhiều luồng đồng thời không thực thi đồng thời một đoạn mã được gọi là phần quan trọng.
+1. **Thread synchronization** là một cơ chế đảm bảo rằng hai hoặc nhiều thread đồng thời không thực thi đồng thời một đoạn mã được gọi là phần quan trọng.
 2. **Phần quan trọng** là vùng mã truy cập các tài nguyên được chia sẻ và không được thực thi bởi nhiều hơn một thread cùng một lúc. Tài nguyên được chia sẻ có thể là một biến, tệp, cổng đầu vào/đầu ra, cơ sở dữ liệu hoặc thứ gì khác.
 
 ## Đồng bộ hóa mã
 
-Cách "cổ điển" và đơn giản nhất để bảo vệ mã khỏi bị truy cập đồng thời bởi nhiều luồng liên quan đến việc sử dụng các phương thức được đồng bộ hóa.
+Cách "cổ điển" và đơn giản nhất để bảo vệ mã khỏi bị truy cập đồng thời bởi nhiều thread liên quan đến việc sử dụng các phương thức được đồng bộ hóa.
 
 Có hai dạng synchronization khác nhau:
 
@@ -35,4 +35,4 @@ Lưu ý rằng **chú thích** là phương tiện đính kèm siêu dữ liệu
 }
 ```
 
-Một chức năng hoặc khối được đồng bộ hóa cần một đối tượng để khóa các luồng. Chỉ một thread có thể thực thi mã trong một khối hoặc phương thức được đồng bộ hóa cùng một lúc. Các luồng khác bị chặn cho đến khi thread bên trong khối hoặc phương thức được đồng bộ hóa thoát khỏi nó.
+Một chức năng hoặc khối được đồng bộ hóa cần một đối tượng để khóa các thread. Chỉ một thread có thể thực thi mã trong một khối hoặc phương thức được đồng bộ hóa cùng một lúc. Các thread khác bị chặn cho đến khi thread bên trong khối hoặc phương thức được đồng bộ hóa thoát khỏi nó.

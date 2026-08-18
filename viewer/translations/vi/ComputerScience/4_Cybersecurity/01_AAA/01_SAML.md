@@ -16,13 +16,13 @@ SSO process, một ứng dụng chính của SAML, bao gồm ba thực thể ch�
 
 Tổng quan về cách hoạt động của xác thực dựa trên SAML-:
 
-1. **Bắt đầu yêu cầu đăng nhập**: Người dùng cố gắng đăng nhập vào một ứng dụng web, điều này sẽ kích hoạt yêu cầu đăng nhập. Yêu cầu này sau đó được chuyển đến nhà cung cấp dịch vụ (SP) có liên quan.
-2. **Tạo yêu cầu SAML**: Nhà cung cấp dịch vụ xử lý yêu cầu đăng nhập và chuyển tiếp yêu cầu đó đến identity provider (IdP) thích hợp, tạo ra yêu cầu SAML trong process. Yêu cầu này bao gồm thông tin nhận dạng của người dùng cùng với thông tin chi tiết về dịch vụ mà người dùng muốn truy cập.
+1. **Bắt đầu request đăng nhập**: Người dùng cố gắng đăng nhập vào một ứng dụng web, điều này sẽ kích hoạt request đăng nhập. Request này sau đó được chuyển đến nhà cung cấp dịch vụ (SP) có liên quan.
+2. **Tạo request SAML**: Nhà cung cấp dịch vụ xử lý request đăng nhập và chuyển tiếp request đó đến identity provider (IdP) thích hợp, tạo ra request SAML trong process. Yêu cầu này bao gồm thông tin nhận dạng của người dùng cùng với thông tin chi tiết về dịch vụ mà người dùng muốn truy cập.
 3. **Người dùng Authentication**: Sau đó, người dùng được nhắc nhập thông tin đăng nhập (chẳng hạn như tên người dùng và mật khẩu) trên trang đăng nhập của IdP. 
-IdP xác minh các thông tin xác thực này dựa trên thư mục người dùng của nó, có khả năng kết hợp các biện pháp bảo mật bổ sung như xác thực đa yếu tố dựa trên các giao thức xác thực cụ thể của IdP.
-4. **Tạo và truyền phản hồi SAML**: Sau khi xác thực thành công, IdP sẽ tạo phản hồi SAML, còn được gọi là xác nhận SAML. 
-Phản hồi này chứa thông tin ủy quyền bao gồm vai trò của người dùng, thuộc tính và chữ ký số và có thể được mã hóa để bảo vệ việc trao đổi thông tin.
-5. **Nhà cung cấp dịch vụ Authorization**: Nhà cung cấp dịch vụ nhận được phản hồi SAML và xác thực chữ ký số để xác nhận tính xác thực của nó. 
+IdP xác minh các thông tin xác thực này dựa trên thư mục người dùng của nó, có khả năng kết hợp các biện pháp bảo mật bổ sung như xác thực đa yếu tố dựa trên các protocol xác thực cụ thể của IdP.
+4. **Tạo và truyền response SAML**: Sau khi xác thực thành công, IdP sẽ tạo response SAML, còn được gọi là xác nhận SAML.
+Response này chứa thông tin ủy quyền bao gồm vai trò của người dùng, thuộc tính và chữ ký số và có thể được mã hóa để bảo vệ việc trao đổi thông tin.
+5. **Nhà cung cấp dịch vụ Authorization**: Nhà cung cấp dịch vụ nhận được response SAML và xác thực chữ ký số để xác nhận tính xác thực của nó.
 Sau đó, nó giải mã thông tin ủy quyền có trong xác nhận SAML, xác định xem người dùng có được phép truy cập vào các tài nguyên được yêu cầu hay không.
 
 

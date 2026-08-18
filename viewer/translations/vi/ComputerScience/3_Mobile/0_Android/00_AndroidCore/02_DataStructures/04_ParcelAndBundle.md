@@ -6,8 +6,8 @@ Trong Android, chúng tôi sử dụng `Bundle` để truyền dữ liệu đế
 
 - **Các loại nguyên thủy**
 - **Chuỗi**
-- **Có thể tuần tự hóa** (giao diện Java tiêu chuẩn)
-- **Parcelable** (giao diện dành riêng cho Android)
+- **Có thể tuần tự hóa** (interface Java tiêu chuẩn)
+- **Parcelable** (interface dành riêng cho Android)
 - **Danh sách và mảng** thuộc các loại được liệt kê ở trên
 
 Trong chủ đề này, chúng tôi sẽ tập trung vào các đối tượng `Parcelable`.

@@ -80,14 +80,14 @@ class MyViewModel(formatDateUseCase: FormatDateUseCase) : ViewModel() {
 
 Các trường hợp sử dụng không có lifecycle riêng. Thay vào đó, chúng nằm trong phạm vi lớp sử dụng chúng.
 Điều này có nghĩa là bạn có thể gọi các trường hợp sử dụng từ các lớp trong lớp UI, từ các dịch vụ hoặc từ chính lớp Ứng dụng.
-Vì các trường hợp sử dụng không được chứa dữ liệu mutable nên bạn nên tạo một phiên bản mới của lớp trường hợp sử dụng mỗi khi bạn chuyển nó dưới dạng phần phụ thuộc.
+Vì các trường hợp sử dụng không được chứa dữ liệu mutable nên bạn nên tạo một phiên bản mới của lớp trường hợp sử dụng mỗi khi bạn chuyển nó dưới dạng dependency.
 
 ## Luồng
 
-Các trường hợp sử dụng từ domain layer phải an toàn để gọi từ thread chính.
+Các trường hợp sử dụng từ domain layer phải an toàn để gọi từ main thread.
 Nếu các lớp ca sử dụng thực hiện các hoạt động chặn trong thời gian dài, chúng chịu trách nhiệm di chuyển logic đó sang thread thích hợp.
 
-Ví dụ sau đây cho thấy một trường hợp sử dụng thực hiện công việc của nó trên nền thread:
+Ví dụ sau đây cho thấy một trường hợp sử dụng thực hiện công việc của nó trên background thread:
 
 ```kotlin
 class GetLatestNewsWithAuthorsUseCase(
@@ -114,7 +114,7 @@ class GetLatestNewsWithAuthorsUseCase(
 
 - **Logic nghiệp vụ đơn giản có thể tái sử dụng**, Bạn nên gói gọn logic nghiệp vụ có thể lặp lại có trong lớp UI trong một lớp ca sử dụng. Điều này giúp dễ dàng áp dụng mọi thay đổi ở mọi nơi sử dụng logic. Nó cũng cho phép bạn kiểm tra logic một cách riêng biệt.
 
-- **Kết hợp các kho lưu trữ**
+- **Kết hợp các repository**
 - **Người dùng khác**, Ngoài lớp UI, domain layer có thể được sử dụng lại bởi các lớp khác như `Services` và lớp `Application`. Hơn nữa, nếu các nền tảng khác như TV hoặc Wear chia sẻ cơ sở mã với ứng dụng di động thì lớp UI của họ cũng có thể sử dụng lại các trường hợp sử dụng để nhận được tất cả các lợi ích nói trên của domain layer.
 - **Hạn chế truy cập Data layer**, Ưu điểm của việc thực hiện hạn chế này là nó ngăn UI của bạn bỏ qua logic domain layer
 

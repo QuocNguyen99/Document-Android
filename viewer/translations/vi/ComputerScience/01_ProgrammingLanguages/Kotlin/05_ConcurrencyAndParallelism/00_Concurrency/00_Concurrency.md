@@ -2,8 +2,8 @@
 
 ## Quy trình
 
-Trong máy tính, **các thực thể lớn nhất có thể chạy cùng lúc được gọi là tiến trình**, thường đại diện cho các ứng dụng khác nhau. 
-Tuy nhiên, các nhà phát triển Kotlin hiếm khi làm việc với các tiến trình vì chúng khá nặng, Một máy tính hiện đại có thể xử lý hàng trăm tiến trình. 
+Trong máy tính, **các thực thể lớn nhất có thể chạy cùng lúc được gọi là process**, thường đại diện cho các ứng dụng khác nhau.
+Tuy nhiên, các nhà phát triển Kotlin hiếm khi làm việc với các process vì chúng khá nặng, Một máy tính hiện đại có thể xử lý hàng trăm process.
 và thông thường các lập trình viên muốn ứng dụng của họ nhỏ gọn hơn. 
 Vì lý do này, chúng tôi sẽ không trình bày chi tiết chúng ở đây.
 
@@ -17,12 +17,12 @@ Một số người trong số họ làm việc trong các lĩnh vực hoàn to�
 **Một cách thuận tiện hơn để chạy các tác vụ đồng thời trong một chương trình** là phân luồng. 
 Nó được hỗ trợ bởi hầu hết các ngôn ngữ lập trình bao gồm Kotlin.
 
-**Mọi thread đều được liên kết với process và process có thể tạo các luồng của nó.** 
+**Mọi thread đều được liên kết với process và process có thể tạo các thread của nó.**
 Ví dụ: các ứng dụng thường sử dụng thread đặc biệt để vẽ đồ họa trên màn hình,
 trong khi logic của chương trình được thực thi ở một chương trình khác.
-Các luồng chia sẻ một số bộ nhớ nên việc giao tiếp giữa chúng tương đối đơn giản.
+Các thread chia sẻ một số bộ nhớ nên việc giao tiếp giữa chúng tương đối đơn giản.
 
-**Luồng nhẹ hơn quy trình và ngày nay một máy tính thông thường có thể thực thi hàng chục nghìn luồng.**
+**Thread nhẹ hơn quy trình và ngày nay một máy tính thông thường có thể thực thi hàng chục nghìn luồng.**
 
 thread trong process giống như một nhân viên trong một công ty.
 Một người và thread chịu trách nhiệm về vai trò của mình.
@@ -30,9 +30,9 @@ Một người và thread chịu trách nhiệm về vai trò của mình.
 ![văn bản thay thế](/resources/concurrency_thread.png)
 
 
-Trong Kotlin, các luồng phụ thuộc vào nền tảng, có nghĩa là bạn phải sử dụng các luồng khác nhau cho các môi trường khác nhau, 
+Trong Kotlin, các thread phụ thuộc vào nền tảng, có nghĩa là bạn phải sử dụng các thread khác nhau cho các môi trường khác nhau,
 ví dụ: Chủ đề Java cho Kotlin/JVM và Chủ đề Posix cho Kotlin/Native. 
-Tuy nhiên, các luồng vẫn được sử dụng thường xuyên vì dễ dàng xác định giao tiếp của chúng và chạy chúng.
+Tuy nhiên, các thread vẫn được sử dụng thường xuyên vì dễ dàng xác định giao tiếp của chúng và chạy chúng.
 
 Tuy nhiên, nếu bạn có một trang web phổ biến và web server để lưu trữ trang web đó thì điều này có thể là chưa đủ: số lượng kết nối đồng thời đến trang web của bạn có thể dễ dàng vượt quá hàng chục nghìn.
 
@@ -62,9 +62,9 @@ Hãy quay trở lại với sự tương tự với một công ty. Chúng ta c�
 
 ![văn bản thay thế](/resources/concurrency_coroutine.png)
 
-Vì thread có thể được sử dụng để chạy coroutine nên bạn có thể có nhiều coroutine hơn luồng. Số lượng coroutine được lên lịch thực thi có thể lên tới hơn một triệu!
+Vì thread có thể được sử dụng để chạy coroutine nên bạn có thể có nhiều coroutine hơn thread. Số lượng coroutine được lên lịch thực thi có thể lên tới hơn một triệu!
 
 
 Bạn có thể nghi ngờ một lỗ hổng ở đây: không phải ai cũng có thể thực hiện nhiều nhiệm vụ cùng một lúc. Thông thường, chúng ta thực hiện một nhiệm vụ và chỉ sau đó mới thực hiện một nhiệm vụ khác. Trên thực tế, điều này cũng đúng với các coroutine: trong một thread, mỗi lần chỉ có một coroutine được xử lý. Đó là lý do tại sao nó được gọi là concurrency nội bộ. Tuy nhiên, khái niệm tạm dừng nhiệm vụ thực sự rất mạnh mẽ và chúng ta có thể nói rằng tính đồng thời sai lầm này vẫn có tác dụng. Hãy thể hiện nó.
 
-Bạn còn nhớ ví dụ web server không? Chúng tôi chỉ có một số lượng người thực thi hạn chế, nhưng chúng tôi muốn phục vụ một số lượng lớn khách hàng. Giải pháp là có một nhiệm vụ cho mỗi khách hàng và phân bổ dần dần các nhiệm vụ đang chờ cho những người thực thi có sẵn. Một số khách hàng sẽ phải đợi lâu hơn vì sẽ phải xếp hàng nhưng ít nhất máy chủ sẽ không gặp sự cố.
+Bạn còn nhớ ví dụ web server không? Chúng tôi chỉ có một số lượng người thực thi hạn chế, nhưng chúng tôi muốn phục vụ một số lượng lớn client. Giải pháp là có một nhiệm vụ cho mỗi client và phân bổ dần dần các nhiệm vụ đang chờ cho những người thực thi có sẵn. Một số client sẽ phải đợi lâu hơn vì sẽ phải xếp hàng nhưng ít nhất server sẽ không gặp sự cố.

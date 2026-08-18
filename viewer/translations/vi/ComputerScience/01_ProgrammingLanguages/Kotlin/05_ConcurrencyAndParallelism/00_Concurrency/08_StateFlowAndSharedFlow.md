@@ -134,7 +134,7 @@ class LatestNewsActivity : AppCompatActivity() {
 
 ## Khi nào nên sử dụng
 - Sử dụng `StateFlow` để **quản lý và chia sẻ trạng thái UI**
-- Sử dụng `SharedFlow` để **phát sóng sự kiện** tới nhiều người nghe
+- Sử dụng `SharedFlow` để **phát sóng sự kiện** tới nhiều listener
 
 
 

@@ -13,11 +13,11 @@ Ngoài ra còn có **quyền đặc biệt** nhưng chúng được xác định
 
 ## Quyền và trải nghiệm người dùng
 
-Yêu cầu quyền runtime trông giống như một cảnh báo chứa biểu tượng, tên quyền được phê duyệt và hai hoặc ba nút (tùy thuộc vào phiên bản OS):
+Request quyền runtime trông giống như một cảnh báo chứa biểu tượng, tên quyền được phê duyệt và hai hoặc ba nút (tùy thuộc vào phiên bản OS):
 
 ![văn bản thay thế](/resources/permission_and_ux.png)
 
-Đôi khi, những cảnh báo này tự giải thích: khi bạn tải xuống ứng dụng Máy ảnh, ứng dụng này sẽ không hoạt động nếu không có quyền truy cập vào máy ảnh. Tuy nhiên, quyền truy cập danh bạ trong ứng dụng Ghi chú có thể không dễ hiểu như vậy. Đó là lý do tại sao việc yêu cầu họ vào đúng thời điểm lại quan trọng.
+Đôi khi, những cảnh báo này tự giải thích: khi bạn tải xuống ứng dụng Máy ảnh, ứng dụng này sẽ không hoạt động nếu không có quyền truy cập vào máy ảnh. Tuy nhiên, quyền truy cập danh bạ trong ứng dụng Ghi chú có thể không dễ hiểu như vậy. Đó là lý do tại sao việc request họ vào đúng thời điểm lại quan trọng.
 
 Hãy dành chút thời gian để suy nghĩ về cách xin phép một cách thích hợp trong ứng dụng của bạn. Bạn có thể làm theo các quy tắc sau để làm cho nó dễ dàng hơn:
 
@@ -27,7 +27,7 @@ Hãy dành chút thời gian để suy nghĩ về cách xin phép một cách th
 
 - Nếu ứng dụng của bạn có thể chạy mà không có quyền này, nhưng hoàn toàn rõ ràng rằng việc sử dụng chức năng này sẽ yêu cầu quyền này — hãy yêu cầu quyền này tại thời điểm người dùng cố gắng sử dụng chức năng đó. Ví dụ: Tin nhắn thoại trong ứng dụng nhắn tin - rõ ràng là bạn cần quyền truy cập Micrô để ghi tin nhắn thoại. Nếu quyền bị từ chối, bạn có thể hiển thị lời giải thích như "Ghi tin nhắn thoại yêu cầu quyền truy cập vào micrô".
 
-- Nếu ứng dụng của bạn có thể chạy mà không cần sự cho phép này nhưng không rõ lý do tại sao bạn cần nó - hãy đưa ra lời giải thích rồi yêu cầu sự cho phép. Ví dụ: lưu thành tích trong trò chơi vào thư viện. Không rõ tại sao trò chơi lại yêu cầu quyền lưu trữ khi bạn nhấn "Chia sẻ". Giải thích lý do bạn cần quyền lưu trữ, sau đó hiển thị yêu cầu.
+- Nếu ứng dụng của bạn có thể chạy mà không cần sự cho phép này nhưng không rõ lý do tại sao bạn cần nó - hãy đưa ra lời giải thích rồi request sự cho phép. Ví dụ: lưu thành tích trong trò chơi vào thư viện. Không rõ tại sao trò chơi lại yêu cầu quyền lưu trữ khi bạn nhấn "Chia sẻ". Giải thích lý do bạn cần quyền lưu trữ, sau đó hiển thị yêu cầu.
 
 ## Khai báo quyền
 
@@ -66,21 +66,21 @@ if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
 ```
 
 
-Phương thức này lấy `Context` và tên quyền làm tham số rồi trả về Int. Int được trả về là `PackageManager.PERMISSION_GRANTED`, bằng 0 hoặc `PackageManager.PERMISSION_DENIED`, bằng -1. Chúng tôi nên yêu cầu quyền nếu `checkSelfPermission` trả về `PERMISSION_DENIED`.
+Phương thức này lấy `Context` và tên quyền làm tham số rồi trả về Int. Int được trả về là `PackageManager.PERMISSION_GRANTED`, bằng 0 hoặc `PackageManager.PERMISSION_DENIED`, bằng -1. Chúng tôi nên request quyền nếu `checkSelfPermission` trả về `PERMISSION_DENIED`.
 
-Bạn có thể yêu cầu quyền bằng cách sử dụng API kết quả Activity hoặc `requestPermissions()`. Trước tiên, chúng ta sẽ xem xét API kết quả Activity.
+Bạn có thể request quyền bằng cách sử dụng API kết quả Activity hoặc `requestPermissions()`. Trước tiên, chúng ta sẽ xem xét API kết quả Activity.
 
 ## Yêu cầu quyền sử dụng API kết quả Activity
 
 
-API kết quả Activity là giao diện lập trình mới để trao đổi dữ liệu giữa các hoạt động.
+API kết quả Activity là interface lập trình mới để trao đổi dữ liệu giữa các hoạt động.
 Nó cho phép tạo một trình khởi chạy với một hợp đồng được chỉ định và đăng ký callback để được gọi khi có kết quả.
 
 Có hai hợp đồng có thể giúp chúng tôi: 
 - `RequestPermission` 
 - `RequestMultiplePermissions`.
 
-Đúng như tên gọi của chúng, quyền đầu tiên được sử dụng để yêu cầu một quyền và quyền thứ hai có thể được sử dụng để yêu cầu hai hoặc nhiều quyền cùng một lúc. Chúng ta cần đăng ký hợp đồng trong hoạt động. Bạn có thể thực hiện điều đó bằng cách sử dụng `registerForActivityResult()` chấp nhận hợp đồng và callback làm tham số:
+Đúng như tên gọi của chúng, quyền đầu tiên được sử dụng để request một quyền và quyền thứ hai có thể được sử dụng để request hai hoặc nhiều quyền cùng một lúc. Chúng ta cần đăng ký hợp đồng trong hoạt động. Bạn có thể thực hiện điều đó bằng cách sử dụng `registerForActivityResult()` chấp nhận hợp đồng và callback làm tham số:
 
 ```kotlin
 private val cameraRequestPermissionLauncher =
@@ -111,7 +111,7 @@ private fun onRequestCameraPermissionResult(granted: Boolean) {
 }
 ```
 
-Đối với `RequestMultiplePermissions()`, callback sẽ nhận được `Map<String, Boolean>` kèm theo kết quả cho mỗi yêu cầu cấp phép:
+Đối với `RequestMultiplePermissions()`, callback sẽ nhận được `Map<String, Boolean>` kèm theo kết quả cho mỗi request cấp phép:
 
 ```kotlin
 private val requestAllPermissionsLauncher =
@@ -132,7 +132,7 @@ if (ActivityCompat
 }
 ```
 
-Đặt tất cả lại với nhau, kiểm tra quyền, hiển thị lý do căn bản và khởi chạy yêu cầu cấp phép sẽ như thế này:
+Đặt tất cả lại với nhau, kiểm tra quyền, hiển thị lý do căn bản và khởi chạy request cấp phép sẽ như thế này:
 
 ```kotlin
 cameraButton.setOnClickListener {
@@ -195,20 +195,20 @@ private fun onRequestCameraPermissionResult(granted: Boolean) {
 }
 ```
 
-Trong phương pháp này, chúng tôi đã tạo `AlertDialog`, điều này giải thích một lần nữa lý do tại sao chúng tôi yêu cầu quyền này và cho phép người dùng chuyển sang Cài đặt và cho phép quyền theo cách thủ công hoặc hủy và quay lại ứng dụng mà không có các quyền này.
+Trong phương pháp này, chúng tôi đã tạo `AlertDialog`, điều này giải thích một lần nữa lý do tại sao chúng tôi request quyền này và cho phép người dùng chuyển sang Cài đặt và cho phép quyền theo cách thủ công hoặc hủy và quay lại ứng dụng mà không có các quyền này.
 
 ## Yêu cầu quyền với `requestPermissions()`
 
 
-Trong một số ứng dụng hiện có, bạn có thể gặp phải cách yêu cầu quyền cũ hơn. Không có callback: thay vào đó, bạn chuyển một số tùy ý dưới dạng requestCode cho yêu cầu cấp quyền và phản hồi chứa mã đó, vì vậy, bạn có thể tìm ra yêu cầu nào được phản hồi.
+Trong một số ứng dụng hiện có, bạn có thể gặp phải cách request quyền cũ hơn. Không có callback: thay vào đó, bạn chuyển một số tùy ý dưới dạng requestCode cho request cấp quyền và response chứa mã đó, vì vậy, bạn có thể tìm ra yêu cầu nào được phản hồi.
 
-Phương thức `requestPermissions()` là một phần của lớp `Activity` và có thể được gọi trực tiếp trong các lớp con của nó (chẳng hạn như `ComponentActivity` hoặc `AppCompatActivity`). Phải có hai đối số: một mảng quyền và mã yêu cầu. Mã yêu cầu là Int bạn muốn sử dụng nhưng lớn hơn hoặc bằng 0.
+Phương thức `requestPermissions()` là một phần của lớp `Activity` và có thể được gọi trực tiếp trong các lớp con của nó (chẳng hạn như `ComponentActivity` hoặc `AppCompatActivity`). Phải có hai đối số: một mảng quyền và mã request. Mã request là Int bạn muốn sử dụng nhưng lớn hơn hoặc bằng 0.
 
 
 > [!NOTE]
-> Để tương thích ngược với các phiên bản Android cũ hơn (API cấp 22 trở xuống), bạn có thể sử dụng ActivityCompat.requestPermissions(). Phương thức này yêu cầu bạn chuyển hoạt động làm đối số đầu tiên, theo sau là mảng quyền và mã yêu cầu.
+> Để tương thích ngược với các phiên bản Android cũ hơn (API cấp 22 trở xuống), bạn có thể sử dụng ActivityCompat.requestPermissions(). Phương thức này request bạn chuyển hoạt động làm đối số đầu tiên, theo sau là mảng quyền và mã yêu cầu.
 
-Yêu cầu cấp phép có thể trông như thế này:
+Request cấp phép có thể trông như thế này:
 
 ```kotlin
 private const val MEDIA_REQUEST_CODE = 1
@@ -246,7 +246,7 @@ when {
 Sau khi nhấp vào bất kỳ nút nào (hoặc đóng cảnh báo), phương thức `onRequestPermissionsResult()` sẽ được gọi.
 
 > [!CAUTION]
-> Việc sử dụng onRequestPermissionsResult() để xử lý các kết quả yêu cầu cấp phép không được dùng nữa (ngoại trừ các yêu cầu tương thích). Bạn nên sử dụng API kết quả Activity như được hiển thị trong phần trước.
+> Việc sử dụng onRequestPermissionsResult() để xử lý các kết quả request cấp phép không được dùng nữa (ngoại trừ các yêu cầu tương thích). Bạn nên sử dụng API kết quả Activity như được hiển thị trong phần trước.
 
 Để kiểm tra xem ứng dụng có được cấp các quyền được yêu cầu hay không, chúng tôi có thể ghi đè `onRequestPermissionsResult()`. Sau khi người dùng chọn quyền phê duyệt hoặc từ chối, phương thức này sẽ được gọi. Phương thức này có ba tham số: requestCode, mảng quyền và mảng grantResults.
 
@@ -260,7 +260,7 @@ override fun onRequestPermissionsResult(
 }
 ```
 
-Đây là nơi bạn sẽ cần mã yêu cầu mà bạn đã chỉ định trong yêu cầu của mình trước đó. Với sự trợ giúp của nó, chúng tôi sẽ có thể hiểu những hành động nào phải được thực hiện sau yêu cầu của chúng tôi.
+Đây là nơi bạn sẽ cần mã request mà bạn đã chỉ định trong request của mình trước đó. Với sự trợ giúp của nó, chúng tôi sẽ có thể hiểu những hành động nào phải được thực hiện sau request của chúng tôi.
 
 ```kotlin
 override fun onRequestPermissionsResult(
@@ -284,7 +284,7 @@ override fun onRequestPermissionsResult(
 }
 ```
 
-Chúng tôi sẽ sử dụng thời điểm để kiểm tra mã yêu cầu. `MEDIA_REQUEST_CODE` trong ví dụ này là hằng số bằng 1 (nhưng bạn có thể chọn bất kỳ số nào bạn thích). Vì Android cho phép bạn yêu cầu nhiều quyền cùng một lúc nên chúng tôi cũng nhận được kết quả dưới dạng mảng.
+Chúng tôi sẽ sử dụng thời điểm để kiểm tra mã request. `MEDIA_REQUEST_CODE` trong ví dụ này là hằng số bằng 1 (nhưng bạn có thể chọn bất kỳ số nào bạn thích). Vì Android cho phép bạn request nhiều quyền cùng một lúc nên chúng tôi cũng nhận được kết quả dưới dạng mảng.
 
 Hãy nhớ rằng nếu người dùng đóng cảnh báo mà không chọn bất kỳ tùy chọn nào thì mảng kết quả có thể trống. Hãy coi mảng trống là "Bị từ chối" để tránh các sự cố tiềm ẩn với các ngoại lệ bảo mật vì bạn đang cố truy cập một số quyền mà không được phê duyệt.
 

@@ -6,13 +6,13 @@ Cách tiếp cận bắt đầu các hoạt động và mong đợi kết quả 
 
 ## Sử dụng API kết quả Activity
 
-Khi bạn bắt đầu một hoạt động cho một kết quả, bạn yêu cầu hệ thống Android khởi chạy một hoạt động một cách hiệu quả và sau đó trả về kết quả do hoạt động đó tạo ra cho ứng dụng của bạn.
+Khi bạn bắt đầu một hoạt động cho một kết quả, bạn request hệ thống Android khởi chạy một hoạt động một cách hiệu quả và sau đó trả về kết quả do hoạt động đó tạo ra cho ứng dụng của bạn.
 
 **Các API cung cấp phương thức để đăng ký callback**, phương thức này được gọi khi chúng tôi nhận được kết quả từ một hoạt động đã khởi chạy. callback này thường được gọi là kết quả callback. Khi ở trong ComponentActivity hoặc Fragment, bạn có thể đăng ký kết quả callback bằng phương thức `registerForActivityResult()`. Phương thức này có hai đối số:
 
 - `ActivityResultContract`: Đây là đối tượng xác định loại đầu vào mà hoạt động đã khởi chạy yêu cầu để tạo ra kết quả cùng với loại đầu ra của kết quả. API cung cấp các hợp đồng được xác định trước cho các hành động có mục đích chung như chụp ảnh, chọn nội dung hoặc thậm chí yêu cầu quyền. Bạn cũng có thể tạo hợp đồng tùy chỉnh cho các nhu cầu cụ thể hơn mà chúng ta sẽ khám phá trong phần tiếp theo.
 
-- An `ActivityResultCallback`: Đây là giao diện chức năng hay còn gọi là giao diện Phương thức trừu tượng đơn (SAM), với phương thức `onActivityResult()`. Nó được gọi khi ứng dụng nhận được kết quả từ hoạt động đã khởi chạy và nó nhận một đối số thuộc loại đầu ra được xác định trong hợp đồng.
+- An `ActivityResultCallback`: Đây là interface chức năng hay còn gọi là interface Phương thức trừu tượng đơn (SAM), với phương thức `onActivityResult()`. Nó được gọi khi ứng dụng nhận được kết quả từ hoạt động đã khởi chạy và nó nhận một đối số thuộc loại đầu ra được xác định trong hợp đồng.
 
 Phương thức `registerForActivityResult()` trả về `ActivityResultLauncher` mà sau này bạn sẽ sử dụng để khởi chạy một hoạt động nhằm đạt được kết quả.
 
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 Ở đây, chúng tôi đã sử dụng hợp đồng được xác định trước PickContact để mở rộng lớp `ActivityResultContract`.
 Hợp đồng xác định mục đích ngầm được sử dụng để khởi chạy một hoạt động có khả năng hiển thị các liên hệ để chọn.
 Hợp đồng cũng xác định kết quả đầu ra là Uri?.
-Đối số thứ hai được truyền dưới dạng lambda (cụ thể là lambda ở cuối) bằng cách sử dụng chuyển đổi SAM của Kotlin để chuyển đổi lambda expression thành mã khởi tạo việc triển khai giao diện ActivityResultCallback.
+Đối số thứ hai được truyền dưới dạng lambda (cụ thể là lambda ở cuối) bằng cách sử dụng chuyển đổi SAM của Kotlin để chuyển đổi lambda expression thành mã khởi tạo việc triển khai interface ActivityResultCallback.
 
 > [!NOTE]
 > Lưu ý rằng các API được viết bằng Java do đó các giá trị trả về có thể là null mặc dù Kotlin cho phép chúng tôi chỉ định loại contactUri là Uri (Không rỗng) có thể dẫn đến NullPointerException nổi tiếng khi không được xử lý tốt. Chúng tôi cũng có quyền truy cập vào phương thức registerForActivityResult() vì AppCompatActivity kế thừa từ ComponentActivity.
@@ -177,13 +177,13 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
 
 ## Các phương pháp và mẹo hay nhất
 
-- Khi bạn bắt đầu một hoạt động để đạt được kết quả, **hãy nhớ rằng ứng dụng của bạn có thể bị hệ thống tắt**, đặc biệt là trong các hoạt động sử dụng nhiều bộ nhớ. Để bảo vệ khỏi điều này, lệnh gọi lại kết quả phải được đăng ký vô điều kiện theo cùng một thứ tự mỗi khi hoạt động của bạn được tạo. **Điều này nhằm đảm bảo các lệnh gọi lại này sẵn sàng nếu hoạt động bị hủy vì API kết quả Activity tách riêng kết quả callback khỏi nơi nó được đăng ký**. Đừng quên lưu lại bất kỳ trạng thái quan trọng nào khi bắt đầu một hoạt động để dự đoán rằng hoạt động của bạn có thể bị hủy.
+- Khi bạn bắt đầu một hoạt động để đạt được kết quả, **hãy nhớ rằng ứng dụng của bạn có thể bị hệ thống tắt**, đặc biệt là trong các hoạt động sử dụng nhiều bộ nhớ. Để bảo vệ khỏi điều này, callback kết quả phải được đăng ký vô điều kiện theo cùng một thứ tự mỗi khi hoạt động của bạn được tạo. **Điều này nhằm đảm bảo các callback này sẵn sàng nếu hoạt động bị hủy vì API kết quả Activity tách riêng kết quả callback khỏi nơi nó được đăng ký**. Đừng quên lưu lại bất kỳ trạng thái quan trọng nào khi bắt đầu một hoạt động để dự đoán rằng hoạt động của bạn có thể bị hủy.
 
 - Khi triển khai xử lý kết quả, **hãy nhớ tính đến những khác biệt tiềm ẩn trong cách các ứng dụng khác nhau trả về kết quả**. Ví dụ: trong ví dụ về danh bạ trước đây của chúng tôi, mặc dù chỉ là giả định hoặc khó có khả năng xảy ra, nhưng một số ứng dụng danh bạ ít người biết đến mà người dùng có thể chọn làm mặc định trên một số điện thoại Android nhất định có thể trả về liên hệ đã chọn làm thông tin bổ sung thay vì thông tin dữ liệu mong đợi về mục đích điển hình của ứng dụng "Danh bạ". Điều này sẽ dẫn đến một nội dung rỗng-Uri. Vì vậy, điều quan trọng là phải sẵn sàng cho những tình huống như vậy; Ví dụ: bạn có thể hiển thị một thông báo phù hợp cho người dùng để thông báo cho họ rằng liên hệ không được nhận như mong đợi.
 
-- Ngoài ra, nếu bạn có ý định thiết kế các thành phần hoặc hoạt động mà các ứng dụng khác sẽ sử dụng để đạt được kết quả thì việc cung cấp tài liệu chi tiết là rất quan trọng. Các giao diện và kỳ vọng rõ ràng, được giải thích rõ ràng sẽ giúp việc trao đổi dữ liệu giữa các ứng dụng diễn ra suôn sẻ và đáng tin cậy, giảm thiểu các vấn đề tiềm ẩn và nâng cao trải nghiệm người dùng.
+- Ngoài ra, nếu bạn có ý định thiết kế các thành phần hoặc hoạt động mà các ứng dụng khác sẽ sử dụng để đạt được kết quả thì việc cung cấp tài liệu chi tiết là rất quan trọng. Các interface và kỳ vọng rõ ràng, được giải thích rõ ràng sẽ giúp việc trao đổi dữ liệu giữa các ứng dụng diễn ra suôn sẻ và đáng tin cậy, giảm thiểu các vấn đề tiềm ẩn và nâng cao trải nghiệm người dùng.
 
-- Trong trường hợp bạn muốn nhận kết quả ở một lớp riêng ngoài `ComponentActivity` hoặc `Fragment`, bạn có thể thực hiện bằng cách sử dụng trực tiếp `ActivityResultRegistry`. `ActivityResultRegistry` chịu trách nhiệm lưu trữ các lệnh gọi lại kết quả trong hoạt động. Bạn có thể tìm hiểu thêm nếu bạn quan tâm đến cách thức hoạt động của nó.
+- Trong trường hợp bạn muốn nhận kết quả ở một lớp riêng ngoài `ComponentActivity` hoặc `Fragment`, bạn có thể thực hiện bằng cách sử dụng trực tiếp `ActivityResultRegistry`. `ActivityResultRegistry` chịu trách nhiệm lưu trữ các callback kết quả trong hoạt động. Bạn có thể tìm hiểu thêm nếu bạn quan tâm đến cách thức hoạt động của nó.
 
 ## thẩm quyền giải quyết
 

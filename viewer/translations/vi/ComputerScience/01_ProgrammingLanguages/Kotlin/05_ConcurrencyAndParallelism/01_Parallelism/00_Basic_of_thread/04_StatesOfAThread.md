@@ -41,7 +41,7 @@ worker.join()  // waiting for completing the worker
 println(worker.state) // TERMINATED
 ```
 Khi thread được tạo, trạng thái của nó là `NEW`. Khi thread được khởi động, trạng thái của nó là `RUNNABLE` (chức năng chạy có thể chưa được gọi).
-Cuối cùng, khi thread được hoàn thành, trạng thái là `TERMINATED`. Ngoài ra, thread chính cũng chuyển sang trạng thái `WAITING` (dài vô thời hạn) sau khi gọi hàm `worker.join()`.
+Cuối cùng, khi thread được hoàn thành, trạng thái là `TERMINATED`. Ngoài ra, main thread cũng chuyển sang trạng thái `WAITING` (dài vô thời hạn) sau khi gọi hàm `worker.join()`.
 
 ## lifecycle thực (gần như) của thread
 
@@ -63,9 +63,9 @@ Sau khi khởi tạo, thread đã sẵn sàng chạy (**Sẵn sàng**).
 Bộ lập lịch thread có trách nhiệm cung cấp một số thời gian để thread chạy (**Đang chạy**) và sau đó chuyển nó lại sang **Sẵn sàng**.
 
 > [!NOTE]
-> Trong Kotlin, bộ lập lịch thread là một thành phần của hệ điều hành quản lý việc thực thi các luồng riêng lẻ trong một chương trình.
+> Trong Kotlin, bộ lập lịch thread là một thành phần của hệ điều hành quản lý việc thực thi các thread riêng lẻ trong một chương trình.
 
-Điều này được sử dụng để chia sẻ thời gian xử lý giữa nhiều luồng đồng thời: nếu không, một thread có thể tiêu tốn tất cả thời gian xử lý có sẵn.
+Điều này được sử dụng để chia sẻ thời gian xử lý giữa nhiều thread đồng thời: nếu không, một thread có thể tiêu tốn tất cả thời gian xử lý có sẵn.
 
 Trạng thái **Đang chờ** có nghĩa là thread tạm thời không hoạt động (ví dụ: nó có thể đang đợi một thread khác hoặc chờ I/O hoàn tất).
 
@@ -73,5 +73,5 @@ thread ở trạng thái này không thể tiếp tục thực thi thêm nữa c
 
 Trên thực tế, trạng thái chờ là một tập hợp các trạng thái khác nhau mà chúng ta sẽ xem xét trong các chủ đề sau.
 
-Tất nhiên, lifecycle thực sự của các luồng thậm chí còn phức tạp hơn những gì chúng tôi đã phác thảo,
-nhưng hiện tại, chỉ cần có ít nhất sự hiểu biết chung về cách hoạt động của các luồng là đủ.
+Tất nhiên, lifecycle thực sự của các thread thậm chí còn phức tạp hơn những gì chúng tôi đã phác thảo,
+nhưng hiện tại, chỉ cần có ít nhất sự hiểu biết chung về cách hoạt động của các thread là đủ.

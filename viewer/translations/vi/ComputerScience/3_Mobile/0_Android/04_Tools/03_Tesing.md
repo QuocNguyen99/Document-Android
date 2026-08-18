@@ -27,16 +27,16 @@ Android Studio nhóm các mã khác nhau vào các thư mục có tên **bộ ng
 Theo mặc định, có bộ nguồn `main` chứa mã ứng dụng. Ngoài ra còn có bộ nguồn `test` dành cho kiểm tra cục bộ và `androidTest` dành cho kiểm tra thiết bị.
 
 Kiểm tra cục bộ và kiểm tra thiết bị khác nhau về cách chúng được thực hiện:
-- **Thử nghiệm cục bộ** (ví dụ: thử nghiệm đơn vị) chạy trên máy hoặc máy chủ phát triển cục bộ.
+- **Thử nghiệm cục bộ** (ví dụ: thử nghiệm đơn vị) chạy trên máy hoặc server phát triển cục bộ.
 - **Thử nghiệm đo lường** (ví dụ: thử nghiệm UI) chạy trên thiết bị vật lý hoặc trình mô phỏng.
 
 
 
-Chúng tôi cũng cần đảm bảo rằng tệp `build.gradle` của dự án của chúng tôi bao gồm các phần phụ thuộc cần thiết cho các khung thử nghiệm như JUnit, Robolectric, Espresso hoặc bất kỳ thư viện thử nghiệm nào khác mà chúng tôi dự định sử dụng
+Chúng tôi cũng cần đảm bảo rằng tệp `build.gradle` của dự án của chúng tôi bao gồm các dependency cần thiết cho các framework thử nghiệm như JUnit, Robolectric, Espresso hoặc bất kỳ thư viện thử nghiệm nào khác mà chúng tôi dự định sử dụng
 
 Có hai loại phụ thuộc:
 `testImplementation` và `androidTestImplementation`.
-Cái trước là phần phụ thuộc cho các thử nghiệm trong bộ nguồn thử nghiệm và cái sau là phần phụ thuộc cho các thử nghiệm trong bộ nguồn androidTest.
+Cái trước là dependency cho các thử nghiệm trong bộ nguồn thử nghiệm và cái sau là dependency cho các thử nghiệm trong bộ nguồn androidTest.
 
 ![văn bản thay thế](/resources/local_test_and_instrumented_test.png)
 
@@ -118,7 +118,7 @@ Chúng tôi đang sử dụng mẫu "Sắp xếp, Hành động, Khẳng định
 ## Viết bài kiểm tra UI
 
 Đối với các bài kiểm tra thiết bị (bài kiểm tra UI), chúng tôi sẽ tạo các lớp kiểm tra trong thư mục `com.example.myapplication` (androidTest).
-Chúng tôi có thể sử dụng các khung như **Espresso** hoặc UI Automator cho thử nghiệm UI để mô phỏng tương tác của người dùng và xác minh hành vi của user interface trong ứng dụng của chúng tôi.
+Chúng tôi có thể sử dụng các framework như **Espresso** hoặc UI Automator cho thử nghiệm UI để mô phỏng tương tác của người dùng và xác minh hành vi của user interface trong ứng dụng của chúng tôi.
 
 Hãy xem ví dụ về bài kiểm tra Espresso UI cho màn hình có chứa một nút. Chúng tôi sẽ cố gắng xác minh rằng nút này làm cho dòng chữ "Đã nhấp vào nút" xuất hiện khi được nhấp vào.
 
@@ -175,7 +175,7 @@ Android Studio sẽ cung cấp phản hồi về việc thử nghiệm đã đ�
 Nếu thử nghiệm thất bại, framework sẽ cung cấp thông tin về xác nhận nào không thành công và kết quả mong đợi so với kết quả dự kiến.
 giá trị thực tế, giúp chúng tôi xác định chính xác vấn đề. Khi gặp một thử nghiệm thất bại, chúng ta có thể:
 
-- Chẩn đoán lỗi bằng cách kiểm tra mã chúng tôi đang kiểm tra, đầu vào kiểm tra, phần phụ thuộc và xác nhận.
+- Chẩn đoán lỗi bằng cách kiểm tra mã chúng tôi đang kiểm tra, đầu vào kiểm tra, dependency và xác nhận.
 
 - Xác định và khắc phục nguyên nhân gốc rễ của sự cố.
 
@@ -235,7 +235,7 @@ Phương thức `perform()` lấy **ViewActions**, trong khi phương thức `ch
 
 ##ViewMatchers
 
-**ViewMatchers**, như tên cho thấy, về cơ bản là các đối tượng so khớp để so khớp các chế độ xem triển khai giao diện `Matcher<View>` từ thư viện Hamcrest.
+**ViewMatchers**, như tên cho thấy, về cơ bản là các đối tượng so khớp để so khớp các chế độ xem triển khai interface `Matcher<View>` từ thư viện Hamcrest.
 Chúng được sử dụng để chỉ định tiêu chí hoặc điều kiện tìm kiếm các chế độ xem trong hệ thống phân cấp chế độ xem hiện tại.
 Một chế độ xem phải đáp ứng các điều kiện đã chỉ định để được khớp
 Bạn có thể chuyển một hoặc nhiều `ViewMatchers` sang phương thức `onView()`, phương thức này trả về một đối tượng `ViewInteraction` mà bạn có thể sử dụng để thực hiện các hành động hoặc kiểm tra các xác nhận trên chế độ xem phù hợp.
@@ -284,7 +284,7 @@ onView(withId(R.id.edit_text))
 ```
 
 Đôi khi, bạn có thể cần thực hiện một hành động không được Espresso cung cấp hoặc tùy chỉnh một hành động hiện có.
-Trong trường hợp đó, bạn có thể tạo `ViewAction` tùy chỉnh của riêng mình bằng cách triển khai giao diện `ViewAction` hoặc mở rộng một trong các lớp con của nó (chẳng hạn như `GeneralClickAction`)
+Trong trường hợp đó, bạn có thể tạo `ViewAction` tùy chỉnh của riêng mình bằng cách triển khai interface `ViewAction` hoặc mở rộng một trong các lớp con của nó (chẳng hạn như `GeneralClickAction`)
 
 ##ViewAssertions
 

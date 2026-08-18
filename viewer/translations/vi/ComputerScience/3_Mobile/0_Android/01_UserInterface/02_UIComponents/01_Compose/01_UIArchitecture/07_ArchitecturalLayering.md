@@ -22,7 +22,7 @@ Mỗi lớp được xây dựng dựa trên các cấp độ thấp hơn, kết
     Mô-đun này cung cấp các kiến thức cơ bản về Compose runtime chẳng hạn như `remember`, `mutableStateOf`, chú thích `@Composable` và SideEffect.**Bạn có thể cân nhắc xây dựng trực tiếp trên lớp này nếu chỉ cần Khả năng quản lý cây của Compose, không phải UI.**
 
 2. **UI**
-    Lớp UI được tạo thành từ nhiều mô-đun ( `ui-text`, `ui-graphics`, `ui-tooling`, v.v.). Các mô-đun này triển khai các nguyên tắc cơ bản của bộ công cụ UI, chẳng hạn như `LayoutNode`, `Modifier`, trình xử lý đầu vào, bố cục tùy chỉnh và bản vẽ. **Bạn có thể cân nhắc xây dựng trên lớp này nếu bạn chỉ cần các khái niệm cơ bản về bộ công cụ UI.**
+    Lớp UI được tạo thành từ nhiều mô-đun ( `ui-text`, `ui-graphics`, `ui-tooling`, v.v.). Các mô-đun này triển khai các nguyên tắc cơ bản của bộ công cụ UI, chẳng hạn như `LayoutNode`, `Modifier`, handler đầu vào, bố cục tùy chỉnh và bản vẽ. **Bạn có thể cân nhắc xây dựng trên lớp này nếu bạn chỉ cần các khái niệm cơ bản về bộ công cụ UI.**
 
 3. **Nền**
     Mô-đun này cung cấp các khối xây dựng bất khả tri của hệ thống thiết kế cho Compose UI, như `Row` và `Column`, `LazyColumn`, nhận dạng các cử chỉ cụ thể, v.v. **Bạn có thể cân nhắc xây dựng dựa trên lớp nền tảng để tạo hệ thống thiết kế của riêng mình.**

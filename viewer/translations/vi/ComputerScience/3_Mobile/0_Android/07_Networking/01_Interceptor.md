@@ -1,31 +1,31 @@
 # OkHttp Interceptor
 
-**Interceptor** trong Android là một thành phần cho phép bạn **chặn và sửa đổi** HTTP **yêu cầu** và **phản hồi**.
-Nó thường được sử dụng để quan sát, sửa đổi hoặc thậm chí chặn các yêu cầu và phản hồi, cho phép các hành động như thêm, xóa hoặc chuyển đổi tiêu đề và dữ liệu khác.
+**Interceptor** trong Android là một thành phần cho phép bạn **chặn và sửa đổi** HTTP **request** và **response**.
+Nó thường được sử dụng để quan sát, sửa đổi hoặc thậm chí chặn các request và response, cho phép các hành động như thêm, xóa hoặc chuyển đổi tiêu đề và dữ liệu khác.
 
 ## Các loại thiết bị chặn
 
 Thiết bị chặn được phân thành hai loại chính:
 
 1. **Ứng dụng Interceptor**:  
-   - **Mục đích**: Chặn và xử lý các yêu cầu cũng như phản hồi ở cấp ứng dụng.
+   - **Mục đích**: Chặn và xử lý các request cũng như response ở cấp ứng dụng.
    - **Đặc điểm**:
-     - Được gọi một lần cho mỗi yêu cầu, ngay cả khi phản hồi được lấy từ bộ đệm.
-     - Thường được sử dụng để viết lại tiêu đề hoặc truy vấn cho cả yêu cầu và phản hồi.
-     - Không bị ảnh hưởng bởi bộ nhớ đệm HTTP.
+     - Được gọi một lần cho mỗi request, ngay cả khi response được lấy từ bộ đệm.
+     - Thường được sử dụng để viết lại tiêu đề hoặc truy vấn cho cả request và response.
+     - Không bị ảnh hưởng bởi cache HTTP.
 
 2. **Mạng Interceptor**:  
-   - **Mục đích**: Chặn và xử lý các yêu cầu cũng như phản hồi ở cấp độ mạng.
+   - **Mục đích**: Chặn và xử lý các request cũng như response ở cấp độ mạng.
    - **Đặc điểm**:
-     - Chỉ được gọi cho các yêu cầu mạng thực tế chứ không phải khi phản hồi được cung cấp từ bộ đệm.
-     - Hữu ích để theo dõi các chuyển hướng, thử lại và truy cập các chi tiết yêu cầu và phản hồi cấp thấp.
+     - Chỉ được gọi cho các network request thực tế chứ không phải khi response được cung cấp từ bộ đệm.
+     - Hữu ích để theo dõi các chuyển hướng, thử lại và truy cập các chi tiết request và response cấp thấp.
      - Có thể sửa đổi các tiêu đề như Mã hóa nội dung và Độ dài nội dung.
 
     ![](/resources/interceptor.webp)
 
 ## Sử dụng Interceptor với OkHttp
 
-**OkHttp** là thư viện máy khách HTTP mạnh mẽ trong Android hỗ trợ Bộ chặn để quản lý và xử lý các yêu cầu cũng như phản hồi.
+**OkHttp** là thư viện HTTP client mạnh mẽ trong Android hỗ trợ Bộ chặn để quản lý và xử lý các request cũng như response.
 
 ### **Thêm Interceptor vào OkHttpClient**
 
@@ -57,7 +57,7 @@ val client = OkHttpClient.Builder()
 
 ### Sử dụng tính năng ghi nhật ký Interceptor
 
-OkHttp cung cấp `HttpLoggingInterceptor` tích hợp để ghi nhật ký các yêu cầu và phản hồi HTTP.
+OkHttp cung cấp `HttpLoggingInterceptor` tích hợp để ghi nhật ký các request và response HTTP.
 
 ```kotlin
 val loggingInterceptor = HttpLoggingInterceptor().apply {
@@ -72,17 +72,17 @@ val client = OkHttpClient.Builder()
 
 # Làm mới trường hợp sử dụng Token trong Android
 
-Cơ chế **Làm mới Token** đảm bảo rằng người dùng vẫn được xác thực mà không yêu cầu họ đăng nhập thường xuyên.
-Khi **access token** hết hạn, **làm mới token** được sử dụng để nhận một cái mới mà không cần sự can thiệp của người dùng.
+Cơ chế **Refresh token** đảm bảo rằng người dùng vẫn được xác thực mà không yêu cầu họ đăng nhập thường xuyên.
+Khi **access token** hết hạn, **refresh token** được sử dụng để nhận một cái mới mà không cần sự can thiệp của người dùng.
 
-## **Flow của Cơ chế làm mới Token**
-1. Người dùng đăng nhập và nhận **access token** và **làm mới token**.
-2. **access token** được sử dụng cho các yêu cầu API.
-3. Nếu access token hết hạn, khách hàng sẽ gửi yêu cầu nhận một cái mới bằng cách sử dụng **làm mới token**.
-4. Nếu việc làm mới token hợp lệ, máy chủ sẽ trả về **access token mới** (và đôi khi là một token làm mới mới).
-5. Nếu việc làm mới token không hợp lệ, người dùng phải đăng nhập lại.
+## **Flow của Cơ chế refresh token**
+1. Người dùng đăng nhập và nhận **access token** và **refresh token**.
+2. **access token** được sử dụng cho các request API.
+3. Nếu access token hết hạn, client sẽ gửi request nhận một cái mới bằng cách sử dụng **refresh token**.
+4. Nếu việc refresh token hợp lệ, server sẽ trả về **access token mới** (và đôi khi là một refresh token mới).
+5. Nếu việc refresh token không hợp lệ, người dùng phải đăng nhập lại.
 
-### **Triển khai làm mới Token trong Android (Kotlin + trang bị thêm + OkHttp)**
+### **Triển khai refresh token trong Android (Kotlin + trang bị thêm + OkHttp)**
 
 ```kotlin
 class AutoRefreshTokenInterceptor : Interceptor {

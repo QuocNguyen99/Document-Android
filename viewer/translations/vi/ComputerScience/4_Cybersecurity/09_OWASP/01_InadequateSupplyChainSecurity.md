@@ -17,6 +17,6 @@ Rủi ro này liên quan đến việc **ứng dụng của bạn bị xâm ph�
 
 - Thực thi **thực hành phát triển an toàn**: đánh giá mã, kiểm tra bảo mật và kiểm soát thay đổi.
 - Bảo vệ **khóa ký/chứng chỉ**: lưu trữ an toàn, truy cập hạn chế, nhật ký luân chuyển và kiểm tra.
-- Chỉ sử dụng **các phần phụ thuộc đáng tin cậy và được xác thực**; giữ cho chúng được cập nhật và theo dõi.
+- Chỉ sử dụng **các dependency đáng tin cậy và được xác thực**; giữ cho chúng được cập nhật và theo dõi.
 - Bảo mật **cập nhật/bản vá/bản phát hành** bằng các biện pháp kiểm soát mạnh mẽ (phê duyệt, kiểm tra tính toàn vẹn).
 - Liên tục **giám sát và phát hiện** các vấn đề về chuỗi cung ứng: quét phụ thuộc, quét bản dựng, cảnh báo, sẵn sàng ứng phó sự cố.

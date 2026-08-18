@@ -6,7 +6,7 @@ Kotlin có thể được sử dụng trong nhiều nền tảng ứng dụng kh
 
 - **Android**: sử dụng cú pháp Kotlin, bạn có thể tạo ứng dụng di động cho Android, hệ điều hành được sử dụng nhiều nhất trên thế giới.
 
-- **JS**: Kotlin cũng tương thích với JavaScript, cho phép bạn phát triển các ứng dụng web phía máy khách và chạy chúng trong trình duyệt.
+- **JS**: Kotlin cũng tương thích với JavaScript, cho phép bạn phát triển các ứng dụng web phía client và chạy chúng trong trình duyệt.
 
 - **Bản địa**: Kotlin/Native là công nghệ biên dịch mã Kotlin thành các tệp nhị phân gốc có thể chạy trên mọi OS như Windows, Linux, iOS và macOS.
 

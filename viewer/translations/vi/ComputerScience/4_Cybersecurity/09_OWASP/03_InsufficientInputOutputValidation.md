@@ -3,7 +3,7 @@
 
 ## Nó là gì
 
-Rủi ro này xảy ra khi một ứng dụng di động (hoặc chương trình phụ trợ của ứng dụng đó) **không xác thực và vệ sinh đúng cách dữ liệu đầu vào hoặc đầu ra** đến từ các nguồn không đáng tin cậy (người dùng, API, liên kết sâu, tệp, phản hồi mạng). 
+Rủi ro này xảy ra khi một ứng dụng di động (hoặc chương trình phụ trợ của ứng dụng đó) **không xác thực và vệ sinh đúng cách dữ liệu đầu vào hoặc đầu ra** đến từ các nguồn không đáng tin cậy (người dùng, API, liên kết sâu, tệp, network response).
 Do đó, kẻ tấn công có thể tiêm dữ liệu độc hại dẫn đến **đánh cắp dữ liệu, thao túng dữ liệu, treo máy hoặc thậm chí thực thi mã**.
 
 
@@ -28,8 +28,8 @@ Do đó, kẻ tấn công có thể tiêm dữ liệu độc hại dẫn đến 
 - Thực thi **mã hóa và vệ sinh đầu ra**:
     - Mã hóa đầu ra dựa trên ngữ cảnh (HTML, URL, JSON).
     - Dọn dẹp mọi nội dung do người dùng tạo hoặc không đáng tin cậy trước khi hiển thị (đặc biệt là trong WebViews).
-- **Thêm kiểm tra tính toàn vẹn dữ liệu**: xác thực chữ ký/băm khi cần, phát hiện giả mạo, xác thực lược đồ cho các phản hồi của mạng.
-- **Xây dựng hệ thống phòng thủ chuyên sâu**: các tiện ích xác thực tập trung, xử lý lỗi nhất quán, giới hạn tốc độ và ghi nhật ký các tải trọng đáng ngờ.
+- **Thêm kiểm tra tính toàn vẹn dữ liệu**: xác thực chữ ký/băm khi cần, phát hiện giả mạo, xác thực lược đồ cho các network response.
+- **Xây dựng hệ thống phòng thủ chuyên sâu**: các tiện ích xác thực tập trung, xử lý lỗi nhất quán, giới hạn tốc độ và ghi nhật ký các payload đáng ngờ.
 - Chạy **kiểm tra bảo mật thông thường**: code review + Kiểm tra bảo mật ứng dụng tĩnh/Kiểm tra bảo mật ứng dụng động + quét phụ thuộc + kiểm tra thâm nhập của đầu vào API và các trường hợp biên.
 
 

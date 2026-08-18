@@ -2,7 +2,7 @@ Lớp # UI
 
 Vai trò của lớp UI (hoặc lớp trình bày) là hiển thị dữ liệu ứng dụng trên màn hình. Thuật ngữ UI đề cập đến các phần tử UI chẳng hạn như các hoạt động và phân đoạn hiển thị dữ liệu, không phụ thuộc vào loại API mà chúng sử dụng để thực hiện việc này (Chế độ xem hoặc Jetpack Compose).
 
-Bất cứ khi nào dữ liệu thay đổi, do tương tác của người dùng (chẳng hạn như nhấn nút) hoặc đầu vào bên ngoài (chẳng hạn như phản hồi của mạng), UI sẽ cập nhật để phản ánh các thay đổi.
+Bất cứ khi nào dữ liệu thay đổi, do tương tác của người dùng (chẳng hạn như nhấn nút) hoặc đầu vào bên ngoài (chẳng hạn như network response), UI sẽ cập nhật để phản ánh các thay đổi.
 
 Lớp UI được tạo thành từ hai thứ:
 - Phần tử UI hiển thị dữ liệu trên màn hình. Bạn xây dựng các phần tử này bằng cách sử dụng Chế độ xem hoặc hàm Jetpack Compose.

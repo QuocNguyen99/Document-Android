@@ -13,7 +13,7 @@ Các yếu tố quan trọng của quản lý rủi ro:
 - **Giảm thiểu rủi ro**: Giai đoạn này bao gồm việc thực hiện các biện pháp để giảm thiểu rủi ro. 
 Trong an ninh mạng, điều này có thể liên quan đến việc sử dụng các giải pháp, quy trình và chính sách kỹ thuật.
 
-- **Giám sát và đánh giá**: Luôn cập nhật về tin tức vi phạm bảo mật mới nhất, tiến hành kiểm tra bảo mật thường xuyên và điều chỉnh các chính sách cũng như giao thức để ứng phó với các mối đe dọa và công nghệ mới.
+- **Giám sát và đánh giá**: Luôn cập nhật về tin tức vi phạm bảo mật mới nhất, tiến hành kiểm tra bảo mật thường xuyên và điều chỉnh các chính sách cũng như protocol để ứng phó với các mối đe dọa và công nghệ mới.
 
 ##Attack Surface 
 
@@ -38,7 +38,7 @@ Khi ứng dụng ngày càng lớn hơn và phức tạp hơn, attack surface c�
 
 - **Phân tích Attack Surface**
 
-Nó bao gồm việc phân tích kiến ​​trúc của ứng dụng, xem xét kỹ lưỡng mã, xác định các giao diện và phần phụ thuộc cũng như đánh giá các giao thức truyền thông.
+Nó bao gồm việc phân tích kiến ​​trúc của ứng dụng, xem xét kỹ lưỡng mã, xác định các interface và dependency cũng như đánh giá các protocol truyền thông.
 Các công cụ quét tự động và kiểm tra thâm nhập có thể giúp phát hiện mọi lỗ hổng bảo mật.
 
 - **Giảm Attack Surface**

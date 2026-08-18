@@ -8,13 +8,13 @@
 ## Mã hóa và giải mã URI
 
 
-Mã hóa URI(L) là phương pháp được sử dụng để đảm bảo rằng URL chỉ chứa các ký tự hợp lệ theo tiêu chuẩn **RFC 3986**, bao gồm các chữ số, chữ cái và một số ký hiệu nhất định trong bộ ký tự ASCII. Nếu URL có các ký tự nằm ngoài bộ này, chúng sẽ được chuyển đổi thành định dạng đặc biệt bằng cách sử dụng mã hóa phần trăm, giúp máy chủ dễ dàng hiểu được chúng.
+Mã hóa URI(L) là phương pháp được sử dụng để đảm bảo rằng URL chỉ chứa các ký tự hợp lệ theo tiêu chuẩn **RFC 3986**, bao gồm các chữ số, chữ cái và một số ký hiệu nhất định trong bộ ký tự ASCII. Nếu URL có các ký tự nằm ngoài bộ này, chúng sẽ được chuyển đổi thành định dạng đặc biệt bằng cách sử dụng mã hóa phần trăm, giúp server dễ dàng hiểu được chúng.
 
 
 
 > [!NOTE]
 > Điều quan trọng cần lưu ý là mã hóa URL không giống với encryption. 
-> Encryption nói về việc bảo mật thông tin bằng khóa bí mật, trong khi mã hóa URL nhằm mục đích đảm bảo máy chủ có thể hiểu được URL và ngăn chặn sự thao túng của người dùng.
+> Encryption nói về việc bảo mật thông tin bằng khóa bí mật, trong khi mã hóa URL nhằm mục đích đảm bảo server có thể hiểu được URL và ngăn chặn sự thao túng của người dùng.
 
 
 
@@ -51,13 +51,13 @@ Dưới đây là một số cuộc tấn công dựa trên URI- phổ biến:
 - Ví dụ: `https://example.com/search?query=term1&query=term2`
 - Tác động: Có thể dẫn đến hành vi ngoài ý muốn, lỗ hổng hoặc lỗi trong ứng dụng.
 
-**HTTP Giả mạo động từ** — Kẻ tấn công thao túng phương thức yêu cầu `HTTP` (`GET`, `POST`, `PUT`, `DELETE`, v.v.) trong URI để thực hiện các hành động trái phép.
+**HTTP Giả mạo động từ** — Kẻ tấn công thao túng phương thức request `HTTP` (`GET`, `POST`, `PUT`, `DELETE`, v.v.) trong URI để thực hiện các hành động trái phép.
 
 
-**Tiết lộ thông tin** — Kẻ tấn công thao túng URI để tiết lộ thông tin nhạy cảm như chi tiết máy chủ nội bộ hoặc thông tin gỡ lỗi.
+**Tiết lộ thông tin** — Kẻ tấn công thao túng URI để tiết lộ thông tin nhạy cảm như chi tiết server nội bộ hoặc thông tin gỡ lỗi.
 
 
-**Từ chối dịch vụ (DoS)** — Kẻ tấn công tạo URI để tiêu thụ quá nhiều tài nguyên máy chủ, khiến người dùng hợp pháp không thể sử dụng ứng dụng.
+**Từ chối dịch vụ (DoS)** — Kẻ tấn công tạo URI để tiêu thụ quá nhiều tài nguyên server, khiến người dùng hợp pháp không thể sử dụng ứng dụng.
 
 **Thao tác cookie** — Kẻ tấn công thao túng URI để chèn hoặc sửa đổi cookie, có khả năng giành được quyền truy cập trái phép hoặc mạo danh người dùng.
 
@@ -75,11 +75,11 @@ Dưới đây là một số phương pháp hay nhất để đảm bảo thiế
 
 3. **Mã hóa đầu ra** — Mã hóa nội dung do người dùng tạo trước khi đưa nội dung đó vào URI để ngăn chặn các cuộc tấn công XSS. Sử dụng các chức năng như `url.QueryEscape` hoặc `html.EscapeString` nếu thích hợp.
 
-4. **Cách sử dụng HTTPS** — Luôn sử dụng sơ đồ HTTPS (`https://`) trong URI để đảm bảo liên lạc được mã hóa giữa máy khách và máy chủ, ngăn chặn việc chặn dữ liệu.
+4. **Cách sử dụng HTTPS** — Luôn sử dụng sơ đồ HTTPS (`https://`) trong URI để đảm bảo liên lạc được mã hóa giữa client và server, ngăn chặn việc chặn dữ liệu.
 
 5. **Quản lý phiên** — Tránh đưa dữ liệu phiên nhạy cảm vào URI. Thay vào đó, hãy sử dụng cookie an toàn hoặc mã thông báo phiên để quản lý phiên của người dùng.
 
-6. **Danh sách trắng URL** — Triển khai danh sách trắng URL để chỉ cho phép truy cập vào các URI cụ thể, đáng tin cậy. Từ chối mọi yêu cầu đối với các URI trái phép hoặc không xác định.
+6. **Danh sách trắng URL** — Triển khai danh sách trắng URL để chỉ cho phép truy cập vào các URI cụ thể, đáng tin cậy. Từ chối mọi request đối với các URI trái phép hoặc không xác định.
 
 7. **Danh sách đen** — Duy trì danh sách đen các URI độc hại hoặc mẫu URI đã biết và từ chối quyền truy cập vào chúng.
 
@@ -92,7 +92,7 @@ Dưới đây là một số phương pháp hay nhất để đảm bảo thiế
 
 ## Danh sách trắng và danh sách đen URI
 
-**Danh sách trắng URI** là một cơ chế kiểm soát quyền truy cập trong đó bạn chỉ định rõ ràng danh sách các URI được phép hoặc được phép mà người dùng hoặc ứng dụng khách được phép truy cập.
+**Danh sách trắng URI** là một cơ chế kiểm soát quyền truy cập trong đó bạn chỉ định rõ ràng danh sách các URI được phép hoặc được phép mà người dùng hoặc client được phép truy cập.
 
 
 Giả sử bạn có một ứng dụng web có các URI sau:
@@ -104,7 +104,7 @@ Giả sử bạn có một ứng dụng web có các URI sau:
 
 Bạn có thể tạo danh sách trắng URI chỉ bao gồm các URI này. Mọi nỗ lực truy cập URI không có trong danh sách trắng sẽ dẫn đến việc từ chối truy cập.
 
-**Mặt khác, danh sách đen URI** là một cơ chế kiểm soát quyền truy cập trong đó bạn chỉ định rõ ràng danh sách các URI không được phép hoặc bị cấm mà người dùng hoặc khách hàng không được phép truy cập. Mọi yêu cầu đối với URI trong danh sách đen đều bị từ chối hoặc hạn chế
+**Mặt khác, danh sách đen URI** là một cơ chế kiểm soát quyền truy cập trong đó bạn chỉ định rõ ràng danh sách các URI không được phép hoặc bị cấm mà người dùng hoặc client không được phép truy cập. Mọi request đối với URI trong danh sách đen đều bị từ chối hoặc hạn chế
 
 Bạn duy trì một danh sách đen các URI được biết là được sử dụng cho các cuộc tấn công lừa đảo hoặc các mục đích độc hại khác.
 

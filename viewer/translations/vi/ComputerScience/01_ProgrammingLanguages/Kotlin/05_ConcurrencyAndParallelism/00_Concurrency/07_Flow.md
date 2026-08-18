@@ -173,13 +173,13 @@ fun main() = runBlocking<Unit> {
 Ngoài `flow { }`, bạn có thể sử dụng:
 
 - Trình tạo `flowOf` để phát ra các giá trị cố định
-- Chức năng mở rộng `.asFlow()` để chuyển đổi **bộ sưu tập và trình tự** thành luồng
+- Chức năng mở rộng `.asFlow()` để chuyển đổi **collection và trình tự** thành luồng
 
 ### callbackFlow
 
 `callbackFlow` là trình tạo luồng **cho phép bạn chuyển đổi các API dựa trên callback thành các luồng**.
 
-Khi bạn muốn bao bọc một trình nghe bên ngoài, broadcast receiver hoặc bất kỳ API không đồng bộ nào sử dụng lệnh gọi lại, không tạm dừng chức năng.
+Khi bạn muốn bao bọc một listener bên ngoài, broadcast receiver hoặc bất kỳ API không đồng bộ nào sử dụng callback, không tạm dừng chức năng.
 
 ```kotlin
 interface MyListener {
@@ -244,7 +244,7 @@ fun main() = runBlocking<Unit> {
 Sự khác biệt quan trọng: khối toán tử có thể gọi các hàm tạm dừng.
 
 ### Toán tử biến đổi
-`transform` cho phép phát ra nhiều giá trị phản hồi cho mỗi giá trị đầu vào:
+`transform` cho phép phát ra nhiều giá trị response cho mỗi giá trị đầu vào:
 
 ```kotlin
 (1..3).asFlow() // a flow of requests
@@ -286,7 +286,7 @@ Finally in numbers
 Người vận hành thiết bị đầu cuối đang tạm dừng các chức năng bắt đầu luồng collection:
 
 - `collect` - collection cơ bản
-- `toList`, `toSet` - chuyển đổi thành bộ sưu tập
+- `toList`, `toSet` - chuyển đổi thành collection
 - `first`, `single` - nhận các giá trị cụ thể
 - `reduce`, `fold` - giảm xuống một giá trị duy nhất
 
@@ -551,7 +551,7 @@ fun main() = runBlocking {
 
 ### flatMapConcat
 
-Làm phẳng tuần tự, Mỗi yêu cầu đợi yêu cầu trước đó kết thúc.
+Làm phẳng tuần tự, Mỗi request đợi yêu cầu trước đó kết thúc.
 
 ```kotlin
 fun main() = runBlocking {
@@ -581,7 +581,7 @@ Done C
 
 ### flatMapMerge
 
-Làm phẳng song song, Tất cả các yêu cầu được bắt đầu cùng một lúc và kết quả sẽ xuất hiện ngay sau khi mỗi yêu cầu kết thúc.
+Làm phẳng song song, Tất cả các request được bắt đầu cùng một lúc và kết quả sẽ xuất hiện ngay sau khi mỗi yêu cầu kết thúc.
 
 ```kotlin
 fun main() = runBlocking {

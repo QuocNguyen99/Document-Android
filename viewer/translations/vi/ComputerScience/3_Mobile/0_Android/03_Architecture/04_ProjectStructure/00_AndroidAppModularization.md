@@ -24,7 +24,7 @@ Các mô-đun là các khối xây dựng hiệu quả.
 Ứng dụng phải là tổng hợp các tính năng của chúng, trong đó các tính năng được sắp xếp thành các mô-đun riêng biệt. 
 Chức năng mà một mô-đun nhất định cung cấp có thể được bật hoặc không trong một ứng dụng cụ thể. Ví dụ: `:feature:news` có thể là một phần của phiên bản đầy đủ hương vị và ứng dụng mặc nhưng không phải là một phần của phiên bản demo.
 
-- **Kiểm soát mức độ hiển thị nghiêm ngặt**: Các mô-đun cho phép bạn dễ dàng kiểm soát những gì bạn hiển thị với các phần khác trong cơ sở mã của mình. Bạn có thể đánh dấu mọi thứ trừ giao diện chung của mình là nội bộ hoặc riêng tư để ngăn không cho sử dụng nó bên ngoài mô-đun.
+- **Kiểm soát mức độ hiển thị nghiêm ngặt**: Các mô-đun cho phép bạn dễ dàng kiểm soát những gì bạn hiển thị với các phần khác trong cơ sở mã của mình. Bạn có thể đánh dấu mọi thứ trừ interface chung của mình là nội bộ hoặc riêng tư để ngăn không cho sử dụng nó bên ngoài mô-đun.
 
 - **Phân phối có thể tùy chỉnh**: *Play Feature Delivery* sử dụng các khả năng nâng cao của gói ứng dụng, cho phép bạn phân phối một số tính năng nhất định của ứng dụng theo điều kiện hoặc theo yêu cầu.
 
@@ -43,7 +43,7 @@ Một số cạm bẫy phổ biến như sau:
 Cấu hình bản dựng phức tạp gây khó khăn cho việc giữ cấu hình nhất quán giữa các mô-đun. 
 **Quá nhiều mã boilerplate dẫn đến cơ sở mã cồng kềnh và khó bảo trì. Nếu chi phí chung cản trở những cải tiến về khả năng mở rộng, bạn nên cân nhắc việc hợp nhất một số mô-đun**.
 
-- **Quá thô**: Ngược lại, nếu mô-đun của bạn phát triển quá lớn, bạn có thể kết thúc bằng một khối nguyên khối khác và bỏ lỡ những lợi ích mà tính mô-đun mang lại. Ví dụ: trong một dự án nhỏ, bạn có thể đặt data layer bên trong một mô-đun duy nhất. Nhưng khi nó phát triển, có thể cần phải tách các kho lưu trữ và nguồn dữ liệu thành các mô-đun độc lập.
+- **Quá thô**: Ngược lại, nếu mô-đun của bạn phát triển quá lớn, bạn có thể kết thúc bằng một khối nguyên khối khác và bỏ lỡ những lợi ích mà tính mô-đun mang lại. Ví dụ: trong một dự án nhỏ, bạn có thể đặt data layer bên trong một mô-đun duy nhất. Nhưng khi nó phát triển, có thể cần phải tách các repository và nguồn dữ liệu thành các mô-đun độc lập.
 
 - **Quá phức tạp**: Việc mô-đun hóa dự án của bạn không phải lúc nào cũng hợp lý. Yếu tố chi phối là kích thước của cơ sở mã. **Nếu bạn không mong đợi dự án của mình phát triển vượt quá một ngưỡng nhất định thì khả năng mở rộng và tăng thời gian xây dựng sẽ không được áp dụng.**
 

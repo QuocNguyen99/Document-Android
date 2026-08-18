@@ -27,7 +27,7 @@ class Penguin extends Bird {
 ```
 Vấn đề: `Penguin` không thể thay thế `Bird` vì nó không hỗ trợ bay.
 
-Thay vì kế thừa từ `Bird`, hãy trích xuất giao diện `Flyable` để chỉ những loài chim có thể bay mới thực hiện được giao diện đó.
+Thay vì kế thừa từ `Bird`, hãy trích xuất interface `Flyable` để chỉ những loài chim có thể bay mới thực hiện được giao diện đó.
 
 ```java
 interface Flyable {
@@ -76,7 +76,7 @@ Vấn đề:
 
 Nếu chúng tôi sử dụng `Rectangle rect = new Square();`, việc sửa đổi `width` hoặc `height` sẽ không hoạt động như mong đợi, gây ra lỗi.
 
-Thay vì kế thừa từ `Rectangle`, hãy tạo các lớp riêng biệt hoặc sử dụng giao diện.
+Thay vì kế thừa từ `Rectangle`, hãy tạo các lớp riêng biệt hoặc sử dụng interface.
 
 ### 3. Sử dụng Composition thay vì Inheritance khi cần thiết
 
@@ -103,7 +103,7 @@ class Car {
 
 ### 4. Áp dụng Interface Segregation để tránh inheritance không đúng
 
-Nếu một lớp con không cần tất cả các phương thức của lớp cha của nó, hãy chia các giao diện ra.
+Nếu một lớp con không cần tất cả các phương thức của lớp cha của nó, hãy chia các interface ra.
 
 Ví dụ sai:
 

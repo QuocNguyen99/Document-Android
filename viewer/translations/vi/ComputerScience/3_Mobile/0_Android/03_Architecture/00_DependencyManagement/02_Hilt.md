@@ -8,11 +8,11 @@ Tất cả các ứng dụng sử dụng Hilt phải chứa lớp Ứng dụng �
 
 `@HiltAndroidApp` kích hoạt quá trình tạo mã của Hilt, bao gồm một lớp cơ sở cho ứng dụng của bạn đóng vai trò là vùng chứa phụ thuộc cấp ứng dụng.
 
-Thành phần Hilt được tạo này được gắn vào lifecycle của đối tượng Ứng dụng và cung cấp các phần phụ thuộc cho nó. Ngoài ra, nó là thành phần chính của ứng dụng, có nghĩa là các thành phần khác có thể truy cập vào các phần phụ thuộc mà nó cung cấp.
+Thành phần Hilt được tạo này được gắn vào lifecycle của đối tượng Ứng dụng và cung cấp các dependency cho nó. Ngoài ra, nó là thành phần chính của ứng dụng, có nghĩa là các thành phần khác có thể truy cập vào các dependency mà nó cung cấp.
 
-## Đưa phần phụ thuộc vào các lớp Android
+## Đưa dependency vào các lớp Android
 
-Sau khi Hilt được thiết lập trong lớp `Application` của bạn và có sẵn thành phần cấp ứng dụng, Hilt có thể cung cấp các phần phụ thuộc cho các lớp Android khác có chú thích `@AndroidEntryPoint`:
+Sau khi Hilt được thiết lập trong lớp `Application` của bạn và có sẵn thành phần cấp ứng dụng, Hilt có thể cung cấp các dependency cho các lớp Android khác có chú thích `@AndroidEntryPoint`:
 
 ```kotlin
 @AndroidEntryPoint
@@ -41,10 +41,10 @@ Hilt hiện hỗ trợ các lớp Android sau:
 
 `@AndroidEntryPoint` tạo thành phần Hilt riêng lẻ cho từng lớp Android trong dự án của bạn.
 
-Các thành phần này có thể nhận phần phụ thuộc từ các lớp cha tương ứng của chúng như được mô tả trong **Phân cấp thành phần**.
+Các thành phần này có thể nhận dependency từ các lớp cha tương ứng của chúng như được mô tả trong **Phân cấp thành phần**.
 
 
-Để có được các phần phụ thuộc từ một thành phần, hãy sử dụng chú thích `@Inject` để thực hiện field injection:
+Để có được các dependency từ một thành phần, hãy sử dụng chú thích `@Inject` để thực hiện field injection:
 
 ```kotlin
 @AndroidEntryPoint
@@ -72,15 +72,15 @@ class AnalyticsAdapter @Inject constructor(
 ) { ... }
 ```
 
-Các tham số của hàm tạo có chú thích của một lớp là các phần phụ thuộc của lớp đó. 
-Trong ví dụ, `AnalyticsAdapter` có `AnalyticsService` làm phần phụ thuộc. 
+Các tham số của hàm tạo có chú thích của một lớp là các dependency của lớp đó.
+Trong ví dụ, `AnalyticsAdapter` có `AnalyticsService` làm dependency.
 Do đó, Hilt cũng phải biết cách cung cấp các phiên bản của `AnalyticsService`.
 
 Tại thời điểm xây dựng, Hilt tạo các thành phần Dagger cho các lớp Android. 
 Sau đó, Dagger duyệt qua mã của bạn và thực hiện các bước sau:
 
 - Xây dựng và xác nhận các biểu đồ phụ thuộc, đảm bảo không có phụ thuộc nào không thỏa mãn và không có chu kỳ phụ thuộc.
-- Tạo các lớp mà nó sử dụng tại runtime để tạo các đối tượng thực tế và các phần phụ thuộc của chúng.
+- Tạo các lớp mà nó sử dụng tại runtime để tạo các đối tượng thực tế và các dependency của chúng.
 
 ## Mô-đun Hilt
 
@@ -88,7 +88,7 @@ Sau đó, Dagger duyệt qua mã của bạn và thực hiện các bước sau:
 
 Đôi khi một kiểu không thể được thêm vào hàm tạo. Điều này có thể xảy ra vì nhiều lý do. 
 
-Ví dụ: bạn không thể đưa vào hàm tạo một giao diện. Bạn cũng không thể đưa vào hàm tạo một kiểu mà bạn không sở hữu, chẳng hạn như một lớp từ thư viện bên ngoài. 
+Ví dụ: bạn không thể đưa vào hàm tạo một interface. Bạn cũng không thể đưa vào hàm tạo một kiểu mà bạn không sở hữu, chẳng hạn như một lớp từ thư viện bên ngoài.
 
 Trong những trường hợp này, bạn có thể cung cấp cho Hilt thông tin ràng buộc bằng cách sử dụng các mô-đun Hilt.
 
@@ -98,12 +98,12 @@ Mô-đun Hilt là lớp được chú thích bằng `@Module`.
 Nó thông báo cho Hilt cách cung cấp các phiên bản của một số loại nhất định.
 bạn phải chú thích các mô-đun Hilt bằng `@InstallIn` để cho Hilt biết mỗi mô-đun sẽ được sử dụng hoặc cài đặt trong lớp Android nào.
 
-### Chèn các phiên bản giao diện bằng @Binds
+### Chèn các phiên bản interface bằng @Binds
  
-Hãy xem xét ví dụ `AnalyticsService`. Nếu `AnalyticsService` là một giao diện thì bạn không thể đưa nó vào hàm tạo. 
+Hãy xem xét ví dụ `AnalyticsService`. Nếu `AnalyticsService` là một interface thì bạn không thể đưa nó vào hàm tạo.
 Thay vào đó, hãy cung cấp cho Hilt thông tin liên kết bằng cách tạo một hàm trừu tượng được chú thích bằng `@Binds` bên trong mô-đun Hilt.
 
-Chú thích `@Binds` cho Hilt biết triển khai nào sẽ sử dụng khi cần cung cấp một phiên bản của giao diện.
+Chú thích `@Binds` cho Hilt biết triển khai nào sẽ sử dụng khi cần cung cấp một phiên bản của interface.
 
 ```kotlin
 interface AnalyticsService {
@@ -129,10 +129,10 @@ abstract class AnalyticsModule {
 
 Hàm chú thích cung cấp thông tin sau cho Hilt:
 
-- Kiểu trả về của hàm cho Hilt biết hàm cung cấp các phiên bản của giao diện nào.
+- Kiểu trả về của hàm cho Hilt biết hàm cung cấp các phiên bản của interface nào.
 - Tham số chức năng cho Hilt biết cần cung cấp triển khai nào.
 
-Mô-đun Hilt AnalyticsModule được chú thích bằng `@InstallIn(ActivityComponent.class)` vì bạn muốn Hilt đưa phần phụ thuộc đó vào `ExampleActivity`. Chú thích này có nghĩa là tất cả các phần phụ thuộc trong `AnalyticsModule` đều có sẵn trong tất cả hoạt động của ứng dụng.
+Mô-đun Hilt AnalyticsModule được chú thích bằng `@InstallIn(ActivityComponent.class)` vì bạn muốn Hilt đưa dependency đó vào `ExampleActivity`. Chú thích này có nghĩa là tất cả các dependency trong `AnalyticsModule` đều có sẵn trong tất cả hoạt động của ứng dụng.
 
 ### Chèn phiên bản bằng @Provides
 
@@ -169,7 +169,7 @@ object AnalyticsModule {
 
 ### Cung cấp nhiều ràng buộc cho cùng một loại
 
-Trong trường hợp bạn cần Hilt để cung cấp các triển khai khác nhau cùng loại làm phần phụ thuộc, bạn phải cung cấp cho Hilt nhiều liên kết. 
+Trong trường hợp bạn cần Hilt để cung cấp các triển khai khác nhau cùng loại làm dependency, bạn phải cung cấp cho Hilt nhiều liên kết.
 Bạn có thể xác định nhiều ràng buộc cho cùng một loại bằng bộ hạn định.
 
 
@@ -296,11 +296,11 @@ Hilt tự động tạo và hủy các phiên bản của các lớp thành ph�
 ## Phạm vi thành phần
 
 Theo mặc định, tất cả các liên kết trong Hilt đều không có phạm vi. 
-Điều này có nghĩa là mỗi khi ứng dụng của bạn yêu cầu liên kết, Hilt sẽ tạo một phiên bản mới của loại cần thiết.
+Điều này có nghĩa là mỗi khi ứng dụng của bạn request liên kết, Hilt sẽ tạo một phiên bản mới của loại cần thiết.
 
 Tuy nhiên, Hilt cũng cho phép liên kết trong phạm vi một thành phần cụ thể. 
 
-**Hilt chỉ tạo một liên kết có phạm vi một lần cho mỗi phiên bản của thành phần mà liên kết đó có phạm vi và tất cả các yêu cầu cho liên kết đó đều có chung một phiên bản.**
+**Hilt chỉ tạo một liên kết có phạm vi một lần cho mỗi phiên bản của thành phần mà liên kết đó có phạm vi và tất cả các request cho liên kết đó đều có chung một phiên bản.**
 
 
 | Lớp Android | Thành phần được tạo | Phạm vi |
@@ -316,7 +316,7 @@ Tuy nhiên, Hilt cũng cho phép liên kết trong phạm vi một thành phần
 
 
 > [!WARNING]
-> Việc sử dụng phạm vi cho một phần phụ thuộc (chẳng hạn như `@Singleton` hoặc `@ActivityRetainedScoped`) có thể sử dụng nhiều bộ nhớ hơn vì đối tượng sẽ ở trong bộ nhớ cho đến khi thành phần của nó bị hủy. 
+> Việc sử dụng phạm vi cho một dependency (chẳng hạn như `@Singleton` hoặc `@ActivityRetainedScoped`) có thể sử dụng nhiều bộ nhớ hơn vì đối tượng sẽ ở trong bộ nhớ cho đến khi thành phần của nó bị hủy.
 > Bạn nên tránh sử dụng phạm vi trừ khi cần thiết.
 > Chỉ sử dụng các liên kết có phạm vi khi:
 > - Đối tượng có trạng thái bên trong cần được sử dụng lại trong một phạm vi nhất định.
@@ -325,17 +325,17 @@ Tuy nhiên, Hilt cũng cho phép liên kết trong phạm vi một thành phần
 
 ## Phân cấp thành phần
 
-Việc cài đặt một mô-đun vào một thành phần cho phép các liên kết của nó được truy cập dưới dạng phần phụ thuộc của các liên kết khác trong thành phần đó hoặc trong bất kỳ thành phần con nào bên dưới nó trong hệ thống phân cấp thành phần:
+Việc cài đặt một mô-đun vào một thành phần cho phép các liên kết của nó được truy cập dưới dạng dependency của các liên kết khác trong thành phần đó hoặc trong bất kỳ thành phần con nào bên dưới nó trong hệ thống phân cấp thành phần:
 
 ![văn bản thay thế](/resources/hilt_component_hierachy.png)
 
-## Chèn phần phụ thuộc vào các lớp không được Hilt hỗ trợ
+## Chèn dependency vào các lớp không được Hilt hỗ trợ
 
 Hilt hỗ trợ các lớp Android phổ biến nhất. 
 Tuy nhiên, bạn có thể cần thực hiện field injection trong các lớp mà Hilt không hỗ trợ.
 
 Ví dụ: Hilt không hỗ trợ trực tiếp các nhà cung cấp nội dung. 
-Nếu bạn muốn content provider sử dụng Hilt để nhận một số phần phụ thuộc, bạn cần xác định một giao diện được chú thích bằng `@EntryPoint` cho từng loại liên kết mà bạn muốn và bao gồm các vòng loại.
+Nếu bạn muốn content provider sử dụng Hilt để nhận một số dependency, bạn cần xác định một interface được chú thích bằng `@EntryPoint` cho từng loại liên kết mà bạn muốn và bao gồm các vòng loại.
 Sau đó thêm `@InstallIn` để chỉ định thành phần cần cài đặt điểm vào như sau:
 
 

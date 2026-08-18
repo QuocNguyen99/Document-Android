@@ -32,7 +32,7 @@ Như bạn có thể thấy, chức năng chính của chúng tôi không tạm 
 Có thể nói rằng chúng ta đang chờ coroutine hoàn thành trong mã thông thường.
 
 Trên thực tế, đây là cách tiếp cận phổ biến cho các ứng dụng hoặc thử nghiệm đơn giản.
-Nhưng nếu chúng ta cần thực hiện nhiều thao tác độc lập, chẳng hạn như nhận hai file từ hai máy chủ khác nhau thì sao? Chúng tôi vẫn có thể chạy chúng bằng cách chặn:
+Nhưng nếu chúng ta cần thực hiện nhiều thao tác độc lập, chẳng hạn như nhận hai file từ hai server khác nhau thì sao? Chúng tôi vẫn có thể chạy chúng bằng cách chặn:
 
 ```kotlin
 fun main() = runBlocking {
@@ -48,7 +48,7 @@ Các hàm tạm dừng được thực thi tuần tự và chúng ta đang đợ
 ## Cháy và quên: `launch`
 
 `launch` tương tự `runBlocking` về cú pháp nhưng có mục đích khác:
-nó không đợi coroutine kết thúc mà ngay lập tức trả về một trình xử lý đặc biệt cho coroutine đã khởi chạy có tên là `Job`.
+nó không đợi coroutine kết thúc mà ngay lập tức trả về một handler đặc biệt cho coroutine đã khởi chạy có tên là `Job`.
 
 Bản thân coroutine vẫn tiếp tục hoạt động, nhưng chúng ta có thể kiểm tra trạng thái hoặc thậm chí hủy nó thông qua đối tượng `Job`.
 

@@ -10,7 +10,7 @@ Sự khác biệt là trong sự kết hợp chặt chẽ, một lớp phụ thu
 Tuy nhiên, trong sự ghép nối lỏng lẻo, một lớp biết rất ít về việc tạo đối tượng và các phương thức trong lớp khác. Điều này làm cho các lớp này ít phụ thuộc lẫn nhau hơn.
 
 
-Cách đơn giản nhất để nới lỏng sự ghép nối là triển khai một giao diện trong mã của bạn. Ngoài ra còn có các cách khác để nới lỏng khớp nối, như dependency injection.
+Cách đơn giản nhất để nới lỏng sự ghép nối là triển khai một interface trong mã của bạn. Ngoài ra còn có các cách khác để nới lỏng khớp nối, như dependency injection.
 
 ### Ví dụ về khớp nối chặt
 
@@ -92,7 +92,7 @@ Biểu đồ dưới đây minh họa những hậu quả có thể xảy ra d�
 
 Hãy tóm tắt những gì chúng ta biết về khớp nối và sự gắn kết.
 
-- Bạn nên cố gắng đạt được khớp nối lỏng lẻo. Khớp nối lỏng lẻo làm cho các phần trong mã của bạn ít phụ thuộc lẫn nhau hơn. Cách dễ nhất bạn có thể đạt được là với các giao diện và dependency injection.
+- Bạn nên cố gắng đạt được khớp nối lỏng lẻo. Khớp nối lỏng lẻo làm cho các phần trong mã của bạn ít phụ thuộc lẫn nhau hơn. Cách dễ nhất bạn có thể đạt được là với các interface và dependency injection.
 
 - Các phần trong code của bạn phải có tính gắn kết cao để có thể tập trung hơn. Điều này sẽ làm cho chúng có thể tái sử dụng nhiều hơn và dễ kiểm tra hơn.
 

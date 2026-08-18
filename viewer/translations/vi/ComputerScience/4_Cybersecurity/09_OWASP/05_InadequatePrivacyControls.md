@@ -8,7 +8,7 @@ Nếu xử lý sai, PII có thể bị rò rỉ, thay đổi hoặc phá hủy, 
 ## Các kịch bản tấn công thường gặp:
 
 - **PII bị rò rỉ thông qua nhật ký/báo cáo sự cố**: Nhà phát triển (hoặc SDK bên thứ ba) vô tình ghi lại dữ liệu nhạy cảm, dẫn đến nhật ký thiết bị, phân tích sự cố hoặc màn hình lỗi.
-- **PII trong tham số truy vấn URL**: Dữ liệu nhạy cảm được gửi trong URL, sau đó được lưu trữ trong nhật ký máy chủ, công cụ phân tích, lịch sử trình duyệt hoặc proxy.
+- **PII trong tham số truy vấn URL**: Dữ liệu nhạy cảm được gửi trong URL, sau đó được lưu trữ trong nhật ký server, công cụ phân tích, lịch sử trình duyệt hoặc proxy.
 - **Hiển thị PII qua bản sao lưu**: Dữ liệu hộp cát ứng dụng được bao gồm trong bản sao lưu thiết bị; những kẻ tấn công có được bản sao lưu có thể trích xuất thông tin nhạy cảm.
 - **Gỡ cài đặt/cài đặt lại tính bền vững của dữ liệu (Android)**: Cấu hình sai (ví dụ: bảo toàn dữ liệu khi gỡ cài đặt) cho phép ứng dụng sau này có cùng gói ID truy cập vào dữ liệu người dùng còn sót lại.
 - **PII được trích xuất sau một lần vi phạm khác**: Trước tiên, kẻ tấn công xâm phạm bộ nhớ/mạng/xác thực (ví dụ: giao tiếp không an toàn hoặc xác thực yếu) rồi thu thập PII từ tệp, bảng nhớ tạm hoặc nhật ký.

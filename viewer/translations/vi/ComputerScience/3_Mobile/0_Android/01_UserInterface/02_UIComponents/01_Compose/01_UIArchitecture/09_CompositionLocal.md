@@ -131,7 +131,7 @@ CompositionLocal có thể là giải pháp quá mức cho một số trường 
 
 ### Truyền tham số rõ ràng
 
-Nói rõ ràng về các phần phụ thuộc của thành phần kết hợp là một thói quen tốt. Chúng tôi khuyên bạn **chỉ nên chuyển các thành phần kết hợp những gì chúng cần**. Để khuyến khích việc tách rời và tái sử dụng các thành phần kết hợp, mỗi thành phần kết hợp phải chứa ít thông tin nhất có thể.
+Nói rõ ràng về các dependency của thành phần kết hợp là một thói quen tốt. Chúng tôi khuyên bạn **chỉ nên chuyển các thành phần kết hợp những gì chúng cần**. Để khuyến khích việc tách rời và tái sử dụng các thành phần kết hợp, mỗi thành phần kết hợp phải chứa ít thông tin nhất có thể.
 
 
 ```kotlin
@@ -156,7 +156,7 @@ fun MyDescendant(data: DataToDisplay) {
 
 ### Đảo ngược quyền kiểm soát
 
-Một cách khác để tránh chuyển các phần phụ thuộc không cần thiết vào một thành phần kết hợp là đảo ngược quyền kiểm soát. Thay vì phần tử con nhận một phần phụ thuộc để thực thi một số logic, phần tử cha sẽ thực hiện điều đó.
+Một cách khác để tránh chuyển các dependency không cần thiết vào một thành phần kết hợp là đảo ngược quyền kiểm soát. Thay vì phần tử con nhận một dependency để thực thi một số logic, phần tử cha sẽ thực hiện điều đó.
 
 <details>
   <summary style="color: orange;">
@@ -167,7 +167,7 @@ Một cách khác để tránh chuyển các phần phụ thuộc không cần t
   
   <p>
 
-Xem ví dụ sau trong đó phần tử con cần kích hoạt yêu cầu tải một số dữ liệu
+Xem ví dụ sau trong đó phần tử con cần kích hoạt request tải một số dữ liệu
 
 ```kotlin
 @Composable
@@ -184,7 +184,7 @@ fun MyDescendant(myViewModel: MyViewModel) {
 }
 ```
 
-Tùy theo trường hợp, MyDescendant có thể phải chịu nhiều trách nhiệm. Ngoài ra, việc chuyển MyViewModel làm phần phụ thuộc sẽ khiến MyDescendant ít có khả năng tái sử dụng hơn vì giờ đây chúng đã được ghép nối với nhau. Hãy xem xét giải pháp thay thế không chuyển sự phụ thuộc vào phần tử con và sử dụng sự đảo ngược các nguyên tắc điều khiển khiến tổ tiên chịu trách nhiệm thực thi logic:
+Tùy theo trường hợp, MyDescendant có thể phải chịu nhiều trách nhiệm. Ngoài ra, việc chuyển MyViewModel làm dependency sẽ khiến MyDescendant ít có khả năng tái sử dụng hơn vì giờ đây chúng đã được ghép nối với nhau. Hãy xem xét giải pháp thay thế không chuyển sự phụ thuộc vào phần tử con và sử dụng sự đảo ngược các nguyên tắc điều khiển khiến tổ tiên chịu trách nhiệm thực thi logic:
 
 ```kotlin
 @Composable

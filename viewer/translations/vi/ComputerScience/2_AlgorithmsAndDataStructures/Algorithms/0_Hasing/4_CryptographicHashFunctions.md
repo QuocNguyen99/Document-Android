@@ -52,7 +52,7 @@ Nói một cách đơn giản, khả năng chống va chạm đảm bảo rằng
 Không giống như khả năng kháng tiền hình ảnh thứ hai, trong trường hợp này, chúng tôi không được cung cấp thông tin trước. 
 Mục đích là gây khó khăn cho việc tìm thấy hai thông điệp riêng biệt tạo ra cùng một giá trị băm.
 
-Khả năng chống va chạm đảm bảo rằng rất khó tìm thấy hai thông báo khác nhau có cùng hàm băm, bảo vệ các giao thức mật mã, chữ ký số và tính toàn vẹn của dữ liệu.
+Khả năng chống va chạm đảm bảo rằng rất khó tìm thấy hai thông báo khác nhau có cùng hàm băm, bảo vệ các protocol mật mã, chữ ký số và tính toàn vẹn của dữ liệu.
 
 >[!NOTE]
 > Khi chúng tôi nói rằng thật khó để tìm thấy một giá trị nào đó, điều đó có nghĩa là việc tìm ra một giá trị với các đặc tính cần thiết sẽ phải mất nhiều năm, ngay cả với những siêu máy tính đáng gờm nhất. 

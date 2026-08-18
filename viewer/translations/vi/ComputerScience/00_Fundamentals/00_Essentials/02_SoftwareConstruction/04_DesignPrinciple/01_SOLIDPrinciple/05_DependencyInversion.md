@@ -1,6 +1,6 @@
 #Dependency Inversion
 
-Nguyên tắc Dependency Inversion nêu rõ rằng các lớp của chúng ta phải phụ thuộc vào giao diện hoặc lớp trừu tượng thay vì các lớp và hàm cụ thể.
+Nguyên tắc Dependency Inversion nêu rõ rằng các lớp của chúng ta phải phụ thuộc vào interface hoặc lớp trừu tượng thay vì các lớp và hàm cụ thể.
 
 ## Đảo ngược quyền kiểm soát
 
@@ -8,7 +8,7 @@ Nguyên tắc Dependency Inversion nêu rõ rằng các lớp của chúng ta ph
 Thay vì gọi thủ công các thư viện hoặc thành phần, IoC cho phép framework hoặc vùng chứa quản lý và gọi các thành phần ứng dụng khi cần.
 Điều này giúp tách biệt logic kinh doanh khỏi cơ sở hạ tầng, cải thiện khả năng mở rộng và khả năng bảo trì.
 
-Cách phổ biến để triển khai IoC là thông qua Dependency Injection (DI), Bộ định vị dịch vụ trong đó các phần phụ thuộc của đối tượng được cung cấp bên ngoài thay vì được tạo bên trong chính đối tượng đó. Điều này làm giảm sự liên kết chặt chẽ giữa các thành phần và tăng tính linh hoạt của hệ thống.
+Cách phổ biến để triển khai IoC là thông qua Dependency Injection (DI), Bộ định vị dịch vụ trong đó các dependency của đối tượng được cung cấp bên ngoài thay vì được tạo bên trong chính đối tượng đó. Điều này làm giảm sự liên kết chặt chẽ giữa các thành phần và tăng tính linh hoạt của hệ thống.
 
 ##Dependency Injection
 
@@ -20,13 +20,13 @@ Cách phổ biến để triển khai IoC là thông qua Dependency Injection (D
 > Dependency Injection là một phương pháp triển khai Đảo ngược điều khiển.
 
 Đó là process chuyển nhiệm vụ tạo đối tượng sang các phần khác của mã.
-Điều này có nghĩa là tạo một phần phụ thuộc mà bạn có thể sử dụng. Điều này cho phép tạo [khớp nối lỏng lẻo trong mã của chúng tôi.](/General/ComputerScience/0_Fundamentals/0_Essentials/2_SoftwareConstruction/4_DesignPrinciple/1_SOLIDPrinciple/0_CouplingAndCohesion.md)
+Điều này có nghĩa là tạo một dependency mà bạn có thể sử dụng. Điều này cho phép tạo [khớp nối lỏng lẻo trong mã của chúng tôi.](/General/ComputerScience/0_Fundamentals/0_Essentials/2_SoftwareConstruction/4_DesignPrinciple/1_SOLIDPrinciple/0_CouplingAndCohesion.md)
 
 ###Các kiểu tiêm
 
 Có ba loại DI chính.
 
-- **Chèn phương thức (Giao diện)**: các phần phụ thuộc được truyền qua các phương thức mà lớp có thể truy cập thông qua giao diện hoặc lớp khác.
+- **Chèn phương thức (Interface)**: các dependency được truyền qua các phương thức mà lớp có thể truy cập thông qua interface hoặc lớp khác.
 
 ```java
 // Define the Email interface
@@ -59,7 +59,7 @@ public class Main {
 
 ```
 
-- **Chèn thuộc tính(Setter)**: các phần phụ thuộc được chuyển qua một phương thức setter riêng biệt. Việc triển khai bộ tiêm này khác nhau tùy thuộc vào ngôn ngữ.
+- **Chèn thuộc tính(Setter)**: các dependency được chuyển qua một phương thức setter riêng biệt. Việc triển khai bộ tiêm này khác nhau tùy thuộc vào ngôn ngữ.
 
 ```java
 // Define the Email interface
@@ -103,7 +103,7 @@ public class Main {
 }
 ```
 
-- **Constructor Injection**: các phần phụ thuộc được cung cấp thông qua hàm tạo của lớp.
+- **Constructor Injection**: các dependency được cung cấp thông qua hàm tạo của lớp.
 
 ```java
 // Define the Email interface

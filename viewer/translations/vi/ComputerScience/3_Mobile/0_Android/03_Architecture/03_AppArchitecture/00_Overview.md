@@ -61,12 +61,12 @@ Xem xét các nguyên tắc kiến trúc chung được đề cập trong phần
 ## Quản lý sự phụ thuộc giữa các thành phần
 
 Các lớp trong ứng dụng của bạn phụ thuộc vào các lớp khác để hoạt động bình thường.
-Bạn có thể sử dụng một trong các mẫu thiết kế sau để thu thập các phần phụ thuộc của một lớp cụ thể:
+Bạn có thể sử dụng một trong các mẫu thiết kế sau để thu thập các dependency của một lớp cụ thể:
 
-- **Dependency injection (DI)**: Dependency injection cho phép các cô gái xác định sự phụ thuộc của chúng mà không cần xây dựng chúng. Tại runtime, một lớp khác chịu trách nhiệm cung cấp các phần phụ thuộc này.
-- **Bộ định vị dịch vụ**: Mẫu bộ định vị dịch vụ cung cấp một sổ đăng ký trong đó các lớp có thể lấy các phần phụ thuộc của chúng thay vì xây dựng chúng.
+- **Dependency injection (DI)**: Dependency injection cho phép các cô gái xác định sự phụ thuộc của chúng mà không cần xây dựng chúng. Tại runtime, một lớp khác chịu trách nhiệm cung cấp các dependency này.
+- **Bộ định vị dịch vụ**: Mẫu bộ định vị dịch vụ cung cấp một sổ đăng ký trong đó các lớp có thể lấy các dependency của chúng thay vì xây dựng chúng.
 
-Các mẫu này cho phép bạn mở rộng quy mô mã của mình vì chúng cung cấp các mẫu rõ ràng để quản lý các phần phụ thuộc mà không cần sao chép mã hoặc tăng thêm độ phức tạp.
+Các mẫu này cho phép bạn mở rộng quy mô mã của mình vì chúng cung cấp các mẫu rõ ràng để quản lý các dependency mà không cần sao chép mã hoặc tăng thêm độ phức tạp.
 Hơn nữa, các mẫu này cho phép bạn nhanh chóng chuyển đổi giữa triển khai thử nghiệm và sản xuất.
 
 

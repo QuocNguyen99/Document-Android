@@ -1,8 +1,8 @@
 # Định vị dịch vụ
 
-Bộ định vị dịch vụ đóng vai trò là design pattern để quản lý các phần phụ thuộc dịch vụ trong một ứng dụng. 
-Chúng hoạt động như một cơ quan đăng ký hoặc vùng chứa tập trung có nhiệm vụ quản lý các phần phụ thuộc này. 
-Thay vì các thành phần trực tiếp khởi tạo phần phụ thuộc của chúng, chúng lấy chúng từ Bộ định vị dịch vụ.
+Bộ định vị dịch vụ đóng vai trò là design pattern để quản lý các dependency dịch vụ trong một ứng dụng.
+Chúng hoạt động như một cơ quan đăng ký hoặc vùng chứa tập trung có nhiệm vụ quản lý các dependency này.
+Thay vì các thành phần trực tiếp khởi tạo dependency của chúng, chúng lấy chúng từ Bộ định vị dịch vụ.
 
 ## Trình định vị dịch vụ triển khai
 
@@ -65,13 +65,13 @@ userService.loadUserData()
 
 1. **Tính rõ ràng của sự phụ thuộc**:
 
-    - **DI**: Các phần phụ thuộc được cung cấp cho lớp, làm cho chúng trở nên rõ ràng.
+    - **DI**: Các dependency được cung cấp cho lớp, làm cho chúng trở nên rõ ràng.
 
     ```kotlin
     class UserRepository @Inject constructor(private val userService: UserService)
     ```
 
-    - **SL**: Lớp truy xuất các phần phụ thuộc, điều này có thể che khuất chúng.
+    - **SL**: Lớp truy xuất các dependency, điều này có thể che khuất chúng.
 
     ```kotlin
     val userService: UserService = ServiceLocator.get<UserService>()
@@ -79,13 +79,13 @@ userService.loadUserData()
 
 2. **Dễ kiểm tra**:
 
-    - **DI**: Bạn có thể dễ dàng mô phỏng các phần phụ thuộc để thử nghiệm.
+    - **DI**: Bạn có thể dễ dàng mô phỏng các dependency để thử nghiệm.
 
     ```kotlin
         @Mock lateinit var mockUserService: UserService 
         val userRepository = UserRepository(mockUserService)
     ```
-    - **SL**: Giống như DI, bạn có thể dễ dàng thay thế các phần phụ thuộc mô phỏng để kiểm tra bằng cách đăng ký các đối tượng mô phỏng trong Bộ định vị dịch vụ.
+    - **SL**: Giống như DI, bạn có thể dễ dàng thay thế các dependency mô phỏng để kiểm tra bằng cách đăng ký các đối tượng mô phỏng trong Bộ định vị dịch vụ.
 
     ```kotlin
         ServiceLocator.register<UserService>(mockUserService) 
@@ -94,7 +94,7 @@ userService.loadUserData()
 
 3. **Độ phức tạp của mã và gỡ lỗi**:
 
-    - **DI**: Khung Dependency Injection có thể tăng thêm độ phức tạp. Một số khung bắt lỗi khi biên dịch chương trình, trong khi một số khung khác chỉ bắt lỗi ở runtime.
+    - **DI**: Framework Dependency Injection có thể tăng thêm độ phức tạp. Một số framework bắt lỗi khi biên dịch chương trình, trong khi một số khung khác chỉ bắt lỗi ở runtime.
 
     - **SL**: Về mặt ngữ nghĩa đơn giản hơn nhưng có thể phát sinh lỗi tại runtime.
 
@@ -111,14 +111,14 @@ val userService = ServiceLocator.get<UserService>()
 
 ## Những lợi ích
 
-Bộ định vị dịch vụ quản lý các phần phụ thuộc một cách hiệu quả,
+Bộ định vị dịch vụ quản lý các dependency một cách hiệu quả,
 mang lại một số lợi ích, đặc biệt là trong các tình huống sau:
 
 1. **Separation of Concerns**: Thông qua `ServiceLocator`, các dịch vụ như `UserService` và `NetworkService` có thể được quản lý độc lập, thúc đẩy thiết kế mô-đun.
 
 2. **Nhiều bộ định vị dịch vụ**: Bạn có thể có ServiceLocators riêng biệt cho các chức năng khác nhau, nâng cao cấu trúc tổ chức và sự rõ ràng của ứng dụng.
 
-3. Tính đơn giản trong các thiết kế có cấu trúc tốt: Trái ngược với việc xử lý thủ công hoặc sử dụng các khung DI phức tạp, Bộ định vị dịch vụ quản lý các phần phụ thuộc một cách đơn giản.
+3. Tính đơn giản trong các thiết kế có cấu trúc tốt: Trái ngược với việc xử lý thủ công hoặc sử dụng các framework DI phức tạp, Bộ định vị dịch vụ quản lý các dependency một cách đơn giản.
 Trong các thiết kế ứng dụng có cấu trúc tốt và ít phức tạp hơn, sự đơn giản này có thể mang lại lợi ích.
 
 ## Những cạm bẫy thường gặp và cách khắc phục sự cố

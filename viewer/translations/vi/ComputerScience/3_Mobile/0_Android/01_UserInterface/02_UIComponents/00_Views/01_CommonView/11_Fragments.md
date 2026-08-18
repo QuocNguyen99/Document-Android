@@ -21,7 +21,7 @@ Mỗi trạng thái `Lifecycle` có thể có được thể hiện trong `Li
    Chế độ xem của một mảnh có một `Lifecycle` riêng biệt được quản lý độc lập với chế độ xem của `Lifecycle` của mảnh.
 
 
-## Trạng thái và lệnh gọi lại Fragment lifecycle
+## Trạng thái và callback Fragment lifecycle
 
      Khi một mảnh tiến triển qua lifecycle, nó sẽ di chuyển lên và xuống qua các trạng thái của nó. Ví dụ: một mảnh được thêm vào đầu back stack sẽ di chuyển lên từ `CREATED` đến `STARTED` đến `RESUMED`. Ngược lại, khi một mảnh được tách ra khỏi back stack, mảnh đó sẽ di chuyển xuống dưới qua các trạng thái đó, từ `RESUMED` đến `STARTED` đến `CREATED` và cuối cùng là `DESTROYED`.
 
@@ -44,7 +44,7 @@ Mỗi trạng thái `Lifecycle` có thể có được thể hiện trong `Li
 
     Nếu và chỉ khi chế độ xem phân mảnh của bạn được khởi tạo bằng `View` không rỗng, thì `View` đó được đặt trên phân mảnh và có thể truy xuất bằng cách sử dụng `getView()`. Sau đó, `getViewLifecycleOwnerLiveData()` được cập nhật với `INITIALIZED` `LifecycleOwner` mới tương ứng với chế độ xem của mảnh. `onViewCreated()` lifecycle callback cũng được gọi vào thời điểm này.
 
-    Đây là nơi thích hợp để thiết lập trạng thái ban đầu cho chế độ xem của bạn, để bắt đầu quan sát các phiên bản `LiveData` có lệnh gọi lại cập nhật chế độ xem của phân đoạn và để thiết lập bộ chuyển đổi trên mọi phiên bản `RecyclerView` hoặc `ViewPager2` trong chế độ xem phân đoạn của bạn.
+    Đây là nơi thích hợp để thiết lập trạng thái ban đầu cho chế độ xem của bạn, để bắt đầu quan sát các phiên bản `LiveData` có callback cập nhật chế độ xem của phân đoạn và để thiết lập bộ chuyển đổi trên mọi phiên bản `RecyclerView` hoặc `ViewPager2` trong chế độ xem phân đoạn của bạn.
 
 VN : ý nghĩa là sau khi onCreate chạy xong thì Lifecycle của chế độ xem mới được khởi tạo có nghĩa là lúc này LifecycleOwner mới được khởi tạo tương ứng với View
 
@@ -204,7 +204,7 @@ Bước áp chót là lấy một phiên bản Activity triển khai giao diện
 
 Cuối cùng, bạn chỉ cần gọi phiên bản giao diện tại vị trí bạn muốn,
 
-### 2. Trình nghe kết quả
+### 2. Listener kết quả
 
 Android có API rất hữu ích để truyền dữ liệu giữa các phân đoạn, **Fragment Kết quả API**. Đây là một công cụ cho phép truyền dữ liệu giữa các đoạn bằng khóa do người dùng chỉ định. 
 

@@ -1,6 +1,6 @@
 # Bảo mật web, OWASP
 
-**Bảo mật web** là tập hợp các biện pháp và giao thức nhằm bảo vệ dữ liệu khỏi vi-rút, thư rác và các mối đe dọa khác có thể gây hại cho trang web, ứng dụng và/hoặc dữ liệu của người dùng cụ thể
+**Bảo mật web** là tập hợp các biện pháp và protocol nhằm bảo vệ dữ liệu khỏi vi-rút, thư rác và các mối đe dọa khác có thể gây hại cho trang web, ứng dụng và/hoặc dữ liệu của người dùng cụ thể
 
 Ý tưởng chính của bảo mật web là Internet vốn là một kênh không an toàn để trao đổi thông tin.
 

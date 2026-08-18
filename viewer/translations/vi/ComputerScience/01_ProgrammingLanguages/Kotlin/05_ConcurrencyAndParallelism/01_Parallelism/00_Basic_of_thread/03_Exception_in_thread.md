@@ -1,6 +1,6 @@
 # Chủ đề và ngoại lệ
 
-Nếu một trong các luồng trong chương trình của bạn đưa ra một ngoại lệ mà bất kỳ phương thức nào trong ngăn xếp lệnh gọi không phát hiện được thì thread sẽ bị chấm dứt. Nếu ngoại lệ như vậy xảy ra trong một chương trình đơn luồng, toàn bộ chương trình sẽ dừng vì JVM chấm dứt chương trình đang chạy ngay khi không còn luồng **không phải daemon** nào nữa.
+Nếu một trong các thread trong chương trình của bạn đưa ra một ngoại lệ mà bất kỳ phương thức nào trong ngăn xếp lệnh gọi không phát hiện được thì thread sẽ bị chấm dứt. Nếu ngoại lệ như vậy xảy ra trong một chương trình đơn thread, toàn bộ chương trình sẽ dừng vì JVM chấm dứt chương trình đang chạy ngay khi không còn luồng **không phải daemon** nào nữa.
 
 Ví dụ: 
 
@@ -53,7 +53,7 @@ Process finished with exit code 0
 Mã `0` có nghĩa là process đã được hoàn thành thành công.
 
 
-Điều gì sẽ xảy ra nếu có lỗi trong thread chính trong khi mã thread tùy chỉnh là chính xác? Hãy xem:
+Điều gì sẽ xảy ra nếu có lỗi trong main thread trong khi mã thread tùy chỉnh là chính xác? Hãy xem:
 
 ```kotlin
 fun main() {
@@ -75,5 +75,5 @@ Hello from the custom thread!
 Process finished with exit code 1
 ```
 
-Kết quả là process bị lỗi (mã thoát `1`). Mã sau `print(2 / 0)` không thực thi nhưng khối mã trong thread tùy chỉnh thì có. Vì vậy, mặc dù có ngoại lệ trong thread chính, các luồng tùy chỉnh luôn hoạt động chính xác, ngay cả khi chương trình kết thúc với lỗi.
+Kết quả là process bị lỗi (mã thoát `1`). Mã sau `print(2 / 0)` không thực thi nhưng khối mã trong thread tùy chỉnh thì có. Vì vậy, mặc dù có ngoại lệ trong main thread, các thread tùy chỉnh luôn hoạt động chính xác, ngay cả khi chương trình kết thúc với lỗi.
 

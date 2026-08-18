@@ -11,7 +11,7 @@ Thư viện cung cấp nhiều phương pháp xử lý các tác vụ đồng th
 ## `kotlinx.coroutines` làm thư viện
 
 
-Lưu ý rằng coroutine không đi kèm với thư viện chuẩn Kotlin — chúng là một phần phụ thuộc.  
+Lưu ý rằng coroutine không đi kèm với thư viện chuẩn Kotlin — chúng là một dependency.
 
 Có một số lý do khiến coroutine bị tách ra. Dưới đây là hai lý do chính:
 

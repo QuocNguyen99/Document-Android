@@ -158,7 +158,7 @@ fun Address(
 }
 ```
 
-Logic bitwise này khó đọc và khó hiểu, nhưng chúng ta không cần phải hiểu điều này: trình biên dịch giỏi việc này, còn con người thì không.
+Logic bitwise này khó đọc và khó hiểu, nhưng chúng ta không cần phải hiểu điều này: compiler giỏi việc này, còn con người thì không.
 
 Vì điều này, chúng ta có thể tiến xa hơn và tạo mã hiểu rằng con số đó là thứ duy nhất sẽ thay đổi. Sau đó, mã này có thể hoạt động sao cho nếu một số không thay đổi thì phần nội dung của hàm sẽ bị bỏ qua hoàn toàn và chúng ta chỉ cần hướng dẫn trình soạn thảo di chuyển chỉ mục hiện tại của nó đến vị trí như thể hàm đã được thực thi.
 

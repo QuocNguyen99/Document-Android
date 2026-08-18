@@ -217,7 +217,7 @@ Nhưng bạn có thể sử dụng `LinearLayout` nếu bạn gặp phải bất
 
 - Không có `scaleType` và nhiều thuộc tính cụ thể khác của `ImageView`- cũng bị thiếu.
 
-- Ngoài ra, không có trình nghe nhấp chuột riêng biệt để cho biết khi nào đối tượng có thể vẽ cụ thể được nhấp vào 
+- Ngoài ra, không có listener nhấp chuột riêng biệt để cho biết khi nào đối tượng có thể vẽ cụ thể được nhấp vào
 `OnClickListener` chỉ có thể được áp dụng cho toàn bộ `TextView`.
 
 

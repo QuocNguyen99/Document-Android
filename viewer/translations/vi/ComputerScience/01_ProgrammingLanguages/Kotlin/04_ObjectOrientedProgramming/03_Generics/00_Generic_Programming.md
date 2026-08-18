@@ -20,7 +20,7 @@ Tên tham số loại được sử dụng phổ biến nhất là:
 
 - `S`, `U`, `V`, v.v. – loại thứ 2, thứ 3, thứ 4;
 
-- `E` – Phần tử (thường được sử dụng bởi các bộ sưu tập khác nhau);
+- `E` – Phần tử (thường được sử dụng bởi các collection khác nhau);
 
 - `K` – Chìa khóa;
 
