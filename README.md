@@ -2,7 +2,7 @@
 
 Thư viện kiến thức kỹ thuật về Android, Kotlin, Computer Science và Cybersecurity, đi kèm trình đọc Markdown song ngữ English/Vietnamese.
 
-Project hiện có **365 tài liệu**, mỗi tài liệu có bản English gốc và bản dịch tiếng Việt tương ứng. Trình đọc hỗ trợ chuyển đổi **EN/VI** mà không làm thay đổi tài liệu đang mở.
+Project hiện có **378 tài liệu**. Phần lớn có bản English gốc và bản dịch tiếng Việt tương ứng; riêng `Android/Interview/` là bộ ôn phỏng vấn viết thẳng bằng tiếng Việt nên không có bản dịch riêng — viewer tự hiển thị nội dung gốc cho cả hai chế độ ngôn ngữ. Trình đọc hỗ trợ chuyển đổi **EN/VI** mà không làm thay đổi tài liệu đang mở.
 
 ## Tính năng
 
@@ -29,6 +29,7 @@ Project hiện có **365 tài liệu**, mỗi tài liệu có bản English gố
 ```text
 .
 ├── Android/                    # Tài liệu Android gốc (English)
+│   └── Interview/              # Bộ ôn phỏng vấn Senior Android (tiếng Việt)
 ├── ComputerScience/            # Kotlin, CS, Android và Security (English)
 ├── General/                    # Kiến thức tổng quát (English)
 ├── resources/                  # Ảnh và tài nguyên của tài liệu
